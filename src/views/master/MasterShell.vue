@@ -1,5 +1,5 @@
 <template>
-  <div class="m-8">
+  <div class="m-8 abc">
     <master-navigation />
     <router-view />
   </div>
@@ -14,3 +14,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+$re: rgb(255, 0, 0);
+
+.abc {
+  background-color: $re;
+}
+</style>
