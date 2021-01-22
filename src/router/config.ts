@@ -15,13 +15,13 @@ const master: Array<RouteConfig> = [
   {
     path: '/master',
     name: 'master',
-    component: () => import('@/views/master/master.vue'),
+    component: () => import('@/views/master/MasterPage.vue'),
     redirect: {
       name: 'helloworld',
     },
     children: [
       {
-        path: '/helloworld',
+        path: 'helloworld',
         name: 'helloworld',
         component: () => import('@/components/HelloWorld.vue'),
       },
