@@ -1,16 +1,16 @@
 <template>
   <div>
-    <navigation-page />
+    <master-navigation />
     <router-view />
   </div>
 </template>
 
 <script lang="ts">
-import NavigationPage from './NavigationPage.vue';
+import MasterNavigation from './MasterNavigation.vue';
 
 export default {
   components: {
-    NavigationPage,
+    MasterNavigation,
   },
 };
 </script>

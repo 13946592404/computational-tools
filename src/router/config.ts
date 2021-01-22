@@ -15,7 +15,7 @@ const master: Array<RouteConfig> = [
   {
     path: '/master',
     name: 'master',
-    component: () => import('@/views/master/MasterPage.vue'),
+    component: () => import('@/views/master/MasterShell.vue'),
     redirect: {
       name: 'helloworld',
     },
