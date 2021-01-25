@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style lang="scss">
-$re: rgb(255, 0, 0);
+$re: green;
 
 .abc {
   background-color: $re;
