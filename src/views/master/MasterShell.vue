@@ -1,8 +1,14 @@
 <template>
-  <div class="m-8 abc">
-    <master-navigation />
-    <router-view />
-  </div>
+  <el-container>
+    <el-header />
+    <el-aside>
+      <master-navigation />
+    </el-aside>
+    <el-main>
+      <router-view />
+    </el-main>
+    <el-footer />
+  </el-container>
 </template>
 
 <script lang="ts">
@@ -16,9 +22,7 @@ export default {
 </script>
 
 <style lang="scss">
-$re: green;
+.ct-master {
 
-.abc {
-  background-color: $re;
 }
 </style>
