@@ -1,13 +1,25 @@
 <template>
   <el-container>
-    <el-header />
-    <el-aside>
-      <master-navigation />
-    </el-aside>
-    <el-main>
-      <router-view />
-    </el-main>
-    <el-footer />
+    <el-header>
+      <!-- header -->
+      <!-- noop -->
+    </el-header>
+    <el-container>
+      <el-aside>
+        <!-- navigation -->
+        <master-navigation />
+      </el-aside>
+      <el-container>
+        <el-main>
+          <!-- main -->
+          <router-view />
+        </el-main>
+        <el-footer>
+          <!-- footer -->
+          <!-- noop -->
+        </el-footer>
+      </el-container>
+    </el-container>
   </el-container>
 </template>
 
@@ -20,9 +32,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.ct-master {
-
-}
-</style>

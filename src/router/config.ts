@@ -25,6 +25,11 @@ const master: Array<RouteConfig> = [
         name: 'helloworld',
         component: () => import('@/components/HelloWorld.vue'),
       },
+      {
+        path: 'hellorouter',
+        name: 'hellorouter',
+        component: () => import('@/components/HelloRouter.vue'),
+      },
     ],
   },
 ];

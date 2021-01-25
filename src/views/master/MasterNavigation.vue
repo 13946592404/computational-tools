@@ -5,7 +5,7 @@
     >
       <el-menu-item index="2">
         <i class="el-icon-menu"></i>
-        <span slot="title">导航二</span>
+        <span slot="title">{{ $i18n.t('navigation.info') }}</span>
       </el-menu-item>
       <el-menu-item index="3" disabled>
         <i class="el-icon-document"></i>
@@ -18,10 +18,3 @@
     </el-menu>
   </el-col>
 </template>
-
-<style lang="scss">
-.ct-sidebar {
-  width: 20vh;
-  height: 100vh;
-}
-</style>
