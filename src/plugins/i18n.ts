@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
 
-import ch from '@/locale/zh-CN.json';
-import en from '@/locale/en-US.json';
+import ch from '@/locales/zh-CN.json';
+import en from '@/locales/en-US.json';
 
 Vue.use(VueI18n);
 

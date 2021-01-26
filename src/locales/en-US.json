@@ -1,0 +1,24 @@
+{
+  "navigation": [
+    {
+      "name": "Opportunity",
+      "icon": "el-icon-s-opportunity",
+      "routerName": "helloworld"
+    },
+    {
+      "name": "Info",
+      "icon": "el-icon-info",
+      "routerName": "hellorouter"
+    },
+    {
+      "name": "Menu",
+      "icon": "el-icon-menu",
+      "routerName": "helloworld"
+    },
+    {
+      "name": "Setting",
+      "icon": "el-icon-setting",
+      "routerName": "hellorouter"
+    }
+  ]
+}
