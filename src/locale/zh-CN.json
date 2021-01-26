@@ -1,5 +1,14 @@
 {
-  "navigation": {
-    "info": "信息"
-  }
+  "navigation": [
+    {
+      "name": "信息",
+      "icon": "el-icon-info",
+      "routerName": "helloworld"
+    },
+    {
+      "name": "设置",
+      "icon": "el-icon-setting",
+      "routerName": "hellorouter"
+    }
+  ]
 }

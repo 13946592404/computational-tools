@@ -1,5 +1,14 @@
 {
-  "navigation": {
-    "info": "infomation"
-  }
+  "navigation": [
+    {
+      "name": "info",
+      "icon": "el-icon-info",
+      "routerName": "helloworld"
+    },
+    {
+      "name": "Setting",
+      "icon": "el-icon-setting",
+      "routerName": "hellorouter"
+    }
+  ]
 }
