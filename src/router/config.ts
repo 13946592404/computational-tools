@@ -1,7 +1,8 @@
 import { RouteConfig } from 'vue-router';
+import i18n from '@/plugins/i18n';
 
 // home page: redirect
-const home: RouteConfig = {
+export const home: RouteConfig = {
   path: '/',
   name: 'home',
   component: () => import('@/views/Home.vue'),
@@ -11,31 +12,37 @@ const home: RouteConfig = {
 };
 
 // main pages (in children)
-const master: Array<RouteConfig> = [
-  {
-    path: '/master',
-    name: 'master',
-    component: () => import('@/views/master/MasterShell.vue'),
-    redirect: {
-      name: 'helloworld',
-    },
-    children: [
-      {
-        path: 'helloworld',
-        name: 'helloworld',
-        component: () => import('@/components/HelloWorld.vue'),
-      },
-      {
-        path: 'hellorouter',
-        name: 'hellorouter',
-        component: () => import('@/components/HelloRouter.vue'),
-      },
-    ],
+export const master: RouteConfig = {
+  path: '/master',
+  name: 'master',
+  component: () => import('@/views/master/MasterShell.vue'),
+  redirect: {
+    name: 'helloworld',
   },
-];
+  children: [
+    {
+      path: 'helloworld',
+      name: 'helloworld',
+      meta: {
+        name: i18n.t('navigation.helloworld'),
+        icon: 'el-icon-platform-eleme',
+      },
+      component: () => import('@/components/HelloWorld.vue'),
+    },
+    {
+      path: 'hellorouter',
+      name: 'hellorouter',
+      meta: {
+        name: i18n.t('navigation.hellorouter'),
+        icon: 'el-icon-loading',
+      },
+      component: () => import('@/components/HelloRouter.vue'),
+    },
+  ],
+};
 
 // http common pages: 40X 50X
-const common: Array<RouteConfig> = [
+export const common: Array<RouteConfig> = [
   {
     path: '/50*',
     name: '50*',
@@ -56,7 +63,7 @@ const common: Array<RouteConfig> = [
 // all routes
 const routes: Array<RouteConfig> = [
   home,
-  ...master,
+  master,
   ...common,
 ];
 

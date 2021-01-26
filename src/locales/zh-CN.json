@@ -1,24 +1,6 @@
 {
-  "navigation": [
-    {
-      "name": "机会",
-      "icon": "el-icon-s-opportunity",
-      "routerName": "helloworld"
-    },
-    {
-      "name": "信息",
-      "icon": "el-icon-info",
-      "routerName": "hellorouter"
-    },
-    {
-      "name": "菜单",
-      "icon": "el-icon-menu",
-      "routerName": "helloworld"
-    },
-    {
-      "name": "设置",
-      "icon": "el-icon-setting",
-      "routerName": "hellorouter"
-    }
-  ]
+  "navigation": {
+    "helloworld": "欢迎",
+    "hellorouter": "路由"
+  }
 }
