@@ -10,26 +10,13 @@
         "requirement": "掌握数学、自然科学、工程科学和计算机专业的基础知识、原理和方法",
         "subClasses":
         [
-          {
-            "name": "高等数学",
-            "percent": "15%"
-          },
-          {
-            "name": "线性代数A",
-            "percent": "5%"
-          },
-          {
-            "name": "离散数学",
-            "percent": "5%"
-          },
-          {
-            "name": "概率论与数理统计",
-            "percent": "10%"
-          },
-          {
-            "name": "大学物理B",
-            "percent": "5%"
-          }
+          { "name": "高等数学", "percent": "15%" },
+          { "name": "线性代数A", "percent": "5%" },
+          { "name": "离散数学", "percent": "5%" },
+          { "name": "概率论与数理统计", "percent": "10%" },
+          { "name": "大学物理B", "percent": "5%" },
+          { "name": "计算机导论", "percent": "4%" },
+          { "name": "编程导论", "percent": "4%" }
         ]
       },
       {
