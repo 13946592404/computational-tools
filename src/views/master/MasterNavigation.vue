@@ -1,6 +1,16 @@
 <template>
-  <el-col :span="12">
-    <el-menu class="el-menu-vertical-demo ct-sidebar" router>
+  <el-col
+    class="flex-1"
+    style="background:#545c64"
+    :span="12"
+  >
+    <el-menu
+      class="el-menu-vertical-demo ct-sidebar"
+      background-color="#545c64"
+      text-color="#ffffff"
+      active-text-color="#ffd04b"
+      router
+    >
       <el-menu-item
         v-for="(value, index) in masterRouters"
         :key="index"
@@ -28,3 +38,14 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.el-menu {
+  border-right: none;
+
+  .el-menu-item {
+    padding-left: 20% !important;
+    font-size: 16px;
+  }
+}
+</style>

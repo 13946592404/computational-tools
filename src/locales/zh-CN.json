@@ -1,6 +1,7 @@
 {
   "navigation": {
     "helloworld": "欢迎",
-    "hellorouter": "路由"
+    "hellorouter": "路由",
+    "graduaterequire": "毕业要求"
   }
 }

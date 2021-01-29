@@ -38,6 +38,15 @@ export const master: RouteConfig = {
       },
       component: () => import('@/components/HelloRouter.vue'),
     },
+    {
+      path: 'graduaterequire',
+      name: 'graduaterequire',
+      meta: {
+        name: i18n.t('navigation.graduaterequire'),
+        icon: 'el-icon-s-flag',
+      },
+      component: () => import('@/views/pages/GraduateRequire.vue'),
+    },
   ],
 };
 

@@ -14,10 +14,6 @@
           <!-- main -->
           <router-view />
         </el-main>
-        <el-footer>
-          <!-- footer -->
-          <!-- noop -->
-        </el-footer>
       </el-container>
     </el-container>
   </el-container>
@@ -32,3 +28,22 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.el-container {
+  &.is-vertical {
+    height: 100vh;
+  }
+}
+.el-header {
+  height: 10vh !important;
+}
+.el-aside {
+  display: flex;
+  width: 15vw !important;
+}
+.el-main {
+  overflow: scroll;
+  height: 90vh;
+}
+</style>

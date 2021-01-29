@@ -1,6 +1,7 @@
 {
   "navigation": {
     "helloworld": "World",
-    "hellorouter": "Router"
+    "hellorouter": "Router",
+    "graduaterequire": "Graduation Requirements"
   }
 }
