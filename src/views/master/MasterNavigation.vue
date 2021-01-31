@@ -28,10 +28,10 @@
 <script lang="ts">
 import { master } from '@/router/config';
 
-const { children: masterRouters } = master;
-
 export default {
   data() {
+    const { children: masterRouters } = master;
+
     return {
       masterRouters,
     };

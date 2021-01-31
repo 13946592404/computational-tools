@@ -1,69 +1,71 @@
 <template>
-  <el-collapse v-model="activeNames" @change="handleChange">
+  <el-collapse v-model="activeNames">
     <el-collapse-item
       v-for="target in requirement"
       :key="target.index"
       :name="target.index"
       :title="target.index + ' ' + target.title + '：' + target.statement"
     >
-        <el-table
+        <certification-table
           :data="target.children"
-          stripe
-          border
-          default-expand-all
-        >
-          <el-table-column
-            prop="index"
-            label="子目标"
-            width="100px"
-          />
-          <el-table-column
-            prop="statement"
-            label="内容"
-          />
-          <el-table-column type="expand">
-            <template slot-scope="props">
-              <el-form
-                label-position="left"
-                class="demo-table-expand"
-              >
-                <el-form-item
-                  v-for="course in props.row.subClasses"
-                  :key="course.name"
-                  :label="course.name"
-                >
-                  <span>{{ course.percent }}</span>
-                </el-form-item>
-              </el-form>
-            </template>
-          </el-table-column>
-        </el-table>
+        />
     </el-collapse-item>
   </el-collapse>
 </template>
 
-<script>
+<script type="ts">
+// import { defineComponent } from '@vue/composition-api';
 import requirement from '@/data/requirement';
+import CertificationTable from './CertificationTable.vue';
 
 export default {
+  components: {
+    CertificationTable,
+  },
   data() {
-    let activeNames = []; // eslint-disable-line
-
+    requirement[0].children[0].sub = [
+      { name: 'a', percent: '30%' },
+    ];
     return {
-      activeNames,
       requirement,
     };
   },
-  created() {
-    setInterval(() => {
-      if (this.activeNames.length) {
-        this.activeNames = [];
-      } else {
-        this.activeNames = requirement.map((value) => value.index);
-      }
-    }, 3000);
-  },
 };
+
+// export default defineComponent({
+//   components: {
+//     CertificationTable,
+//   },
+
+//   setup() {
+//     const activeNames = [];
+
+//     const foldCertificationAll = () => {
+//       activeNames.splice(0, this.activeNames.length);
+//     };
+
+//     const openCertificationAll = () => {
+//       activeNames.push(...requirement.map((val) => val.index));
+//     };
+
+//     requirement[0].children[0].sub = [
+//       { name: 'a', percent: '30%' },
+//     ];
+
+//     setTimeout(() => {
+//       openCertificationAll();
+//     }, 3000);
+
+//     setTimeout(() => {
+//       foldCertificationAll();
+//     }, 3000);
+
+//     return {
+//       activeNames,
+//       requirement,
+//     };
+//   },
+// });
 </script>
 
 <style lang="scss">
