@@ -28,6 +28,7 @@ export default {
     ];
     return {
       requirement,
+      activeNames: [],
     };
   },
 };
