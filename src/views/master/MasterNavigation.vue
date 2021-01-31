@@ -45,7 +45,7 @@ export default {
 
   .el-menu-item {
     padding-left: 20% !important;
-    font-size: 16px;
+    font-size: 15px;
   }
 }
 </style>
