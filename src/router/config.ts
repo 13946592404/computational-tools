@@ -45,7 +45,7 @@ export const master: RouteConfig = {
         name: i18n.t('navigation.graduaterequire'),
         icon: 'el-icon-s-flag',
       },
-      component: () => import('@/views/pages/GraduateRequire.vue'),
+      component: () => import('@/views/master/pages/GraduateRequire.vue'),
     },
   ],
 };

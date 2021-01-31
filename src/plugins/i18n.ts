@@ -6,7 +6,7 @@ import en from '@/locales/en/config';
 
 Vue.use(VueI18n);
 
-const i18n = new VueI18n({
+const i18n: VueI18n = new VueI18n({
   locale: navigator.language,
   fallbackLocale: 'ch',
   messages: {
