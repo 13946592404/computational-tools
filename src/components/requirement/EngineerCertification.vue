@@ -59,11 +59,14 @@ export default defineComponent({
 <style lang="scss">
 .radioGroups {
   position: fixed;
-  right: 10%;
-  bottom: 25%;
+  right: 2%;
+  bottom: 7%;
   display: flex;
   flex-flow: column wrap;
   text-align: center;
+  background: whitesmoke;
+  border: 1px solid grey;
+  z-index: 1;
 
   .el-switch {
     margin: 20px;
