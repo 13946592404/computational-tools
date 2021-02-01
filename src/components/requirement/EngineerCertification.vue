@@ -1,65 +1,72 @@
 <template>
-  <el-collapse v-model="activeNames">
-    <el-collapse-item
-      v-for="target in requirement"
-      :key="target.index"
-      :name="target.index"
-      :title="target.index + ' ' + target.title + '：' + target.statement"
-    >
-        <certification-table
-          :data="target.children"
-        />
-    </el-collapse-item>
-  </el-collapse>
+  <div>
+    <div class="collapseGroups">
+      <certification-collapse
+        v-model="statement"
+      />
+    </div>
+    <div class="radioGroups">
+      <el-switch
+        v-model="statement.collapse.show"
+        :active-text="statement.collapse.text.open"
+        :inactive-text="statement.collapse.text.fold">
+      </el-switch>
+      <el-switch
+        v-model="statement.course.show"
+        :active-text="statement.course.text.open"
+        :inactive-text="statement.course.text.fold">
+      </el-switch>
+    </div>
+  </div>
 </template>
 
-<script type="ts">
-import { defineComponent, ref } from '@vue/composition-api';
-import requirement from '@/data/requirement';
-import CertificationTable from './CertificationTable.vue';
+<script lang="ts">
+import { defineComponent, reactive, toRefs } from '@vue/composition-api';
+import i18n from '@/plugins/i18n';
+import CertificationCollapse from './CertificationCollapse.vue';
 
 export default defineComponent({
   components: {
-    CertificationTable,
+    CertificationCollapse,
   },
-
   setup() {
-    const activeNames = ref([]);
-
-    const openCertificationAll = () => {
-      activeNames.value.push(...requirement.map((val) => val.index));
-    };
-
-    const foldCertificationAll = () => {
-      activeNames.value.splice(0, activeNames.value.length);
-    };
-
-    // Certification-Table-Expand test
-    requirement[0].children[0].sub = [
-      { name: 'a', percent: '30%' },
-    ];
+    const state = reactive({
+      statement: {
+        collapse: {
+          show: true,
+          text: {
+            open: `${i18n.t('base.open')}${i18n.t('switchGroups.collapse')}`,
+            fold: `${i18n.t('base.fold')}${i18n.t('switchGroups.collapse')}`,
+          },
+        },
+        course: {
+          show: false,
+          text: {
+            open: `${i18n.t('base.open')}${i18n.t('switchGroups.course')}`,
+            fold: `${i18n.t('base.fold')}${i18n.t('switchGroups.course')}`,
+          },
+        },
+      },
+    });
 
     return {
-      requirement,
-      activeNames,
-      openCertificationAll,
-      foldCertificationAll,
+      ...toRefs(state),
     };
   },
 });
 </script>
 
 <style lang="scss">
-.demo-table-expand {
-  font-size: 0;
-}
-.demo-table-expand label {
-  width: 160px;
-  color: #99a9bf;
-}
-.demo-table-expand .el-form-item {
-  margin-right: 0;
-  margin-bottom: 0;
-  width: 50%;
+.radioGroups {
+  position: fixed;
+  right: 10%;
+  bottom: 25%;
+  display: flex;
+  flex-flow: column wrap;
+  text-align: center;
+
+  .el-switch {
+    margin: 20px;
+  }
 }
 </style>
