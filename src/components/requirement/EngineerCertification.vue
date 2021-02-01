@@ -70,6 +70,7 @@ export default defineComponent({
 
   .el-switch {
     margin: 20px;
+    justify-content: center;
   }
 }
 </style>
