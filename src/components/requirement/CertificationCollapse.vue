@@ -16,7 +16,6 @@
 <script type="ts">
 import {
   defineComponent,
-  onMounted,
   ref,
   watch,
 } from '@vue/composition-api';
@@ -37,16 +36,17 @@ export default defineComponent({
   setup(props) {
     const activeNames = ref([]);
 
-    const openCertificationAll = () => {
-      activeNames.value.push(...requirement.map((val) => val.index));
-    };
-
     const foldCertificationAll = () => {
       activeNames.value.splice(0, activeNames.value.length);
     };
 
+    const openCertificationAll = () => {
+      foldCertificationAll();
+      activeNames.value.push(...requirement.map((val) => val.index));
+    };
+
     // default open all
-    onMounted(() => openCertificationAll());
+    openCertificationAll();
 
     // watch props
     watch(
