@@ -53,11 +53,6 @@ export default defineComponent({
       () => (props.value.collapse.show ? openCertificationAll() : foldCertificationAll()),
     );
 
-    // Certification-Table-Expand test
-    requirement[0].children[0].sub = [
-      { name: 'a', percent: '30%' },
-    ];
-
     return {
       requirement,
       activeNames,
