@@ -9,13 +9,14 @@
       <el-switch
         v-model="statement.collapse.show"
         :active-text="statement.collapse.text.open"
-        :inactive-text="statement.collapse.text.fold">
-      </el-switch>
+        :inactive-text="statement.collapse.text.fold"
+      />
       <el-switch
         v-model="statement.course.show"
         :active-text="statement.course.text.open"
-        :inactive-text="statement.course.text.fold">
-      </el-switch>
+        :inactive-text="statement.course.text.fold"
+        :disabled="!statement.collapse.show"
+      />
     </div>
   </div>
 </template>
