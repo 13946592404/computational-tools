@@ -5,15 +5,16 @@
 </template>
 
 <script>
+import { defineComponent } from '@vue/composition-api';
 import EngineerCertification from '@/components/requirement/EngineerCertification.vue';
 
-export default {
+export default defineComponent({
   components: { EngineerCertification },
 
-  data() {
+  setup() {
     return {
       EngineerCertification,
     };
   },
-};
+});
 </script>

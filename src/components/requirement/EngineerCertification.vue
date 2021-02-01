@@ -14,7 +14,7 @@
 </template>
 
 <script type="ts">
-import { defineComponent, reactive } from '@vue/composition-api';
+import { defineComponent, ref } from '@vue/composition-api';
 import requirement from '@/data/requirement';
 import CertificationTable from './CertificationTable.vue';
 
@@ -24,31 +24,26 @@ export default defineComponent({
   },
 
   setup() {
-    const activeNames = reactive([]);
-
-    const foldCertificationAll = () => {
-      activeNames.splice(0, this.activeNames.length);
-    };
+    const activeNames = ref([]);
 
     const openCertificationAll = () => {
-      activeNames.push(...requirement.map((val) => val.index));
+      activeNames.value.push(...requirement.map((val) => val.index));
     };
 
+    const foldCertificationAll = () => {
+      activeNames.value.splice(0, activeNames.value.length);
+    };
+
+    // Certification-Table-Expand test
     requirement[0].children[0].sub = [
       { name: 'a', percent: '30%' },
     ];
 
-    setTimeout(() => {
-      openCertificationAll();
-    }, 3000);
-
-    setTimeout(() => {
-      foldCertificationAll();
-    }, 6000);
-
     return {
-      activeNames,
       requirement,
+      activeNames,
+      openCertificationAll,
+      foldCertificationAll,
     };
   },
 });

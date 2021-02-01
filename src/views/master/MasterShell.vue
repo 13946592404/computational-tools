@@ -20,13 +20,14 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from '@vue/composition-api';
 import MasterNavigation from './MasterNavigation.vue';
 
-export default {
+export default defineComponent({
   components: {
     MasterNavigation,
   },
-};
+});
 </script>
 
 <style lang="scss">

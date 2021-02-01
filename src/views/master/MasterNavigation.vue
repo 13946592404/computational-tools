@@ -26,17 +26,18 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from '@vue/composition-api';
 import { master } from '@/router/config';
 
-export default {
-  data() {
+export default defineComponent({
+  setup() {
     const { children: masterRouters } = master;
 
     return {
       masterRouters,
     };
   },
-};
+});
 </script>
 
 <style lang="scss">

@@ -3,18 +3,27 @@
     :data="data"
     stripe
     border
-    :default-expand-all="isExpand"
+    :default-expand-all="false"
   >
-    <el-table-column prop="index" label="子目标" width="100px" />
-    <el-table-column prop="statement" label="内容" />
+    <el-table-column
+      prop="index"
+      label="子目标"
+      width="100px"
+      align="center"
+    />
+    <el-table-column
+      prop="statement"
+      label="内容"
+    />
     <certification-table-expand />
   </el-table>
 </template>
 
 <script lang="ts">
+import { defineComponent } from '@vue/composition-api';
 import CertificationTableExpand from './CertificationTableExpand.vue';
 
-export default {
+export default defineComponent({
   components: {
     CertificationTableExpand,
   },
@@ -23,23 +32,11 @@ export default {
       default: [],
     },
   },
-  data() {
-    return {
-      isExpand: true,
-    };
-  },
-  // methods: {
-  //   openCourseAll() {
-  //     this.isExpand = true;
-  //   },
-  //   foldCourseAll() {
-  //     this.isExpand = false;
-  //   },
-  // },
-  // created() {
-  //   setInterval(() => {
-  //     this.isExpand = !this.isExpand;
-  //   }, 3000)
-  // },
-};
+});
 </script>
+
+<style lang="scss">
+.el-table_1_column_2 {
+  padding-left: 8px !important;
+}
+</style>
