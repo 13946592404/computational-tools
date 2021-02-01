@@ -34,11 +34,13 @@ export default defineComponent({
     },
   },
   setup() {
+    const labels = {
+      subTarget: i18n.t('certification.table.subTarget'),
+      content: i18n.t('certification.table.content'),
+    };
+
     return {
-      labels: {
-        subTarget: i18n.t('certification.table.subTarget'),
-        content: i18n.t('certification.table.content'),
-      },
+      labels,
     };
   },
 });
