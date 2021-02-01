@@ -10,6 +10,8 @@
         v-model="statement.collapse.show"
         :active-text="statement.collapse.text.open"
         :inactive-text="statement.collapse.text.fold"
+        active-color="#13ce66"
+        inactive-color="#ff4949"
       />
       <el-switch
         v-model="statement.course.show"
