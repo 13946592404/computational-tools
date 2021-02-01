@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import elementUI from 'element-ui';
+import VueCompositionAPI from '@vue/composition-api';
 
 import App from './App.vue';
 import router from './router';
@@ -10,6 +11,7 @@ import '@/assets/tailwind.css';
 import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.use(elementUI);
+Vue.use(VueCompositionAPI);
 
 Vue.config.productionTip = false;
 

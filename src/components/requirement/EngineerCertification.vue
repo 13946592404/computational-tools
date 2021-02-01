@@ -14,59 +14,44 @@
 </template>
 
 <script type="ts">
-// import { defineComponent } from '@vue/composition-api';
+import { defineComponent, reactive } from '@vue/composition-api';
 import requirement from '@/data/requirement';
 import CertificationTable from './CertificationTable.vue';
 
-export default {
+export default defineComponent({
   components: {
     CertificationTable,
   },
-  data() {
+
+  setup() {
+    const activeNames = reactive([]);
+
+    const foldCertificationAll = () => {
+      activeNames.splice(0, this.activeNames.length);
+    };
+
+    const openCertificationAll = () => {
+      activeNames.push(...requirement.map((val) => val.index));
+    };
+
     requirement[0].children[0].sub = [
       { name: 'a', percent: '30%' },
     ];
+
+    setTimeout(() => {
+      openCertificationAll();
+    }, 3000);
+
+    setTimeout(() => {
+      foldCertificationAll();
+    }, 6000);
+
     return {
+      activeNames,
       requirement,
-      activeNames: [],
     };
   },
-};
-
-// export default defineComponent({
-//   components: {
-//     CertificationTable,
-//   },
-
-//   setup() {
-//     const activeNames = [];
-
-//     const foldCertificationAll = () => {
-//       activeNames.splice(0, this.activeNames.length);
-//     };
-
-//     const openCertificationAll = () => {
-//       activeNames.push(...requirement.map((val) => val.index));
-//     };
-
-//     requirement[0].children[0].sub = [
-//       { name: 'a', percent: '30%' },
-//     ];
-
-//     setTimeout(() => {
-//       openCertificationAll();
-//     }, 3000);
-
-//     setTimeout(() => {
-//       foldCertificationAll();
-//     }, 3000);
-
-//     return {
-//       activeNames,
-//       requirement,
-//     };
-//   },
-// });
+});
 </script>
 
 <style lang="scss">
