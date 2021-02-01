@@ -65,7 +65,7 @@ export default defineComponent({
   flex-flow: column wrap;
   text-align: center;
   background: whitesmoke;
-  border: 1px solid grey;
+  border: 1px dotted #999999;
   z-index: 1;
 
   .el-switch {
