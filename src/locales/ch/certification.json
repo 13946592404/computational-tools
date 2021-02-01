@@ -1,0 +1,10 @@
+{
+  "switchGroups": {
+    "collapse": "毕业要求",
+    "course": "课程比例"
+  },
+  "table": {
+    "subTarget": "子目标",
+    "content": "内容"
+  }
+}

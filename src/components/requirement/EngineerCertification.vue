@@ -35,15 +35,15 @@ export default defineComponent({
         collapse: {
           show: true,
           text: {
-            open: `${i18n.t('base.open')}${i18n.t('switchGroups.collapse')}`,
-            fold: `${i18n.t('base.fold')}${i18n.t('switchGroups.collapse')}`,
+            open: `${i18n.t('base.open')}${i18n.t('certification.switchGroups.collapse')}`,
+            fold: `${i18n.t('base.fold')}${i18n.t('certification.switchGroups.collapse')}`,
           },
         },
         course: {
           show: false,
           text: {
-            open: `${i18n.t('base.open')}${i18n.t('switchGroups.course')}`,
-            fold: `${i18n.t('base.fold')}${i18n.t('switchGroups.course')}`,
+            open: `${i18n.t('base.open')}${i18n.t('certification.switchGroups.course')}`,
+            fold: `${i18n.t('base.fold')}${i18n.t('certification.switchGroups.course')}`,
           },
         },
       },

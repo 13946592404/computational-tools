@@ -8,7 +8,8 @@ Vue.use(VueI18n);
 
 const i18n: VueI18n = new VueI18n({
   locale: navigator.language,
-  fallbackLocale: 'ch',
+  // fallbackLocale: 'ch',
+  fallbackLocale: 'en',
   messages: {
     ch,
     en,

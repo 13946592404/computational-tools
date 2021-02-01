@@ -1,120 +1,120 @@
 [
   {
-    "title": "工程知识",
-    "statement": "能够将数学、自然科学、工程基础和专业知识用于解决复杂工程问题",
+    "title": "Engineering Knowledge",
+    "statement": "Able to apply mathematics, science, engineering fundamentals and expertise to solve complex engineering problems",
     "children":
     [
-      { "statement": "掌握数学、自然科学、工程科学和计算机专业的基础知识、原理和方法" },
-      { "statement": "能使用数学、自然科学、工程科学和计算机专业的语言工具表述计算机领域的复杂工程问题并求解" },
-      { "statement": "能利用相关知识和数学模型方法推演、分析计算机领域的复杂工程问题" },
-      { "statement": "能利用相关知识比较、综合和优化计算机工程问题的解决方案" }
+      { "statement": "Master the basic knowledge, principles and methods of mathematics, natural science, engineering science and computer science" },
+      { "statement": "Can use the language tools of mathematics, natural science, engineering science and computer science to express and solve complex engineering problems in the computer field" },
+      { "statement": "Can use relevant knowledge and mathematical modeling methods to deduce and analyze complex engineering problems in the computer field" },
+      { "statement": "Solutions that compare, synthesize, and optimize computer engineering problems using relevant knowledge" }
     ]
   },
   {
-    "title": "问题分析",
-    "statement": "能够应用数学、自然科学和工程科学的基本原理，识别、表达、并通过文献研究分析复杂工程问题，以获得有效结论",
+    "title": "Problem Analysis",
+    "statement": "Ability to apply fundamental principles of mathematics, natural science and engineering science to identify, express, and analyze complex engineering problems through literature research to reach valid conclusions",
     "children":
     [
-      { "statement": "掌握数学、自然科学和工程科学的基本原理，掌握文献检索与研究的方法和技巧" },
-      { "statement": "能应用数学、自然科学和工程科学的基本原理识别计算机领域复杂工程问题的关键环节，能正确表述复杂的计算机工程问题" },
-      { "statement": "能应用基本原理，会借助文献研究、分析、解决工程问题，获得多种可选的解决方案" }
+      { "statement": "Master the basic principles of mathematics, natural science and engineering science, master the methods and skills of literature retrieval and research" },
+      { "statement": "Can apply the basic principles of mathematics, natural science and engineering science to identify the key links of complex engineering problems in the field of computer, and can correctly describe complex computer engineering problems" },
+      { "statement": "Able to apply basic principles and develop alternative solutions to engineering problems through literature research, analysis, and problem-solving" }
     ]
   },
   {
-    "title": "设计/开发解决方案",
-    "statement": "能够设计针对复杂工程问题的解决方案，设计满足特定需求的系统、单元（部件）或工艺流程，并能够在设计环节中体现创新意",
+    "title": "Design/Develop Solution",
+    "statement": "Can design solutions to complex engineering problems, design systems, units (components) or processes to meet specific needs, and demonstrate innovation in the design process",
     "children":
     [
-      { "statement": "掌握计算机领域工程设计与产品开发全周期、全流程的基本设计/开发方法和，了解影响设计目标和技术方案的各种因素" },
-      { "statement": "针对计算机领域复杂工程问题，设计满足特定需求的系统、单元或流程的能力" },
-      { "statement": "在计算机领域设计环节中体现创新意识，并综合考虑社会、健康、安全、法律、文化以及环境等因素的能力" }
+      { "statement": "Master the basic design/development methods of the whole cycle and process of engineering design and product development in the field of computer, and understand the various factors that affect the design objectives and technical solutions" },
+      { "statement": "Able to design systems, units, or processes that meet specific requirements for complex engineering problems in the computer domain" },
+      { "statement": "Able to demonstrate a sense of innovation in the design process in the computer field, taking into account social, health, safety, legal, cultural, and environmental factors" }
     ]
   },
   {
-    "title": "研究",
-    "statement": "能够基于科学原理并采用科学方法对复杂工程问题进行研究，包括设计实验、分析与解释数据、并通过信息综合得到合理有效的结论",
+    "title": "Research",
+    "statement": "Able to study complex engineering problems based on scientific principles and using scientific methods, including designing experiments, analyzing and interpreting data, and synthesizing information to arrive at reasonable and effective conclusions",
     "children":
     [
-      { "statement": "通过文献研究或相关方法，调研和分析计算机领域复杂工程问题的解决方案" },
-      { "statement": "能够根据计算机领域对象特征，选择研究路线，设计实验方案" },
-      { "statement": "能够根据实验方案构建计算机领域实验系统，安全地开展实验，科学地采集实验数据" },
-      { "statement": "能对实验结果进行分析和解释，并通过信息综合得到合理有效地结论" }
+      { "statement": "Investigate and analyze solutions to complex engineering problems in the computer field through literature research or related methods" },
+      { "statement": "Able to select research routes and design experimental schemes according to the characteristics of objects in the computer field" },
+      { "statement": "Can build the computer field experimental system according to the experimental scheme, safely carry out experiments, and scientifically collect experimental data" },
+      { "statement": "Can analyze and explain the experimental results, and draw reasonable and effective conclusions through information synthesis" }
     ]
   },
   {
-    "title": "使用现代工具",
-    "statement": "能够针对复杂工程问题，开发、选择与使用恰当的技术、资源、现代工程工具和信息技术工具，包括对复杂工程问题的预测与模拟，并能够理解其局限性",
+    "title": "Using Modern Tools",
+    "statement": "Able to develop, select and use appropriate technologies, resources, modern engineering tools and information technology tools for complex engineering problems, including prediction and simulation of complex engineering problems, and understanding their limitations",
     "children":
     [
-      { "statement": "了解计算机领域常用的现代仪器、信息技术工具、工程工具和模拟软件的使用原理和方法，并理解其局限性" },
-      { "statement": "能够选择与使用恰当的仪器、信息资源、工程工具和专业模拟软件，对计算机领域复杂工程问题进行分析、计算与设计" },
-      { "statement": "能够针对计算机领域具体的对象，开发或选用满足特定需求的现代工具，模拟和预测专业问题，并能够分析其局限性" }
+      { "statement": "Understand the use principles and methods of modern instruments, information technology tools, engineering tools and simulation software commonly used in the computer field, and understand their limitations" },
+      { "statement": "Can select and use appropriate instruments, information resources, engineering tools and professional simulation software to analyze, calculate and design complex engineering problems in the field of computer" },
+      { "statement": "Able to develop or select modern tools to meet specific needs for specific objects in the computer field, to simulate and predict professional problems, and to analyze their limitations" }
     ]
   },
   {
-    "title": "工程与社会",
-    "statement": "能够基于工程相关背景知识进行合理分析，评价专业工程实践和复杂工程问题解决方案对社会、健康、安全、法律以及文化的影响，并理解应承担的责任",
+    "title": "Engineering And Society",
+    "statement": "Able to conduct rational analysis based on engineering background knowledge, evaluate the social, health, safety, legal and cultural impact of professional engineering practices and solutions to complex engineering problems, and understand the responsibilities to be undertaken",
     "children":
     [
-      { "statement": "了解计算机专业相关领域的技术标准体系、知识产权、产业政策和法律法规，不同社会文化对工程活动的影响" },
-      { "statement": "能分析和评价计算机领域专业实践对社会、健康、安全、法律以及文化的影响，并理解应承担的责任" }
+      { "statement": "Understand the technical standard system, intellectual property rights, industrial policies, laws and regulations in the field related to computer science, and the influence of different social cultures on engineering activities" },
+      { "statement": "Ability to analyze and evaluate the social, health, safety, legal, and cultural implications of professional practice in the field of computer science, and to understand the responsibilities that should be taken" }
     ]
   },
   {
-    "title": "环境和可持续发展",
-    "statement": "能够理解和评价针对复杂工程问题的工程实践对环境、社会可持续发展的影响",
+    "title": "Environment and Sustainable Development",
+    "statement": "Able to understand and evaluate the impact of engineering practices on environmental and social sustainability of complex engineering problems",
     "children":
     [
-      { "statement": "知晓和理解环境保护和可持续发展的理念和内涵" },
-      { "statement": "能够站在环境保护和可持续发展的角度思考计算机领域专业工程实践的可持续性，评价产品周期中可能对人类和环境在城的损害和隐患" }
+      { "statement": "Know and understand the concept and connotation of environmental protection and sustainable development" },
+      { "statement": "Can consider the sustainability of professional engineering practice in the field of computer from the perspective of environmental protection and sustainable development, and evaluate the possible damage and hidden danger to human and environment in the city during the product cycle" }
     ]
   },
   {
-    "title": "职业规范",
-    "statement": "具有人文社会科学素养、社会责任感，能够在工程实践中理解并遵守工程职业道德和规范，履行责任",
+    "title": "Professional norms",
+    "statement": "With humanistic and social science literacy, social responsibility, able to understand and abide by engineering professional ethics and norms in engineering practice, to fulfill responsibilities",
     "children":
     [
-      { "statement": "有正确的价值观，理解个人与社会的关系，了解中国国情" },
-      { "statement": "理解诚实公正、诚信守则的过程职业道德规范，并能在计算机领域工程实践中自觉遵守" },
-      { "statement": "理解并遵守计算机领域工程职业道德和规范" }
+      { "statement": "Have correct values, understand the relationship between individuals and society, and understand China's national conditions" },
+      { "statement": "Understand the principles of integrity, fairness and integrity in the process of professional ethics and be able to consciously observe them in the engineering practice in the computer field" },
+      { "statement": "Understand and adhere to the Engineering Ethics and Code of Ethics in the Computer Field" }
     ]
   },
   {
-    "title": "个人和团队",
-    "statement": "能够在多学科背景下的团队中承担个体、团队成员以及负责人的角色",
+    "title": "Individual And Team",
+    "statement": "Able to act as an individual, team member, and leader in a multidisciplinary team",
     "children":
     [
-      { "statement": "能与其他学科的成员有效沟通，合作共享" },
-      { "statement": "能够在计算机领域团队中独立或合作开展工作" },
-      { "statement": "能够组织、协调和指挥计算机领域团队开展工作" }
+      { "statement": "Able to communicate effectively and collaboratively with members of other disciplines" },
+      { "statement": "Able to work independently or collaboratively in a computer field team" },
+      { "statement": "Able to organize, coordinate and direct the work of computer field teams" }
     ]
   },
   {
-    "title": "沟通",
-    "statement": "能够就复杂工程问题与业界同行及社会公众进行有效沟通和交流，包括撰写报告和设计文稿、陈述发言、清晰表达或回应指令。并具备一定的国际视野，能够在跨文化背景下进行沟通和交流",
+    "title": "Communication",
+    "statement": "Able to effectively communicate and communicate with industry colleagues and the public on complex engineering issues, including writing reports and design documents, making presentations, and clearly expressing or responding to instructions. With a certain international perspective and the ability to communicate and communicate in a cross-cultural context",
     "children":
     [
-      { "statement": "能就计算机领域专业问题，以口头、文稿、图表等方式，准确表达自己的观点，回应质疑，理解与业界同行和社会公众交流的差异性" },
-      { "statement": "关注全球性问题，理解和尊重世界不同文化的差异性和多样性，理解计算机领域的国际发展趋势、研究热点" },
-      { "statement": "具有款文化的语言和书面交流能力，能救计算机领域专业问题，在款文化的背景下机型基本的沟通和交流" }
+      { "statement": "Can accurately express my views, respond to questions, and understand the differences in communication with peers and the public on professional issues in the computer field by oral, written, and graphic methods" },
+      { "statement": "Focus on global issues, understand and respect the differences and diversity of different cultures in the world, understand the international development trends and research hotspots in the field of computer" },
+      { "statement": "Able to communicate in language and in writing in different cultures, capable of solving professional problems in the computer field, and basic communication and communication in the context of different cultures" }
     ]
   },
   {
-    "title": "项目管理",
-    "statement": "理解并掌握工程管理原理与经济决策方法，并能在多学科环境中应用",
+    "title": "Project Management",
+    "statement": "Understand and grasp the principles of project management and economic decision-making methods and be able to apply them in a multidisciplinary environment",
     "children":
     [
-      { "statement": "理解计算机领域工程及产品全周期、全流程的成本构成中涉及构成管理与经济决策问题" },
-      { "statement": "掌握计算机领域工程项目中涉及的管理与经济决策方法、项目管理知识与管理工具" },
-      { "statement": "能在多学科环境中，应用计算机工程管理与经济决策方法" }
+      { "statement": "Understand the construction management and economic decision-making issues involved in the cost structure of the whole cycle and process of engineering and products in the field of computer" },
+      { "statement": "Master management and economic decision-making methods, project management knowledge and management tools involved in engineering projects in the computer field" },
+      { "statement": "Able to apply computer engineering management and economic decision-making methods in a multidisciplinary environment" }
     ]
   },
   {
-    "title": "终身学习",
-    "statement": "具有自主学习和终身学习的意识，有不断学习和适应发展的能力",
+    "title": "Lifelong Learning",
+    "statement": "Have the consciousness of independent learning and lifelong learning, and I have the ability to continuously learn and adapt to development",
     "children":
     [
-      { "statement": "具有自主学习和终身学习的意识， 具有不断学习和适应发展的能力" }
+      { "statement": "Have the consciousness of independent learning and lifelong learning, and have the ability to continuously learn and adapt to development" }
     ]
   }
 ]

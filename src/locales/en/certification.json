@@ -1,0 +1,10 @@
+{
+  "switchGroups": {
+    "collapse": "Requirements",
+    "course": "Courses"
+  },
+  "table": {
+    "subTarget": "SubGoals",
+    "content": "Details"
+  }
+}
