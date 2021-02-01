@@ -41,7 +41,6 @@ export default defineComponent({
     };
 
     const openCertificationAll = () => {
-      foldCertificationAll();
       activeNames.value.push(...requirement.map((val) => val.index));
     };
 
