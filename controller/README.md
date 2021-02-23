@@ -3,6 +3,7 @@
 ## Project setup
 ```
 npm install
+npm install --save
 ```
 
 ### Compiles and Run in serve
