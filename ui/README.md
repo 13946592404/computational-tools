@@ -1,4 +1,4 @@
-# computational-tools
+# computational-tools ui
 
 ## Project setup
 ```
