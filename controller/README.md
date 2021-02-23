@@ -2,8 +2,7 @@
 
 ## Project setup
 ```
-npm install
-npm install --save
+npm ci
 ```
 
 ### Compiles and Run in serve
