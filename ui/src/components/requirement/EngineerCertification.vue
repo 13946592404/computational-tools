@@ -36,7 +36,7 @@ export default defineComponent({
     const state = reactive({
       radioGroup: {
         radioCollapse: true,
-        radioCourse: false,
+        radioCourse: true,
       },
     });
 

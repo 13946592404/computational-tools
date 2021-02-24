@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <engineer-certification />
-  </div>
+  <engineer-certification />
 </template>
 
 <script>

@@ -6,9 +6,10 @@
       :name="target.id"
       :title="target.id + ' ' + target.title + ' - ' + target.statement"
     >
-        <certification-table
-          :data="target.children"
-        />
+      <certification-table
+        :data="target.children"
+        :radioCourse="radioCourse"
+      />
     </el-collapse-item>
   </el-collapse>
 </template>
@@ -31,10 +32,10 @@ export default defineComponent({
 
   props: {
     radioCollapse: {
-      default: false,
+      default: true,
     },
     radioCourse: {
-      default: false,
+      default: true,
     },
   },
 
@@ -47,7 +48,7 @@ export default defineComponent({
     const activeNames = ref([]);
 
     // methods
-    const handleCertificationAll = (opt) => {
+    const handleCollapse = (opt) => {
       if (opt) {
         activeNames.value.push(...state.requirements.map((val) => val.id));
       } else {
@@ -60,13 +61,13 @@ export default defineComponent({
       // requirements
       state.requirements = val;
       // state init - collapse
-      handleCertificationAll(props.radioCollapse);
+      handleCollapse(props.radioCollapse);
     });
 
     // state change - by radio group
     watch(
       () => props,
-      (val) => handleCertificationAll(val.radioCollapse),
+      (val) => handleCollapse(val.radioCollapse),
       { deep: true },
     );
 

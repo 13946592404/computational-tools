@@ -3,25 +3,30 @@
     :data="data"
     stripe
     border
-    :default-expand-all="false"
+    :row-key="getRowKey"
+    :expand-row-keys="expandArray"
   >
     <el-table-column
       prop="index"
-      :label="labels.subTarget"
+      :label="$t('certification.table.subTarget')"
       width="100px"
       align="center"
     />
     <el-table-column
       prop="statement"
-      :label="labels.content"
+      :label="$t('certification.table.content')"
     />
     <certification-table-expand />
   </el-table>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
-import i18n from '@/plugins/i18n';
+import {
+  defineComponent,
+  watch,
+  toRefs,
+  reactive,
+} from '@vue/composition-api';
 import CertificationTableExpand from './CertificationTableExpand.vue';
 
 export default defineComponent({
@@ -32,15 +37,34 @@ export default defineComponent({
     data: {
       default: [],
     },
+    radioCourse: {
+      default: true,
+    },
   },
-  setup() {
-    const labels = {
-      subTarget: i18n.t('certification.table.subTarget'),
-      content: i18n.t('certification.table.content'),
-    };
+  setup(props) {
+    const state = reactive({
+      expandArray: [],
+    });
+
+    // @ts-ignore
+    const getRowKey = (row) => row.index;
+
+    watch(
+      () => props,
+      (value) => {
+        if (value.radioCourse) {
+          // @ts-ignore
+          state.expandArray.push(...value.data.map((val) => val.index));
+        } else {
+          state.expandArray.splice(0, state.expandArray.length);
+        }
+      },
+      { deep: true, immediate: true },
+    );
 
     return {
-      labels,
+      ...toRefs(state),
+      getRowKey,
     };
   },
 });
