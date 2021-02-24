@@ -1,19 +1,19 @@
 import requirementService from '@/service/requirementService';
 
-interface SubClasses {
+export interface SubClasses {
   name: string;
   percent: string;
   //
 }
 
-interface SubGoals {
+export interface SubGoals {
   index: string;
   statement: string;
   father_id: number;
   subClasses: SubClasses[];
 }
 
-interface Requirements {
+export interface Requirements {
   id: number;
   statement: string;
   title: string;

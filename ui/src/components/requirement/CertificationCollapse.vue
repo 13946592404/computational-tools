@@ -13,7 +13,7 @@
   </el-collapse>
 </template>
 
-<script type="ts">
+<script lang="js">
 import {
   defineComponent,
   reactive,
@@ -30,8 +30,11 @@ export default defineComponent({
   },
 
   props: {
-    value: {
-      default: {},
+    radioCollapse: {
+      default: false,
+    },
+    radioCourse: {
+      default: false,
     },
   },
 
@@ -57,13 +60,13 @@ export default defineComponent({
       // requirements
       state.requirements = val;
       // state init - collapse
-      handleCertificationAll(props.value.collapse.show);
+      handleCertificationAll(props.radioCollapse);
     });
 
     // state change - by radio group
     watch(
-      () => props.value,
-      (val) => handleCertificationAll(val.collapse.show),
+      () => props,
+      (val) => handleCertificationAll(val.radioCollapse),
       { deep: true },
     );
 

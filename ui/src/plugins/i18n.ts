@@ -6,10 +6,14 @@ import en from '@/locales/en/config';
 
 Vue.use(VueI18n);
 
+const langMap = new Map([
+  ['zh-CN', 'ch'],
+  ['en-US', 'en'],
+]);
+
 const i18n: VueI18n = new VueI18n({
-  locale: navigator.language,
+  locale: langMap.get(navigator.language),
   fallbackLocale: 'ch',
-  // fallbackLocale: 'en',
   messages: {
     ch,
     en,

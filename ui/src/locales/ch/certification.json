@@ -1,7 +1,11 @@
 {
   "switchGroups": {
     "collapse": "毕业要求",
-    "course": "课程比例"
+    "collapseOpen": "展开毕业要求",
+    "collapseFold": "折叠毕业要求",
+    "course": "课程比例",
+    "courseOpen": "展开课程比例",
+    "courseFold": "折叠课程比例"
   },
   "table": {
     "subTarget": "子目标",

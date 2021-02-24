@@ -10,6 +10,8 @@ import i18n from './plugins/i18n';
 import '@/assets/tailwind.css';
 import 'element-ui/lib/theme-chalk/index.css';
 
+import 'default-passive-events';
+
 Vue.use(elementUI);
 Vue.use(VueCompositionAPI);
 

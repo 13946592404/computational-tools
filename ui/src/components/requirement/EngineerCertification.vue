@@ -2,22 +2,23 @@
   <div>
     <div class="collapseGroups">
       <certification-collapse
-        v-model="statement"
+        :radioCollapse="radioGroup.radioCollapse"
+        :radioCourse="radioGroup.radioCourse"
       />
     </div>
     <div class="radioGroups">
       <el-switch
-        v-model="statement.collapse.show"
-        :active-text="statement.collapse.text.open"
-        :inactive-text="statement.collapse.text.fold"
+        v-model="radioGroup.radioCollapse"
+        :active-text="$t('certification.switchGroups.collapseOpen')"
+        :inactive-text="$t('certification.switchGroups.collapseFold')"
         active-color="#13ce66"
         inactive-color="#ff4949"
       />
       <el-switch
-        v-model="statement.course.show"
-        :active-text="statement.course.text.open"
-        :inactive-text="statement.course.text.fold"
-        :disabled="!statement.collapse.show"
+        v-model="radioGroup.radioCourse"
+        :active-text="$t('certification.switchGroups.courseOpen')"
+        :inactive-text="$t('certification.switchGroups.courseFold')"
+        :disabled="!radioGroup.radioCollapse"
       />
     </div>
   </div>
@@ -25,7 +26,6 @@
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from '@vue/composition-api';
-import i18n from '@/plugins/i18n';
 import CertificationCollapse from './CertificationCollapse.vue';
 
 export default defineComponent({
@@ -34,21 +34,9 @@ export default defineComponent({
   },
   setup() {
     const state = reactive({
-      statement: {
-        collapse: {
-          show: true,
-          text: {
-            open: `${i18n.t('base.open')}${i18n.t('certification.switchGroups.collapse')}`,
-            fold: `${i18n.t('base.fold')}${i18n.t('certification.switchGroups.collapse')}`,
-          },
-        },
-        course: {
-          show: false,
-          text: {
-            open: `${i18n.t('base.open')}${i18n.t('certification.switchGroups.course')}`,
-            fold: `${i18n.t('base.fold')}${i18n.t('certification.switchGroups.course')}`,
-          },
-        },
+      radioGroup: {
+        radioCollapse: true,
+        radioCourse: false,
       },
     });
 
