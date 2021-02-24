@@ -20,12 +20,24 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-// test sql
-app.get('/sql', (req, res) => {
-  const query = 'SELECT * FROM courses';
+app.get('/requirements', (req, res) => {
+  const query = 'SELECT * FROM requirements';
   select(query).then((resolve, rejected) => {
-    console.log(`query: ${query}`);
-    console.log(`response: ${JSON.stringify(resolve)}`);
+    res.send(resolve);
+  });
+});
+
+app.get('/subGoals', (req, res) => {
+  const query = 'SELECT * FROM subGoals';
+  select(query).then((resolve, rejected) => {
+    res.send(resolve);
+  });
+});
+
+app.get('./coursesToSubgoalsView', (req, res) => {
+  const query = 'SELECT * FROM coursestosubgoalsview';
+  // const query = 'select `coursestosubgoals`.`subgoal_id` AS `subgoal_id`,`courses`.`name` AS `name`,`coursestosubgoals`.`percent` AS `percent` from (`coursestosubgoals` join `courses` on((`coursestosubgoals`.`course_id` = `courses`.`id`))) order by `coursestosubgoals`.`subgoal_id` asc';
+  select(query).then((resolve, rejected) => {
     res.send(resolve);
   });
 });

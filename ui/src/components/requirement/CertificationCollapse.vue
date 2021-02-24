@@ -1,10 +1,10 @@
 <template>
   <el-collapse v-model="activeNames">
     <el-collapse-item
-      v-for="target in requirement"
-      :key="target.index"
-      :name="target.index"
-      :title="target.index + ' ' + target.title + '：' + target.statement"
+      v-for="target in requirements"
+      :key="target.id"
+      :name="target.id"
+      :title="target.id + ' ' + target.title + ' - ' + target.statement"
     >
         <certification-table
           :data="target.children"
@@ -16,10 +16,12 @@
 <script type="ts">
 import {
   defineComponent,
+  reactive,
   ref,
+  toRefs,
   watch,
 } from '@vue/composition-api';
-import requirement from '@/data/requirement';
+import getAllRequirements from '@/data/requirementData';
 import CertificationTable from './CertificationTable.vue';
 
 export default defineComponent({
@@ -34,6 +36,10 @@ export default defineComponent({
   },
 
   setup(props) {
+    const state = reactive({
+      requirements: {},
+    });
+
     const activeNames = ref([]);
 
     const foldCertificationAll = () => {
@@ -41,11 +47,8 @@ export default defineComponent({
     };
 
     const openCertificationAll = () => {
-      activeNames.value.push(...requirement.map((val) => val.index));
+      activeNames.value.push(...state.requirements.map((val) => val.id));
     };
-
-    // default open all
-    openCertificationAll();
 
     // watch props
     watch(
@@ -53,8 +56,14 @@ export default defineComponent({
       () => (props.value.collapse.show ? openCertificationAll() : foldCertificationAll()),
     );
 
+    getAllRequirements().then((val) => {
+      state.requirements = val;
+      // default open all - after promise
+      openCertificationAll();
+    });
+
     return {
-      requirement,
+      ...toRefs(state),
       activeNames,
     };
   },
