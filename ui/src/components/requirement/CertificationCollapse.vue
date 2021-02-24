@@ -36,31 +36,36 @@ export default defineComponent({
   },
 
   setup(props) {
+    // data
     const state = reactive({
-      requirements: {},
+      requirements: [],
     });
 
     const activeNames = ref([]);
 
-    const foldCertificationAll = () => {
-      activeNames.value.splice(0, activeNames.value.length);
+    // methods
+    const handleCertificationAll = (opt) => {
+      if (opt) {
+        activeNames.value.push(...state.requirements.map((val) => val.id));
+      } else {
+        activeNames.value.splice(0, activeNames.value.length);
+      }
     };
 
-    const openCertificationAll = () => {
-      activeNames.value.push(...state.requirements.map((val) => val.id));
-    };
-
-    // watch props
-    watch(
-      () => props.value.collapse.show,
-      () => (props.value.collapse.show ? openCertificationAll() : foldCertificationAll()),
-    );
-
+    // get data and init
     getAllRequirements().then((val) => {
+      // requirements
       state.requirements = val;
-      // default open all - after promise
-      openCertificationAll();
+      // state init - collapse
+      handleCertificationAll(props.value.collapse.show);
     });
+
+    // state change - by radio group
+    watch(
+      () => props.value,
+      (val) => handleCertificationAll(val.collapse.show),
+      { deep: true },
+    );
 
     return {
       ...toRefs(state),
