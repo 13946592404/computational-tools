@@ -1,14 +1,25 @@
 # computational-tools ui
 
+## Change directory
+```
+cd ui
+```
 ## Project setup
 ```
-yarn install
+yarn
 ```
 
-### Compiles and hot-reloads for development
+## Compiles and hot-reloads for development
 ```
 yarn serve
 ```
+
+## Environment
+```
+/ui/src/conf/
+```
+<br/>
+<br/>
 
 ### Compiles and minifies for production
 ```

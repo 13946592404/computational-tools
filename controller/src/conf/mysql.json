@@ -3,5 +3,5 @@
   "user"     : "root",
   "password" : "5201314wan",
   "database" : "computational-tools",
-  "port"     : "3306"
+  "port"     : 3306
 }

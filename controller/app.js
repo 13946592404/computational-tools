@@ -20,11 +20,12 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
+// test sql
 app.get('/sql', (req, res) => {
   const query = 'SELECT * FROM courses';
   select(query).then((resolve, rejected) => {
     console.log(`query: ${query}`);
-    console.log(`response: ${resolve}`);
+    console.log(`response: ${JSON.stringify(resolve)}`);
     res.send(resolve);
   });
 });
