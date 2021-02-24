@@ -52,7 +52,27 @@
     "parserOptions": {
       "ecmaVersion": 2020
     },
-    "rules": {}
+    "rules": {
+      "max-len": ["error", { "code": 150 }],
+      "camelcase": 0,
+      "import/extensions": [2, "never", {
+        "web.js": "never",
+        "json": "never",
+        "ts": "never",
+        "js": "never"
+      }],
+      "import/no-extraneous-dependencies": [2, { "devDependencies": true }],
+      "import/no-unresolved": [2, { "ignore": ["antd-mobile"] }]
+    },
+    "settings": {
+      "import/resolver": {
+        "alias": {
+          "map": [
+            ["@", "/src"]
+          ]
+        }
+      }
+    }
   },
   "browserslist": [
     "> 1%",
