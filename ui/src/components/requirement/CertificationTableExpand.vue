@@ -9,6 +9,7 @@
         >
           <span>{{ course.name }}</span>
         </el-form-item>
+        <input type="text">
       </el-form>
     </template>
   </el-table-column>
