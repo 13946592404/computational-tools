@@ -13,6 +13,7 @@ const langMap = new Map([
 
 const i18n: VueI18n = new VueI18n({
   locale: langMap.get(navigator.language),
+  // locale: 'en', // test
   fallbackLocale: 'ch',
   messages: {
     ch,

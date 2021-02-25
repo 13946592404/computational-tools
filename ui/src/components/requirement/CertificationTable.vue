@@ -7,7 +7,7 @@
     :expand-row-keys="expandArray"
   >
     <el-table-column
-      prop="index"
+      prop="id"
       :label="$t('certification.table.subTarget')"
       width="100px"
       align="center"

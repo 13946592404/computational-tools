@@ -5,9 +5,9 @@
         <el-form-item
           v-for="course in props.row.subClasses"
           :key="course.name"
-          :label="course.name"
+          :label="course.percent"
         >
-          <span>{{ course.percent }}</span>
+          <span>{{ course.name }}</span>
         </el-form-item>
       </el-form>
     </template>

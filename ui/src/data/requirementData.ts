@@ -7,7 +7,7 @@ export interface SubClasses {
 }
 
 export interface SubGoals {
-  index: string;
+  id: string;
   statement: string;
   father_id: number;
   subClasses: SubClasses[];
@@ -31,7 +31,7 @@ const handleAllRequirements = (requirements: Requirements[], subGoals: SubGoals[
 
   // add every courses to subGoals[]
   coursesToSubgoalsView.forEach((val: SubClasses) => {
-    subGoal.find((value) => value.index === val.subgoal_id)!.subClasses.push(val);
+    subGoal.find((value) => value.id === val.subgoal_id)!.subClasses.push(val);
   });
 
   // add children[]
@@ -45,10 +45,10 @@ const handleAllRequirements = (requirements: Requirements[], subGoals: SubGoals[
   return requirement;
 };
 
-const getAllRequirements = async () => {
-  const requirements = await requirementService.getRequirements().then((res) => res.data);
-  const subGoals = await requirementService.getSubGoals().then((res) => res.data);
-  const coursesToSubgoalsView = await requirementService.getCoursesToSubgoalsView().then((res) => res.data);
+const getAllRequirements = async (locale: string) => {
+  const requirements = await requirementService.getRequirements(locale).then((res) => res.data);
+  const subGoals = await requirementService.getSubGoals(locale).then((res) => res.data);
+  const coursesToSubgoalsView = await requirementService.getCoursesToSubgoalsView(locale).then((res) => res.data);
   return handleAllRequirements(requirements, subGoals, coursesToSubgoalsView);
 };
 

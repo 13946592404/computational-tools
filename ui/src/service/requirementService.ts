@@ -1,16 +1,28 @@
 import axios from '@/plugins/axios';
 
 class Requirements {
-  static getRequirements() {
-    return axios.get('./requirements');
+  static getRequirements(lang: string) {
+    return axios.get('./requirements', {
+      params: {
+        lang,
+      },
+    });
   }
 
-  static getSubGoals() {
-    return axios.get('./subGoals');
+  static getSubGoals(lang: string) {
+    return axios.get('./subGoals', {
+      params: {
+        lang,
+      },
+    });
   }
 
-  static getCoursesToSubgoalsView() {
-    return axios.get('./coursesToSubgoalsView');
+  static getCoursesToSubgoalsView(lang: string) {
+    return axios.get('./coursesToSubgoalsView', {
+      params: {
+        lang,
+      },
+    });
   }
 }
 
