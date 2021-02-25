@@ -7,10 +7,28 @@
           :key="course.name"
           :label="course.percent"
         >
-          <span>{{ course.name }}</span>
+          <span v-show="!editable">{{ course.name }}</span>
+          <input v-if="editable" type="text" v-model="name">
         </el-form-item>
         <input type="text">
       </el-form>
     </template>
   </el-table-column>
 </template>
+
+<script lang="ts">
+import { defineComponent, reactive, toRefs } from '@vue/composition-api';
+
+export default defineComponent({
+  setup() {
+    const state = reactive({
+      editable: false,
+      name: 'test',
+    });
+
+    return {
+      ...toRefs(state),
+    };
+  },
+});
+</script>
