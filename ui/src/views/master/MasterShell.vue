@@ -31,6 +31,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+html{
+  touch-action: none;
+}
 .el-container {
   &.is-vertical {
     height: 100vh;
