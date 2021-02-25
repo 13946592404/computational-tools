@@ -11,7 +11,7 @@
  Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 01/02/2021 18:09:02
+ Date: 25/02/2021 11:58:14
 */
 
 SET NAMES utf8mb4;
@@ -34,36 +34,36 @@ CREATE TABLE `courses` (
 -- Records of courses
 -- ----------------------------
 BEGIN;
-INSERT INTO `courses` VALUES (1, '高等数学A', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (2, '线性代数A', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (3, '离散数学', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (4, '概率论与数理统计', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (5, '大学物理B', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (6, '计算机导论', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (7, '编程导论', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (8, '数据结构', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (9, '计算机组成与结构', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (10, '操作系统', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (11, '数据库系统原理', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (12, '人工智能', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (13, '计算机网络', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (14, '编译原理', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (15, '嵌入式系统原理', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (16, '信息系统安全', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (17, '面向对象程序设计', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (18, '分布式课程', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (19, '数字逻辑及实验', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (20, '通用学术英语听说', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (21, '学术英语写作', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (22, '通识核心', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (23, '编译原理实践', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (24, '毕业设计', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (25, '数据库系统实践', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (26, '程序设计能力实训', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (27, '计算机组成与结构实践', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (28, '毕业论文', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (29, '思想政治教育课程', NULL, NULL, NULL);
-INSERT INTO `courses` VALUES (30, '公共体育课程', NULL, NULL, NULL);
+INSERT INTO `courses` VALUES (1, '高等数学A', 'Advanced Mathematics A', NULL, NULL);
+INSERT INTO `courses` VALUES (2, '线性代数A', 'Linear Algebra A', NULL, NULL);
+INSERT INTO `courses` VALUES (3, '离散数学', 'Discrete Mathematics', NULL, NULL);
+INSERT INTO `courses` VALUES (4, '概率论与数理统计', 'Probability Theory and Statistics', NULL, NULL);
+INSERT INTO `courses` VALUES (5, '大学物理B', 'College Physics B', NULL, NULL);
+INSERT INTO `courses` VALUES (6, '计算机导论', 'Introduction to Computer Science', NULL, NULL);
+INSERT INTO `courses` VALUES (7, '编程导论', 'ntroduction to Programming', NULL, NULL);
+INSERT INTO `courses` VALUES (8, '数据结构', 'Data Structures', NULL, NULL);
+INSERT INTO `courses` VALUES (9, '计算机组成与结构', 'Computer Organization and Architecture', NULL, NULL);
+INSERT INTO `courses` VALUES (10, '操作系统', 'Operating Systems', NULL, NULL);
+INSERT INTO `courses` VALUES (11, '数据库系统原理', 'Principles of Database System', NULL, NULL);
+INSERT INTO `courses` VALUES (12, '人工智能', 'Artificial Intelligence', NULL, NULL);
+INSERT INTO `courses` VALUES (13, '计算机网络', 'Computer Networks', NULL, NULL);
+INSERT INTO `courses` VALUES (14, '编译原理', 'Compiler Construction', NULL, NULL);
+INSERT INTO `courses` VALUES (15, '嵌入式系统原理', 'Principles of Embedded Systems', NULL, NULL);
+INSERT INTO `courses` VALUES (16, '信息系统安全', 'Introduction to Information and Systems Security', NULL, NULL);
+INSERT INTO `courses` VALUES (17, '面向对象程序设计', 'The practice of object oriented programming', NULL, NULL);
+INSERT INTO `courses` VALUES (18, '分布式课程', '分布式课程', NULL, NULL);
+INSERT INTO `courses` VALUES (19, '数字逻辑及实验', 'Digital Logic & Laboratory', NULL, NULL);
+INSERT INTO `courses` VALUES (20, '通用学术英语听说', 'Listening and Speaking for General Academic Purposes', NULL, NULL);
+INSERT INTO `courses` VALUES (21, '学术英语写作', 'Writing for General Academic Purposes', NULL, NULL);
+INSERT INTO `courses` VALUES (22, '通识核心', '通识核心', NULL, NULL);
+INSERT INTO `courses` VALUES (23, '编译原理实践', 'Compiler Construction Laboratory', NULL, NULL);
+INSERT INTO `courses` VALUES (24, '毕业设计', '毕业设计', NULL, NULL);
+INSERT INTO `courses` VALUES (25, '数据库系统实践', 'Database Systems Laboratory', NULL, NULL);
+INSERT INTO `courses` VALUES (26, '程序设计能力实训', 'Practice of Programming', NULL, NULL);
+INSERT INTO `courses` VALUES (27, '计算机组成与结构实践', 'Computer Architecture Laboratory', NULL, NULL);
+INSERT INTO `courses` VALUES (28, '毕业论文', 'Thesis for Bachelor\'s Degree', NULL, NULL);
+INSERT INTO `courses` VALUES (29, '思想政治教育课程', '思想政治教育课程', NULL, NULL);
+INSERT INTO `courses` VALUES (30, '公共体育课程', '公共体育课程', NULL, NULL);
 COMMIT;
 
 -- ----------------------------
@@ -76,7 +76,7 @@ CREATE TABLE `CoursesToSubgoals` (
   `percent` varchar(255) NOT NULL COMMENT '占比',
   PRIMARY KEY (`subgoal_id`,`course_id`),
   KEY `course_id` (`course_id`),
-  CONSTRAINT `coursestosubgoals_ibfk_1` FOREIGN KEY (`subgoal_id`) REFERENCES `subgoals` (`index`),
+  CONSTRAINT `coursestosubgoals_ibfk_1` FOREIGN KEY (`subgoal_id`) REFERENCES `subgoals` (`id`),
   CONSTRAINT `coursestosubgoals_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -287,11 +287,11 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `subGoals`;
 CREATE TABLE `subGoals` (
-  `index` varchar(255) NOT NULL COMMENT 'a-b格式索引',
+  `id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'a-b格式索引',
   `father_id` int(11) NOT NULL COMMENT '父要求索引 外键',
   `statement` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '描述',
   `statement_EN` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '描述i18n',
-  PRIMARY KEY (`index`) USING BTREE,
+  PRIMARY KEY (`id`) USING BTREE,
   KEY `father_id` (`father_id`),
   CONSTRAINT `subgoals_ibfk_1` FOREIGN KEY (`father_id`) REFERENCES `requirements` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -340,6 +340,6 @@ COMMIT;
 -- View structure for coursestosubgoalsview
 -- ----------------------------
 DROP VIEW IF EXISTS `coursestosubgoalsview`;
-CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `coursestosubgoalsview` AS select `coursestosubgoals`.`subgoal_id` AS `subgoal_id`,`courses`.`name` AS `name`,`coursestosubgoals`.`percent` AS `percent` from (`coursestosubgoals` join `courses` on((`coursestosubgoals`.`course_id` = `courses`.`id`))) order by `coursestosubgoals`.`subgoal_id` asc;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `coursestosubgoalsview` AS select `coursestosubgoals`.`subgoal_id` AS `subgoal_id`,`courses`.`name` AS `name`,`courses`.`name_EN` AS `name_EN`,`coursestosubgoals`.`percent` AS `percent` from (`coursestosubgoals` join `courses` on((`coursestosubgoals`.`course_id` = `courses`.`id`))) order by `coursestosubgoals`.`subgoal_id` asc;
 
 SET FOREIGN_KEY_CHECKS = 1;

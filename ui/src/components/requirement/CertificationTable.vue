@@ -47,18 +47,20 @@ export default defineComponent({
     });
 
     // @ts-ignore
-    const getRowKey = (row) => row.index;
+    const getRowKey = (row) => row.id;
+
+    const handleCourses = (opt: boolean) => {
+      if (opt) {
+        // @ts-ignore
+        state.expandArray.push(...props.data.map((val) => val.id));
+      } else {
+        state.expandArray.splice(0, state.expandArray.length);
+      }
+    };
 
     watch(
       () => props,
-      (value) => {
-        if (value.radioCourse) {
-          // @ts-ignore
-          state.expandArray.push(...value.data.map((val) => val.index));
-        } else {
-          state.expandArray.splice(0, state.expandArray.length);
-        }
-      },
+      (value) => handleCourses(value.radioCourse),
       { deep: true, immediate: true },
     );
 
