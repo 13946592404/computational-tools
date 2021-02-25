@@ -54,7 +54,7 @@ export default defineComponent({
         // @ts-ignore
         state.expandArray.push(...props.data.map((val) => val.id));
       } else {
-        state.expandArray.splice(0, state.expandArray.length);
+        state.expandArray = [];
       }
     };
 

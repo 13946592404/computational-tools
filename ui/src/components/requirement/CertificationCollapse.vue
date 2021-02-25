@@ -44,16 +44,15 @@ export default defineComponent({
     // data
     const state = reactive({
       requirements: [],
+      activeNames: [],
     });
-
-    const activeNames = ref([]);
 
     // methods
     const handleCollapse = (opt) => {
       if (opt) {
-        activeNames.value.push(...state.requirements.map((val) => val.id));
+        state.activeNames.push(...state.requirements.map((val) => val.id));
       } else {
-        activeNames.value.splice(0, activeNames.value.length);
+        state.activeNames = [];
       }
     };
 
@@ -74,7 +73,6 @@ export default defineComponent({
 
     return {
       ...toRefs(state),
-      activeNames,
     };
   },
 });
