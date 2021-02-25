@@ -2,7 +2,7 @@ import requirementService from '@/service/requirementService';
 
 export interface SubClasses {
   name: string;
-  percent: string;
+  percent: number;
   subgoal_id: string;
 }
 

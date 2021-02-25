@@ -8,7 +8,7 @@
           :label="course.name"
         >
           <div :style="spanStyle">
-            <span>{{ course.percent }}</span>
+            <span contenteditable>{{ course.percent }}</span>
           </div>
         </el-form-item>
       </el-form>
