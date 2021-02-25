@@ -5,12 +5,12 @@
         <el-form-item
           v-for="course in props.row.subClasses"
           :key="course.name"
-          :label="course.percent"
+          :label="course.name"
         >
-          <span v-show="!editable">{{ course.name }}</span>
-          <input v-if="editable" type="text" v-model="name">
+          <div :style="spanStyle">
+            <span>{{ course.percent }}</span>
+          </div>
         </el-form-item>
-        <input type="text">
       </el-form>
     </template>
   </el-table-column>
@@ -18,6 +18,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from '@vue/composition-api';
+import i18n from '@/plugins/i18n';
 
 export default defineComponent({
   setup() {
@@ -26,9 +27,20 @@ export default defineComponent({
       name: 'test',
     });
 
+    const spanStyle = {
+      marginLeft: i18n.locale === 'ch' ? '80px' : '380px',
+    };
+
     return {
       ...toRefs(state),
+      spanStyle,
     };
   },
 });
 </script>
+
+<style lang="scss">
+.el-form-item__label {
+  white-space: nowrap;
+}
+</style>
