@@ -10,5 +10,12 @@
   "table": {
     "subTarget": "子目标",
     "content": "内容"
+  },
+  "subClasses": {
+    "hint": {
+      "total": "所有课程的比例总和应该是100% !",
+      "subGoal": "当前子目标: ",
+      "value": "当前课程比例总和: "
+    }
   }
 }

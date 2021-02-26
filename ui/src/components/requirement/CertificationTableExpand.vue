@@ -44,9 +44,16 @@ import {
 
 export default defineComponent({
   props: {
-    subGoals: {
+    subGoal: {
       default: {
-        subClasses: [],
+        id: '',
+        subClasses: [
+          {
+            name: '',
+            percent: 0,
+            is_edit: false,
+          },
+        ],
       },
     },
   },
@@ -55,7 +62,7 @@ export default defineComponent({
 
     const state = reactive({
       // data
-      subClasses: props.subGoals.subClasses,
+      subClasses: props.subGoal.subClasses,
       editable: true, // ajax - need permission to check
       // css
       spanStyle: {
@@ -67,15 +74,41 @@ export default defineComponent({
     // computed
     // @ts-ignore
     // eslint-disable-next-line
-    const subClassesTotal = computed(() => state.subClasses.map((val) => val.percent).reduce((total, value) => total += value));
+    const subClassesTotal = computed(() => state.subClasses.map((val) => Number.parseInt(val.percent, 10)).reduce((total, value) => total += value));
+
+    const subClassesTotalWarnCheck = () => {
+      if (subClassesTotal.value !== 100) {
+        // @ts-ignore
+        // eslint-disable-next-line
+        const msg = `<h1>${vm.$t('certification.subClasses.hint.total')}</h1></br><h2>${vm.$t('certification.subClasses.hint.subGoal')}${props.subGoal.id}</h2></br><h2>${vm.$t('certification.subClasses.hint.value')}${subClassesTotal.value}%</h2>`
+        // @ts-ignore
+        vm.$message({
+          message: msg,
+          dangerouslyUseHTMLString: true,
+          type: 'warning',
+          showClose: true,
+          duration: 8000,
+        });
+      }
+    };
 
     // methods
-    // @ts-ignore
-    // eslint-disable-next-line
-    const buttonChange = (index: number) => state.subClasses[index].is_edit = !state.subClasses[index].is_edit;
+    const submitChange = (index: number) => {
+      console.log(`subGoal: ${props.subGoal.id}, class: ${state.subClasses[index].name}, percent: ${state.subClasses[index].percent}% !`);
+    };
+
+    const buttonChange = (index: number) => {
+      const { is_edit } = state.subClasses[index];
+      // commit (true to false)
+      if (is_edit) {
+        submitChange(index);
+        subClassesTotalWarnCheck();
+      }
+      // switch state
+      state.subClasses[index].is_edit = !is_edit;
+    };
 
     const buttonState = (index: number) => {
-      // @ts-ignore
       const { is_edit } = state.subClasses[index];
       return {
         icon: is_edit ? 'el-icon-check' : 'el-icon-edit',
@@ -83,23 +116,15 @@ export default defineComponent({
       };
     };
 
-    const subClassesTotalWarn = () => {
-      if (subClassesTotal.value !== 100) {
-        // TODO
-        // @ts-ignore
-        vm.$message('warn');
-      }
-    };
-
-    setInterval(() => subClassesTotalWarn(), 3000);
-
     return {
       // data
       ...toRefs(state),
+
       // computed
       subClassesTotal,
+
       // methods
-      subClassesTotalWarn,
+      subClassesTotalWarnCheck,
       buttonChange,
       buttonState,
     };

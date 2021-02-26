@@ -10,5 +10,12 @@
   "table": {
     "subTarget": "SubGoals",
     "content": "Details"
+  },
+  "subClasses": {
+    "hint": {
+      "total": "The total ratio for all courses should be 100% !",
+      "subGoal": "Current subGoal: ",
+      "value": "Current total ratio: "
+    }
   }
 }
