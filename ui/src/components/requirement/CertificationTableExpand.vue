@@ -92,6 +92,9 @@ export default defineComponent({
       }
     };
 
+    // onCreated check
+    subClassesTotalWarnCheck();
+
     // methods
     const submitChange = (index: number) => {
       console.log(`subGoal: ${props.subGoal.id}, class: ${state.subClasses[index].name}, percent: ${state.subClasses[index].percent}% !`);
