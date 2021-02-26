@@ -15,8 +15,8 @@
               v-if="course.is_edit"
               v-model="course.percent"
               size="small"
-              max="100"
-              min="0"
+              :max="100"
+              :min="0"
             />
           </div>
         </div>
@@ -102,7 +102,8 @@ export default defineComponent({
 
     // methods
     const submitChange = (index: number) => {
-      console.log(`subGoal: ${props.subGoal.id}, class: ${state.subClasses[index].name}, percent: ${state.subClasses[index].percent}% !`);
+      console.log(props.subGoal.id);
+      console.log(state.subClasses[index]);
     };
 
     const buttonChange = (index: number) => {

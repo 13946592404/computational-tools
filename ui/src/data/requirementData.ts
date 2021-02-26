@@ -1,6 +1,7 @@
 import requirementService from '@/service/requirementService';
 
 export interface SubClasses {
+  course_id: string;
   name: string;
   percent: number;
   subgoal_id: string;

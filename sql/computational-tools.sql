@@ -11,7 +11,7 @@
  Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 25/02/2021 17:24:26
+ Date: 26/02/2021 15:09:51
 */
 
 SET NAMES utf8mb4;
@@ -340,6 +340,6 @@ COMMIT;
 -- View structure for coursestosubgoalsview
 -- ----------------------------
 DROP VIEW IF EXISTS `coursestosubgoalsview`;
-CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `coursestosubgoalsview` AS select `coursestosubgoals`.`subgoal_id` AS `subgoal_id`,`courses`.`name` AS `name`,`courses`.`name_EN` AS `name_EN`,`coursestosubgoals`.`percent` AS `percent` from (`coursestosubgoals` join `courses` on((`coursestosubgoals`.`course_id` = `courses`.`id`))) order by `coursestosubgoals`.`subgoal_id` asc;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `coursestosubgoalsview` AS select `coursestosubgoals`.`subgoal_id` AS `subgoal_id`,`courses`.`id` AS `course_Id`,`courses`.`name` AS `name`,`courses`.`name_EN` AS `name_EN`,`coursestosubgoals`.`percent` AS `percent` from (`coursestosubgoals` join `courses` on((`coursestosubgoals`.`course_id` = `courses`.`id`))) order by `coursestosubgoals`.`subgoal_id` asc;
 
 SET FOREIGN_KEY_CHECKS = 1;

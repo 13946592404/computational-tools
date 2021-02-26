@@ -34,7 +34,7 @@ app.get('/subGoals', (req, res) => {
 
 app.get('/coursesToSubgoalsView', (req, res) => {
   const isEN = req.query.lang === "en";
-  const query = `SELECT subgoal_id, ${isEN ? 'name_EN as name' : 'name'}, percent FROM coursestosubgoalsview`; // TODO // sql en TODO
+  const query = `SELECT subgoal_id, course_id, ${isEN ? 'name_EN as name' : 'name'}, percent FROM coursestosubgoalsview`; // TODO // sql en TODO
   select(query).then((resolve, rejected) => {
     res.send(resolve);
   });
