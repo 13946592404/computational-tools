@@ -4,6 +4,7 @@ export interface SubClasses {
   name: string;
   percent: number;
   subgoal_id: string;
+  is_edit: boolean; // FE
 }
 
 export interface SubGoals {
@@ -31,7 +32,9 @@ const handleAllRequirements = (requirements: Requirements[], subGoals: SubGoals[
 
   // add every courses to subGoals[]
   coursesToSubgoalsView.forEach((val: SubClasses) => {
-    subGoal.find((value) => value.id === val.subgoal_id)!.subClasses.push(val);
+    const proxy = val;
+    proxy.is_edit = false;
+    subGoal.find((value) => value.id === val.subgoal_id)!.subClasses.push(proxy);
   });
 
   // add children[]
