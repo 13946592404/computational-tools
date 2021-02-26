@@ -1,19 +1,15 @@
 <template>
-  <el-table-column type="expand">
-    <template slot-scope="props">
-      <el-form label-position="left" class="demo-table-expand">
-        <el-form-item
-          v-for="course in props.row.subClasses"
-          :key="course.name"
-          :label="course.name"
-        >
-          <div :style="spanStyle">
-            <span contenteditable>{{ course.percent }}</span>
-          </div>
-        </el-form-item>
-      </el-form>
-    </template>
-  </el-table-column>
+  <div>
+    <el-form-item
+      v-for="course in courses.subClasses"
+      :key="course.name"
+      :label="course.name"
+    >
+      <div :style="spanStyle">
+        <span contenteditable>{{ course.percent }}</span>
+      </div>
+    </el-form-item>
+  </div>
 </template>
 
 <script lang="ts">
@@ -21,6 +17,11 @@ import { defineComponent, reactive, toRefs } from '@vue/composition-api';
 import i18n from '@/plugins/i18n';
 
 export default defineComponent({
+  props: {
+    courses: {
+      default: [],
+    },
+  },
   setup() {
     const state = reactive({
       editable: false,

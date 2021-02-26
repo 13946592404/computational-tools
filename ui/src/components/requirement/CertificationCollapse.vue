@@ -7,7 +7,7 @@
       :title="target.id + ' ' + target.title + ' - ' + target.statement"
     >
       <certification-table
-        :data="target.children"
+        :subGoals="target.children"
         :radioCourse="radioCourse"
       />
     </el-collapse-item>

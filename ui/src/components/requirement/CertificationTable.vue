@@ -1,6 +1,6 @@
 <template>
   <el-table
-    :data="data"
+    :data="subGoals"
     stripe
     border
     :row-key="getRowKey"
@@ -16,7 +16,15 @@
       prop="statement"
       :label="$t('certification.table.content')"
     />
-    <certification-table-expand />
+    <el-table-column type="expand">
+      <template slot-scope="props">
+        <el-form label-position="left" class="demo-table-expand">
+          <certification-table-expand
+            :courses="props.row"
+          />
+        </el-form>
+      </template>
+    </el-table-column>
   </el-table>
 </template>
 
@@ -34,7 +42,7 @@ export default defineComponent({
     CertificationTableExpand,
   },
   props: {
-    data: {
+    subGoals: {
       default: [],
     },
     radioCourse: {
@@ -52,7 +60,7 @@ export default defineComponent({
     const handleCourses = (opt: boolean) => {
       if (opt) {
         // @ts-ignore
-        state.expandArray.push(...props.data.map((val) => val.id));
+        state.expandArray.push(...props.subGoals.map((val) => val.id));
       } else {
         state.expandArray = [];
       }
