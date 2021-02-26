@@ -46,6 +46,7 @@ import {
   toRefs,
   getCurrentInstance,
 } from '@vue/composition-api';
+import RequirementService from '@/service/requirementService';
 
 export default defineComponent({
   props: {
@@ -54,6 +55,7 @@ export default defineComponent({
         id: '',
         subClasses: [
           {
+            course_id: 0,
             name: '',
             percent: 0,
             is_edit: false,
@@ -102,8 +104,12 @@ export default defineComponent({
 
     // methods
     const submitChange = (index: number) => {
-      console.log(props.subGoal.id);
-      console.log(state.subClasses[index]);
+      const { percent, course_id } = state.subClasses[index];
+      RequirementService.putCoursesToSubgoals({
+        percent,
+        course_id,
+        subgoal_id: props.subGoal.id,
+      });
     };
 
     const buttonChange = (index: number) => {

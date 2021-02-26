@@ -1,5 +1,5 @@
 const express = require('express');
-const { select } = require('./src/plugins/mysql');
+const { query } = require('./src/plugins/mysql');
 const app = express();
 const port = 3000;
 
@@ -18,24 +18,32 @@ app.all('*', (req, res, next) => {
 // TODO - router
 app.get('/requirements', (req, res) => {
   const isEN = req.query.lang === "en";
-  const query = `SELECT id, ${isEN ? 'title_EN as title' : 'title'}, ${isEN ? 'statement_EN as statement' : 'statement'} FROM requirements`;
-  select(query).then((resolve, rejected) => {
+  const statement = `SELECT id, ${isEN ? 'title_EN as title' : 'title'}, ${isEN ? 'statement_EN as statement' : 'statement'} FROM requirements`;
+  query(statement).then((resolve, rejected) => {
     res.send(resolve);
   });
 });
 
 app.get('/subGoals', (req, res) => {
   const isEN = req.query.lang === "en";
-  const query = `SELECT id, father_id, ${isEN ? 'statement_EN as statement' : 'statement'} FROM subGoals`;
-  select(query).then((resolve, rejected) => {
+  const statement = `SELECT id, father_id, ${isEN ? 'statement_EN as statement' : 'statement'} FROM subGoals`;
+  query(statement).then((resolve, rejected) => {
     res.send(resolve);
   });
 });
 
 app.get('/coursesToSubgoalsView', (req, res) => {
   const isEN = req.query.lang === "en";
-  const query = `SELECT subgoal_id, course_id, ${isEN ? 'name_EN as name' : 'name'}, percent FROM coursestosubgoalsview`; // TODO // sql en TODO
-  select(query).then((resolve, rejected) => {
+  const statement = `SELECT subgoal_id, course_id, ${isEN ? 'name_EN as name' : 'name'}, percent FROM coursestosubgoalsview`;
+  query(statement).then((resolve, rejected) => {
+    res.send(resolve);
+  });
+});
+
+app.get('/coursesToSubgoals', (req, res) => {
+  const { percent, subgoal_id, course_id } = req.query;
+  const statement = `UPDATE CoursesToSubgoals SET percent = ${percent} WHERE subgoal_id = "${subgoal_id}" AND course_id = ${course_id}`;
+  query(statement).then((resolve, rejected) => {
     res.send(resolve);
   });
 });
