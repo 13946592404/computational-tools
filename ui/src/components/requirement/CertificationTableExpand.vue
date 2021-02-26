@@ -6,14 +6,17 @@
       :label="course.name"
     >
       <div :style="[spanStyle]">
-        <div class="inline-block w-32">
+        <div class="inline-block w-40">
           <div class="course-span">
             <span v-show="!course.is_edit">{{ course.percent }}%</span>
           </div>
           <div class="w-3/5">
-            <el-input
+            <el-input-number
               v-if="course.is_edit"
               v-model="course.percent"
+              size="small"
+              max="100"
+              min="0"
             />
           </div>
         </div>
@@ -27,7 +30,9 @@
           plain
           circle
           round
-        />
+        >
+          <i slot="suffix" class="el-input__icon el-icon-search"></i>
+        </el-button>
       </div>
     </el-form-item>
   </div>
