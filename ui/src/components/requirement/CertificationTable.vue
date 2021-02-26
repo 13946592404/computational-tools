@@ -20,7 +20,7 @@
       <template slot-scope="props">
         <el-form label-position="left" class="demo-table-expand">
           <certification-table-expand
-            :courses="props.row"
+            :subGoals="props.row"
           />
         </el-form>
       </template>

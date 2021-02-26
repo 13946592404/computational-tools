@@ -26,7 +26,7 @@ module.exports = {
     'import/no-named-as-default-member': 0,
 
     // https://eslint.org/docs/rules/max-len#options
-    'max-len': ['error', { code: 150 }],
+    'max-len': ['error', { code: 200 }],
 
     'no-bitwise': 0,
     'no-param-reassign': 0,

@@ -18,7 +18,6 @@
 import {
   defineComponent,
   reactive,
-  ref,
   toRefs,
   watch,
 } from '@vue/composition-api';
