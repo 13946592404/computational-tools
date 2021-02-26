@@ -141,6 +141,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+.el-form-item__content {
+  width: 600px;
+}
 .el-form-item__label {
   white-space: nowrap;
 }
