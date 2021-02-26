@@ -13,7 +13,7 @@
   },
   "subClasses": {
     "hint": {
-      "total": "The total ratio for all courses should be 100% !",
+      "total": "Warn: The total ratio for all courses should be 100%",
       "subGoal": "The subgoal in question: ",
       "value": "Sum of the proportion of subtarget courses in question: "
     },
