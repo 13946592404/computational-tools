@@ -14,8 +14,12 @@
   "subClasses": {
     "hint": {
       "total": "The total ratio for all courses should be 100% !",
-      "subGoal": "Current subGoal: ",
-      "value": "Current total ratio: "
+      "subGoal": "The subgoal in question: ",
+      "value": "Sum of the proportion of subtarget courses in question: "
+    },
+    "message": {
+      "success": "Modified course ratio successfully!",
+      "error": "Modified course ratio failed!"
     }
   }
 }

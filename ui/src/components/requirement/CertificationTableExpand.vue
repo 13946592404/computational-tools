@@ -46,6 +46,7 @@ import {
   toRefs,
   getCurrentInstance,
 } from '@vue/composition-api';
+import { Message } from 'element-ui';
 import RequirementService from '@/service/requirementService';
 
 export default defineComponent({
@@ -65,7 +66,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const vm = getCurrentInstance()?.proxy;
+    const vm = getCurrentInstance()?.proxy; // vm.$t or vm.$i18n
 
     const state = reactive({
       // data
@@ -88,8 +89,7 @@ export default defineComponent({
         // @ts-ignore
         // eslint-disable-next-line
         const msg = `<h1>${vm.$t('certification.subClasses.hint.total')}</h1></br><h2>${vm.$t('certification.subClasses.hint.subGoal')}${props.subGoal.id}</h2></br><h2>${vm.$t('certification.subClasses.hint.value')}${subClassesTotal.value}%</h2>`
-        // @ts-ignore
-        vm.$message({
+        Message({
           message: msg,
           dangerouslyUseHTMLString: true,
           type: 'warning',
@@ -109,6 +109,16 @@ export default defineComponent({
         percent,
         course_id,
         subgoal_id: props.subGoal.id,
+      }).then((res) => {
+        const status = res.status === 200 ? 'success' : 'error';
+        // @ts-ignore
+        const msg = vm.$t(`certification.subClasses.message.${status}`);
+        Message({
+          message: msg.toString(),
+          type: status,
+          showClose: true,
+          duration: 8000,
+        });
       });
     };
 
