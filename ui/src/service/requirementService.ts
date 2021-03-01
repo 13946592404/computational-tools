@@ -17,6 +17,14 @@ class Requirements {
     });
   }
 
+  static getCourses(lang: string) {
+    return axios.get('./courses', {
+      params: {
+        lang,
+      },
+    });
+  }
+
   static getCoursesToSubgoalsView(lang: string) {
     return axios.get('./coursesToSubgoalsView', {
       params: {

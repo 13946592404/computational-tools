@@ -26,3 +26,7 @@ export default i18n;
 export function $t(key: VueI18n.Path, values?: VueI18n.Values) {
   return i18n.t(key, values);
 }
+
+export function getLocale() {
+  return i18n.locale;
+}

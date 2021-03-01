@@ -32,6 +32,14 @@ app.get('/subGoals', (req, res) => {
   });
 });
 
+app.get('/courses', (req, res) => { // for add selection
+  const isEN = req.query.lang === "en";
+  const statement = `SELECT id, ${isEN ? 'name_EN as name' : 'name'}, ${isEN ? 'teacher_EN as teacher' : 'teacher'} FROM courses`;
+  query(statement).then((resolve, rejected) => {
+    res.send(resolve);
+  });
+});
+
 app.get('/coursesToSubgoalsView', (req, res) => {
   const isEN = req.query.lang === "en";
   const statement = `SELECT subgoal_id, course_id, ${isEN ? 'name_EN as name' : 'name'}, percent FROM coursestosubgoalsview`;

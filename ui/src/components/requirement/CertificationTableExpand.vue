@@ -58,7 +58,7 @@ import {
 } from '@vue/composition-api';
 import { Notification, Message, MessageBox } from 'element-ui';
 import RequirementService from '@/service/requirementService';
-import i18n, { $t } from '@/plugins/i18n';
+import { $t, getLocale } from '@/plugins/i18n';
 
 export default defineComponent({
   props: {
@@ -79,18 +79,46 @@ export default defineComponent({
   setup(props) {
     const state = reactive({
       // data
-      subClasses: props.subGoal.subClasses,
       editable: true, // ajax - need permission to check
+      subClasses: props.subGoal.subClasses,
+      addClassesAll: [],
+      addState: {
+        isAdd: false,
+        newClass: {
+          course_id: 0,
+          name: '',
+          percent: 0,
+          is_edit: false,
+        },
+      },
       // css
       spanStyle: {
-        marginLeft: i18n.locale === 'ch' ? '80px' : '380px',
+        marginLeft: getLocale() === 'ch' ? '80px' : '380px',
       },
     });
 
-    // computed
+    // add classes All
+    RequirementService.getCourses(getLocale()).then((res) => {
+      // @ts-ignore
+      state.addClassesAll.push(...res.data);
+    });
+
     // @ts-ignore
     // eslint-disable-next-line
     const subClassesTotal = computed(() => state.subClasses.map((val) => Number.parseInt(val.percent, 10)).reduce((total, value) => total += value));
+
+    const addClasses = computed(() => {
+      const ans: any[] = [];
+      // delete already classes
+      state.addClassesAll.forEach((val) => {
+        // @ts-ignore
+        const idx = state.subClasses.findIndex((value) => value.course_id === val.id);
+        if (idx < 0) {
+          ans.push(val);
+        }
+      });
+      return ans;
+    });
 
     const subClassesTotalWarnCheck = () => {
       if (subClassesTotal.value !== 100) {
@@ -202,6 +230,7 @@ export default defineComponent({
 
       // computed
       subClassesTotal,
+      addClasses,
 
       // methods
       // check
