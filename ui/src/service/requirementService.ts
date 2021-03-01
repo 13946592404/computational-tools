@@ -25,8 +25,14 @@ class Requirements {
     });
   }
 
-  static putCoursesToSubgoals(query: any) {
-    return axios.get('./coursesToSubgoals', {
+  static putUpdateCoursesToSubgoals(query: any) {
+    return axios.get('./updateCoursesToSubgoals', {
+      params: query,
+    });
+  }
+
+  static putDeleteCoursesToSubgoals(query: any) {
+    return axios.get('./deleteCoursesToSubgoals', {
       params: query,
     });
   }

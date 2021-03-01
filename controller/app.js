@@ -40,9 +40,17 @@ app.get('/coursesToSubgoalsView', (req, res) => {
   });
 });
 
-app.get('/coursesToSubgoals', (req, res) => {
+app.get('/updateCoursesToSubgoals', (req, res) => {
   const { percent, subgoal_id, course_id } = req.query;
   const statement = `UPDATE CoursesToSubgoals SET percent = ${percent} WHERE subgoal_id = "${subgoal_id}" AND course_id = ${course_id}`;
+  query(statement).then((resolve, rejected) => {
+    res.send(resolve);
+  });
+});
+
+app.get('/deleteCoursesToSubgoals', (req, res) => {
+  const { subgoal_id, course_id } = req.query;
+  const statement = `DELETE FROM CoursesToSubgoals WHERE subgoal_id = "${subgoal_id}" AND course_id = ${course_id}`;
   query(statement).then((resolve, rejected) => {
     res.send(resolve);
   });

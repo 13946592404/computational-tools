@@ -115,15 +115,21 @@ export default defineComponent({
     // methods
     const onEditSubmit = (index: number) => {
       const { percent, course_id } = state.subClasses[index];
-      RequirementService.putCoursesToSubgoals({
+      RequirementService.putUpdateCoursesToSubgoals({
         percent,
         course_id,
         subgoal_id: props.subGoal.id,
       }).then((res) => {
-        const status = res.status === 200 ? 'success' : 'error';
         Message({
-          message: `${$t(`certification.subClasses.edit.${status}`)}`,
-          type: status,
+          message: `${$t('certification.subClasses.edit.success')}`,
+          type: 'success',
+          showClose: true,
+          duration: 4000,
+        });
+      }).catch((err) => {
+        Message({
+          message: `${$t('certification.subClasses.edit.error')}`,
+          type: 'error',
           showClose: true,
           duration: 4000,
         });
@@ -149,12 +155,27 @@ export default defineComponent({
       };
     };
 
-    const onDeleteSubmit = () => {
-      Message({
-        message: `${$t('certification.subClasses.delete.success')}`,
-        type: 'info',
-        showClose: true,
-        duration: 4000,
+    const onDeleteSubmit = (index: number) => {
+      const { percent, course_id } = state.subClasses[index];
+      RequirementService.putDeleteCoursesToSubgoals({
+        course_id,
+        subgoal_id: props.subGoal.id,
+      }).then((res) => {
+        state.subClasses.splice(index, 1); // delete in vue
+        subClassesTotalWarnCheck();
+        Message({
+          message: `${$t('certification.subClasses.delete.success')}`,
+          type: 'success',
+          showClose: true,
+          duration: 4000,
+        });
+      }).catch((err) => {
+        Message({
+          message: `${$t('certification.subClasses.delete.error')}`,
+          type: 'error',
+          showClose: true,
+          duration: 4000,
+        });
       });
     };
 
@@ -169,8 +190,7 @@ export default defineComponent({
         closeOnPressEscape: true,
         callback: (action: string) => {
           if (action === 'confirm') {
-            onDeleteSubmit();
-            subClassesTotalWarnCheck();
+            onDeleteSubmit(index);
           }
         },
       });
