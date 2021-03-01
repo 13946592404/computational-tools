@@ -45,6 +45,69 @@
         />
       </div>
     </el-form-item>
+
+    <template v-if="editable">
+      <el-button
+        v-if="!addState.isAdd"
+        @click="onAddButton()"
+        class="new-course"
+        icon="el-icon-plus"
+        type="info"
+        size="mini"
+        plain
+        circle
+        round
+      />
+
+      <div v-if="addState.isAdd" class="new-course-field">
+        <el-select
+          v-model="addState.newClass.course_id"
+          class="mr-4"
+          placeholder="..."
+          size="small"
+        >
+          <el-option
+            v-for="item in addClasses"
+            :key="item.id"
+            :label="item.name"
+            :value="item.id"
+          >
+            <span style="float: left">
+              {{ item.name }}
+            </span>
+            <span style="float: right; color: #8492a6; font-size: 13px">
+              {{ item.teacher }}
+            </span>
+          </el-option>
+        </el-select>
+        <el-input-number
+          v-model="addState.newClass.percent"
+          class="mr-4"
+          size="small"
+          :max="100"
+          :min="0"
+        />
+        <el-button
+          :disabled="!addState.newClass.course_id"
+          @click="onAdd()"
+          icon="el-icon-plus"
+          type="success"
+          size="mini"
+          plain
+          circle
+          round
+        />
+        <el-button
+          @click="onAddButton()"
+          icon="el-icon-close"
+          type="danger"
+          size="mini"
+          plain
+          circle
+          round
+        />
+      </div>
+    </template>
   </div>
 </template>
 
@@ -55,6 +118,7 @@ import {
   reactive,
   toRefs,
   // getCurrentInstance,
+  watch,
 } from '@vue/composition-api';
 import { Notification, Message, MessageBox } from 'element-ui';
 import RequirementService from '@/service/requirementService';
@@ -82,13 +146,15 @@ export default defineComponent({
       editable: true, // ajax - need permission to check
       subClasses: props.subGoal.subClasses,
       addClassesAll: [],
+      addClasses: [],
       addState: {
         isAdd: false,
         newClass: {
-          course_id: 0,
-          name: '',
-          percent: 0,
+          course_id: null,
+          percent: 5,
+          name: null,
           is_edit: false,
+          subgoal_id: props.subGoal.id,
         },
       },
       // css
@@ -103,22 +169,29 @@ export default defineComponent({
       state.addClassesAll.push(...res.data);
     });
 
+    // add classes check already
+    const alterAddClasses = () => {
+      // clear
+      state.addClasses.splice(0, state.addClasses.length);
+      // @ts-ignore
+      state.addClasses.push(...state.addClassesAll.filter((val) => !state.subClasses.find((value) => value.course_id === val.id)));
+    };
+
+    watch(
+      () => state.addClassesAll,
+      () => alterAddClasses(),
+      { deep: true },
+    );
+
+    watch(
+      () => state.subClasses,
+      () => alterAddClasses(),
+      { deep: true },
+    );
+
     // @ts-ignore
     // eslint-disable-next-line
     const subClassesTotal = computed(() => state.subClasses.map((val) => Number.parseInt(val.percent, 10)).reduce((total, value) => total += value));
-
-    const addClasses = computed(() => {
-      const ans: any[] = [];
-      // delete already classes
-      state.addClassesAll.forEach((val) => {
-        // @ts-ignore
-        const idx = state.subClasses.findIndex((value) => value.course_id === val.id);
-        if (idx < 0) {
-          ans.push(val);
-        }
-      });
-      return ans;
-    });
 
     const subClassesTotalWarnCheck = () => {
       if (subClassesTotal.value !== 100) {
@@ -140,21 +213,20 @@ export default defineComponent({
     // onCreated check
     subClassesTotalWarnCheck();
 
-    // methods
     const onEditSubmit = (index: number) => {
       const { percent, course_id } = state.subClasses[index];
       RequirementService.putUpdateCoursesToSubgoals({
         percent,
         course_id,
         subgoal_id: props.subGoal.id,
-      }).then((res) => {
+      }).then(() => {
         Message({
           message: `${$t('certification.subClasses.edit.success')}`,
           type: 'success',
           showClose: true,
           duration: 4000,
         });
-      }).catch((err) => {
+      }).catch(() => {
         Message({
           message: `${$t('certification.subClasses.edit.error')}`,
           type: 'error',
@@ -184,11 +256,11 @@ export default defineComponent({
     };
 
     const onDeleteSubmit = (index: number) => {
-      const { percent, course_id } = state.subClasses[index];
+      const { course_id } = state.subClasses[index];
       RequirementService.putDeleteCoursesToSubgoals({
         course_id,
         subgoal_id: props.subGoal.id,
-      }).then((res) => {
+      }).then(() => {
         state.subClasses.splice(index, 1); // delete in vue
         subClassesTotalWarnCheck();
         Message({
@@ -197,7 +269,7 @@ export default defineComponent({
           showClose: true,
           duration: 4000,
         });
-      }).catch((err) => {
+      }).catch(() => {
         Message({
           message: `${$t('certification.subClasses.delete.error')}`,
           type: 'error',
@@ -224,15 +296,54 @@ export default defineComponent({
       });
     };
 
+    const onAddButton = () => {
+      const { isAdd } = state.addState;
+      state.addState.isAdd = !isAdd;
+    };
+
+    const onAddCommit = () => {
+      // query class name
+      // @ts-ignore
+      const obj = state.addClasses.find((val) => val.id === state.addState.newClass.course_id);
+      // @ts-ignore
+      state.addState.newClass.name = obj.name;
+      // @ts-ignore
+      state.subClasses.push(state.addState.newClass); // push new
+      state.addState.newClass.course_id = null; // reset selection
+      subClassesTotalWarnCheck(); // check
+      onAddButton(); // button state
+    };
+
+    const onAdd = () => {
+      const { course_id, percent } = state.addState.newClass;
+      RequirementService.putAddCoursesToSubgoals({
+        subgoal_id: props.subGoal.id,
+        course_id,
+        percent,
+      }).then(() => {
+        onAddCommit();
+        Message({
+          message: `${$t('certification.subClasses.add.success')}`,
+          type: 'success',
+          showClose: true,
+          duration: 4000,
+        });
+      }).catch(() => {
+        Message({
+          message: `${$t('certification.subClasses.add.error')}`,
+          type: 'error',
+          showClose: true,
+          duration: 4000,
+        });
+      });
+    };
+
     return {
       // data
       ...toRefs(state),
 
       // computed
       subClassesTotal,
-      addClasses,
-
-      // methods
       // check
       subClassesTotalWarnCheck,
       // edit
@@ -240,6 +351,9 @@ export default defineComponent({
       editState,
       // delete
       onDelete,
+      // add,
+      onAddButton,
+      onAdd,
     };
   },
 });
@@ -257,5 +371,11 @@ export default defineComponent({
 }
 .course-span {
   margin-left: 15px;
+}
+.new-course {
+  margin: 8px 0 0 15px;
+}
+.new-course-field {
+  margin-top: 8px;
 }
 </style>

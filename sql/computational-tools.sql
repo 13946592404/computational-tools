@@ -11,7 +11,7 @@
  Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 26/02/2021 15:09:51
+ Date: 01/03/2021 15:04:21
 */
 
 SET NAMES utf8mb4;
@@ -34,36 +34,36 @@ CREATE TABLE `courses` (
 -- Records of courses
 -- ----------------------------
 BEGIN;
-INSERT INTO `courses` VALUES (1, '高等数学A', 'Advanced Mathematics A', NULL, NULL);
-INSERT INTO `courses` VALUES (2, '线性代数A', 'Linear Algebra A', NULL, NULL);
-INSERT INTO `courses` VALUES (3, '离散数学', 'Discrete Mathematics', NULL, NULL);
-INSERT INTO `courses` VALUES (4, '概率论与数理统计', 'Probability Theory and Statistics', NULL, NULL);
-INSERT INTO `courses` VALUES (5, '大学物理B', 'College Physics B', NULL, NULL);
-INSERT INTO `courses` VALUES (6, '计算机导论', 'Introduction to Computer Science', NULL, NULL);
-INSERT INTO `courses` VALUES (7, '编程导论', 'ntroduction to Programming', NULL, NULL);
-INSERT INTO `courses` VALUES (8, '数据结构', 'Data Structures', NULL, NULL);
-INSERT INTO `courses` VALUES (9, '计算机组成与结构', 'Computer Organization and Architecture', NULL, NULL);
-INSERT INTO `courses` VALUES (10, '操作系统', 'Operating Systems', NULL, NULL);
-INSERT INTO `courses` VALUES (11, '数据库系统原理', 'Principles of Database System', NULL, NULL);
-INSERT INTO `courses` VALUES (12, '人工智能', 'Artificial Intelligence', NULL, NULL);
-INSERT INTO `courses` VALUES (13, '计算机网络', 'Computer Networks', NULL, NULL);
-INSERT INTO `courses` VALUES (14, '编译原理', 'Compiler Construction', NULL, NULL);
-INSERT INTO `courses` VALUES (15, '嵌入式系统原理', 'Principles of Embedded Systems', NULL, NULL);
-INSERT INTO `courses` VALUES (16, '信息系统安全', 'Introduction to Information and Systems Security', NULL, NULL);
-INSERT INTO `courses` VALUES (17, '面向对象程序设计', 'The practice of object oriented programming', NULL, NULL);
-INSERT INTO `courses` VALUES (18, '分布式课程', '分布式课程', NULL, NULL);
-INSERT INTO `courses` VALUES (19, '数字逻辑及实验', 'Digital Logic & Laboratory', NULL, NULL);
-INSERT INTO `courses` VALUES (20, '通用学术英语听说', 'Listening and Speaking for General Academic Purposes', NULL, NULL);
-INSERT INTO `courses` VALUES (21, '学术英语写作', 'Writing for General Academic Purposes', NULL, NULL);
-INSERT INTO `courses` VALUES (22, '通识核心', '通识核心', NULL, NULL);
-INSERT INTO `courses` VALUES (23, '编译原理实践', 'Compiler Construction Laboratory', NULL, NULL);
-INSERT INTO `courses` VALUES (24, '毕业设计', '毕业设计', NULL, NULL);
-INSERT INTO `courses` VALUES (25, '数据库系统实践', 'Database Systems Laboratory', NULL, NULL);
-INSERT INTO `courses` VALUES (26, '程序设计能力实训', 'Practice of Programming', NULL, NULL);
-INSERT INTO `courses` VALUES (27, '计算机组成与结构实践', 'Computer Architecture Laboratory', NULL, NULL);
-INSERT INTO `courses` VALUES (28, '毕业论文', 'Thesis for Bachelor\'s Degree', NULL, NULL);
-INSERT INTO `courses` VALUES (29, '思想政治教育课程', '思想政治教育课程', NULL, NULL);
-INSERT INTO `courses` VALUES (30, '公共体育课程', '公共体育课程', NULL, NULL);
+INSERT INTO `courses` VALUES (1, '高等数学A', 'Advanced Mathematics A', '未知', 'unknown');
+INSERT INTO `courses` VALUES (2, '线性代数A', 'Linear Algebra A', '未知', 'unknown');
+INSERT INTO `courses` VALUES (3, '离散数学', 'Discrete Mathematics', '未知', 'unknown');
+INSERT INTO `courses` VALUES (4, '概率论与数理统计', 'Probability Theory and Statistics', '未知', 'unknown');
+INSERT INTO `courses` VALUES (5, '大学物理B', 'College Physics B', '未知', 'unknown');
+INSERT INTO `courses` VALUES (6, '计算机导论', 'Introduction to Computer Science', '未知', 'unknown');
+INSERT INTO `courses` VALUES (7, '编程导论', 'ntroduction to Programming', '未知', 'unknown');
+INSERT INTO `courses` VALUES (8, '数据结构', 'Data Structures', '未知', 'unknown');
+INSERT INTO `courses` VALUES (9, '计算机组成与结构', 'Computer Organization and Architecture', '未知', 'unknown');
+INSERT INTO `courses` VALUES (10, '操作系统', 'Operating Systems', '未知', 'unknown');
+INSERT INTO `courses` VALUES (11, '数据库系统原理', 'Principles of Database System', '未知', 'unknown');
+INSERT INTO `courses` VALUES (12, '人工智能', 'Artificial Intelligence', '未知', 'unknown');
+INSERT INTO `courses` VALUES (13, '计算机网络', 'Computer Networks', '未知', 'unknown');
+INSERT INTO `courses` VALUES (14, '编译原理', 'Compiler Construction', '未知', 'unknown');
+INSERT INTO `courses` VALUES (15, '嵌入式系统原理', 'Principles of Embedded Systems', '未知', 'unknown');
+INSERT INTO `courses` VALUES (16, '信息系统安全', 'Introduction to Information and Systems Security', '未知', 'unknown');
+INSERT INTO `courses` VALUES (17, '面向对象程序设计', 'The practice of object oriented programming', '未知', 'unknown');
+INSERT INTO `courses` VALUES (18, '分布式课程', '分布式课程', '未知', 'unknown');
+INSERT INTO `courses` VALUES (19, '数字逻辑及实验', 'Digital Logic & Laboratory', '未知', 'unknown');
+INSERT INTO `courses` VALUES (20, '通用学术英语听说', 'Listening and Speaking for General Academic Purposes', '未知', 'unknown');
+INSERT INTO `courses` VALUES (21, '学术英语写作', 'Writing for General Academic Purposes', '未知', 'unknown');
+INSERT INTO `courses` VALUES (22, '通识核心', '通识核心', '未知', 'unknown');
+INSERT INTO `courses` VALUES (23, '编译原理实践', 'Compiler Construction Laboratory', '未知', 'unknown');
+INSERT INTO `courses` VALUES (24, '毕业设计', '毕业设计', '未知', 'unknown');
+INSERT INTO `courses` VALUES (25, '数据库系统实践', 'Database Systems Laboratory', '未知', 'unknown');
+INSERT INTO `courses` VALUES (26, '程序设计能力实训', 'Practice of Programming', '未知', 'unknown');
+INSERT INTO `courses` VALUES (27, '计算机组成与结构实践', 'Computer Architecture Laboratory', '未知', 'unknown');
+INSERT INTO `courses` VALUES (28, '毕业论文', 'Thesis for Bachelor\'s Degree', '未知', 'unknown');
+INSERT INTO `courses` VALUES (29, '思想政治教育课程', '思想政治教育课程', '未知', 'unknown');
+INSERT INTO `courses` VALUES (30, '公共体育课程', '公共体育课程', '未知', 'unknown');
 COMMIT;
 
 -- ----------------------------

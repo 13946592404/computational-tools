@@ -44,6 +44,12 @@ class Requirements {
       params: query,
     });
   }
+
+  static putAddCoursesToSubgoals(query: any) {
+    return axios.get('./addCoursesToSubgoals', {
+      params: query,
+    });
+  }
 }
 
 export default Requirements;

@@ -63,3 +63,11 @@ app.get('/deleteCoursesToSubgoals', (req, res) => {
     res.send(resolve);
   });
 });
+
+app.get('/addCoursesToSubgoals', (req, res) => {
+  const { percent, subgoal_id, course_id } = req.query;
+  const statement = `INSERT INTO CoursesToSubgoals VALUES ("${subgoal_id}", ${course_id}, ${percent})`;
+  query(statement).then((resolve, rejected) => {
+    res.send(resolve);
+  });
+});

@@ -26,6 +26,10 @@
       "hint": "Are you sure you want to delete the current course? This operation is not reversible!",
       "success": "Delete course successfully!",
       "error": "Delete course failed!"
+    },
+    "add": {
+      "success": "Add course successfully!",
+      "error": "Add course failed!"
     }
   }
 }
