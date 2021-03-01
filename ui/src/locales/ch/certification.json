@@ -12,14 +12,20 @@
     "content": "内容"
   },
   "subClasses": {
-    "hint": {
+    "subGoal": {
       "total": "课程比例总和应该是100%",
-      "subGoal": "有问题的子目标: ",
+      "target": "有问题的子目标: ",
       "value": "课程比例总和: "
     },
-    "message": {
+    "edit": {
       "success": "修改课程比例成功!",
       "error": "修改课程比例失败!"
+    },
+    "delete": {
+      "message": "删除当前课程",
+      "hint": "确定要删除当前课程吗？该操作不可逆！",
+      "success": "删除课程成功!",
+      "error": "删除课程失败!"
     }
   }
 }

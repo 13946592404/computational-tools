@@ -23,9 +23,9 @@
         <!-- edit & save -->
         <el-button
           v-if="editable"
-          @click="buttonChange(index)"
-          :icon="buttonState(index).icon"
-          :type="buttonState(index).type"
+          @click="onEditChange(index)"
+          :icon="editState(index).icon"
+          :type="editState(index).type"
           size="mini"
           plain
           circle
@@ -33,6 +33,16 @@
         >
           <i slot="suffix" class="el-input__icon el-icon-search"></i>
         </el-button>
+        <el-button
+          v-if="editable"
+          @click="onDelete(index)"
+          icon="el-icon-delete"
+          type="danger"
+          size="mini"
+          plain
+          circle
+          round
+        />
       </div>
     </el-form-item>
   </div>
@@ -44,10 +54,11 @@ import {
   defineComponent,
   reactive,
   toRefs,
-  getCurrentInstance,
+  // getCurrentInstance,
 } from '@vue/composition-api';
-import { Message, Notification } from 'element-ui';
+import { Notification, Message, MessageBox } from 'element-ui';
 import RequirementService from '@/service/requirementService';
+import i18n from '@/plugins/i18n';
 
 export default defineComponent({
   props: {
@@ -66,7 +77,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const vm = getCurrentInstance()?.proxy; // vm.$t or vm.$i18n
+    // const vm = getCurrentInstance()?.proxy; // i18n.t or vm.$i18n vm/$t
 
     const state = reactive({
       // data
@@ -74,8 +85,7 @@ export default defineComponent({
       editable: true, // ajax - need permission to check
       // css
       spanStyle: {
-        // @ts-ignore
-        marginLeft: vm.$i18n.locale === 'ch' ? '80px' : '380px',
+        marginLeft: i18n.locale === 'ch' ? '80px' : '380px',
       },
     });
 
@@ -86,12 +96,12 @@ export default defineComponent({
 
     const subClassesTotalWarnCheck = () => {
       if (subClassesTotal.value !== 100) {
-        // @ts-ignore
-        // eslint-disable-next-line
-        const msg = `<h2>${vm.$t('certification.subClasses.hint.subGoal')}${props.subGoal.id}</h2><h2>${vm.$t('certification.subClasses.hint.value')}${subClassesTotal.value}%</h2>`
+        const msg = `
+        <h2>${i18n.t('certification.subClasses.subGoal.target')}${props.subGoal.id}</h2>
+        <h2>${i18n.t('certification.subClasses.subGoal.value')}${subClassesTotal.value}%</h2>
+        `;
         Notification({
-          // @ts-ignore
-          title: vm.$t('certification.subClasses.hint.total'),
+          title: `${i18n.t('certification.subClasses.subGoal.total')}`,
           message: msg,
           dangerouslyUseHTMLString: true,
           type: 'warning',
@@ -105,7 +115,7 @@ export default defineComponent({
     subClassesTotalWarnCheck();
 
     // methods
-    const submitChange = (index: number) => {
+    const onEditSubmit = (index: number) => {
       const { percent, course_id } = state.subClasses[index];
       RequirementService.putCoursesToSubgoals({
         percent,
@@ -113,10 +123,8 @@ export default defineComponent({
         subgoal_id: props.subGoal.id,
       }).then((res) => {
         const status = res.status === 200 ? 'success' : 'error';
-        // @ts-ignore
-        const msg = vm.$t(`certification.subClasses.message.${status}`);
         Message({
-          message: msg.toString(),
+          message: `${i18n.t(`certification.subClasses.edit.${status}`)}`,
           type: status,
           showClose: true,
           duration: 4000,
@@ -124,23 +132,50 @@ export default defineComponent({
       });
     };
 
-    const buttonChange = (index: number) => {
+    const onEditChange = (index: number) => {
       const { is_edit } = state.subClasses[index];
       // commit (true to false)
       if (is_edit) {
-        submitChange(index);
+        onEditSubmit(index);
         subClassesTotalWarnCheck();
       }
       // switch state
       state.subClasses[index].is_edit = !is_edit;
     };
 
-    const buttonState = (index: number) => {
+    const editState = (index: number) => {
       const { is_edit } = state.subClasses[index];
       return {
         icon: is_edit ? 'el-icon-check' : 'el-icon-edit',
         type: is_edit ? 'success' : 'primary',
       };
+    };
+
+    const onDeleteSubmit = () => {
+      Message({
+        message: `${i18n.t('certification.subClasses.delete.success')}`,
+        type: 'info',
+        showClose: true,
+        duration: 4000,
+      });
+    };
+
+    const onDelete = (index: number) => {
+      MessageBox({
+        title: `${i18n.t('certification.subClasses.delete.message')}`,
+        message: `${i18n.t('certification.subClasses.delete.hint')}`,
+        // center: true,
+        showCancelButton: true,
+        showConfirmButton: true,
+        closeOnClickModal: true,
+        closeOnPressEscape: true,
+        callback: (action: string) => {
+          if (action === 'confirm') {
+            onDeleteSubmit();
+            subClassesTotalWarnCheck();
+          }
+        },
+      });
     };
 
     return {
@@ -151,9 +186,13 @@ export default defineComponent({
       subClassesTotal,
 
       // methods
+      // check
       subClassesTotalWarnCheck,
-      buttonChange,
-      buttonState,
+      // edit
+      onEditChange,
+      editState,
+      // delete
+      onDelete,
     };
   },
 });

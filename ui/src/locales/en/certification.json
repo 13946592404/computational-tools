@@ -12,14 +12,20 @@
     "content": "Details"
   },
   "subClasses": {
-    "hint": {
+    "subGoal": {
       "total": "The total ratio for all courses should be 100%",
       "subGoal": "The subgoal in question: ",
       "value": "Sum of the proportion: "
     },
-    "message": {
+    "edit": {
       "success": "Modified course ratio successfully!",
       "error": "Modified course ratio failed!"
+    },
+    "delete": {
+      "message": "Delete current course",
+      "hint": "Are you sure you want to delete the current course? This operation is not reversible!",
+      "success": "Delete course successfully!",
+      "error": "Delete course failed!"
     }
   }
 }
