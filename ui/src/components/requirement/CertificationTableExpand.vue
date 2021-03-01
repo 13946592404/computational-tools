@@ -46,7 +46,7 @@ import {
   toRefs,
   getCurrentInstance,
 } from '@vue/composition-api';
-import { Message } from 'element-ui';
+import { Message, Notification } from 'element-ui';
 import RequirementService from '@/service/requirementService';
 
 export default defineComponent({
@@ -88,8 +88,10 @@ export default defineComponent({
       if (subClassesTotal.value !== 100) {
         // @ts-ignore
         // eslint-disable-next-line
-        const msg = `<h1>${vm.$t('certification.subClasses.hint.total')}</h1></br><h2>${vm.$t('certification.subClasses.hint.subGoal')}${props.subGoal.id}</h2></br><h2>${vm.$t('certification.subClasses.hint.value')}${subClassesTotal.value}%</h2>`
-        Message({
+        const msg = `<h2>${vm.$t('certification.subClasses.hint.subGoal')}${props.subGoal.id}</h2><h2>${vm.$t('certification.subClasses.hint.value')}${subClassesTotal.value}%</h2>`
+        Notification({
+          // @ts-ignore
+          title: vm.$t('certification.subClasses.hint.total'),
           message: msg,
           dangerouslyUseHTMLString: true,
           type: 'warning',
@@ -117,7 +119,7 @@ export default defineComponent({
           message: msg.toString(),
           type: status,
           showClose: true,
-          duration: 8000,
+          duration: 4000,
         });
       });
     };
