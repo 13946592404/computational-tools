@@ -58,7 +58,7 @@ import {
 } from '@vue/composition-api';
 import { Notification, Message, MessageBox } from 'element-ui';
 import RequirementService from '@/service/requirementService';
-import i18n from '@/plugins/i18n';
+import i18n, { $t } from '@/plugins/i18n';
 
 export default defineComponent({
   props: {
@@ -77,8 +77,6 @@ export default defineComponent({
     },
   },
   setup(props) {
-    // const vm = getCurrentInstance()?.proxy; // i18n.t or vm.$i18n vm/$t
-
     const state = reactive({
       // data
       subClasses: props.subGoal.subClasses,
@@ -97,11 +95,11 @@ export default defineComponent({
     const subClassesTotalWarnCheck = () => {
       if (subClassesTotal.value !== 100) {
         const msg = `
-        <h2>${i18n.t('certification.subClasses.subGoal.target')}${props.subGoal.id}</h2>
-        <h2>${i18n.t('certification.subClasses.subGoal.value')}${subClassesTotal.value}%</h2>
+        <h2>${$t('certification.subClasses.subGoal.target')}${props.subGoal.id}</h2>
+        <h2>${$t('certification.subClasses.subGoal.value')}${subClassesTotal.value}%</h2>
         `;
         Notification({
-          title: `${i18n.t('certification.subClasses.subGoal.total')}`,
+          title: `${$t('certification.subClasses.subGoal.total')}`,
           message: msg,
           dangerouslyUseHTMLString: true,
           type: 'warning',
@@ -124,7 +122,7 @@ export default defineComponent({
       }).then((res) => {
         const status = res.status === 200 ? 'success' : 'error';
         Message({
-          message: `${i18n.t(`certification.subClasses.edit.${status}`)}`,
+          message: `${$t(`certification.subClasses.edit.${status}`)}`,
           type: status,
           showClose: true,
           duration: 4000,
@@ -153,7 +151,7 @@ export default defineComponent({
 
     const onDeleteSubmit = () => {
       Message({
-        message: `${i18n.t('certification.subClasses.delete.success')}`,
+        message: `${$t('certification.subClasses.delete.success')}`,
         type: 'info',
         showClose: true,
         duration: 4000,
@@ -162,8 +160,8 @@ export default defineComponent({
 
     const onDelete = (index: number) => {
       MessageBox({
-        title: `${i18n.t('certification.subClasses.delete.message')}`,
-        message: `${i18n.t('certification.subClasses.delete.hint')}`,
+        title: `${$t('certification.subClasses.delete.message')}`,
+        message: `${$t('certification.subClasses.delete.hint')}`,
         // center: true,
         showCancelButton: true,
         showConfirmButton: true,

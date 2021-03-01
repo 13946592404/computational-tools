@@ -1,5 +1,5 @@
 import { RouteConfig } from 'vue-router';
-import i18n from '@/plugins/i18n';
+import { $t } from '@/plugins/i18n';
 
 // home page: redirect
 export const home: RouteConfig = {
@@ -24,7 +24,7 @@ export const master: RouteConfig = {
       path: 'helloworld',
       name: 'helloworld',
       meta: {
-        name: i18n.t('navigation.helloworld'),
+        name: $t('navigation.helloworld'),
         icon: 'el-icon-platform-eleme',
       },
       component: () => import('@/components/HelloWorld.vue'),
@@ -33,7 +33,7 @@ export const master: RouteConfig = {
       path: 'hellorouter',
       name: 'hellorouter',
       meta: {
-        name: i18n.t('navigation.hellorouter'),
+        name: $t('navigation.hellorouter'),
         icon: 'el-icon-loading',
       },
       component: () => import('@/components/HelloRouter.vue'),
@@ -42,7 +42,7 @@ export const master: RouteConfig = {
       path: 'graduaterequire',
       name: 'graduaterequire',
       meta: {
-        name: i18n.t('navigation.graduaterequire'),
+        name: $t('navigation.graduaterequire'),
         icon: 'el-icon-s-flag',
       },
       component: () => import('@/views/master/pages/GraduateRequire.vue'),

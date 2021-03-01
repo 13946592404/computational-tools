@@ -22,3 +22,7 @@ const i18n: VueI18n = new VueI18n({
 });
 
 export default i18n;
+
+export function $t(key: VueI18n.Path, values?: VueI18n.Values) {
+  return i18n.t(key, values);
+}
