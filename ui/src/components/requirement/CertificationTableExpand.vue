@@ -120,8 +120,9 @@ import {
   watch,
   inject,
 } from '@vue/composition-api';
-import { $t, getLocale } from '@/plugins/i18n';
 import { Notification, Message, MessageBox } from 'element-ui';
+import { cloneDeep } from 'lodash';
+import { $t, getLocale } from '@/plugins/i18n';
 import RequirementService from '@/service/requirementService';
 
 export default defineComponent({
@@ -144,10 +145,8 @@ export default defineComponent({
     const state = reactive({
       // data
       editable: true, // ajax - need permission to check
-      editState: {
-        value: null,
-      },
-      subClasses: props.subGoal.subClasses,
+      editStateArray: [],
+      subClasses: cloneDeep(props.subGoal.subClasses),
       addClassesAll: inject('courses'),
       addClasses: [],
       addState: {
@@ -189,7 +188,7 @@ export default defineComponent({
 
     const onEditSubmit = (index: number) => {
       const { percent, course_id } = state.subClasses[index];
-      if (state.editState.value === percent) {
+      if (state.editStateArray[index] === percent) {
         return;
       }
       RequirementService.putUpdateCoursesToSubgoals({
@@ -197,6 +196,7 @@ export default defineComponent({
         course_id,
         subgoal_id: props.subGoal.id,
       }).then(() => {
+        subClassesTotalWarnCheck();
         Message({
           message: `${$t('certification.subClasses.edit.success')}`,
           type: 'success',
@@ -204,6 +204,7 @@ export default defineComponent({
           duration: 4000,
         });
       }).catch(() => {
+        state.subClasses[index].percent = props.subGoal.subClasses[index].percent; // reset
         Message({
           message: `${$t('certification.subClasses.edit.error')}`,
           type: 'error',
@@ -218,10 +219,9 @@ export default defineComponent({
       // commit (true to false)
       if (is_edit) {
         onEditSubmit(index);
-        subClassesTotalWarnCheck();
-      } else {
+      } else { // click edit (false to true)
         // @ts-ignore
-        state.editState.value = percent;
+        state.editStateArray[index] = percent;
       }
       // switch state
       state.subClasses[index].is_edit = !is_edit;
