@@ -152,9 +152,6 @@ export default defineComponent({
         newClass: {
           course_id: null,
           percent: 5,
-          name: null,
-          is_edit: false,
-          subgoal_id: props.subGoal.id,
         },
       },
       // css
@@ -301,15 +298,29 @@ export default defineComponent({
       state.addState.isAdd = !isAdd;
     };
 
+    const addNewClass = () => {
+      // @ts-ignore
+      const { name } = state.addClasses.find((val) => val.id === state.addState.newClass.course_id);
+      const { course_id, percent } = state.addState.newClass; // remove reactive
+      const newObj = {
+        course_id,
+        percent,
+        name,
+        is_edit: false,
+        subgoal_id: props.subGoal.id,
+      };
+      // @ts-ignore
+      state.subClasses.push(newObj); // push new
+    };
+
+    const resetSelection = () => {
+      state.addState.newClass.course_id = null;
+      state.addState.newClass.percent = 5;
+    };
+
     const onAddCommit = () => {
-      // query class name
-      // @ts-ignore
-      const obj = state.addClasses.find((val) => val.id === state.addState.newClass.course_id);
-      // @ts-ignore
-      state.addState.newClass.name = obj.name;
-      // @ts-ignore
-      state.subClasses.push(state.addState.newClass); // push new
-      state.addState.newClass.course_id = null; // reset selection
+      addNewClass(); // add
+      resetSelection(); // reset
       subClassesTotalWarnCheck(); // check
       onAddButton(); // button state
     };
