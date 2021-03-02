@@ -24,8 +24,8 @@
         <el-button
           v-if="editable"
           @click="onEditChange(index)"
-          :icon="editState(index).icon"
-          :type="editState(index).type"
+          :icon="getEditCss(index).icon"
+          :type="getEditCss(index).type"
           size="mini"
           plain
           circle
@@ -163,21 +163,6 @@ export default defineComponent({
       },
     });
 
-    // add classes check already
-    const alterAddClasses = () => {
-      // clear
-      state.addClasses.splice(0, state.addClasses.length);
-      // @ts-ignore
-      state.addClasses.push(...state.addClassesAll.filter((val) => !state.subClasses.find((value) => value.course_id === val.id)));
-    };
-
-    // add classes All
-    watch(
-      () => [state.addClassesAll, state.subClasses],
-      () => alterAddClasses(),
-      { deep: true, immediate: true },
-    );
-
     // @ts-ignore
     // eslint-disable-next-line
     const subClassesTotal = computed(() => state.subClasses.map((val) => Number.parseInt(val.percent, 10)).reduce((total, value) => total += value));
@@ -242,7 +227,7 @@ export default defineComponent({
       state.subClasses[index].is_edit = !is_edit;
     };
 
-    const editState = (index: number) => {
+    const getEditCss = (index: number) => {
       const { is_edit } = state.subClasses[index];
       return {
         icon: is_edit ? 'el-icon-check' : 'el-icon-edit',
@@ -290,6 +275,19 @@ export default defineComponent({
         },
       });
     };
+
+    const alterAddClasses = () => {
+      // clear
+      state.addClasses.splice(0, state.addClasses.length);
+      // @ts-ignore
+      state.addClasses.push(...state.addClassesAll.filter((val) => !state.subClasses.find((value) => value.course_id === val.id)));
+    };
+
+    watch(
+      () => [state.addClassesAll, state.subClasses],
+      () => alterAddClasses(),
+      { deep: true, immediate: true },
+    );
 
     const onAddButton = () => {
       const { isAdd } = state.addState;
@@ -357,7 +355,7 @@ export default defineComponent({
       subClassesTotalWarnCheck,
       // edit
       onEditChange,
-      editState,
+      getEditCss,
       // delete
       onDelete,
       // add,
