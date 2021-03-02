@@ -170,15 +170,9 @@ export default defineComponent({
 
     // add classes All
     watch(
-      () => state.addClassesAll,
+      () => [state.addClassesAll, state.subClasses],
       () => alterAddClasses(),
       { deep: true, immediate: true },
-    );
-
-    watch(
-      () => state.subClasses,
-      () => alterAddClasses(),
-      { deep: true },
     );
 
     // @ts-ignore
