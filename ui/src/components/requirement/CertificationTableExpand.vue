@@ -143,14 +143,16 @@ export default defineComponent({
   },
   setup(props) {
     const state = reactive({
-      // data
-      editable: true, // ajax - need permission to check
+      // permission global
+      editable: true,
+      // edit
       editStateArray: [],
-      subClasses: cloneDeep(props.subGoal.subClasses),
-      addClassesAll: inject('courses'),
-      addClasses: [],
+      // add
+      subClasses: cloneDeep(props.subGoal.subClasses), // props copy
+      addClassesAll: inject('courses'), // all
+      addClasses: [], // filter
       addState: {
-        isAdd: false,
+        isAdd: false, // v-if
         newClass: {
           course_id: null,
           percent: 5,
