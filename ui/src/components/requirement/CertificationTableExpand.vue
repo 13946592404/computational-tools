@@ -144,6 +144,9 @@ export default defineComponent({
     const state = reactive({
       // data
       editable: true, // ajax - need permission to check
+      editState: {
+        value: null,
+      },
       subClasses: props.subGoal.subClasses,
       addClassesAll: inject('courses'),
       addClasses: [],
@@ -201,6 +204,9 @@ export default defineComponent({
 
     const onEditSubmit = (index: number) => {
       const { percent, course_id } = state.subClasses[index];
+      if (state.editState.value === percent) {
+        return;
+      }
       RequirementService.putUpdateCoursesToSubgoals({
         percent,
         course_id,
@@ -223,11 +229,14 @@ export default defineComponent({
     };
 
     const onEditChange = (index: number) => {
-      const { is_edit } = state.subClasses[index];
+      const { is_edit, percent } = state.subClasses[index];
       // commit (true to false)
       if (is_edit) {
         onEditSubmit(index);
         subClassesTotalWarnCheck();
+      } else {
+        // @ts-ignore
+        state.editState.value = percent;
       }
       // switch state
       state.subClasses[index].is_edit = !is_edit;
@@ -377,5 +386,10 @@ export default defineComponent({
 }
 .new-course-field {
   margin-top: 8px;
+}
+.el-message-box__headerbtn {
+  &:visited {
+    border: none !important;
+  }
 }
 </style>
