@@ -84,4 +84,7 @@ export default defineComponent({
 .el-table_1_column_2 {
   padding-left: 8px !important;
 }
+.el-table__header-wrapper {
+  border-bottom: 1px solid #e2e8f0; /* Inspect Error */
+}
 </style>
