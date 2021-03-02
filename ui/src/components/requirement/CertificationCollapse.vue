@@ -20,9 +20,11 @@ import {
   reactive,
   toRefs,
   watch,
+  provide,
 } from '@vue/composition-api';
 import getAllRequirements from '@/data/requirementData';
-import { $t } from '@/plugins/i18n';
+import RequirementService from '@/service/requirementService';
+import { $t, getLocale } from '@/plugins/i18n';
 import CertificationTable from './CertificationTable.vue';
 
 export default defineComponent({
@@ -40,6 +42,13 @@ export default defineComponent({
   },
 
   setup(props) {
+    // provide
+    const courses = reactive([]);
+    provide('courses', courses);
+    RequirementService.getCourses(getLocale()).then((res) => {
+      courses.push(...res.data);
+    });
+
     // data
     const state = reactive({
       requirements: [],

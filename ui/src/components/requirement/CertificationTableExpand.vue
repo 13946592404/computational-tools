@@ -117,12 +117,12 @@ import {
   defineComponent,
   reactive,
   toRefs,
-  // getCurrentInstance,
   watch,
+  inject,
 } from '@vue/composition-api';
+import { $t, getLocale } from '@/plugins/i18n';
 import { Notification, Message, MessageBox } from 'element-ui';
 import RequirementService from '@/service/requirementService';
-import { $t, getLocale } from '@/plugins/i18n';
 
 export default defineComponent({
   props: {
@@ -160,12 +160,6 @@ export default defineComponent({
       },
     });
 
-    // add classes All
-    RequirementService.getCourses(getLocale()).then((res) => {
-      // @ts-ignore
-      state.addClassesAll.push(...res.data);
-    });
-
     // add classes check already
     const alterAddClasses = () => {
       // clear
@@ -174,6 +168,7 @@ export default defineComponent({
       state.addClasses.push(...state.addClassesAll.filter((val) => !state.subClasses.find((value) => value.course_id === val.id)));
     };
 
+    // add classes All
     watch(
       () => state.addClassesAll,
       () => alterAddClasses(),
@@ -185,6 +180,9 @@ export default defineComponent({
       () => alterAddClasses(),
       { deep: true },
     );
+
+    // @ts-ignore
+    state.addClassesAll.push(...inject('courses'));
 
     // @ts-ignore
     // eslint-disable-next-line
