@@ -300,7 +300,7 @@ export default defineComponent({
       const { course_id, percent } = state.addState.newClass; // remove reactive
       const newObj = {
         course_id,
-        percent,
+        percent: percent.toFixed(0), // maybe int, double; cannot be other type
         name,
         is_edit: false,
         subgoal_id: props.subGoal.id,
