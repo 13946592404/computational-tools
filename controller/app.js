@@ -42,7 +42,7 @@ app.get('/courses', (req, res) => { // for add selection
 
 app.get('/coursesToSubgoalsView', (req, res) => {
   const isEN = req.query.lang === "en";
-  const statement = `SELECT subgoal_id, course_id, ${isEN ? 'name_EN as name' : 'name'}, percent FROM coursestosubgoalsview`;
+  const statement = `SELECT subgoal_id, course_id, ${isEN ? 'name_EN as name' : 'name'}, percent FROM coursestosubgoalsview ORDER BY id ASC`;
   query(statement).then((resolve, rejected) => {
     res.send(resolve);
   });
@@ -66,7 +66,7 @@ app.get('/deleteCoursesToSubgoals', (req, res) => {
 
 app.get('/addCoursesToSubgoals', (req, res) => {
   const { percent, subgoal_id, course_id } = req.query;
-  const statement = `INSERT INTO CoursesToSubgoals VALUES ("${subgoal_id}", ${course_id}, ${percent})`;
+  const statement = `INSERT INTO CoursesToSubgoals VALUES (NULL ,"${subgoal_id}", ${course_id}, ${percent})`;
   query(statement).then((resolve, rejected) => {
     res.send(resolve);
   });
