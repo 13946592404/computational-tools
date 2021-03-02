@@ -14,7 +14,7 @@
   "subClasses": {
     "subGoal": {
       "total": "The total ratio for all courses should be 100%",
-      "subGoal": "The subgoal in question: ",
+      "target": "The subgoal in question: ",
       "value": "Sum of the proportion: "
     },
     "edit": {

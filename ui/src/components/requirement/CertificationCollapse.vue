@@ -24,7 +24,7 @@ import {
 } from '@vue/composition-api';
 import getAllRequirements from '@/data/requirementData';
 import RequirementService from '@/service/requirementService';
-import { $t, getLocale } from '@/plugins/i18n';
+import { getLocale } from '@/plugins/i18n';
 import CertificationTable from './CertificationTable.vue';
 
 export default defineComponent({
@@ -65,7 +65,7 @@ export default defineComponent({
     };
 
     // get data and init
-    getAllRequirements($t.locale).then((val) => {
+    getAllRequirements(getLocale()).then((val) => {
       // requirements
       state.requirements = val;
       // state init - collapse
