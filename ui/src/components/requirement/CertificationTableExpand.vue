@@ -145,7 +145,7 @@ export default defineComponent({
       // data
       editable: true, // ajax - need permission to check
       subClasses: props.subGoal.subClasses,
-      addClassesAll: [],
+      addClassesAll: inject('courses'),
       addClasses: [],
       addState: {
         isAdd: false,
@@ -172,7 +172,7 @@ export default defineComponent({
     watch(
       () => state.addClassesAll,
       () => alterAddClasses(),
-      { deep: true },
+      { deep: true, immediate: true },
     );
 
     watch(
@@ -180,9 +180,6 @@ export default defineComponent({
       () => alterAddClasses(),
       { deep: true },
     );
-
-    // @ts-ignore
-    state.addClassesAll.push(...inject('courses'));
 
     // @ts-ignore
     // eslint-disable-next-line
