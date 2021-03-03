@@ -1,5 +1,4 @@
 {
-  "helloworld": "欢迎",
-  "hellorouter": "路由",
-  "graduaterequire": "毕业要求"
+  "requirement": "毕业要求",
+  "user": "用户"
 }

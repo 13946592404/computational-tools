@@ -15,19 +15,28 @@ export const home: RouteConfig = {
 export const master: RouteConfig = {
   path: '/master',
   name: 'master',
-  component: () => import('@/views/master/MasterShell.vue'),
+  component: () => import('@/views/master/shell/MasterShell.vue'),
   redirect: {
-    name: 'requirements',
+    name: 'requirement',
   },
   children: [
     {
-      path: 'requirements',
-      name: 'requirements',
+      path: 'requirement',
+      name: 'requirement',
       meta: {
-        name: $t('navigation.graduaterequire'),
+        name: $t('navigation.requirement'),
         icon: 'el-icon-s-flag',
       },
-      component: () => import('@/views/master/pages/GraduateRequire.vue'),
+      component: () => import('@/views/master/GraduateRequire.vue'),
+    },
+    {
+      path: 'user',
+      name: 'user',
+      meta: {
+        name: $t('navigation.user'),
+        icon: 'el-icon-user-solid',
+      },
+      component: () => import('@/views/master/UserView.vue'),
     },
   ],
 };

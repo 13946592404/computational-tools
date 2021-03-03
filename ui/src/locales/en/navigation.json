@@ -1,5 +1,4 @@
 {
-  "helloworld": "World",
-  "hellorouter": "Router",
-  "graduaterequire": "Requirements"
+  "requirement": "Requirements",
+  "user": "User"
 }
