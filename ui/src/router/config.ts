@@ -17,30 +17,12 @@ export const master: RouteConfig = {
   name: 'master',
   component: () => import('@/views/master/MasterShell.vue'),
   redirect: {
-    name: 'helloworld',
+    name: 'requirements',
   },
   children: [
     {
-      path: 'helloworld',
-      name: 'helloworld',
-      meta: {
-        name: $t('navigation.helloworld'),
-        icon: 'el-icon-platform-eleme',
-      },
-      component: () => import('@/components/HelloWorld.vue'),
-    },
-    {
-      path: 'hellorouter',
-      name: 'hellorouter',
-      meta: {
-        name: $t('navigation.hellorouter'),
-        icon: 'el-icon-loading',
-      },
-      component: () => import('@/components/HelloRouter.vue'),
-    },
-    {
-      path: 'graduaterequire',
-      name: 'graduaterequire',
+      path: 'requirements',
+      name: 'requirements',
       meta: {
         name: $t('navigation.graduaterequire'),
         icon: 'el-icon-s-flag',
