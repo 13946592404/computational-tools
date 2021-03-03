@@ -22,7 +22,7 @@ import {
   watch,
   provide,
 } from '@vue/composition-api';
-import getAllRequirements from '@/data/requirementData';
+import RequirementData from '@/data/requirementData';
 import RequirementService from '@/service/requirementService';
 import { getLocale } from '@/plugins/i18n';
 import CertificationTable from './CertificationTable.vue';
@@ -65,7 +65,7 @@ export default defineComponent({
     };
 
     // get data and init
-    getAllRequirements(getLocale()).then((val) => {
+    RequirementData.getAllRequirements(getLocale()).then((val) => {
       // requirements
       state.requirements = val;
       // state init - collapse
