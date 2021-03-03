@@ -70,31 +70,4 @@ class RequirementData {
   }
 }
 
-const handleAllRequirements = (requirements: Requirement[], subGoals: SubGoal[], CoursesToSubgoalsView: CoursesToSubgoalsView[]) => {
-  const requirement = requirements;
-  const subGoal = subGoals;
-
-  // add subClasses[]
-  for (let i = 0; i < subGoal.length; i += 1) {
-    subGoal[i].subClasses = [];
-  }
-
-  // add every courses to subGoals[]
-  CoursesToSubgoalsView.forEach((val: CoursesToSubgoalsView) => {
-    const proxy = val;
-    proxy.is_edit = false;
-    subGoal.find((value) => value.id === val.subgoal_id)!.subClasses.push(proxy);
-  });
-
-  // add children[]
-  for (let i = 0; i < requirement.length; i += 1) {
-    requirement[i].children = [];
-  }
-
-  // add every subGoals to children[]
-  subGoals.forEach((val: SubGoal) => requirement[val.father_id - 1].children.push(val));
-
-  return requirement;
-};
-
 export default new RequirementData();
