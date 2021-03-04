@@ -142,6 +142,8 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const percentBase = 5;
+
     const state = reactive({
       // permission global
       editable: true,
@@ -155,7 +157,7 @@ export default defineComponent({
         isAdd: false, // v-if
         newClass: {
           course_id: null,
-          percent: 5,
+          percent: percentBase,
         },
       },
       // css
@@ -313,7 +315,7 @@ export default defineComponent({
 
     const resetSelection = () => {
       state.addState.newClass.course_id = null;
-      state.addState.newClass.percent = 5;
+      state.addState.newClass.percent = percentBase;
     };
 
     const onAddCommit = () => {
