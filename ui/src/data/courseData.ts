@@ -1,7 +1,7 @@
 import CourseService from '@/service/courseService';
 import { getLocale } from '@/plugins/i18n';
 
-interface Course {
+export interface Course {
   id: number;
   name: string;
   teacher: string;

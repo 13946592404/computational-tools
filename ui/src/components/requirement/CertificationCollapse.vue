@@ -14,7 +14,7 @@
   </el-collapse>
 </template>
 
-<script lang="js">
+<script lang="ts">
 import {
   defineComponent,
   reactive,
@@ -23,7 +23,7 @@ import {
   provide,
 } from '@vue/composition-api';
 import RequirementData from '@/data/requirementData';
-import CourseData from '@/data/courseData';
+import CourseData, { Course } from '@/data/courseData';
 import CertificationTable from './CertificationTable.vue';
 
 export default defineComponent({
@@ -48,8 +48,9 @@ export default defineComponent({
     });
 
     // methods
-    const handleCollapse = (opt) => {
+    const handleCollapse = (opt: boolean) => {
       if (opt) {
+        // @ts-ignore
         state.activeNames.push(...state.requirements.map((val) => val.id));
       } else {
         state.activeNames = [];
@@ -59,13 +60,14 @@ export default defineComponent({
     // get data and init
     RequirementData.getAllRequirements().then((val) => {
       // requirements
+      // @ts-ignore
       state.requirements = val;
       // state init - collapse
       handleCollapse(props.radioCollapse);
     });
 
     // provide
-    const courses = reactive([]);
+    const courses: Course[] = reactive([]);
     provide('courses', courses);
     CourseData.getCourses().then((val) => {
       courses.push(...val);
