@@ -1,7 +1,7 @@
 import axios from '@/plugins/axios';
 
 class CourseService {
-  static getCourses(lang: string) {
+  getCourses(lang: string) {
     return axios.get('./courses', {
       params: {
         lang,
@@ -10,4 +10,4 @@ class CourseService {
   }
 }
 
-export default CourseService;
+export default new CourseService();
