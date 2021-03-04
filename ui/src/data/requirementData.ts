@@ -1,6 +1,8 @@
 import RequirementService from '@/service/requirementService';
 import { getLocale } from '@/plugins/i18n';
 
+const locale: string = getLocale();
+
 export interface CoursesToSubgoalsView {
   course_id: string;
   name: string;
@@ -34,14 +36,32 @@ class RequirementData {
     this.coursesToSubgoalsViews = [];
   }
 
-  async setAllRequirements() {
-    const locale: string = getLocale();
-    this.requirements = await RequirementService.getRequirements(locale).then((res) => res.data);
-    this.subGoals = await RequirementService.getSubGoals(locale).then((res) => res.data);
-    this.coursesToSubgoalsViews = await RequirementService.getCoursesToSubgoalsView(locale).then((res) => res.data);
+  async setRequirments() {
+    if (!this.requirements.length) {
+      this.requirements = await RequirementService.getRequirements(locale).then((res) => res.data);
+    }
   }
 
-  handleAllRequirements() {
+  async setSubGoals() {
+    if (!this.subGoals.length) {
+      this.subGoals = await RequirementService.getSubGoals(locale).then((res) => res.data);
+    }
+  }
+
+  async setCourseToSubgoalsViews() {
+    if (!this.coursesToSubgoalsViews.length) {
+      this.coursesToSubgoalsViews = await RequirementService.getCoursesToSubgoalsView(locale).then((res) => res.data);
+    }
+  }
+
+  // set all
+  async setAllRequirements() {
+    await this.setRequirments();
+    await this.setSubGoals();
+    await this.setCourseToSubgoalsViews();
+  }
+
+  handleSubGoals() {
     // add CoursesToSubgoalsView[]
     for (let i = 0; i < this.subGoals.length; i += 1) {
       this.subGoals[i].subClasses = [];
@@ -53,7 +73,9 @@ class RequirementData {
       proxy.is_edit = false;
       this.subGoals.find((value) => value.id === val.subgoal_id)!.subClasses.push(proxy);
     });
+  }
 
+  handleRequirements() {
     // add children[]
     for (let i = 0; i < this.requirements.length; i += 1) {
       this.requirements[i].children = [];
@@ -63,9 +85,18 @@ class RequirementData {
     this.subGoals.forEach((val: SubGoal) => this.requirements[val.father_id - 1].children.push(val));
   }
 
+  // handle all
+  handleAllRequirements() {
+    this.handleSubGoals();
+    this.handleRequirements();
+  }
+
+  // get all
   async getAllRequirements() {
     if (!this.requirements.length) {
+      // set all
       await this.setAllRequirements();
+      // handle all
       this.handleAllRequirements();
     }
     return this.requirements;
