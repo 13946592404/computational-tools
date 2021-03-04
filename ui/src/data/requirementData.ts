@@ -71,7 +71,8 @@ class RequirementData {
     this.coursesToSubgoalsViews.forEach((val: CoursesToSubgoalsView) => {
       const proxy = val;
       proxy.is_edit = false;
-      this.subGoals.find((value) => value.id === val.subgoal_id)!.subClasses.push(proxy);
+      // @ts-ignore
+      this.subGoals.find((value) => value.id === val.subgoal_id).subClasses.push(proxy);
     });
   }
 

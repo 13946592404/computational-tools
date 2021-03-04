@@ -20,10 +20,9 @@ import {
   reactive,
   toRefs,
   watch,
-  provide,
 } from '@vue/composition-api';
 import RequirementData from '@/data/requirementData';
-import CourseData, { Course } from '@/data/courseData';
+import CourseController from '@/store/courseController';
 import CertificationTable from './CertificationTable.vue';
 
 export default defineComponent({
@@ -66,19 +65,14 @@ export default defineComponent({
       handleCollapse(props.radioCollapse);
     });
 
-    // provide
-    const courses: Course[] = reactive([]);
-    provide('courses', courses);
-    CourseData.getCourses().then((val) => {
-      courses.push(...val);
-    });
-
     // state change - by radio group
     watch(
       () => props,
       (val) => handleCollapse(val.radioCollapse),
       { deep: true },
     );
+
+    CourseController.loadCourses();
 
     return {
       ...toRefs(state),

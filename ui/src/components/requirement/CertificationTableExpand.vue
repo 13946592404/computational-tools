@@ -118,12 +118,12 @@ import {
   reactive,
   toRefs,
   watch,
-  inject,
 } from '@vue/composition-api';
 import { Notification, Message, MessageBox } from 'element-ui';
 import { cloneDeep } from 'lodash';
 import { $t, getLocale } from '@/plugins/i18n';
 import courseToSubgoalService from '@/service/courseToSubgoalService';
+import CourseController from '@/store/courseController';
 
 export default defineComponent({
   props: {
@@ -149,7 +149,7 @@ export default defineComponent({
       editStateArray: [],
       // add
       subClasses: cloneDeep(props.subGoal.subClasses), // props copy
-      addClassesAll: inject('courses'), // all
+      addClassesAll: CourseController.courses, // all
       addClasses: [], // filter
       addState: {
         isAdd: false, // v-if
