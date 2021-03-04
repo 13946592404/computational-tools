@@ -123,7 +123,7 @@ import {
 import { Notification, Message, MessageBox } from 'element-ui';
 import { cloneDeep } from 'lodash';
 import { $t, getLocale } from '@/plugins/i18n';
-import RequirementService from '@/service/requirementService';
+import courseToSubgoalService from '@/service/courseToSubgoalService';
 
 export default defineComponent({
   props: {
@@ -193,7 +193,7 @@ export default defineComponent({
       if (state.editStateArray[index] === percent) {
         return;
       }
-      RequirementService.putUpdateCoursesToSubgoals({
+      courseToSubgoalService.putUpdateCoursesToSubgoals({
         percent,
         course_id,
         subgoal_id: props.subGoal.id,
@@ -239,7 +239,7 @@ export default defineComponent({
 
     const onDeleteSubmit = (index: number) => {
       const { course_id } = state.subClasses[index];
-      RequirementService.putDeleteCoursesToSubgoals({
+      courseToSubgoalService.putDeleteCoursesToSubgoals({
         course_id,
         subgoal_id: props.subGoal.id,
       }).then(() => {
@@ -325,7 +325,7 @@ export default defineComponent({
 
     const onAdd = () => {
       const { course_id, percent } = state.addState.newClass;
-      RequirementService.putAddCoursesToSubgoals({
+      courseToSubgoalService.putAddCoursesToSubgoals({
         subgoal_id: props.subGoal.id,
         course_id,
         percent,

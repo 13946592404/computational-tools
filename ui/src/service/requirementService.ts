@@ -1,6 +1,6 @@
 import axios from '@/plugins/axios';
 
-class Requirements {
+class RequirementService {
   static getRequirements(lang: string) {
     return axios.get('./requirements', {
       params: {
@@ -17,14 +17,6 @@ class Requirements {
     });
   }
 
-  static getCourses(lang: string) {
-    return axios.get('./courses', {
-      params: {
-        lang,
-      },
-    });
-  }
-
   static getCoursesToSubgoalsView(lang: string) {
     return axios.get('./coursesToSubgoalsView', {
       params: {
@@ -32,24 +24,6 @@ class Requirements {
       },
     });
   }
-
-  static putUpdateCoursesToSubgoals(query: any) {
-    return axios.get('./updateCoursesToSubgoals', {
-      params: query,
-    });
-  }
-
-  static putDeleteCoursesToSubgoals(query: any) {
-    return axios.get('./deleteCoursesToSubgoals', {
-      params: query,
-    });
-  }
-
-  static putAddCoursesToSubgoals(query: any) {
-    return axios.get('./addCoursesToSubgoals', {
-      params: query,
-    });
-  }
 }
 
-export default Requirements;
+export default RequirementService;

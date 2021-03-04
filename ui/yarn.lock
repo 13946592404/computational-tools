@@ -2131,7 +2131,7 @@
   "resolved" "https://registry.npmjs.org/babel-helper-vue-jsx-merge-props/-/babel-helper-vue-jsx-merge-props-2.0.3.tgz"
   "version" "2.0.3"
 
-"babel-loader@^8.1.0":
+"babel-loader@^8.1.0", "babel-loader@^8.2.2":
   "integrity" "sha1-k2POhMEMmkDmx1N0jhRBtgyKC4E="
   "resolved" "https://registry.npm.taobao.org/babel-loader/download/babel-loader-8.2.2.tgz?cache=0&sync_timestamp=1606437496300&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fbabel-loader%2Fdownload%2Fbabel-loader-8.2.2.tgz"
   "version" "8.2.2"
@@ -3970,6 +3970,14 @@
   dependencies:
     "esutils" "^2.0.2"
 
+"doctrine@0.7.2":
+  "integrity" "sha1-fLhgNZujvpDgQLJrcpzkv6ZUxSM="
+  "resolved" "https://registry.npmjs.org/doctrine/-/doctrine-0.7.2.tgz"
+  "version" "0.7.2"
+  dependencies:
+    "esutils" "^1.1.6"
+    "isarray" "0.0.1"
+
 "doctrine@1.5.0":
   "integrity" "sha1-N53Ocw9hZvds76TmcHoVmwLFpvo="
   "resolved" "https://registry.npm.taobao.org/doctrine/download/doctrine-1.5.0.tgz"
@@ -4455,6 +4463,11 @@
   "integrity" "sha1-MH30JUfmzHMk088DwVXVzbjFOIA="
   "resolved" "https://registry.npm.taobao.org/estraverse/download/estraverse-5.2.0.tgz?cache=0&sync_timestamp=1596641261331&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Festraverse%2Fdownload%2Festraverse-5.2.0.tgz"
   "version" "5.2.0"
+
+"esutils@^1.1.6":
+  "integrity" "sha1-wBzKqa5LiXxtDD4hCuUvPHqEQ3U="
+  "resolved" "https://registry.npmjs.org/esutils/-/esutils-1.1.6.tgz"
+  "version" "1.1.6"
 
 "esutils@^2.0.2":
   "integrity" "sha1-dNLrTeC42hKTcRkQ1Qd1ubcQ72Q="
@@ -5988,6 +6001,11 @@
   "integrity" "sha1-u5NdSFgsuhaMBoNJV6VKPgcSTxE="
   "resolved" "https://registry.npm.taobao.org/isarray/download/isarray-1.0.0.tgz"
   "version" "1.0.0"
+
+"isarray@0.0.1":
+  "integrity" "sha1-ihis/Kmo9Bd+Cav8YDiTmwXR7t8="
+  "resolved" "https://registry.npmjs.org/isarray/-/isarray-0.0.1.tgz"
+  "version" "0.0.1"
 
 "isexe@^2.0.0":
   "integrity" "sha1-6PvzdNxVb/iUehDcsFctYz8s+hA="
@@ -8528,7 +8546,7 @@
   "resolved" "https://registry.npm.taobao.org/rgba-regex/download/rgba-regex-1.0.0.tgz"
   "version" "1.0.0"
 
-"rimraf@^2.5.4", "rimraf@^2.6.1", "rimraf@^2.6.3", "rimraf@^2.7.1":
+"rimraf@^2.4.4", "rimraf@^2.5.4", "rimraf@^2.6.1", "rimraf@^2.6.3", "rimraf@^2.7.1":
   "integrity" "sha1-NXl/E6f9rcVmFCwp1PB8ytSD4+w="
   "resolved" "https://registry.npm.taobao.org/rimraf/download/rimraf-2.7.1.tgz"
   "version" "2.7.1"
@@ -9707,7 +9725,39 @@
   "resolved" "https://registry.npm.taobao.org/tslib/download/tslib-2.1.0.tgz?cache=0&sync_timestamp=1609887438976&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftslib%2Fdownload%2Ftslib-2.1.0.tgz"
   "version" "2.1.0"
 
-"tslint@^5.20.1":
+"tslib@1.9.0":
+  "integrity" "sha512-f/qGG2tUkrISBlQZEjEqoZ3B2+npJjIf04H1wuAv9iA8i04Icp+61KRXxFdha22670NJopsZCIjhC3SnjPRKrQ=="
+  "resolved" "https://registry.npmjs.org/tslib/-/tslib-1.9.0.tgz"
+  "version" "1.9.0"
+
+"tslint-config-standard@^9.0.0":
+  "integrity" "sha512-CAw9J743RnPMemQV/XQ4YyNreC+A1NItACfkm+cBedrOkz6CQfwlnbKn8anUXBfoa4Zo4tjAhblRbsMNcSLfSw=="
+  "resolved" "https://registry.npmjs.org/tslint-config-standard/-/tslint-config-standard-9.0.0.tgz"
+  "version" "9.0.0"
+  dependencies:
+    "tslint-eslint-rules" "^5.3.1"
+
+"tslint-eslint-rules@^5.3.1":
+  "integrity" "sha512-WlSXE+J2vY/VPgIcqQuijMQiel+UtmXS+4nvK4ZzlDiqBfXse8FAvkNnTcYhnQyOTW5KFM+uRRGXxYhFpuBc6w=="
+  "resolved" "https://registry.npmjs.org/tslint-eslint-rules/-/tslint-eslint-rules-5.4.0.tgz"
+  "version" "5.4.0"
+  dependencies:
+    "doctrine" "0.7.2"
+    "tslib" "1.9.0"
+    "tsutils" "^3.0.0"
+
+"tslint-loader@^3.5.4":
+  "integrity" "sha512-jBHNNppXut6SgZ7CsTBh+6oMwVum9n8azbmcYSeMlsABhWWoHwjq631vIFXef3VSd75cCdX3rc6kstsB7rSVVw=="
+  "resolved" "https://registry.npmjs.org/tslint-loader/-/tslint-loader-3.5.4.tgz"
+  "version" "3.5.4"
+  dependencies:
+    "loader-utils" "^1.0.2"
+    "mkdirp" "^0.5.1"
+    "object-assign" "^4.1.1"
+    "rimraf" "^2.4.4"
+    "semver" "^5.3.0"
+
+"tslint@^5.0.0", "tslint@^5.20.1", "tslint@>=4.0.0":
   "integrity" "sha1-5AHortoBUrxE3QfmFANPP4DGe30="
   "resolved" "https://registry.npm.taobao.org/tslint/download/tslint-5.20.1.tgz?cache=0&sync_timestamp=1600702437217&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftslint%2Fdownload%2Ftslint-5.20.1.tgz"
   "version" "5.20.1"
@@ -9733,7 +9783,7 @@
   dependencies:
     "tslib" "^1.8.1"
 
-"tsutils@^3.17.1":
+"tsutils@^3.0.0", "tsutils@^3.17.1":
   "integrity" "sha1-2FZuDFHILzL5wlpNNnzWJAmlR6k="
   "resolved" "https://registry.npm.taobao.org/tsutils/download/tsutils-3.19.1.tgz?cache=0&sync_timestamp=1610186549007&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftsutils%2Fdownload%2Ftsutils-3.19.1.tgz"
   "version" "3.19.1"
@@ -9792,10 +9842,10 @@
   "resolved" "https://registry.npm.taobao.org/typedarray/download/typedarray-0.0.6.tgz"
   "version" "0.0.6"
 
-"typescript@*", "typescript@>=2", "typescript@>=2.1.0 || >=2.1.0-dev || >=2.2.0-dev || >=2.3.0-dev || >=2.4.0-dev || >=2.5.0-dev || >=2.6.0-dev || >=2.7.0-dev || >=2.8.0-dev || >=2.9.0-dev || >= 3.0.0-dev || >= 3.1.0-dev", "typescript@>=2.3.0-dev || >=2.4.0-dev || >=2.5.0-dev || >=2.6.0-dev || >=2.7.0-dev || >=2.8.0-dev || >=2.9.0-dev || >=3.0.0-dev || >= 3.1.0-dev || >= 3.2.0-dev", "typescript@>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta", "typescript@~3.9.3":
-  "integrity" "sha1-mNYApevcOPQMsndSLxLcgA6eJfo="
-  "resolved" "https://registry.npm.taobao.org/typescript/download/typescript-3.9.7.tgz?cache=0&sync_timestamp=1611215616802&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftypescript%2Fdownload%2Ftypescript-3.9.7.tgz"
-  "version" "3.9.7"
+"typescript@*", "typescript@^2.2.0 || ^3.0.0", "typescript@^3.9.9", "typescript@>=2", "typescript@>=2.1.0 || >=2.1.0-dev || >=2.2.0-dev || >=2.3.0-dev || >=2.4.0-dev || >=2.5.0-dev || >=2.6.0-dev || >=2.7.0-dev || >=2.8.0-dev || >=2.9.0-dev || >= 3.0.0-dev || >= 3.1.0-dev", "typescript@>=2.3.0-dev || >=2.4.0-dev || >=2.5.0-dev || >=2.6.0-dev || >=2.7.0-dev || >=2.8.0-dev || >=2.9.0-dev || >=3.0.0-dev || >= 3.1.0-dev || >= 3.2.0-dev", "typescript@>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta":
+  "integrity" "sha512-kdMjTiekY+z/ubJCATUPlRDl39vXYiMV9iyeMuEuXZh2we6zz80uovNN2WlAxmmdE/Z/YQe+EbOEXB5RHEED3w=="
+  "resolved" "https://registry.npmjs.org/typescript/-/typescript-3.9.9.tgz"
+  "version" "3.9.9"
 
 "uglify-js@3.4.x":
   "integrity" "sha1-mtlWPY6zrN+404WX0q8dgV9qdV8="
@@ -10062,7 +10112,7 @@
     "hash-sum" "^2.0.0"
     "loader-utils" "^2.0.0"
 
-"vue-loader@^15.9.2":
+"vue-loader@^15.9.2", "vue-loader@^15.9.6":
   "integrity" "sha1-9Lua4gw6g3CvPs8JuBJtOP/ba4s="
   "resolved" "https://registry.npm.taobao.org/vue-loader/download/vue-loader-15.9.6.tgz?cache=0&sync_timestamp=1608187944571&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvue-loader%2Fdownload%2Fvue-loader-15.9.6.tgz"
   "version" "15.9.6"

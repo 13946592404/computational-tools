@@ -1,4 +1,5 @@
-import requirementService from '@/service/requirementService';
+import RequirementService from '@/service/requirementService';
+import { getLocale } from '@/plugins/i18n';
 
 export interface CoursesToSubgoalsView {
   course_id: string;
@@ -33,10 +34,11 @@ class RequirementData {
     this.coursesToSubgoalsViews = [];
   }
 
-  async setAllRequirements(locale: string) {
-    this.requirements = await requirementService.getRequirements(locale).then((res) => res.data);
-    this.subGoals = await requirementService.getSubGoals(locale).then((res) => res.data);
-    this.coursesToSubgoalsViews = await requirementService.getCoursesToSubgoalsView(locale).then((res) => res.data);
+  async setAllRequirements() {
+    const locale: string = getLocale();
+    this.requirements = await RequirementService.getRequirements(locale).then((res) => res.data);
+    this.subGoals = await RequirementService.getSubGoals(locale).then((res) => res.data);
+    this.coursesToSubgoalsViews = await RequirementService.getCoursesToSubgoalsView(locale).then((res) => res.data);
   }
 
   handleAllRequirements() {
@@ -61,9 +63,9 @@ class RequirementData {
     this.subGoals.forEach((val: SubGoal) => this.requirements[val.father_id - 1].children.push(val));
   }
 
-  async getAllRequirements(locale: string) {
+  async getAllRequirements() {
     if (!this.requirements.length) {
-      await this.setAllRequirements(locale);
+      await this.setAllRequirements();
       this.handleAllRequirements();
     }
     return this.requirements;

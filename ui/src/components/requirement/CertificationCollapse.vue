@@ -23,8 +23,7 @@ import {
   provide,
 } from '@vue/composition-api';
 import RequirementData from '@/data/requirementData';
-import RequirementService from '@/service/requirementService';
-import { getLocale } from '@/plugins/i18n';
+import CourseData from '@/data/courseData';
 import CertificationTable from './CertificationTable.vue';
 
 export default defineComponent({
@@ -42,13 +41,6 @@ export default defineComponent({
   },
 
   setup(props) {
-    // provide
-    const courses = reactive([]);
-    provide('courses', courses);
-    RequirementService.getCourses(getLocale()).then((res) => {
-      courses.push(...res.data);
-    });
-
     // data
     const state = reactive({
       requirements: [],
@@ -65,11 +57,18 @@ export default defineComponent({
     };
 
     // get data and init
-    RequirementData.getAllRequirements(getLocale()).then((val) => {
+    RequirementData.getAllRequirements().then((val) => {
       // requirements
       state.requirements = val;
       // state init - collapse
       handleCollapse(props.radioCollapse);
+    });
+
+    // provide
+    const courses = reactive([]);
+    provide('courses', courses);
+    CourseData.getCourses().then((val) => {
+      courses.push(...val);
     });
 
     // state change - by radio group
