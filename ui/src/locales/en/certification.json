@@ -1,11 +1,11 @@
 {
   "switchGroups": {
-    "collapse": "Requirements",
     "collapseOpen": "Open All Requirements",
     "collapseFold": "Fold All Requirements",
-    "course": "Courses",
     "courseOpen": "Open All Courses",
-    "courseFold": "Fold All Courses"
+    "courseFold": "Fold All Courses",
+    "buttonShow": "Show All Editable Buttons",
+    "buttonHide": "Hide All Editable Buttons"
   },
   "table": {
     "subTarget": "SubGoals",

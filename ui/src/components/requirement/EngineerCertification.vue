@@ -19,6 +19,13 @@
         :inactive-text="$t('certification.switchGroups.courseFold')"
         :disabled="!radioCollapse"
       />
+      <el-switch
+        v-if="radioPermission.show"
+        v-model="radioPermission.value"
+        :active-text="$t('certification.switchGroups.buttonShow')"
+        :inactive-text="$t('certification.switchGroups.buttonHide')"
+        :disabled="!radioCollapse"
+      />
     </div>
   </div>
 </template>
@@ -43,11 +50,18 @@ export default defineComponent({
       value: true,
     });
 
+    const radioPermission = reactive({
+      show: true,
+      value: true,
+    });
+
     provide('radioCourse', radioCourse);
+    provide('radioPermission', radioPermission);
 
     return {
       radioCollapse,
       radioCourse,
+      radioPermission,
     };
   },
 });

@@ -1,11 +1,11 @@
 {
   "switchGroups": {
-    "collapse": "毕业要求",
     "collapseOpen": "展开所有毕业要求",
     "collapseFold": "折叠所有毕业要求",
-    "course": "课程比例",
     "courseOpen": "展开所有课程比例",
-    "courseFold": "折叠所有课程比例"
+    "courseFold": "折叠所有课程比例",
+    "buttonShow": "展示所有编辑按钮",
+    "buttonHide": "隐藏所有编辑按钮"
   },
   "table": {
     "subTarget": "子目标",

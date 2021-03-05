@@ -123,6 +123,7 @@
 import {
   computed,
   defineComponent,
+  inject,
   reactive,
   toRefs,
   watch,
@@ -150,6 +151,8 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const radioPermission: any = inject('radioPermission');
+
     const percentBase = 5;
 
     const state = reactive({
@@ -173,6 +176,12 @@ export default defineComponent({
         marginLeft: getLocale() === 'ch' ? '80px' : '380px',
       },
     });
+
+    watch(
+      () => radioPermission,
+      (val) => { state.editable = val.value; },
+      { deep: true },
+    );
 
     // @ts-ignore
     // eslint-disable-next-line
