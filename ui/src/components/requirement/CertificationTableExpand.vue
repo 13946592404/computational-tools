@@ -159,7 +159,7 @@ export default defineComponent({
       // permission global
       editable: true,
       // edit
-      editStateArray: [], // local data - because lazy for ajax
+      editStateMap: new Map(), // local data - because lazy for ajax
       // add
       subClasses: cloneDeep(props.subGoal.subClasses), // props copy
       addClassesAll: [], // all
@@ -216,7 +216,7 @@ export default defineComponent({
 
     const onEditSubmit = (index: number) => {
       const { percent, course_id } = state.subClasses[index];
-      if (Number.parseInt(state.editStateArray[index], 10) === percent) {
+      if (state.editStateMap.get(index) === percent) {
         return;
       }
       courseToSubgoalService.putUpdateCoursesToSubgoals({
@@ -249,7 +249,7 @@ export default defineComponent({
         onEditSubmit(index);
       } else { // click edit (false to true)
         // @ts-ignore
-        state.editStateArray[index] = percent;
+        state.editStateMap.set(index, Number.parseInt(percent, 10));
       }
       // switch state
       state.subClasses[index].is_edit = !is_edit;
