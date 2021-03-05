@@ -82,16 +82,17 @@ app.get('/userLogin', (req, res) => {
       if (user_password === password) {
         const subStatement = `SELECT id, is_admin, ${isEN ? 'name_EN as name' : 'name'}, TEL, email FROM teacher WHERE id = ${user_id}`
         query(subStatement).then((resolve, rejected) => {
-          res.statusCode = 200;
-          res.send(resolve);
+          res.send(resolve[0]);
         })
       } else {
-        res.statusCode = 403;
-        res.send('password error');
+        res.send({
+          statusCode: 403,
+        });
       }
     } else {
-      res.statusCode = 404;
-      res.send('no user');
+      res.send({
+        statusCode: 404,
+      });
     }
   });
 });
