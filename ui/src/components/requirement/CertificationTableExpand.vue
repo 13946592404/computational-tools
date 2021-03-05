@@ -187,7 +187,7 @@ export default defineComponent({
           arr[index].is_edit = false;
         });
       },
-      { deep: true },
+      { deep: true, immediate: true },
     );
 
     // @ts-ignore
