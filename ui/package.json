@@ -15,7 +15,6 @@
     "babel-preset-env": "^1.7.0",
     "cache-loader": "^4.1.0",
     "core-js": "^3.6.5",
-    "default-passive-events": "^2.0.0",
     "element-ui": "^2.15.0",
     "lodash": "^4.17.21",
     "node-sass": "^5.0.0",
