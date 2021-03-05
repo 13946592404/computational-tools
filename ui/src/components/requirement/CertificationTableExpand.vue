@@ -177,9 +177,16 @@ export default defineComponent({
       },
     });
 
+    // hide all editable buttons
     watch(
       () => radioPermission,
-      (val) => { state.editable = val.value; },
+      (val) => {
+        state.editable = val.value;
+        // if not close some edit button
+        state.subClasses.forEach((value, index, arr) => {
+          arr[index].is_edit = false;
+        });
+      },
       { deep: true },
     );
 

@@ -24,7 +24,7 @@
         v-model="radioPermission.value"
         :active-text="$t('certification.switchGroups.buttonShow')"
         :inactive-text="$t('certification.switchGroups.buttonHide')"
-        :disabled="!radioCollapse"
+        :disabled="!radioCollapse || !radioCourse.value"
       />
     </div>
   </div>
