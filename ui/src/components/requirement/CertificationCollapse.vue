@@ -22,7 +22,6 @@ import {
   watch,
 } from '@vue/composition-api';
 import RequirementData from '@/store/requirementData';
-import CourseController from '@/store/courseController';
 import CertificationTable from './CertificationTable.vue';
 
 export default defineComponent({
@@ -71,8 +70,6 @@ export default defineComponent({
       (val) => handleCollapse(val.radioCollapse),
       { deep: true },
     );
-
-    CourseController.loadCourses();
 
     return {
       ...toRefs(state),

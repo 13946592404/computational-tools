@@ -151,7 +151,7 @@ export default defineComponent({
       editStateArray: [],
       // add
       subClasses: cloneDeep(props.subGoal.subClasses), // props copy
-      addClassesAll: CourseController.courses, // all
+      addClassesAll: [], // all
       addClasses: [], // filter
       addState: {
         isAdd: false, // v-if
@@ -293,8 +293,12 @@ export default defineComponent({
       { deep: true, immediate: true },
     );
 
-    const onAddButton = () => {
+    const onAddButton = async () => {
       const { isAdd } = state.addState;
+      if (!isAdd) {
+        await CourseController.loadCourses();
+        state.addClassesAll = CourseController.courses;
+      }
       state.addState.isAdd = !isAdd;
     };
 
