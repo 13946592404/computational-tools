@@ -2,30 +2,34 @@
   <div>
     <div class="collapseGroups">
       <certification-collapse
-        :radioCollapse="radioGroup.radioCollapse"
-        :radioCourse="radioGroup.radioCourse"
+        :radioCollapse="radioCollapse"
       />
     </div>
     <div class="radioGroups">
       <el-switch
-        v-model="radioGroup.radioCollapse"
+        v-model="radioCollapse"
         :active-text="$t('certification.switchGroups.collapseOpen')"
         :inactive-text="$t('certification.switchGroups.collapseFold')"
         active-color="#13ce66"
         inactive-color="#ff4949"
       />
       <el-switch
-        v-model="radioGroup.radioCourse"
+        v-model="radioCourse.value"
         :active-text="$t('certification.switchGroups.courseOpen')"
         :inactive-text="$t('certification.switchGroups.courseFold')"
-        :disabled="!radioGroup.radioCollapse"
+        :disabled="!radioCollapse"
       />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from '@vue/composition-api';
+import {
+  defineComponent,
+  provide,
+  ref,
+  reactive,
+} from '@vue/composition-api';
 import CertificationCollapse from './CertificationCollapse.vue';
 
 export default defineComponent({
@@ -33,15 +37,17 @@ export default defineComponent({
     CertificationCollapse,
   },
   setup() {
-    const state = reactive({
-      radioGroup: {
-        radioCollapse: true,
-        radioCourse: true,
-      },
+    const radioCollapse = ref(true);
+
+    const radioCourse = reactive({
+      value: true,
     });
 
+    provide('radioCourse', radioCourse);
+
     return {
-      ...toRefs(state),
+      radioCollapse,
+      radioCourse,
     };
   },
 });

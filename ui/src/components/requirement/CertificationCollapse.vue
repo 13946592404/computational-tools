@@ -8,7 +8,6 @@
     >
       <certification-table
         :subGoals="target.children"
-        :radioCourse="radioCourse"
       />
     </el-collapse-item>
   </el-collapse>
@@ -31,9 +30,6 @@ export default defineComponent({
 
   props: {
     radioCollapse: {
-      default: true,
-    },
-    radioCourse: {
       default: true,
     },
   },

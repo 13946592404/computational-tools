@@ -34,6 +34,7 @@ import {
   watch,
   toRefs,
   reactive,
+  inject,
 } from '@vue/composition-api';
 import CertificationTableExpand from './CertificationTableExpand.vue';
 
@@ -41,23 +42,23 @@ export default defineComponent({
   components: {
     CertificationTableExpand,
   },
+
   props: {
     subGoals: {
       default: [],
     },
-    radioCourse: {
-      default: true,
-    },
   },
+
   setup(props) {
+    const radioCourse = inject('radioCourse');
+
     const state = reactive({
       expandArray: [],
     });
 
-    // @ts-ignore
-    const getRowKey = (row) => row.id;
+    const getRowKey = (row: any) => row.id;
 
-    const handleCourses = (opt: boolean) => {
+    const handleCourses = (opt: boolean | undefined) => {
       if (opt) {
         // @ts-ignore
         state.expandArray.push(...props.subGoals.map((val) => val.id));
@@ -67,8 +68,8 @@ export default defineComponent({
     };
 
     watch(
-      () => props,
-      (value) => handleCourses(value.radioCourse),
+      () => radioCourse,
+      (val: any) => handleCourses(val.value),
       { deep: true, immediate: true },
     );
 
