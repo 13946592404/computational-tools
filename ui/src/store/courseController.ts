@@ -8,11 +8,7 @@ const MODULE_NAME = 'CourseModule';
 
 export class CourseModule extends createModule({ namespaced: MODULE_NAME }) {
   state = reactive({
-    courses: {
-      id: 0,
-      name: '',
-      teacher: '',
-    },
+    courses: [],
   });
 
   get courses() {
@@ -24,7 +20,7 @@ export class CourseModule extends createModule({ namespaced: MODULE_NAME }) {
   }
 
   @action async loadCourses() {
-    return CourseService.getCourses(getLocale()).then((res) => {
+    return this.state.courses.length ? this.courses : CourseService.getCourses(getLocale()).then((res) => {
       this.setCourses(res.data);
     });
   }

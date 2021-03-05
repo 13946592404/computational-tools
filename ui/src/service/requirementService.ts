@@ -17,7 +17,7 @@ class RequirementService {
     });
   }
 
-  getCoursesToSubgoalsView(lang: string) {
+  getCoursesToSubgoalsViews(lang: string) {
     return axios.get('./coursesToSubgoalsView', {
       params: {
         lang,

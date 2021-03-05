@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    version: 'v1.2.0',
+    version: 'v0.0.0',
   },
 });
 

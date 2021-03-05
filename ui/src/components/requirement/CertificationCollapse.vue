@@ -21,7 +21,7 @@ import {
   toRefs,
   watch,
 } from '@vue/composition-api';
-import RequirementData from '@/data/requirementData';
+import RequirementData from '@/store/requirementData';
 import CourseController from '@/store/courseController';
 import CertificationTable from './CertificationTable.vue';
 

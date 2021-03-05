@@ -50,7 +50,7 @@ class RequirementData {
 
   async setCourseToSubgoalsViews() {
     if (!this.coursesToSubgoalsViews.length) {
-      this.coursesToSubgoalsViews = await RequirementService.getCoursesToSubgoalsView(locale).then((res) => res.data);
+      this.coursesToSubgoalsViews = await RequirementService.getCoursesToSubgoalsViews(locale).then((res) => res.data);
     }
   }
 
