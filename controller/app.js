@@ -71,3 +71,27 @@ app.get('/addCoursesToSubgoals', (req, res) => {
     res.send(resolve);
   });
 });
+
+app.get('/userLogin', (req, res) => {
+  const isEN = req.query.lang === "en";
+  const { username, password } = req.query;
+  const statement = `SELECT id, password FROM teacher WHERE username="${username}"`;
+  query(statement).then((resolve, rejected) => {
+    if (resolve.length) {
+      const { id: user_id, password: user_password } = resolve[0];
+      if (user_password === password) {
+        const subStatement = `SELECT id, is_admin, ${isEN ? 'name_EN as name' : 'name'}, TEL, email FROM teacher WHERE id = ${user_id}`
+        query(subStatement).then((resolve, rejected) => {
+          res.statusCode = 200;
+          res.send(resolve);
+        })
+      } else {
+        res.statusCode = 403;
+        res.send('password error');
+      }
+    } else {
+      res.statusCode = 404;
+      res.send('no user');
+    }
+  });
+});

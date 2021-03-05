@@ -11,7 +11,7 @@
  Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 02/03/2021 14:12:01
+ Date: 05/03/2021 16:08:06
 */
 
 SET NAMES utf8mb4;
@@ -77,7 +77,7 @@ CREATE TABLE `CoursesToSubgoals` (
   `percent` int(11) NOT NULL COMMENT '占比',
   PRIMARY KEY (`id`) USING BTREE,
   KEY `course_id` (`course_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=169 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=212 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of CoursesToSubgoals
@@ -248,7 +248,6 @@ INSERT INTO `CoursesToSubgoals` VALUES (162, '11-3', 22, 50);
 INSERT INTO `CoursesToSubgoals` VALUES (163, '12-1', 18, 40);
 INSERT INTO `CoursesToSubgoals` VALUES (164, '12-1', 22, 40);
 INSERT INTO `CoursesToSubgoals` VALUES (165, '12-1', 30, 20);
-INSERT INTO `CoursesToSubgoals` VALUES (168, '1-1', 25, 60);
 COMMIT;
 
 -- ----------------------------
@@ -334,6 +333,29 @@ INSERT INTO `subGoals` VALUES ('8-3', 8, '理解并遵守计算机领域工程�
 INSERT INTO `subGoals` VALUES ('9-1', 9, '能与其他学科的成员有效沟通，合作共享', 'Able to communicate effectively and collaboratively with members of other disciplines');
 INSERT INTO `subGoals` VALUES ('9-2', 9, '能够在计算机领域团队中独立或合作开展工作', 'Able to work independently or collaboratively in a computer field team');
 INSERT INTO `subGoals` VALUES ('9-3', 9, '能够组织、协调和指挥计算机领域团队开展工作', 'Able to organize, coordinate and direct the work of computer field teams');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for teacher
+-- ----------------------------
+DROP TABLE IF EXISTS `teacher`;
+CREATE TABLE `teacher` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增',
+  `is_admin` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否有管理毕业要求的权限',
+  `username` varchar(255) NOT NULL COMMENT '用户账户',
+  `password` varchar(255) NOT NULL COMMENT '用户密码',
+  `name` varchar(255) NOT NULL,
+  `name_EN` varchar(255) DEFAULT NULL,
+  `TEL` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of teacher
+-- ----------------------------
+BEGIN;
+INSERT INTO `teacher` VALUES (1, 1, 'admin', 'changeme', 'admin', 'admin', '123', '123@456');
 COMMIT;
 
 -- ----------------------------
