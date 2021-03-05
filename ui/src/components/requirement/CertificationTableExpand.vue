@@ -7,12 +7,17 @@
     >
       <div :style="[spanStyle]">
         <div class="inline-block w-40">
-          <div class="course-span">
-            <span v-show="!course.is_edit">{{ course.percent }}%</span>
+          <div
+            v-if="!course.is_edit"
+            class="course-span"
+          >
+            <span >{{ course.percent }}%</span>
           </div>
-          <div class="w-3/5">
+          <div
+            v-else
+            class="w-3/5"
+          >
             <el-input-number
-              v-if="course.is_edit"
               v-model="course.percent"
               size="small"
               :max="100"
@@ -20,32 +25,33 @@
             />
           </div>
         </div>
-        <!-- edit & save -->
-        <el-button
-          v-if="editable"
-          @click="onEditChange(index)"
-          :icon="getEditCss(index).icon"
-          :type="getEditCss(index).type"
-          size="mini"
-          plain
-          circle
-          round
-        >
-          <i slot="suffix" class="el-input__icon el-icon-search"></i>
-        </el-button>
-        <el-button
-          v-if="editable"
-          @click="onDelete(index)"
-          icon="el-icon-delete"
-          type="danger"
-          size="mini"
-          plain
-          circle
-          round
-        />
+        <!-- edit & delete -->
+        <template v-if="editable" >
+          <el-button
+            @click="onEditChange(index)"
+            :icon="getEditCss(index).icon"
+            :type="getEditCss(index).type"
+            size="mini"
+            plain
+            circle
+            round
+          >
+            <i slot="suffix" class="el-input__icon el-icon-search"></i>
+          </el-button>
+          <el-button
+            @click="onDelete(index)"
+            icon="el-icon-delete"
+            type="danger"
+            size="mini"
+            plain
+            circle
+            round
+          />
+        </template>
       </div>
     </el-form-item>
 
+    <!-- add & selection -->
     <template v-if="editable">
       <el-button
         v-if="!addState.isAdd"
@@ -148,7 +154,7 @@ export default defineComponent({
       // permission global
       editable: true,
       // edit
-      editStateArray: [],
+      editStateArray: [], // local data - because lazy for ajax
       // add
       subClasses: cloneDeep(props.subGoal.subClasses), // props copy
       addClassesAll: [], // all
