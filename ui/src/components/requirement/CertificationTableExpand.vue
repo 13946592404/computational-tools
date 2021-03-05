@@ -6,6 +6,7 @@
       :label="course.name"
     >
       <div :style="[spanStyle]">
+        <!-- percent | edit percent view -->
         <div class="inline-block w-40">
           <div
             v-if="!course.is_edit"
@@ -25,6 +26,7 @@
             />
           </div>
         </div>
+
         <!-- edit & delete -->
         <template v-if="editable" >
           <el-button
@@ -68,8 +70,8 @@
       <div v-if="addState.isAdd" class="new-course-field">
         <el-select
           v-model="addState.newClass.course_id"
-          class="mr-4"
           placeholder="..."
+          class="mr-4"
           size="small"
         >
           <el-option
