@@ -192,7 +192,7 @@ export default defineComponent({
 
     const onEditSubmit = (index: number) => {
       const { percent, course_id } = state.subClasses[index];
-      if (state.editStateArray[index] === percent) {
+      if (Number.parseInt(state.editStateArray[index], 10) === percent) {
         return;
       }
       courseToSubgoalService.putUpdateCoursesToSubgoals({
