@@ -16,62 +16,66 @@ app.all('*', (req, res, next) => {
 });
 
 // TODO - router
-app.get('/requirements', (req, res) => {
+/* requirement */
+app.get('/requirement', (req, res) => {
   const isEN = req.query.lang === "en";
-  const statement = `SELECT id, ${isEN ? 'title_EN as title' : 'title'}, ${isEN ? 'statement_EN as statement' : 'statement'} FROM requirements`;
+  const statement = `SELECT id, ${isEN ? 'title_EN as title' : 'title'}, ${isEN ? 'statement_EN as statement' : 'statement'} FROM requirement`;
   query(statement).then((resolve, rejected) => {
     res.send(resolve);
   });
 });
 
-app.get('/subGoals', (req, res) => {
+app.get('/subgoal', (req, res) => {
   const isEN = req.query.lang === "en";
-  const statement = `SELECT id, father_id, ${isEN ? 'statement_EN as statement' : 'statement'} FROM subGoals`;
+  const statement = `SELECT id, father_id, ${isEN ? 'statement_EN as statement' : 'statement'} FROM subgoal`;
   query(statement).then((resolve, rejected) => {
     res.send(resolve);
   });
 });
 
-app.get('/courses', (req, res) => { // for add selection
+app.get('/courseToSubgoalView', (req, res) => {
   const isEN = req.query.lang === "en";
-  const statement = `SELECT id, ${isEN ? 'name_EN as name' : 'name'}, ${isEN ? 'teacher_EN as teacher' : 'teacher'} FROM courses`;
+  const statement = `SELECT subgoal_id, course_id, ${isEN ? 'name_EN as name' : 'name'}, percent FROM courseToSubgoalView ORDER BY id ASC`;
   query(statement).then((resolve, rejected) => {
     res.send(resolve);
   });
 });
 
-app.get('/coursesToSubgoalsView', (req, res) => {
+/* course */
+app.get('/course', (req, res) => { // for add selection
   const isEN = req.query.lang === "en";
-  const statement = `SELECT subgoal_id, course_id, ${isEN ? 'name_EN as name' : 'name'}, percent FROM coursestosubgoalsview ORDER BY id ASC`;
+  const statement = `SELECT id, ${isEN ? 'name_EN as name' : 'name'} FROM course`;
   query(statement).then((resolve, rejected) => {
     res.send(resolve);
   });
 });
 
-app.get('/updateCoursesToSubgoals', (req, res) => {
+/* courseToSubgoal - CRUD */
+app.get('/updateCourseToSubgoal', (req, res) => {
   const { percent, subgoal_id, course_id } = req.query;
-  const statement = `UPDATE CoursesToSubgoals SET percent = ${percent} WHERE subgoal_id = "${subgoal_id}" AND course_id = ${course_id}`;
+  const statement = `UPDATE courseToSubgoal SET percent = ${percent} WHERE subgoal_id = "${subgoal_id}" AND course_id = ${course_id}`;
   query(statement).then((resolve, rejected) => {
     res.send(resolve);
   });
 });
 
-app.get('/deleteCoursesToSubgoals', (req, res) => {
+app.get('/deleteCourseToSubgoal', (req, res) => {
   const { subgoal_id, course_id } = req.query;
-  const statement = `DELETE FROM CoursesToSubgoals WHERE subgoal_id = "${subgoal_id}" AND course_id = ${course_id}`;
+  const statement = `DELETE FROM courseToSubgoal WHERE subgoal_id = "${subgoal_id}" AND course_id = ${course_id}`;
   query(statement).then((resolve, rejected) => {
     res.send(resolve);
   });
 });
 
-app.get('/addCoursesToSubgoals', (req, res) => {
+app.get('/addCourseToSubgoal', (req, res) => {
   const { percent, subgoal_id, course_id } = req.query;
-  const statement = `INSERT INTO CoursesToSubgoals VALUES (NULL ,"${subgoal_id}", ${course_id}, ${percent})`;
+  const statement = `INSERT INTO courseToSubgoal VALUES (NULL ,"${subgoal_id}", ${course_id}, ${percent})`;
   query(statement).then((resolve, rejected) => {
     res.send(resolve);
   });
 });
 
+/* user */
 app.get('/userLogin', (req, res) => {
   const isEN = req.query.lang === "en";
   const { username, password } = req.query;

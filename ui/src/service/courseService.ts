@@ -2,7 +2,7 @@ import axios from '@/plugins/axios';
 
 class CourseService {
   getCourses(lang: string) {
-    return axios.get('./courses', {
+    return axios.get('./course', {
       params: {
         lang,
       },

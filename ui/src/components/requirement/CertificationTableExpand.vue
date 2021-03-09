@@ -83,9 +83,9 @@
             <span style="float: left">
               {{ item.name }}
             </span>
-            <span style="float: right; color: #8492a6; font-size: 13px">
+            <!-- <span style="float: right; color: #8492a6; font-size: 13px">
               {{ item.teacher }}
-            </span>
+            </span> -->
           </el-option>
         </el-select>
         <el-input-number
@@ -219,7 +219,7 @@ export default defineComponent({
       if (state.editStateMap.get(index) === percent) {
         return;
       }
-      courseToSubgoalService.putUpdateCoursesToSubgoals({
+      courseToSubgoalService.updateCourseToSubgoal({
         percent,
         course_id,
         subgoal_id: props.subGoal.id,
@@ -265,7 +265,7 @@ export default defineComponent({
 
     const onDeleteSubmit = (index: number) => {
       const { course_id } = state.subClasses[index];
-      courseToSubgoalService.putDeleteCoursesToSubgoals({
+      courseToSubgoalService.deleteCourseToSubgoal({
         course_id,
         subgoal_id: props.subGoal.id,
       }).then(() => {
@@ -355,7 +355,7 @@ export default defineComponent({
 
     const onAdd = () => {
       const { course_id, percent } = state.addState.newClass;
-      courseToSubgoalService.putAddCoursesToSubgoals({
+      courseToSubgoalService.addCourseToSubgoal({
         subgoal_id: props.subGoal.id,
         course_id,
         percent,

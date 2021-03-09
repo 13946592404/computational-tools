@@ -2,7 +2,7 @@ import axios from '@/plugins/axios';
 
 class RequirementService {
   getRequirements(lang: string) {
-    return axios.get('./requirements', {
+    return axios.get('./requirement', {
       params: {
         lang,
       },
@@ -10,7 +10,7 @@ class RequirementService {
   }
 
   getSubGoals(lang: string) {
-    return axios.get('./subGoals', {
+    return axios.get('./subgoal', {
       params: {
         lang,
       },
@@ -18,7 +18,7 @@ class RequirementService {
   }
 
   getCoursesToSubgoalsViews(lang: string) {
-    return axios.get('./coursesToSubgoalsView', {
+    return axios.get('./courseToSubgoalView', {
       params: {
         lang,
       },

@@ -1,20 +1,23 @@
 import axios from 'axios';
 
 class CourseToSubgoalService {
-  putUpdateCoursesToSubgoals(query: any) {
-    return axios.get('./updateCoursesToSubgoals', {
+  /* TODO - put */
+  updateCourseToSubgoal(query: any) {
+    return axios.get('./updateCourseToSubgoal', {
       params: query,
     });
   }
 
-  putDeleteCoursesToSubgoals(query: any) {
-    return axios.get('./deleteCoursesToSubgoals', {
+  /* TODO - put */
+  deleteCourseToSubgoal(query: any) {
+    return axios.get('./deleteCourseToSubgoal', {
       params: query,
     });
   }
 
-  putAddCoursesToSubgoals(query: any) {
-    return axios.get('./addCoursesToSubgoals', {
+  /* TODO - put */
+  addCourseToSubgoal(query: any) {
+    return axios.get('./addCourseToSubgoal', {
       params: query,
     });
   }
