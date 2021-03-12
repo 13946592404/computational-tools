@@ -26,8 +26,9 @@ import { getLocale } from '@/plugins/i18n';
 //   children: SubGoal[];
 // }
 
+const validLen = (val: number) => val > 1;
+
 const locale: string = getLocale();
-const basicLength = 12;
 
 const MODULE_NAME = 'RequirementModule';
 
@@ -68,17 +69,17 @@ export class RequirementModule extends createModule({ namespaced: MODULE_NAME })
 
   // base action
   @action async loadRequirements() {
-    return this.requirements.length ? this.requirements : RequirementService.getRequirements(locale).then((res) => {
+    return validLen(this.requirements.length) ? this.requirements : RequirementService.getRequirements(locale).then((res) => {
       this.setRequirements(res.data);
     });
   }
   @action async loadSubGoals() {
-    return this.subGoals.length ? this.subGoals : RequirementService.getSubGoals(locale).then((res) => {
+    return validLen(this.subGoals.length) ? this.subGoals : RequirementService.getSubGoals(locale).then((res) => {
       this.setSubGoals(res.data);
     });
   }
   @action async loadCoursesToSubgoalsViews() {
-    return this.coursesToSubgoalsViews.length ? this.coursesToSubgoalsViews : RequirementService.getCoursesToSubgoalsViews(locale).then((res) => {
+    return validLen(this.coursesToSubgoalsViews.length) ? this.coursesToSubgoalsViews : RequirementService.getCoursesToSubgoalsViews(locale).then((res) => {
       this.setCoursesToSubgoalsViews(res.data);
     });
   }
@@ -123,7 +124,7 @@ export class RequirementModule extends createModule({ namespaced: MODULE_NAME })
 
   // get all - sum of load all & handle all
   @action async getAll() {
-    if (this.requirements.length < basicLength) {
+    if (!validLen(this.requirements.length)) {
       // set all
       await this.loadAll();
       // handle all

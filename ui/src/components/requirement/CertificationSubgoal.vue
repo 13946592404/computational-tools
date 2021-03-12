@@ -19,7 +19,7 @@
     <el-table-column type="expand">
       <template slot-scope="props">
         <el-form label-position="left" class="demo-table-expand">
-          <certification-table-expand
+          <certification-view-course
             :subGoal="props.row"
           />
         </el-form>
@@ -36,11 +36,11 @@ import {
   reactive,
   inject,
 } from '@vue/composition-api';
-import CertificationTableExpand from './CertificationTableExpand.vue';
+import CertificationViewCourse from './CertificationViewCourse.vue';
 
 export default defineComponent({
   components: {
-    CertificationTableExpand,
+    CertificationViewCourse,
   },
 
   props: {

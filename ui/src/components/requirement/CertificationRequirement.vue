@@ -6,7 +6,7 @@
       :name="target.id"
       :title="target.id + ' ' + target.title + ' - ' + target.statement"
     >
-      <certification-table
+      <certification-subgoal
         :subGoals="target.children"
       />
     </el-collapse-item>
@@ -20,12 +20,12 @@ import {
   toRefs,
   watch,
 } from '@vue/composition-api';
-import RequirementData from '@/store/requirementData';
-import CertificationTable from './CertificationTable.vue';
+import RequirementController from '@/store/requirementController';
+import CertificationSubgoal from './CertificationSubgoal.vue';
 
 export default defineComponent({
   components: {
-    CertificationTable,
+    CertificationSubgoal,
   },
 
   props: {
@@ -51,14 +51,13 @@ export default defineComponent({
       }
     };
 
-    // get data and init
-    RequirementData.getAllRequirements().then((val) => {
-      // requirements
-      // @ts-ignore
-      state.requirements = val;
-      // state init - collapse
+    const getRequirements = async () => {
+      await RequirementController.getAll();
+      state.requirements = RequirementController.requirements;
       handleCollapse(props.radioCollapse);
-    });
+    };
+
+    getRequirements();
 
     // state change - by radio group
     watch(

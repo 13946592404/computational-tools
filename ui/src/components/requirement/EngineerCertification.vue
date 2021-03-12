@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="collapseGroups">
-      <certification-collapse
+      <certification-requirement
         :radioCollapse="radioCollapse"
       />
     </div>
@@ -41,11 +41,11 @@ import {
   ref,
   reactive,
 } from '@vue/composition-api';
-import CertificationCollapse from './CertificationCollapse.vue';
+import CertificationRequirement from './CertificationRequirement.vue';
 
 export default defineComponent({
   components: {
-    CertificationCollapse,
+    CertificationRequirement,
   },
   setup() {
     const radioCollapse = ref(true);
