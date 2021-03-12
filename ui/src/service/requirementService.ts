@@ -9,7 +9,7 @@ class RequirementService {
     });
   }
 
-  getSubGoals(lang: string) {
+  getSubgoals(lang: string) {
     return axios.get('./subgoal', {
       params: {
         lang,

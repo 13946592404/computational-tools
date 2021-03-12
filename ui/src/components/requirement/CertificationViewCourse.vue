@@ -28,7 +28,7 @@
         </div>
 
         <!-- edit & delete -->
-        <template v-if="editable" >
+        <template v-if="globalEditable" >
           <el-button
             @click="onEditChange(index)"
             :icon="getEditCss(index).icon"
@@ -54,10 +54,10 @@
     </el-form-item>
 
     <!-- add & selection -->
-    <template v-if="editable">
+    <template v-if="globalEditable">
       <el-button
         v-if="!addState.isAdd"
-        @click="onAddButton()"
+        @click="onAddButtonReverse()"
         class="new-course"
         icon="el-icon-plus"
         type="info"
@@ -106,7 +106,7 @@
           round
         />
         <el-button
-          @click="onAddButton()"
+          @click="onAddButtonReverse()"
           icon="el-icon-close"
           type="danger"
           size="mini"
@@ -129,44 +129,44 @@ import {
   watch,
 } from '@vue/composition-api';
 import { Notification, Message, MessageBox } from 'element-ui';
-import { cloneDeep } from 'lodash';
 import { $t, getLocale } from '@/plugins/i18n';
+import RequirementController from '@/store/requirementController';
 import courseToSubgoalService from '@/service/courseToSubgoalService';
 import CourseController from '@/store/courseController';
 
 export default defineComponent({
   props: {
-    subGoal: {
-      default: {
-        id: '',
-        subClasses: [
-          {
-            course_id: 0,
-            name: '',
-            percent: 0,
-            is_edit: false,
-          },
-        ],
-      },
+    subgoal: {
+      default: '',
     },
   },
   setup(props) {
-    const radioPermission: any = inject('radioPermission');
+    /* state & radio - watch */
+    const radioCoursePermission: any = inject('radioCoursePermission');
 
     const percentBase = 5;
 
     const state = reactive({
       // permission global
-      editable: true,
+      globalEditable: true,
+      // data - base
+      subClasses: [ /* local active - virtual loading */
+        {
+          subgoal_id: props.subgoal,
+          course_id: 0,
+          name: '',
+          percent: 0,
+          is_edit: false,
+        },
+      ],
       // edit
       editStateMap: new Map(), // local data - because lazy for ajax
       // add
-      subClasses: cloneDeep(props.subGoal.subClasses), // props copy
-      addClassesAll: [], // all
-      addClasses: [], // filter
+      addClasses: [], /* filter data */
       addState: {
         isAdd: false, // v-if
         newClass: {
+          subgoal_id: props.subgoal,
           course_id: null,
           percent: percentBase,
         },
@@ -177,11 +177,11 @@ export default defineComponent({
       },
     });
 
-    // hide all editable buttons
+    // hide all globalEditable buttons
     watch(
-      () => radioPermission,
+      () => radioCoursePermission,
       (val) => {
-        state.editable = val.value;
+        state.globalEditable = val.value;
         // if not close some edit button
         state.subClasses.forEach((value, index, arr) => {
           arr[index].is_edit = false;
@@ -190,6 +190,8 @@ export default defineComponent({
       { deep: true, immediate: true },
     );
 
+    /* check */
+
     // @ts-ignore
     // eslint-disable-next-line
     const subClassesTotal = computed(() => state.subClasses.map((val) => Number.parseInt(val.percent, 10)).reduce((total, value) => total += value));
@@ -197,7 +199,7 @@ export default defineComponent({
     const subClassesTotalWarnCheck = () => {
       if (subClassesTotal.value !== 100) {
         const msg = `
-        <h2>${$t('certification.subClasses.subGoal.target')}${props.subGoal.id}</h2>
+        <h2>${$t('certification.subClasses.subGoal.target')}${props.subgoal}</h2>
         <h2>${$t('certification.subClasses.subGoal.value')}${subClassesTotal.value}%</h2>
         `;
         Notification({
@@ -211,18 +213,24 @@ export default defineComponent({
       }
     };
 
-    // onCreated check
-    subClassesTotalWarnCheck();
+    const getSubClasses = async () => {
+      state.subClasses = RequirementController.coursesToSubgoalsViews.filter((val: any) => val.subgoal_id === props.subgoal);
+      subClassesTotalWarnCheck(); // onCreated check
+    };
+
+    getSubClasses();
+
+    /* edit */
 
     const onEditSubmit = (index: number) => {
-      const { percent, course_id } = state.subClasses[index];
+      const { percent, course_id, subgoal_id } = state.subClasses[index];
       if (state.editStateMap.get(index) === percent) {
         return;
       }
       courseToSubgoalService.updateCourseToSubgoal({
         percent,
         course_id,
-        subgoal_id: props.subGoal.id,
+        subgoal_id,
       }).then(() => {
         subClassesTotalWarnCheck();
         Message({
@@ -232,7 +240,7 @@ export default defineComponent({
           duration: 4000,
         });
       }).catch(() => {
-        state.subClasses[index].percent = props.subGoal.subClasses[index].percent; // reset
+        state.subClasses[index].percent = state.editStateMap.get(index); // reset
         Message({
           message: `${$t('certification.subClasses.edit.error')}`,
           type: 'error',
@@ -263,11 +271,13 @@ export default defineComponent({
       };
     };
 
+    /* delete */
+
     const onDeleteSubmit = (index: number) => {
-      const { course_id } = state.subClasses[index];
+      const { course_id, subgoal_id } = state.subClasses[index];
       courseToSubgoalService.deleteCourseToSubgoal({
         course_id,
-        subgoal_id: props.subGoal.id,
+        subgoal_id,
       }).then(() => {
         state.subClasses.splice(index, 1); // delete in vue
         subClassesTotalWarnCheck();
@@ -304,24 +314,26 @@ export default defineComponent({
       });
     };
 
-    const alterAddClasses = () => {
+    /* add */
+    const alterAddClasses = async () => {
       // clear
       state.addClasses.splice(0, state.addClasses.length);
+      const coursesTemp = await CourseController.loadCourses();
       // @ts-ignore
-      state.addClasses.push(...state.addClassesAll.filter((val) => !state.subClasses.find((value) => value.course_id === val.id)));
+      state.addClasses = coursesTemp.filter((val) => !state.subClasses.find((value) => value.course_id === val.id));
     };
 
     watch(
-      () => [state.addClassesAll, state.subClasses],
+      () => state.subClasses.length, // add / delete
       () => alterAddClasses(),
-      { deep: true, immediate: true },
     );
 
-    const onAddButton = async () => {
+    /* add */
+
+    const onAddButtonReverse = async () => {
       const { isAdd } = state.addState;
       if (!isAdd) {
-        await CourseController.loadCourses();
-        state.addClassesAll = CourseController.courses;
+        await alterAddClasses();
       }
       state.addState.isAdd = !isAdd;
     };
@@ -329,16 +341,16 @@ export default defineComponent({
     const addNewClass = () => {
       // @ts-ignore
       const { name } = state.addClasses.find((val) => val.id === state.addState.newClass.course_id);
-      const { course_id, percent } = state.addState.newClass; // remove reactive
+      const { subgoal_id, course_id, percent } = state.addState.newClass; // remove reactive
       const newObj = {
         course_id,
         percent: percent.toFixed(0), // maybe int, double; cannot be other type
         name,
         is_edit: false,
-        subgoal_id: props.subGoal.id,
+        subgoal_id,
       };
       // @ts-ignore
-      state.subClasses.push(newObj); // push new
+      state.subClasses.push(newObj); // add in vue
     };
 
     const resetSelection = () => {
@@ -350,13 +362,13 @@ export default defineComponent({
       addNewClass(); // add
       resetSelection(); // reset
       subClassesTotalWarnCheck(); // check
-      onAddButton(); // button state
+      onAddButtonReverse(); // button state
     };
 
     const onAdd = () => {
-      const { course_id, percent } = state.addState.newClass;
+      const { subgoal_id, course_id, percent } = state.addState.newClass;
       courseToSubgoalService.addCourseToSubgoal({
-        subgoal_id: props.subGoal.id,
+        subgoal_id,
         course_id,
         percent,
       }).then(() => {
@@ -381,8 +393,6 @@ export default defineComponent({
       // data
       ...toRefs(state),
 
-      // computed
-      subClassesTotal,
       // check
       subClassesTotalWarnCheck,
       // edit
@@ -391,7 +401,7 @@ export default defineComponent({
       // delete
       onDelete,
       // add,
-      onAddButton,
+      onAddButtonReverse,
       onAdd,
     };
   },

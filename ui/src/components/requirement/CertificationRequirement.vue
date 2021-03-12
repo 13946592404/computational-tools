@@ -1,13 +1,13 @@
 <template>
   <el-collapse v-model="activeNames">
     <el-collapse-item
-      v-for="target in requirements"
-      :key="target.id"
-      :name="target.id"
-      :title="target.id + ' ' + target.title + ' - ' + target.statement"
+      v-for="requirement in requirements"
+      :key="requirement.id"
+      :name="requirement.id"
+      :title="requirement.id + ' ' + requirement.title + ' - ' + requirement.statement"
     >
       <certification-subgoal
-        :subGoals="target.children"
+        :requirement="requirement.id"
       />
     </el-collapse-item>
   </el-collapse>
@@ -29,7 +29,7 @@ export default defineComponent({
   },
 
   props: {
-    radioCollapse: {
+    radioRequirement: {
       default: true,
     },
   },
@@ -42,7 +42,7 @@ export default defineComponent({
     });
 
     // methods
-    const handleCollapse = (opt: boolean) => {
+    const handleCollapseByRadioRequirement = (opt: boolean) => {
       if (opt) {
         // @ts-ignore
         state.activeNames.push(...state.requirements.map((val) => val.id));
@@ -52,19 +52,16 @@ export default defineComponent({
     };
 
     const getRequirements = async () => {
-      await RequirementController.getAll();
-      state.requirements = RequirementController.requirements;
-      handleCollapse(props.radioCollapse);
+      state.requirements = await RequirementController.loadRequirements();
+      handleCollapseByRadioRequirement(props.radioRequirement);
     };
 
-    getRequirements();
-
-    // state change - by radio group
     watch(
-      () => props,
-      (val) => handleCollapse(val.radioCollapse),
-      { deep: true },
+      () => props.radioRequirement,
+      (val) => handleCollapseByRadioRequirement(val),
     );
+
+    getRequirements();
 
     return {
       ...toRefs(state),
