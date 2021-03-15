@@ -97,7 +97,7 @@
         />
         <el-button
           :disabled="!addState.newClass.course_id"
-          @click="onAdd()"
+          @click="onAddCommit()"
           icon="el-icon-plus"
           type="success"
           size="mini"
@@ -224,6 +224,24 @@ export default defineComponent({
       }
     };
 
+    /* add */
+    const alterAddClasses = async () => {
+      // clear
+      state.addClasses.splice(0, state.addClasses.length);
+      const coursesTemp = await CourseController.loadCourses();
+      // @ts-ignore
+      state.addClasses = coursesTemp.filter((val) => !state.subClasses.find((value) => value.course_id === val.id));
+    };
+
+    const subClassesUpdated = (isAddOrDelete = false) => {
+      if (isAddOrDelete) {
+        alterAddClasses();
+      }
+      subClassesTotalWarnCheck();
+    };
+
+    /* get subClasses */
+
     const getSubClasses = async () => {
       state.subClasses = RequirementController.coursesToSubgoalsViews.filter((val: any) => val.subgoal_id === props.subgoal);
       subClassesTotalWarnCheck(); // onCreated check
@@ -243,7 +261,7 @@ export default defineComponent({
         course_id,
         subgoal_id,
       }).then(() => {
-        subClassesTotalWarnCheck();
+        subClassesUpdated();
         Message({
           message: `${$t('certification.subClasses.edit.success')}`,
           type: 'success',
@@ -291,7 +309,7 @@ export default defineComponent({
         subgoal_id,
       }).then(() => {
         state.subClasses.splice(index, 1); // delete in vue
-        subClassesTotalWarnCheck();
+        subClassesUpdated(true);
         Message({
           message: `${$t('certification.subClasses.delete.success')}`,
           type: 'success',
@@ -326,21 +344,6 @@ export default defineComponent({
     };
 
     /* add */
-    const alterAddClasses = async () => {
-      // clear
-      state.addClasses.splice(0, state.addClasses.length);
-      const coursesTemp = await CourseController.loadCourses();
-      // @ts-ignore
-      state.addClasses = coursesTemp.filter((val) => !state.subClasses.find((value) => value.course_id === val.id));
-    };
-
-    watch(
-      () => state.subClasses.length, // add / delete
-      () => alterAddClasses(),
-    );
-
-    /* add */
-
     const onAddButtonChange = async () => {
       const { isAdd } = state.addState;
       if (!isAdd) {
@@ -369,21 +372,21 @@ export default defineComponent({
       state.addState.newClass.percent = percentBase;
     };
 
-    const onAddCommit = () => {
-      addNewClass(); // add
-      resetSelection(); // reset
-      subClassesTotalWarnCheck(); // check
+    const onAddUpdated = () => {
+      addNewClass(); // add class locally
+      resetSelection(); // reset selection to default place holder
+      subClassesUpdated(true); // check
       onAddButtonChange(); // button state
     };
 
-    const onAdd = () => {
+    const onAddCommit = () => {
       const { subgoal_id, course_id, percent } = state.addState.newClass;
       courseToSubgoalService.addCourseToSubgoal({
         subgoal_id,
         course_id,
         percent,
       }).then(() => {
-        onAddCommit();
+        onAddUpdated();
         Message({
           message: `${$t('certification.subClasses.add.success')}`,
           type: 'success',
@@ -413,7 +416,7 @@ export default defineComponent({
       onDeleteMessageBox,
       // add,
       onAddButtonChange,
-      onAdd,
+      onAddCommit,
     };
   },
 });
