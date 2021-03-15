@@ -47,7 +47,7 @@ import {
   reactive,
 } from '@vue/composition-api';
 import RequirementController from '@/store/requirementController';
-import CourseController from '@/store/courseController';
+// import CourseController from '@/store/courseController';
 import CertificationRequirement from './CertificationRequirement.vue';
 
 export default defineComponent({
@@ -73,7 +73,7 @@ export default defineComponent({
 
     const globalVuex = async () => {
       await RequirementController.init();
-      await CourseController.init();
+      // await CourseController.init();
       globalVuexState.value = true;
     };
 

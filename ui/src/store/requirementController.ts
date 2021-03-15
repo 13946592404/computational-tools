@@ -68,7 +68,7 @@ export class RequirementModule extends createModule({ namespaced: MODULE_NAME })
   }
 
   // base action
-  @action async loadRequirements(force?: false) {
+  @action async loadRequirements(force = false) {
     if (!validLen(this.requirements.length) || force) {
       await RequirementService.getRequirements(locale).then((res) => {
         this.setRequirements(res.data);
@@ -76,7 +76,7 @@ export class RequirementModule extends createModule({ namespaced: MODULE_NAME })
     }
     return this.requirements;
   }
-  @action async loadSubgoals(force?: false) {
+  @action async loadSubgoals(force = false) {
     if (!validLen(this.subgoals.length) || force) {
       await RequirementService.getSubgoals(locale).then((res) => {
         this.setSubgoals(res.data);
@@ -84,7 +84,7 @@ export class RequirementModule extends createModule({ namespaced: MODULE_NAME })
     }
     return this.subgoals;
   }
-  @action async loadCoursesToSubgoalsViews(force?: false) {
+  @action async loadCoursesToSubgoalsViews(force = false) {
     if (!validLen(this.coursesToSubgoalsViews.length) || force) {
       await RequirementService.getCoursesToSubgoalsViews(locale).then((res) => {
         this.setCoursesToSubgoalsViews(res.data);

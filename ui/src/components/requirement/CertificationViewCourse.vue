@@ -237,6 +237,7 @@ export default defineComponent({
       if (isAddOrDelete) {
         alterAddClasses();
       }
+      RequirementController.loadCoursesToSubgoalsViews(true); // forcely update vuex
       subClassesTotalWarnCheck();
     };
 
