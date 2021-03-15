@@ -30,7 +30,7 @@
         <!-- edit & delete -->
         <template v-if="globalEditable" >
           <el-button
-            @click="onEditChange(index)"
+            @click="onEditButtonChange(index)"
             :icon="getEditCss(index).icon"
             :type="getEditCss(index).type"
             size="mini"
@@ -41,7 +41,7 @@
             <i slot="suffix" class="el-input__icon el-icon-search"></i>
           </el-button>
           <el-button
-            @click="onDelete(index)"
+            @click="onDeleteMessageBox(index)"
             icon="el-icon-delete"
             type="danger"
             size="mini"
@@ -57,7 +57,7 @@
     <template v-if="globalEditable">
       <el-button
         v-if="!addState.isAdd"
-        @click="onAddButtonReverse()"
+        @click="onAddButtonChange()"
         class="new-course"
         icon="el-icon-plus"
         type="info"
@@ -106,7 +106,7 @@
           round
         />
         <el-button
-          @click="onAddButtonReverse()"
+          @click="onAddButtonChange()"
           icon="el-icon-close"
           type="danger"
           size="mini"
@@ -160,7 +160,7 @@ export default defineComponent({
         },
       ],
       // edit
-      editStateMap: new Map(), // local data - because lazy for ajax
+      editValueMap: new Map(),
       // add
       addClasses: [], /* filter data */
       addState: {
@@ -189,6 +189,17 @@ export default defineComponent({
       },
       { deep: true, immediate: true },
     );
+
+    // add edit button
+    // watch(
+    //   () => state.subClasses,
+    //   () => {
+    //     state.subClasses.forEach((value, index, arr) => {
+    //       arr[index].is_edit = false;
+    //     });
+    //   },
+    //   { deep: true },
+    // );
 
     /* check */
 
@@ -224,7 +235,7 @@ export default defineComponent({
 
     const onEditSubmit = (index: number) => {
       const { percent, course_id, subgoal_id } = state.subClasses[index];
-      if (state.editStateMap.get(index) === percent) {
+      if (state.editValueMap.get(index) === percent) {
         return;
       }
       courseToSubgoalService.updateCourseToSubgoal({
@@ -240,7 +251,7 @@ export default defineComponent({
           duration: 4000,
         });
       }).catch(() => {
-        state.subClasses[index].percent = state.editStateMap.get(index); // reset
+        state.subClasses[index].percent = state.editValueMap.get(index); // reset
         Message({
           message: `${$t('certification.subClasses.edit.error')}`,
           type: 'error',
@@ -250,14 +261,14 @@ export default defineComponent({
       });
     };
 
-    const onEditChange = (index: number) => {
+    const onEditButtonChange = (index: number) => {
       const { is_edit, percent } = state.subClasses[index];
       // commit (true to false)
       if (is_edit) {
         onEditSubmit(index);
       } else { // click edit (false to true)
         // @ts-ignore
-        state.editStateMap.set(index, Number.parseInt(percent, 10));
+        state.editValueMap.set(index, Number.parseInt(percent, 10));
       }
       // switch state
       state.subClasses[index].is_edit = !is_edit;
@@ -297,7 +308,7 @@ export default defineComponent({
       });
     };
 
-    const onDelete = (index: number) => {
+    const onDeleteMessageBox = (index: number) => {
       MessageBox({
         title: `${$t('certification.subClasses.delete.message')}`,
         message: `${$t('certification.subClasses.delete.hint')}`,
@@ -330,7 +341,7 @@ export default defineComponent({
 
     /* add */
 
-    const onAddButtonReverse = async () => {
+    const onAddButtonChange = async () => {
       const { isAdd } = state.addState;
       if (!isAdd) {
         await alterAddClasses();
@@ -362,7 +373,7 @@ export default defineComponent({
       addNewClass(); // add
       resetSelection(); // reset
       subClassesTotalWarnCheck(); // check
-      onAddButtonReverse(); // button state
+      onAddButtonChange(); // button state
     };
 
     const onAdd = () => {
@@ -396,12 +407,12 @@ export default defineComponent({
       // check
       subClassesTotalWarnCheck,
       // edit
-      onEditChange,
+      onEditButtonChange,
       getEditCss,
       // delete
-      onDelete,
+      onDeleteMessageBox,
       // add,
-      onAddButtonReverse,
+      onAddButtonChange,
       onAdd,
     };
   },
