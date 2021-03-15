@@ -389,7 +389,7 @@ export default defineComponent({
       ...toRefs(state),
 
       // check
-      subClassesTotalWarnCheck,
+      // subClassesTotalWarnCheck,
       // edit
       onEditButtonChange,
       getEditCss,
