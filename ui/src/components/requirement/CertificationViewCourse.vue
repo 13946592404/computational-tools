@@ -150,7 +150,7 @@ export default defineComponent({
       // permission global
       globalEditable: true,
       // data - base
-      subClasses: [ /* local active - virtual loading */
+      subClasses: [ /* reactive data */
         {
           subgoal_id: props.subgoal,
           course_id: 0,
@@ -162,11 +162,10 @@ export default defineComponent({
       // edit
       editValueMap: new Map(),
       // add
-      addClasses: [], /* filter data */
+      addClasses: [], /* filter data - reactive data */
       addState: {
         isAdd: false, // v-if
         newClass: {
-          subgoal_id: props.subgoal,
           course_id: null,
           percent: percentBase,
         },
@@ -202,7 +201,6 @@ export default defineComponent({
     // );
 
     /* check */
-
     // @ts-ignore
     // eslint-disable-next-line
     const subClassesTotal = computed(() => state.subClasses.map((val) => Number.parseInt(val.percent, 10)).reduce((total, value) => total += value));
@@ -225,8 +223,9 @@ export default defineComponent({
     };
 
     /* get subClasses */
-    const getSubClasses = async () => {
-      state.subClasses = RequirementController.coursesToSubgoalsViews.filter((val: any) => val.subgoal_id === props.subgoal);
+    const getSubClasses = async (force = false) => {
+      const courseViewTemp = await RequirementController.loadCoursesToSubgoalsViews(force);
+      state.subClasses = courseViewTemp.filter((val: any) => val.subgoal_id === props.subgoal);
       subClassesTotalWarnCheck(); // onCreated check
     };
 
@@ -241,13 +240,13 @@ export default defineComponent({
       state.addClasses = coursesTemp.filter((val) => !state.subClasses.find((value) => value.course_id === val.id));
     };
 
+    /* updated check */
     const subClassesUpdated = async (isAddOrDelete = false) => {
+      subClassesTotalWarnCheck();
+      await getSubClasses(true); // get subclasses again // forcely update vuex
       if (isAddOrDelete) {
         alterAddClasses();
       }
-      await RequirementController.loadCoursesToSubgoalsViews(true); // forcely update vuex
-      await getSubClasses();
-      subClassesTotalWarnCheck();
     };
 
     /* edit */
@@ -307,7 +306,6 @@ export default defineComponent({
         course_id,
         subgoal_id,
       }).then(() => {
-        // state.subClasses.splice(index, 1); // delete in vue
         subClassesUpdated(true);
         Message({
           message: `${$t('certification.subClasses.delete.success')}`,
@@ -351,37 +349,21 @@ export default defineComponent({
       state.addState.isAdd = !isAdd;
     };
 
-    const addNewClass = () => {
-      // @ts-ignore
-      const { name } = state.addClasses.find((val) => val.id === state.addState.newClass.course_id);
-      const { subgoal_id, course_id, percent } = state.addState.newClass; // remove reactive
-      const newObj = {
-        course_id,
-        percent: percent.toFixed(0), // maybe int, double; cannot be other type
-        name,
-        is_edit: false,
-        subgoal_id,
-      };
-      // @ts-ignore
-      // state.subClasses.push(newObj); // add in vue
-    };
-
     const resetSelection = () => {
       state.addState.newClass.course_id = null;
       state.addState.newClass.percent = percentBase;
     };
 
     const onAddUpdated = () => {
-      addNewClass(); // add class locally
-      resetSelection(); // reset selection to default place holder
       subClassesUpdated(true); // check
       onAddButtonChange(); // button state
+      resetSelection(); // reset selection to default place holder
     };
 
     const onAddCommit = () => {
-      const { subgoal_id, course_id, percent } = state.addState.newClass;
+      const { course_id, percent } = state.addState.newClass;
       courseToSubgoalService.addCourseToSubgoal({
-        subgoal_id,
+        subgoal_id: props.subgoal,
         course_id,
         percent,
       }).then(() => {
