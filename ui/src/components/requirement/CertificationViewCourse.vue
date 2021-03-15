@@ -191,15 +191,15 @@ export default defineComponent({
     );
 
     // add edit button
-    // watch(
-    //   () => state.subClasses,
-    //   () => {
-    //     state.subClasses.forEach((value, index, arr) => {
-    //       arr[index].is_edit = false;
-    //     });
-    //   },
-    //   { deep: true },
-    // );
+    watch(
+      () => state.subClasses,
+      () => {
+        state.subClasses.forEach((value, index, arr) => {
+          arr[index].is_edit = false;
+        });
+      },
+      { deep: true },
+    );
 
     /* check */
 

@@ -94,10 +94,10 @@ export class RequirementModule extends createModule({ namespaced: MODULE_NAME })
   }
 
   // init
-  @action async init() {
+  @action async init(force = false) {
     this.loadRequirements();
     this.loadSubgoals();
-    this.loadCoursesToSubgoalsViews();
+    this.loadCoursesToSubgoalsViews(force);
   }
 }
 

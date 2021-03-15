@@ -19,8 +19,8 @@ export class CourseModule extends createModule({ namespaced: MODULE_NAME }) {
     this.state.courses = courses;
   }
 
-  @action async loadCourses() {
-    if (!this.state.courses.length) {
+  @action async loadCourses(force = false) {
+    if (!this.state.courses.length || force) {
       await CourseService.getCourses(getLocale()).then((res) => {
         this.setCourses(res.data);
       });
@@ -29,8 +29,8 @@ export class CourseModule extends createModule({ namespaced: MODULE_NAME }) {
   }
 
   // init
-  @action async init() {
-    this.loadCourses();
+  @action async init(force = false) {
+    this.loadCourses(force);
   }
 }
 
