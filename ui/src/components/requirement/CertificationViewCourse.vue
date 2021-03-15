@@ -224,7 +224,15 @@ export default defineComponent({
       }
     };
 
-    /* add */
+    /* get subClasses */
+    const getSubClasses = async () => {
+      state.subClasses = RequirementController.coursesToSubgoalsViews.filter((val: any) => val.subgoal_id === props.subgoal);
+      subClassesTotalWarnCheck(); // onCreated check
+    };
+
+    getSubClasses();
+
+    /* add classes optional */
     const alterAddClasses = async () => {
       // clear
       state.addClasses.splice(0, state.addClasses.length);
@@ -233,22 +241,14 @@ export default defineComponent({
       state.addClasses = coursesTemp.filter((val) => !state.subClasses.find((value) => value.course_id === val.id));
     };
 
-    const subClassesUpdated = (isAddOrDelete = false) => {
+    const subClassesUpdated = async (isAddOrDelete = false) => {
       if (isAddOrDelete) {
         alterAddClasses();
       }
-      RequirementController.loadCoursesToSubgoalsViews(true); // forcely update vuex
+      await RequirementController.loadCoursesToSubgoalsViews(true); // forcely update vuex
+      await getSubClasses();
       subClassesTotalWarnCheck();
     };
-
-    /* get subClasses */
-
-    const getSubClasses = async () => {
-      state.subClasses = RequirementController.coursesToSubgoalsViews.filter((val: any) => val.subgoal_id === props.subgoal);
-      subClassesTotalWarnCheck(); // onCreated check
-    };
-
-    getSubClasses();
 
     /* edit */
     const onEditSubmit = (index: number) => {
@@ -307,7 +307,7 @@ export default defineComponent({
         course_id,
         subgoal_id,
       }).then(() => {
-        state.subClasses.splice(index, 1); // delete in vue
+        // state.subClasses.splice(index, 1); // delete in vue
         subClassesUpdated(true);
         Message({
           message: `${$t('certification.subClasses.delete.success')}`,
@@ -363,7 +363,7 @@ export default defineComponent({
         subgoal_id,
       };
       // @ts-ignore
-      state.subClasses.push(newObj); // add in vue
+      // state.subClasses.push(newObj); // add in vue
     };
 
     const resetSelection = () => {
