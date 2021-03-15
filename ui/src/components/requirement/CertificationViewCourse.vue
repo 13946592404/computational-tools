@@ -191,15 +191,15 @@ export default defineComponent({
     );
 
     // add edit button
-    watch(
-      () => state.subClasses,
-      () => {
-        state.subClasses.forEach((value, index, arr) => {
-          arr[index].is_edit = false;
-        });
-      },
-      { deep: true },
-    );
+    // watch(
+    //   () => state.subClasses,
+    //   () => {
+    //     state.subClasses.forEach((value, index, arr) => {
+    //       arr[index].is_edit = false;
+    //     });
+    //   },
+    //   { deep: true },
+    // );
 
     /* check */
 
@@ -251,7 +251,6 @@ export default defineComponent({
     getSubClasses();
 
     /* edit */
-
     const onEditSubmit = (index: number) => {
       const { percent, course_id, subgoal_id } = state.subClasses[index];
       if (state.editValueMap.get(index) === percent) {
@@ -302,7 +301,6 @@ export default defineComponent({
     };
 
     /* delete */
-
     const onDeleteSubmit = (index: number) => {
       const { course_id, subgoal_id } = state.subClasses[index];
       courseToSubgoalService.deleteCourseToSubgoal({

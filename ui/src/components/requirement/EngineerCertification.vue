@@ -47,7 +47,7 @@ import {
   reactive,
 } from '@vue/composition-api';
 import RequirementController from '@/store/requirementController';
-import CourseController from '@/store/courseController';
+// import CourseController from '@/store/courseController';
 import CertificationRequirement from './CertificationRequirement.vue';
 
 export default defineComponent({
@@ -72,8 +72,8 @@ export default defineComponent({
     provide('radioCoursePermission', radioCoursePermission);
 
     const globalVuex = async () => {
-      await RequirementController.init(true);
-      await CourseController.init(true);
+      await RequirementController.init();
+      // await CourseController.init();
       globalVuexState.value = true;
     };
 

@@ -95,8 +95,8 @@ export class RequirementModule extends createModule({ namespaced: MODULE_NAME })
 
   // init
   @action async init(force = false) {
-    this.loadRequirements();
-    this.loadSubgoals();
+    this.loadRequirements(force);
+    this.loadSubgoals(force);
     this.loadCoursesToSubgoalsViews(force);
   }
 }
