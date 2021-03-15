@@ -9,7 +9,7 @@
         <!-- percent | edit percent view -->
         <div class="inline-block w-40">
           <div
-            v-if="!course.is_edit"
+            v-if="!course.is_edit.value"
             class="course-span"
           >
             <span >{{ course.percent }}%</span>
@@ -127,6 +127,7 @@ import {
   reactive,
   toRefs,
   watch,
+  ref,
 } from '@vue/composition-api';
 import { Notification, Message, MessageBox } from 'element-ui';
 import { $t, getLocale } from '@/plugins/i18n';
@@ -156,7 +157,7 @@ export default defineComponent({
           course_id: 0,
           name: '',
           percent: 0,
-          is_edit: false,
+          is_edit: ref(),
         },
       ],
       // edit
@@ -183,22 +184,22 @@ export default defineComponent({
         state.globalEditable = val.value;
         // if not close some edit button
         state.subClasses.forEach((value, index, arr) => {
-          arr[index].is_edit = false;
+          arr[index].is_edit = ref(false);
         });
       },
       { deep: true, immediate: true },
     );
 
     // add edit button
-    // watch(
-    //   () => state.subClasses,
-    //   () => {
-    //     state.subClasses.forEach((value, index, arr) => {
-    //       arr[index].is_edit = false;
-    //     });
-    //   },
-    //   { deep: true },
-    // );
+    watch(
+      () => state.subClasses,
+      () => {
+        state.subClasses.forEach((value, index, arr) => {
+          arr[index].is_edit = ref(false);
+        });
+      },
+      { deep: true },
+    );
 
     /* check */
     // @ts-ignore
@@ -279,23 +280,23 @@ export default defineComponent({
     };
 
     const onEditButtonChange = (index: number) => {
-      const { is_edit, percent } = state.subClasses[index];
+      const { is_edit: { value }, percent } = state.subClasses[index];
       // commit (true to false)
-      if (is_edit) {
+      if (value) {
         onEditSubmit(index);
       } else { // click edit (false to true)
         // @ts-ignore
         state.editValueMap.set(index, Number.parseInt(percent, 10));
       }
       // switch state
-      state.subClasses[index].is_edit = !is_edit;
+      state.subClasses[index].is_edit.value = !value;
     };
 
     const getEditCss = (index: number) => {
-      const { is_edit } = state.subClasses[index];
+      const { is_edit: { value } } = state.subClasses[index];
       return {
-        icon: is_edit ? 'el-icon-check' : 'el-icon-edit',
-        type: is_edit ? 'success' : 'primary',
+        icon: value ? 'el-icon-check' : 'el-icon-edit',
+        type: value ? 'success' : 'primary',
       };
     };
 
