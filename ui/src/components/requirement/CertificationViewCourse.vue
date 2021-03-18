@@ -9,7 +9,7 @@
         <!-- percent | edit percent view -->
         <div class="inline-block w-40">
           <div
-            v-if="!course.is_edit"
+            v-if="!course.is_edit.value"
             class="course-span"
           >
             <span >{{ course.percent }}%</span>
@@ -127,6 +127,7 @@ import {
   reactive,
   toRefs,
   watch,
+  ref,
 } from '@vue/composition-api';
 import { Notification, Message, MessageBox } from 'element-ui';
 import { $t, getLocale } from '@/plugins/i18n';
@@ -156,7 +157,7 @@ export default defineComponent({
           course_id: 0,
           name: '',
           percent: 0,
-          is_edit: false,
+          is_edit: ref(),
         },
       ],
       // edit
@@ -183,22 +184,11 @@ export default defineComponent({
         state.globalEditable = val.value;
         // if not close some edit button
         state.subClasses.forEach((value, index, arr) => {
-          arr[index].is_edit = false;
+          arr[index].is_edit = ref(false);
         });
       },
       { deep: true, immediate: true },
     );
-
-    // add edit button
-    // watch(
-    //   () => state.subClasses,
-    //   () => {
-    //     state.subClasses.forEach((value, index, arr) => {
-    //       arr[index].is_edit = false;
-    //     });
-    //   },
-    //   { deep: true },
-    // );
 
     /* check */
     // @ts-ignore
@@ -223,10 +213,17 @@ export default defineComponent({
     };
 
     /* get subClasses */
-    const getSubClasses = async (force = false) => {
-      const courseViewTemp = await RequirementController.loadCoursesToSubgoalsViews(force);
+    const getSubClasses = async () => {
+      const courseViewTemp = await RequirementController.loadCoursesToSubgoalsViews(true); // forcely update vuex
+      // copy old edit state
+      const stateMap = state.subClasses.map((val) => val.is_edit.value);
+      // get subClasses
       state.subClasses = courseViewTemp.filter((val: any) => val.subgoal_id === props.subgoal);
-      subClassesTotalWarnCheck(); // onCreated check
+      state.subClasses.forEach((value, index, arr) => {
+        // add is_edit
+        arr[index].is_edit = ref(stateMap[index] ?? false);
+      });
+      subClassesTotalWarnCheck(); // onCreated / onUpdated check
     };
 
     getSubClasses();
@@ -242,9 +239,8 @@ export default defineComponent({
 
     /* updated check */
     const subClassesUpdated = async (isAddOrDelete = false) => {
-      subClassesTotalWarnCheck();
-      await getSubClasses(true); // get subclasses again // forcely update vuex
-      if (isAddOrDelete) {
+      await getSubClasses(); // get subclasses again
+      if (isAddOrDelete && state.addClasses.length) {
         alterAddClasses();
       }
     };
@@ -279,23 +275,23 @@ export default defineComponent({
     };
 
     const onEditButtonChange = (index: number) => {
-      const { is_edit, percent } = state.subClasses[index];
+      const { is_edit: { value }, percent } = state.subClasses[index];
       // commit (true to false)
-      if (is_edit) {
+      if (value) {
         onEditSubmit(index);
       } else { // click edit (false to true)
         // @ts-ignore
         state.editValueMap.set(index, Number.parseInt(percent, 10));
       }
       // switch state
-      state.subClasses[index].is_edit = !is_edit;
+      state.subClasses[index].is_edit.value = !value;
     };
 
     const getEditCss = (index: number) => {
-      const { is_edit } = state.subClasses[index];
+      const { is_edit: { value } } = state.subClasses[index];
       return {
-        icon: is_edit ? 'el-icon-check' : 'el-icon-edit',
-        type: is_edit ? 'success' : 'primary',
+        icon: value ? 'el-icon-check' : 'el-icon-edit',
+        type: value ? 'success' : 'primary',
       };
     };
 
@@ -343,7 +339,7 @@ export default defineComponent({
     /* add */
     const onAddButtonChange = async () => {
       const { isAdd } = state.addState;
-      if (!isAdd) {
+      if (!isAdd && !state.addClasses.length) {
         await alterAddClasses();
       }
       state.addState.isAdd = !isAdd;
@@ -389,7 +385,7 @@ export default defineComponent({
       ...toRefs(state),
 
       // check
-      subClassesTotalWarnCheck,
+      // subClassesTotalWarnCheck,
       // edit
       onEditButtonChange,
       getEditCss,
