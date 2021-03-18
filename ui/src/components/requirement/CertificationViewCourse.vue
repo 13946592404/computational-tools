@@ -190,17 +190,6 @@ export default defineComponent({
       { deep: true, immediate: true },
     );
 
-    // add edit button
-    watch(
-      () => state.subClasses,
-      () => {
-        state.subClasses.forEach((value, index, arr) => {
-          arr[index].is_edit = ref(false);
-        });
-      },
-      { deep: true },
-    );
-
     /* check */
     // @ts-ignore
     // eslint-disable-next-line
@@ -224,10 +213,17 @@ export default defineComponent({
     };
 
     /* get subClasses */
+    const addSubClassesEdit = () => {
+      state.subClasses.forEach((value, index, arr) => {
+        arr[index].is_edit = ref(false);
+      });
+    };
+
     const getSubClasses = async (force = false) => {
       const courseViewTemp = await RequirementController.loadCoursesToSubgoalsViews(force);
       state.subClasses = courseViewTemp.filter((val: any) => val.subgoal_id === props.subgoal);
-      subClassesTotalWarnCheck(); // onCreated check
+      addSubClassesEdit();
+      subClassesTotalWarnCheck(); // onCreated / onUpdated check
     };
 
     getSubClasses();
@@ -243,7 +239,6 @@ export default defineComponent({
 
     /* updated check */
     const subClassesUpdated = async (isAddOrDelete = false) => {
-      subClassesTotalWarnCheck();
       await getSubClasses(true); // get subclasses again // forcely update vuex
       if (isAddOrDelete) {
         alterAddClasses();
@@ -287,6 +282,11 @@ export default defineComponent({
       } else { // click edit (false to true)
         // @ts-ignore
         state.editValueMap.set(index, Number.parseInt(percent, 10));
+        state.subClasses.forEach((val: any, idx: number) => {
+          if (idx !== index) {
+            val.is_edit.value = false; // close all edit
+          }
+        });
       }
       // switch state
       state.subClasses[index].is_edit.value = !value;
