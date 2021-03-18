@@ -213,16 +213,16 @@ export default defineComponent({
     };
 
     /* get subClasses */
-    const addSubClassesEdit = () => {
-      state.subClasses.forEach((value, index, arr) => {
-        arr[index].is_edit = ref(false);
-      });
-    };
-
-    const getSubClasses = async (force = false) => {
-      const courseViewTemp = await RequirementController.loadCoursesToSubgoalsViews(force);
+    const getSubClasses = async () => {
+      const courseViewTemp = await RequirementController.loadCoursesToSubgoalsViews(true); // forcely update vuex
+      // copy old edit state
+      const stateMap = state.subClasses.map((val) => val.is_edit.value);
+      // get subClasses
       state.subClasses = courseViewTemp.filter((val: any) => val.subgoal_id === props.subgoal);
-      addSubClassesEdit();
+      state.subClasses.forEach((value, index, arr) => {
+        // add is_edit
+        arr[index].is_edit = ref(stateMap[index] ?? false);
+      });
       subClassesTotalWarnCheck(); // onCreated / onUpdated check
     };
 
@@ -239,8 +239,8 @@ export default defineComponent({
 
     /* updated check */
     const subClassesUpdated = async (isAddOrDelete = false) => {
-      await getSubClasses(true); // get subclasses again // forcely update vuex
-      if (isAddOrDelete) {
+      await getSubClasses(); // get subclasses again
+      if (isAddOrDelete && state.addClasses.length) {
         alterAddClasses();
       }
     };
@@ -282,11 +282,6 @@ export default defineComponent({
       } else { // click edit (false to true)
         // @ts-ignore
         state.editValueMap.set(index, Number.parseInt(percent, 10));
-        state.subClasses.forEach((val: any, idx: number) => {
-          if (idx !== index) {
-            val.is_edit.value = false; // close all edit
-          }
-        });
       }
       // switch state
       state.subClasses[index].is_edit.value = !value;
@@ -344,7 +339,7 @@ export default defineComponent({
     /* add */
     const onAddButtonChange = async () => {
       const { isAdd } = state.addState;
-      if (!isAdd) {
+      if (!isAdd && !state.addClasses.length) {
         await alterAddClasses();
       }
       state.addState.isAdd = !isAdd;
