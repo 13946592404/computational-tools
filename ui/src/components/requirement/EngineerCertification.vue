@@ -2,29 +2,34 @@
   <div>
     <div class="collapseGroups">
       <certification-requirement
-        :radioCollapse="radioCollapse"
+        :radio-requirement="radioRequirement"
+        v-if="globalVuexState"
+      />
+      <div class="requirment-loading flex flex-1"
+        v-if="!globalVuexState"
+        v-loading="!globalVuexState"
       />
     </div>
     <div class="radioGroups">
       <!-- edit button: collapse - show, course - show, auth - ok -->
       <el-switch
-        v-if="radioCollapse && radioCourse.value && radioPermission.show"
-        v-model="radioPermission.value"
+        v-if="radioRequirement && radioSubgoal.value && radioCoursePermission.show"
+        v-model="radioCoursePermission.value"
         active-color="#E6A23C"
         :active-text="$t('certification.switchGroups.buttonShow')"
         :inactive-text="$t('certification.switchGroups.buttonHide')"
       />
       <!-- course fold: collapse - show -->
       <el-switch
-        v-if="radioCollapse"
-        v-model="radioCourse.value"
+        v-if="radioRequirement"
+        v-model="radioSubgoal.value"
         inactive-color="#909399"
         :active-text="$t('certification.switchGroups.courseOpen')"
         :inactive-text="$t('certification.switchGroups.courseFold')"
       />
       <!-- collapse fold: no limit -->
       <el-switch
-        v-model="radioCollapse"
+        v-model="radioRequirement"
         active-color="#13ce66"
         inactive-color="#ff4949"
         :active-text="$t('certification.switchGroups.collapseOpen')"
@@ -41,6 +46,8 @@ import {
   ref,
   reactive,
 } from '@vue/composition-api';
+import RequirementController from '@/store/requirementController';
+// import CourseController from '@/store/courseController';
 import CertificationRequirement from './CertificationRequirement.vue';
 
 export default defineComponent({
@@ -48,24 +55,37 @@ export default defineComponent({
     CertificationRequirement,
   },
   setup() {
-    const radioCollapse = ref(true);
+    const globalVuexState = ref(false);
 
-    const radioCourse = reactive({
+    const radioRequirement = ref(true);
+
+    const radioSubgoal = reactive({
       value: true,
     });
 
-    const radioPermission = reactive({
+    const radioCoursePermission = reactive({
       show: true,
       value: true,
     });
 
-    provide('radioCourse', radioCourse);
-    provide('radioPermission', radioPermission);
+    provide('radioSubgoal', radioSubgoal);
+    provide('radioCoursePermission', radioCoursePermission);
+
+    const globalVuex = async () => {
+      await RequirementController.init();
+      // await CourseController.init();
+      globalVuexState.value = true;
+    };
+
+    globalVuex();
 
     return {
-      radioCollapse,
-      radioCourse,
-      radioPermission,
+      // radio state
+      radioRequirement,
+      radioSubgoal,
+      radioCoursePermission,
+      // vuex
+      globalVuexState,
     };
   },
 });

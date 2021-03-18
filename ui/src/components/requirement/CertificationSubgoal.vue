@@ -1,6 +1,6 @@
 <template>
   <el-table
-    :data="subGoals"
+    :data="subgoals"
     stripe
     border
     :row-key="getRowKey"
@@ -20,7 +20,7 @@
       <template slot-scope="props">
         <el-form label-position="left" class="demo-table-expand">
           <certification-view-course
-            :subGoal="props.row"
+            :subgoal="props.row.id"
           />
         </el-form>
       </template>
@@ -31,11 +31,12 @@
 <script lang="ts">
 import {
   defineComponent,
-  watch,
   toRefs,
   reactive,
   inject,
+  watch,
 } from '@vue/composition-api';
+import RequirementController from '@/store/requirementController';
 import CertificationViewCourse from './CertificationViewCourse.vue';
 
 export default defineComponent({
@@ -44,33 +45,41 @@ export default defineComponent({
   },
 
   props: {
-    subGoals: {
-      default: [],
+    requirement: {
+      default: 0,
     },
   },
 
   setup(props) {
-    const radioCourse = inject('radioCourse');
+    const radioSubgoal = inject('radioSubgoal');
 
     const state = reactive({
       expandArray: [],
+      subgoals: [],
     });
 
     const getRowKey = (row: any) => row.id;
 
-    const handleCourses = (opt: boolean | undefined) => {
+    const handleCollapseByRadioSubgoal = (opt: unknown) => {
       if (opt) {
         // @ts-ignore
-        state.expandArray.push(...props.subGoals.map((val) => val.id));
+        state.expandArray = state.subgoals.map((val) => val.id);
       } else {
         state.expandArray = [];
       }
     };
 
+    const getSubgoals = () => {
+      state.subgoals = RequirementController.subgoals.filter((val: any) => val.father_id === props.requirement);
+      handleCollapseByRadioSubgoal(radioSubgoal);
+    };
+
+    getSubgoals();
+
     watch(
-      () => radioCourse,
-      (val: any) => handleCourses(val.value),
-      { deep: true, immediate: true },
+      () => radioSubgoal,
+      (val: any) => handleCollapseByRadioSubgoal(val.value),
+      { deep: true },
     );
 
     return {

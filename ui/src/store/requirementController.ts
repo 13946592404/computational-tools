@@ -37,7 +37,7 @@ export class RequirementModule extends createModule({ namespaced: MODULE_NAME })
     requirements: [
       { children: [] },
     ],
-    subGoals: [
+    subgoals: [
       { subClasses: [] },
     ],
     coursesToSubgoalsViews: [
@@ -49,8 +49,8 @@ export class RequirementModule extends createModule({ namespaced: MODULE_NAME })
   get requirements() {
     return this.state.requirements;
   }
-  get subGoals() {
-    return this.state.subGoals;
+  get subgoals() {
+    return this.state.subgoals;
   }
   get coursesToSubgoalsViews() {
     return this.state.coursesToSubgoalsViews;
@@ -60,77 +60,44 @@ export class RequirementModule extends createModule({ namespaced: MODULE_NAME })
   @mutation setRequirements(requirements: []) {
     this.state.requirements = requirements;
   }
-  @mutation setSubGoals(subGoals: []) {
-    this.state.subGoals = subGoals;
+  @mutation setSubgoals(subgoals: []) {
+    this.state.subgoals = subgoals;
   }
   @mutation setCoursesToSubgoalsViews(coursesToSubgoalsViews: []) {
     this.state.coursesToSubgoalsViews = coursesToSubgoalsViews;
   }
 
   // base action
-  @action async loadRequirements() {
-    return validLen(this.requirements.length) ? this.requirements : RequirementService.getRequirements(locale).then((res) => {
-      this.setRequirements(res.data);
-    });
-  }
-  @action async loadSubGoals() {
-    return validLen(this.subGoals.length) ? this.subGoals : RequirementService.getSubGoals(locale).then((res) => {
-      this.setSubGoals(res.data);
-    });
-  }
-  @action async loadCoursesToSubgoalsViews() {
-    return validLen(this.coursesToSubgoalsViews.length) ? this.coursesToSubgoalsViews : RequirementService.getCoursesToSubgoalsViews(locale).then((res) => {
-      this.setCoursesToSubgoalsViews(res.data);
-    });
-  }
-
-  // load All - sum of base action
-  @action async loadAll() {
-    await this.loadRequirements();
-    await this.loadSubGoals();
-    await this.loadCoursesToSubgoalsViews();
-  }
-
-  // handle function
-  @mutation handleSubGoals() {
-    for (let i = 0; i < this.state.subGoals.length; i += 1) {
-      this.state.subGoals[i].subClasses = [];
-    }
-
-    // add every courses to subGoals[]
-    this.state.coursesToSubgoalsViews.forEach((val) => {
-      const proxy = val;
-      proxy.is_edit = false;
-      // @ts-ignore
-      this.state.subGoals.find((value) => value.id === val.subgoal_id).subClasses.push(proxy);
-    });
-  }
-
-  @mutation handleRequirements() {
-    for (let i = 0; i < this.state.requirements.length; i += 1) {
-      this.state.requirements[i].children = [];
-    }
-
-    // add every subGoals to children[]
-    // @ts-ignore
-    this.state.subGoals.forEach((val) => this.state.requirements[val.father_id - 1].children.push(val));
-  }
-
-  // handle all - sum of handle
-  @action async handleAll() {
-    await this.handleSubGoals();
-    await this.handleRequirements();
-  }
-
-  // get all - sum of load all & handle all
-  @action async getAll() {
-    if (!validLen(this.requirements.length)) {
-      // set all
-      await this.loadAll();
-      // handle all
-      this.handleAll();
+  @action async loadRequirements(force = false) {
+    if (!validLen(this.requirements.length) || force) {
+      await RequirementService.getRequirements(locale).then((res) => {
+        this.setRequirements(res.data);
+      });
     }
     return this.requirements;
+  }
+  @action async loadSubgoals(force = false) {
+    if (!validLen(this.subgoals.length) || force) {
+      await RequirementService.getSubgoals(locale).then((res) => {
+        this.setSubgoals(res.data);
+      });
+    }
+    return this.subgoals;
+  }
+  @action async loadCoursesToSubgoalsViews(force = false) {
+    if (!validLen(this.coursesToSubgoalsViews.length) || force) {
+      await RequirementService.getCoursesToSubgoalsViews(locale).then((res) => {
+        this.setCoursesToSubgoalsViews(res.data);
+      });
+    }
+    return this.coursesToSubgoalsViews;
+  }
+
+  // init
+  @action async init(force = false) {
+    this.loadRequirements(force);
+    this.loadSubgoals(force);
+    this.loadCoursesToSubgoalsViews(force);
   }
 }
 
