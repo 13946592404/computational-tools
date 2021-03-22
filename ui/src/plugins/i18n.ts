@@ -9,11 +9,10 @@ Vue.use(VueI18n);
 const langMap = new Map([
   ['zh-CN', 'ch'],
   ['en-US', 'en'],
-  ['en', 'en'],
 ]);
 
 const i18n: VueI18n = new VueI18n({
-  locale: langMap.get(navigator.language),
+  locale: langMap.get(navigator.language) ?? navigator.language,
   // locale: 'en',
   fallbackLocale: 'ch',
   messages: {
