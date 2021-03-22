@@ -213,8 +213,8 @@ export default defineComponent({
     };
 
     /* get subClasses */
-    const getSubClasses = async () => {
-      const courseViewTemp = await RequirementController.loadCoursesToSubgoalsViews(true); // forcely update vuex
+    const getSubClasses = async (force = true) => {
+      const courseViewTemp = await RequirementController.loadCoursesToSubgoalsViews(force); // forcely update vuex
       // copy old edit state
       const stateMap = state.subClasses.map((val) => val.is_edit.value);
       // get subClasses
@@ -226,7 +226,7 @@ export default defineComponent({
       subClassesTotalWarnCheck(); // onCreated / onUpdated check
     };
 
-    getSubClasses();
+    getSubClasses(false); // init not need to update forcely
 
     /* add classes optional */
     const alterAddClasses = async () => {
