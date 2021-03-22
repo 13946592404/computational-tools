@@ -45,6 +45,17 @@ export class RequirementModule extends createModule({ namespaced: MODULE_NAME })
     ],
   });
 
+  // validation
+  get requirementsValid() {
+    return validLen(this.requirements.length);
+  }
+  get subgoalsValid() {
+    return validLen(this.subgoals.length);
+  }
+  get coursesToSubgoalsViewsValid() {
+    return validLen(this.coursesToSubgoalsViews.length);
+  }
+
   // base getter
   get requirements() {
     return this.state.requirements;
@@ -69,7 +80,7 @@ export class RequirementModule extends createModule({ namespaced: MODULE_NAME })
 
   // base action
   @action async loadRequirements(force = false) {
-    if (!validLen(this.requirements.length) || force) {
+    if (!this.requirementsValid || force) {
       await RequirementService.getRequirements(locale).then((res) => {
         this.setRequirements(res.data);
       });
@@ -77,7 +88,7 @@ export class RequirementModule extends createModule({ namespaced: MODULE_NAME })
     return this.requirements;
   }
   @action async loadSubgoals(force = false) {
-    if (!validLen(this.subgoals.length) || force) {
+    if (!this.subgoalsValid || force) {
       await RequirementService.getSubgoals(locale).then((res) => {
         this.setSubgoals(res.data);
       });
@@ -85,7 +96,7 @@ export class RequirementModule extends createModule({ namespaced: MODULE_NAME })
     return this.subgoals;
   }
   @action async loadCoursesToSubgoalsViews(force = false) {
-    if (!validLen(this.coursesToSubgoalsViews.length) || force) {
+    if (!this.coursesToSubgoalsViewsValid || force) {
       await RequirementService.getCoursesToSubgoalsViews(locale).then((res) => {
         this.setCoursesToSubgoalsViews(res.data);
       });
