@@ -20,7 +20,7 @@ import {
   toRefs,
   watch,
 } from '@vue/composition-api';
-import RequirementController from '@/store/requirementController';
+import RequirementController from '../../store/requirementController';
 import CertificationSubgoal from './CertificationSubgoal.vue';
 
 export default defineComponent({

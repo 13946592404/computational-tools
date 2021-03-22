@@ -130,10 +130,10 @@ import {
   ref,
 } from '@vue/composition-api';
 import { Notification, Message, MessageBox } from 'element-ui';
-import { $t, getLocale } from '@/plugins/i18n';
-import RequirementController from '@/store/requirementController';
-import courseToSubgoalService from '@/service/courseToSubgoalService';
-import CourseController from '@/store/courseController';
+import { $t, getLocale } from '../../plugins/i18n';
+import RequirementController from '../../store/requirementController';
+import courseToSubgoalService from '../../service/courseToSubgoalService';
+import CourseController from '../../store/courseController';
 
 export default defineComponent({
   props: {

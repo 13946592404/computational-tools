@@ -36,7 +36,7 @@ import {
   inject,
   watch,
 } from '@vue/composition-api';
-import RequirementController from '@/store/requirementController';
+import RequirementController from '../../store/requirementController';
 import CertificationViewCourse from './CertificationViewCourse.vue';
 
 export default defineComponent({

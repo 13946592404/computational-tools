@@ -46,7 +46,7 @@ import {
   ref,
   reactive,
 } from '@vue/composition-api';
-import RequirementController from '@/store/requirementController';
+import RequirementController from '../../store/requirementController';
 // import CourseController from '@/store/courseController';
 import CertificationRequirement from './CertificationRequirement.vue';
 
