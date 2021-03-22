@@ -20,7 +20,7 @@ import {
   watch,
 } from '@vue/composition-api';
 import { Message } from 'element-ui';
-import UserController from '@/store/userController';
+import UserController from '../../store/userController';
 
 export default defineComponent({
   setup() {
