@@ -1,25 +1,25 @@
 <template>
-  <div
-    class="h-full flex flex-1 flex-col justify-center items-center user-login"
-  >
-    <div class="w-1/5 user-login-input">
+  <div class="h-full">
+    <div class="user-login-bg" />
+    <div class="user-login-input">
       <el-input
+        class="my-8"
+        spellcheck="false"
         v-model="login.username"
-        class="-mt-48"
-        spellcheck="false"
       />
       <el-input
-        v-model="login.password"
-        class="my-4"
+        class="mb-8"
         spellcheck="false"
+        v-model="login.password"
+        show-password
       />
+      <el-button
+        @click="loginHandle"
+        type="success"
+      >
+        {{ $t('user.action.login') }}
+      </el-button>
     </div>
-    <el-button
-      @click="loginHandle"
-      type="success"
-    >
-      {{ $t('user.action.login') }}
-    </el-button>
   </div>
 </template>
 
@@ -30,9 +30,11 @@ import {
   toRefs,
 } from '@vue/composition-api';
 import { Message } from 'element-ui';
+import App from '../../App.vue';
 import UserController from '../../store/userController';
 
 export default defineComponent({
+  components: { App },
   setup(props, { emit }) {
     const state = reactive({
       login: {
@@ -98,13 +100,29 @@ export default defineComponent({
 
 <style lang="scss">
 .user-login {
-  background: url('../../assets/login.png');
-  background-repeat: repeat;
-  background-size: auto 110%;
-  // filter: blur(10px);
+  &-bg {
+    height: 100%;
+    display: flex;
+    flex: 1;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: url('../../assets/login.png');
+    background-repeat: repeat;
+    background-size: auto 120%;
+    filter: blur(8px);
+  }
 
-  // &-input {
-  //   filter: none !important;
-  // }
+  &-input {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    width: 20%;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+  }
 }
 </style>
