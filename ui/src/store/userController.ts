@@ -8,9 +8,7 @@ const MODULE_NAME = 'UserModule';
 
 export class UserModule extends createModule({ namespaced: MODULE_NAME }) {
   state = reactive({
-    user: {
-      id: 0,
-    },
+    user: {},
   });
 
   get user() {
@@ -22,6 +20,7 @@ export class UserModule extends createModule({ namespaced: MODULE_NAME }) {
   }
 
   @action async loadUser(login: any) {
+    // @ts-ignore
     if (this.state.user?.id > 0) {
       return this.state.user;
     }
@@ -33,6 +32,10 @@ export class UserModule extends createModule({ namespaced: MODULE_NAME }) {
     }).then((res) => res.data);
     this.setUser(user);
     return user;
+  }
+
+  @mutation logoutUser() {
+    this.state.user = {};
   }
 }
 

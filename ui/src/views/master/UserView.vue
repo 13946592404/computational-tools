@@ -3,6 +3,7 @@
     <user-info
       v-if="user.id"
       :user="user"
+      @user-logout="userLogout"
     />
     <user-login
       v-else
@@ -21,6 +22,7 @@ export default defineComponent({
     UserLogin,
     UserInfo,
   },
+
   setup() {
     const state = reactive({
       user: {},
@@ -30,9 +32,15 @@ export default defineComponent({
       state.user = user;
     };
 
+    const userLogout = () => {
+      state.user = {};
+    };
+
     return {
       ...toRefs(state),
+      // methods
       userLogin,
+      userLogout,
     };
   },
 });
