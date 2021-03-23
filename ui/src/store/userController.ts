@@ -11,29 +11,21 @@ export class UserModule extends createModule({ namespaced: MODULE_NAME }) {
     user: {
       id: 0,
     },
-    login: {
-      username: '',
-      password: '',
-    },
   });
 
   get user() {
     return this.state.user;
   }
 
-  @mutation setLogin(login: any) {
-    this.state.login = login;
-  }
-
   @mutation setUser(user: any) {
     this.state.user = user;
   }
 
-  @action async loadUser() {
+  @action async loadUser(login: any) {
     if (this.state.user?.id > 0) {
       return this.state.user;
     }
-    const { username, password } = this.state.login;
+    const { username, password } = login;
     const user = await UserService.getUser({
       lang: getLocale(),
       username,

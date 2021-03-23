@@ -23,7 +23,7 @@ import { Message } from 'element-ui';
 import UserController from '../../store/userController';
 
 export default defineComponent({
-  setup() {
+  setup(props, { emit }) {
     const state = reactive({
       login: {
         username: 'admin',
@@ -33,8 +33,7 @@ export default defineComponent({
     });
 
     const loginHandle = async () => {
-      UserController.setLogin(state.login); // 将账号密码传递给vuex
-      await UserController.loadUser(); // vuex根据账号密码去后端判断并拿字段
+      await UserController.loadUser(state.login); // vuex根据账号密码去后端判断并拿字段
       state.user = UserController.user; // 根据vuex获取数据
     };
 
@@ -66,6 +65,7 @@ export default defineComponent({
                 showClose: true,
                 duration: 4000,
               });
+              emit('user-login', state.user);
             } else {
               Message({
                 message: '未知错误',
