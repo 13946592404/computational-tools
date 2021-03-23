@@ -1,13 +1,24 @@
 <template>
-  <div class="w-1/5">
-    <el-input
-      v-model="login.username"
-    />
-    <el-input
-      v-model="login.password"
-    />
-    <el-button @click="loginHandle">
-      登录
+  <div
+    class="h-full flex flex-1 flex-col justify-center items-center user-login"
+  >
+    <div class="w-1/5 user-login-input">
+      <el-input
+        v-model="login.username"
+        class="-mt-48"
+        spellcheck="false"
+      />
+      <el-input
+        v-model="login.password"
+        class="my-4"
+        spellcheck="false"
+      />
+    </div>
+    <el-button
+      @click="loginHandle"
+      type="success"
+    >
+      {{ $t('user.action.login') }}
     </el-button>
   </div>
 </template>
@@ -75,9 +86,25 @@ export default defineComponent({
     };
 
     return {
+      // data
       ...toRefs(state),
+
+      // methods
       loginHandle,
     };
   },
 });
 </script>
+
+<style lang="scss">
+.user-login {
+  background: url('../../assets/login.png');
+  background-repeat: repeat;
+  background-size: auto 110%;
+  // filter: blur(10px);
+
+  // &-input {
+  //   filter: none !important;
+  // }
+}
+</style>

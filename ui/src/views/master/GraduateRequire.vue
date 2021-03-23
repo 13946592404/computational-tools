@@ -1,5 +1,7 @@
 <template>
-  <engineer-certification />
+  <div class="p-8">
+    <engineer-certification />
+  </div>
 </template>
 
 <script lang="ts">

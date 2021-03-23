@@ -1,8 +1,11 @@
 <template>
   <div>
     {{ user }}
-    <el-button @click="logoutHandle">
-      注销
+    <el-button
+      @click="logoutHandle"
+      type="info"
+    >
+      {{ $t('user.action.logout') }}
     </el-button>
   </div>
 </template>
@@ -23,8 +26,8 @@ export default defineComponent({
 
   setup(props, { emit }) {
     const logoutHandle = () => {
-      UserController.logoutUser();
-      emit('user-logout');
+      UserController.logoutUser(); // vuex
+      emit('user-logout'); // state
     };
 
     return {

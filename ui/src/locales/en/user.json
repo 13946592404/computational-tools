@@ -1,0 +1,6 @@
+{
+  "action": {
+    "login": "Login",
+    "logout": "Logout"
+  }
+}

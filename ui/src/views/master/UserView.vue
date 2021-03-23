@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="h-full">
     <user-info
       v-if="user.id"
       :user="user"

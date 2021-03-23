@@ -49,5 +49,6 @@ html{
 .el-main {
   overflow: scroll;
   height: 90vh;
+  padding: 0;
 }
 </style>
