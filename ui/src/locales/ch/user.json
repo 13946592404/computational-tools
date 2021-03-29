@@ -1,4 +1,23 @@
 {
+  "label": {
+    "login": "用户登录",
+    "username": "账号",
+    "password": "密码"
+  },
+
+  "hint": {
+    "username": {
+      "text": "请输入账号",
+      "required": "账号不能为空！",
+      "length": "账号长度不正确！"
+    },
+    "password": {
+      "text": "请输入密码",
+      "required": "密码不能为空！",
+      "length": "密码长度不正确！"
+    } 
+  },
+
   "action": {
     "login": "登录",
     "logout": "注销",

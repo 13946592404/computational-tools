@@ -1,19 +1,45 @@
 <template>
   <div class="h-full">
     <div class="user-login-bg" />
-    <div class="user-login-input">
-      <el-input
-        class="my-8"
-        spellcheck="false"
-        v-model="login.username"
-      />
-      <el-input
-        class="mb-8"
-        spellcheck="false"
-        v-model="login.password"
-        show-password
-      />
-      <div class="flex flex-row">
+    <div class="user-login-form">
+      <!-- text -->
+      <div>
+        <span class="text-2xl">
+          {{ $t('user.label.login') }}
+        </span>
+      </div>
+      <!-- input -->
+      <el-form
+        class="mt-8 mb-4 flex flex-col"
+        :rules="rules"
+        inline
+      >
+        <el-form-item
+          :label="$t('user.label.username')"
+          prop="username"
+        >
+          <el-input
+            class="user-login-input"
+            spellcheck="false"
+            v-model="login.username"
+            :placeholder="$t('user.hint.username.text')"
+          />
+        </el-form-item>
+        <el-form-item
+          :label="$t('user.label.password')"
+          prop="password"
+        >
+          <el-input
+            class="user-login-input"
+            spellcheck="false"
+            v-model="login.password"
+            :placeholder="$t('user.hint.password.text')"
+            show-password
+          />
+        </el-form-item>
+      </el-form>
+      <!-- button -->
+      <div class="flex flex-row ml-6">
         <el-button
           @click="onLogin"
           type="success"
@@ -47,6 +73,34 @@ export default defineComponent({
       login: {
         username: 'admin',
         password: 'changeme',
+      },
+      rules: {
+        username: [
+          {
+            required: true,
+            triggered: 'blur',
+            message: $t('user.hint.username.required'),
+          },
+          {
+            min: 3,
+            max: 16,
+            triggered: 'blur',
+            message: $t('user.hint.username.length'),
+          },
+        ],
+        password: [
+          {
+            required: true,
+            triggered: 'blur',
+            message: $t('user.hint.password.required'),
+          },
+          {
+            min: 3,
+            max: 16,
+            triggered: 'blur',
+            message: $t('user.hint.password.length'),
+          },
+        ],
       },
     });
 
@@ -119,15 +173,27 @@ export default defineComponent({
     filter: blur(4px);
   }
 
-  &-input {
+  &-form {
     position: absolute;
-    left: 50%;
-    top: 40%;
-    width: 20%;
+    right: 5%;
+    top: 20%;
+    // width: 40%;
+    // min-width: 20%;
+    // max-width: 40%;
+    // min-height: 35%;
+    // max-height: 70%;
+    padding: 70px 40px;
+    background-color: white;
+    box-shadow: darkgray 3px 3px 3px 3px;
+    border-radius: 5%;
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
     align-items: center;
+  }
+
+  &-input {
+    width: 200px;
   }
 }
 </style>

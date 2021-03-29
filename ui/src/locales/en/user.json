@@ -1,4 +1,23 @@
 {
+  "label": {
+    "login": "User Login",
+    "username": "Username",
+    "password": "Password"
+  },
+
+  "hint": {
+    "username": {
+      "text": "Please enter your account",
+      "required": "Username cannot be empty!",
+      "length": "Incorrect length of Username!"
+    },
+    "password": {
+      "text": "Please enter your password",
+      "required": "Password cannot be empty!",
+      "length": "Incorrect length of Password!"
+    } 
+  },
+
   "action": {
     "login": "Login",
     "logout": "Logout",
