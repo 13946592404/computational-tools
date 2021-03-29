@@ -13,12 +13,20 @@
         v-model="login.password"
         show-password
       />
-      <el-button
-        @click="loginHandle"
-        type="success"
-      >
-        {{ $t('user.action.login') }}
-      </el-button>
+      <div class="flex flex-row">
+        <el-button
+          @click="onLogin"
+          type="success"
+        >
+          {{ $t('user.action.login') }}
+        </el-button>
+        <el-button
+          @click="onRegister"
+          type="primary"
+        >
+          {{ $t('user.action.register') }}
+        </el-button>
+      </div>
     </div>
   </div>
 </template>
@@ -30,11 +38,10 @@ import {
   toRefs,
 } from '@vue/composition-api';
 import { Message } from 'element-ui';
-import App from '../../App.vue';
+import { $t } from '../../plugins/i18n';
 import UserController from '../../store/userController';
 
 export default defineComponent({
-  components: { App },
   setup(props, { emit }) {
     const state = reactive({
       login: {
@@ -43,48 +50,45 @@ export default defineComponent({
       },
     });
 
-    const loginHandle = async () => {
-      await UserController.loadUser(state.login); // vuex根据账号密码去后端判断并拿字段
+    const onLoginMessage = (message: any, type: any) => {
+      Message({
+        message,
+        type,
+        showClose: true,
+        duration: 4000,
+      });
+    };
 
-      const user = UserController.user; // eslint-disable-line
-
-      switch (user.statusCode) { // 如果登录失败，返回数据只有statusCode，否则有id、name等
+    const onLoginHandle = (user: any) => {
+      switch (user.statusCode) {
         case 404:
-          Message({
-            message: '没有此用户',
-            type: 'error',
-            showClose: true,
-            duration: 4000,
-          });
+          onLoginMessage($t('user.login.fail.user'), 'error');
           break;
         case 403:
-          Message({
-            message: '密码错误',
-            type: 'warning',
-            showClose: true,
-            duration: 4000,
-          });
+          onLoginMessage($t('user.login.fail.password'), 'warning');
           break;
         case undefined:
           if (user.id) {
-            Message({
-              message: `登陆成功！${user.name}, 你好！`,
-              type: 'success',
-              showClose: true,
-              duration: 4000,
-            });
+            onLoginMessage($t('user.login.success'), 'success');
             emit('user-login', user);
           } else {
-            Message({
-              message: '未知错误',
-              type: 'error',
-              showClose: true,
-              duration: 4000,
-            });
+            onLoginMessage($t('user.login.fail.others'), 'error');
           }
           break;
         default: break;
       }
+    };
+
+    const onLogin = async () => {
+      await UserController.loadUser(state.login);
+
+      const user = UserController.user; // eslint-disable-line
+
+      onLoginHandle(user);
+    };
+
+    const onRegister = async () => {
+      console.log(true);
     };
 
     return {
@@ -92,7 +96,8 @@ export default defineComponent({
       ...toRefs(state),
 
       // methods
-      loginHandle,
+      onLogin,
+      onRegister,
     };
   },
 });
@@ -108,10 +113,10 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
     position: relative;
-    background: url('../../assets/login.png');
-    background-repeat: repeat;
-    background-size: auto 120%;
-    filter: blur(8px);
+    background: url('../../assets/login4.jpeg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%; // 拉伸
+    filter: blur(4px);
   }
 
   &-input {

@@ -1,6 +1,16 @@
 {
   "action": {
     "login": "Login",
-    "logout": "Logout"
+    "logout": "Logout",
+    "register": "Register"
+  },
+
+  "login": {
+    "success": "Login successful! Welcome to the system!",
+    "fail": {
+      "password": "Password error!",
+      "user": "No such user!",
+      "others": "Unknown error!"
+    }
   }
 }
