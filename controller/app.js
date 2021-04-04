@@ -81,14 +81,13 @@ app.put('/addCourseToSubgoal', (req, res) => {
 
 /* user */
 app.post('/userLogin', (req, res) => {
-  const { username, password, lang } = req.body;
-  const isEN = lang === "en";
+  const { username, password } = req.body;
   const statement = `SELECT id, password FROM teacher WHERE username="${username}"`;
   query(statement).then((resolve, rejected) => {
     if (resolve.length) {
       const { id: user_id, password: user_password } = resolve[0];
       if (user_password === password) {
-        const subStatement = `SELECT id, is_admin, ${isEN ? 'name_EN as name' : 'name'}, TEL, email FROM teacher WHERE id = ${user_id}`
+        const subStatement = `SELECT * FROM teacher WHERE id = ${user_id}`
         query(subStatement).then((resolve, rejected) => {
           res.send(resolve[0]);
         })
@@ -106,10 +105,9 @@ app.post('/userLogin', (req, res) => {
 });
 
 app.put('/userRegister', (req, res) => {
-  const { username, password, lang } = req.body;
-  const isEN = lang === "en";
-  const statement = `INSERT INTO teacher VALUES (null, 0, '${username}', '${password}', '', '', '', '')`;
-  const subStatement = `SELECT id, is_admin, ${isEN ? 'name_EN as name' : 'name'}, TEL, email FROM teacher WHERE username = '${username}'`;
+  const { username, password } = req.body;
+  const statement = `INSERT INTO teacher VALUES (null, 0, '${username}', '${password}', '', '', '', '', '', '', '')`;
+  const subStatement = `SELECT * FROM teacher WHERE username = '${username}'`;
   query(subStatement).then((resolve, rejected) => {
     if (resolve.length) {
       res.send({

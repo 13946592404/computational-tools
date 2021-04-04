@@ -34,14 +34,10 @@ html {
     padding: 0 !important;
     z-index: 999;
   }
-  &-aside {
-    display: flex;
-    width: 15vw !important;
-  }
   &-main {
     overflow: auto;
     height: 90vh;
-    // padding: 0;
+    padding: 0 !important;
   }
   &-menu {
     &-item {

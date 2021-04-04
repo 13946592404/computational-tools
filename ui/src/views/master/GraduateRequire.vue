@@ -1,5 +1,5 @@
 <template>
-  <div style="padding: 0 20%">
+  <div class="graduate-require">
     <div class="collapseGroups">
       <certification-requirement
         :radio-requirement="radioRequirement"
@@ -95,6 +95,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+.graduate-require {
+  padding: 0 18%;
+}
 .radioGroups {
   position: fixed;
   right: 2%;

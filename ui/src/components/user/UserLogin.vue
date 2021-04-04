@@ -178,12 +178,13 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
     position: relative;
-    background: url('../../assets/login4.jpeg');
+    background: url('../../assets/d.jpeg');
     background-repeat: no-repeat;
     background-size: 100% 100%; // 拉伸
-    filter: blur(4px);
+    // filter: blur(5px);
   }
   &-form {
+    opacity: 0.85;
     position: absolute;
     left: 70%;
     right: 5%;
@@ -193,7 +194,7 @@ export default defineComponent({
     height: 75%;
     overflow: hidden;
     background-color: white;
-    box-shadow: darkgray 3px 3px 3px 3px;
+    box-shadow: darkgray 2px 2px 2px 2px;
     border-radius: 5%;
     display: flex;
     flex-flow: column wrap;

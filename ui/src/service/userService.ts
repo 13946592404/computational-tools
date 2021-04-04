@@ -1,11 +1,11 @@
 import axios from '@/plugins/axios';
 
 class UserService {
-  getUser(params: any) { // lang username password
+  getUser(params: any) {
     return axios.post('./userLogin', params);
   }
 
-  registerUser(params: any) { // lang username password
+  registerUser(params: any) {
     return axios.put('./userRegister', params);
   }
 }

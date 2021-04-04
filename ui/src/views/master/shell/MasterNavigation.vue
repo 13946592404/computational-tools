@@ -36,9 +36,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.el-menu {
-  &-item {
-    font-size: 15px;
-  }
+.ct-sidebar {
+  border-bottom: none !important;
 }
 </style>

@@ -2,7 +2,6 @@ import { useModule } from '@/store/helper';
 import { reactive } from '@vue/composition-api';
 import { createModule, mutation, action } from 'vuex-class-component';
 import UserService from '@/service/userService';
-import { getLocale } from '@/plugins/i18n';
 
 const MODULE_NAME = 'UserModule';
 
@@ -26,7 +25,6 @@ export class UserModule extends createModule({ namespaced: MODULE_NAME }) {
     }
     const { username, password } = login;
     const user = await UserService.getUser({
-      lang: getLocale(),
       username,
       password,
     }).then((res) => res.data);
@@ -37,7 +35,6 @@ export class UserModule extends createModule({ namespaced: MODULE_NAME }) {
   @action async registerUser(login: any) {
     const { username, password } = login;
     const user = await UserService.registerUser({
-      lang: getLocale(),
       username,
       password,
     }).then((res) => res.data);

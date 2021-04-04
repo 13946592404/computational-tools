@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : LOCALHOST
+ Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 80011
+ Source Server Version : 80018
  Source Host           : localhost:3306
  Source Schema         : computational-tools
 
  Target Server Type    : MySQL
- Target Server Version : 80011
+ Target Server Version : 80018
  File Encoding         : 65001
 
- Date: 09/03/2021 18:11:35
+ Date: 04/04/2021 23:29:42
 */
 
 SET NAMES utf8mb4;
@@ -21,17 +21,16 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- Table structure for course
 -- ----------------------------
 DROP TABLE IF EXISTS `course`;
-CREATE TABLE `course` (
+CREATE TABLE `course`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主码 自增',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '名称',
-  `name_EN` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '名称-i18n',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `name_EN` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '名称-i18n',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of course
 -- ----------------------------
-BEGIN;
 INSERT INTO `course` VALUES (1, '高等数学A', 'Advanced Mathematics A');
 INSERT INTO `course` VALUES (2, '线性代数A', 'Linear Algebra A');
 INSERT INTO `course` VALUES (3, '离散数学', 'Discrete Mathematics');
@@ -62,280 +61,270 @@ INSERT INTO `course` VALUES (27, '计算机组成与结构实践', 'Computer Arc
 INSERT INTO `course` VALUES (28, '毕业论文', 'Thesis for Bachelor\'s Degree');
 INSERT INTO `course` VALUES (29, '思想政治教育课程', '思想政治教育课程');
 INSERT INTO `course` VALUES (30, '公共体育课程', '公共体育课程');
-COMMIT;
 
 -- ----------------------------
--- Table structure for courseToSubgoal
+-- Table structure for coursetosubgoal
 -- ----------------------------
-DROP TABLE IF EXISTS `courseToSubgoal`;
-CREATE TABLE `courseToSubgoal` (
+DROP TABLE IF EXISTS `coursetosubgoal`;
+CREATE TABLE `coursetosubgoal`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主码 自增',
   `subgoal_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '外码',
   `course_id` int(11) NOT NULL COMMENT '外码',
   `percent` int(11) NOT NULL COMMENT '比例',
   PRIMARY KEY (`id`) USING BTREE,
-  KEY `subgoal_id` (`subgoal_id`),
-  KEY `course_id` (`course_id`),
-  CONSTRAINT `coursetosubgoal_ibfk_1` FOREIGN KEY (`subgoal_id`) REFERENCES `subgoal` (`id`),
-  CONSTRAINT `coursetosubgoal_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=200 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  INDEX `subgoal_id`(`subgoal_id`) USING BTREE,
+  INDEX `course_id`(`course_id`) USING BTREE,
+  CONSTRAINT `coursetosubgoal_ibfk_1` FOREIGN KEY (`subgoal_id`) REFERENCES `subgoal` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `coursetosubgoal_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 200 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of courseToSubgoal
+-- Records of coursetosubgoal
 -- ----------------------------
-BEGIN;
-INSERT INTO `courseToSubgoal` VALUES (1, '1-1', 1, 15);
-INSERT INTO `courseToSubgoal` VALUES (2, '1-1', 2, 5);
-INSERT INTO `courseToSubgoal` VALUES (3, '1-1', 3, 5);
-INSERT INTO `courseToSubgoal` VALUES (4, '1-1', 4, 10);
-INSERT INTO `courseToSubgoal` VALUES (5, '1-1', 5, 5);
-INSERT INTO `courseToSubgoal` VALUES (6, '1-1', 6, 4);
-INSERT INTO `courseToSubgoal` VALUES (7, '1-1', 7, 4);
-INSERT INTO `courseToSubgoal` VALUES (8, '1-1', 8, 6);
-INSERT INTO `courseToSubgoal` VALUES (9, '1-1', 9, 6);
-INSERT INTO `courseToSubgoal` VALUES (10, '1-1', 10, 6);
-INSERT INTO `courseToSubgoal` VALUES (11, '1-1', 11, 5);
-INSERT INTO `courseToSubgoal` VALUES (12, '1-1', 12, 5);
-INSERT INTO `courseToSubgoal` VALUES (13, '1-1', 13, 5);
-INSERT INTO `courseToSubgoal` VALUES (14, '1-1', 14, 5);
-INSERT INTO `courseToSubgoal` VALUES (15, '1-1', 15, 5);
-INSERT INTO `courseToSubgoal` VALUES (16, '1-1', 16, 4);
-INSERT INTO `courseToSubgoal` VALUES (17, '1-1', 17, 5);
-INSERT INTO `courseToSubgoal` VALUES (18, '1-2', 6, 5);
-INSERT INTO `courseToSubgoal` VALUES (19, '1-2', 7, 5);
-INSERT INTO `courseToSubgoal` VALUES (20, '1-2', 8, 10);
-INSERT INTO `courseToSubgoal` VALUES (21, '1-2', 9, 10);
-INSERT INTO `courseToSubgoal` VALUES (22, '1-2', 10, 10);
-INSERT INTO `courseToSubgoal` VALUES (23, '1-2', 11, 10);
-INSERT INTO `courseToSubgoal` VALUES (24, '1-2', 12, 10);
-INSERT INTO `courseToSubgoal` VALUES (25, '1-2', 13, 10);
-INSERT INTO `courseToSubgoal` VALUES (26, '1-2', 14, 10);
-INSERT INTO `courseToSubgoal` VALUES (27, '1-2', 17, 10);
-INSERT INTO `courseToSubgoal` VALUES (28, '1-2', 18, 10);
-INSERT INTO `courseToSubgoal` VALUES (29, '1-3', 7, 10);
-INSERT INTO `courseToSubgoal` VALUES (30, '1-3', 8, 15);
-INSERT INTO `courseToSubgoal` VALUES (31, '1-3', 10, 10);
-INSERT INTO `courseToSubgoal` VALUES (32, '1-3', 11, 15);
-INSERT INTO `courseToSubgoal` VALUES (33, '1-3', 12, 15);
-INSERT INTO `courseToSubgoal` VALUES (34, '1-3', 13, 15);
-INSERT INTO `courseToSubgoal` VALUES (35, '1-3', 14, 10);
-INSERT INTO `courseToSubgoal` VALUES (36, '1-3', 17, 10);
-INSERT INTO `courseToSubgoal` VALUES (37, '1-4', 8, 20);
-INSERT INTO `courseToSubgoal` VALUES (38, '1-4', 11, 20);
-INSERT INTO `courseToSubgoal` VALUES (39, '1-4', 12, 20);
-INSERT INTO `courseToSubgoal` VALUES (40, '1-4', 14, 10);
-INSERT INTO `courseToSubgoal` VALUES (41, '1-4', 16, 10);
-INSERT INTO `courseToSubgoal` VALUES (42, '1-4', 17, 20);
-INSERT INTO `courseToSubgoal` VALUES (43, '2-1', 1, 15);
-INSERT INTO `courseToSubgoal` VALUES (44, '2-1', 2, 5);
-INSERT INTO `courseToSubgoal` VALUES (45, '2-1', 3, 5);
-INSERT INTO `courseToSubgoal` VALUES (46, '2-1', 4, 15);
-INSERT INTO `courseToSubgoal` VALUES (47, '2-1', 5, 5);
-INSERT INTO `courseToSubgoal` VALUES (48, '2-1', 7, 5);
-INSERT INTO `courseToSubgoal` VALUES (49, '2-1', 8, 5);
-INSERT INTO `courseToSubgoal` VALUES (50, '2-1', 9, 5);
-INSERT INTO `courseToSubgoal` VALUES (51, '2-1', 10, 5);
-INSERT INTO `courseToSubgoal` VALUES (52, '2-1', 11, 5);
-INSERT INTO `courseToSubgoal` VALUES (53, '2-1', 12, 5);
-INSERT INTO `courseToSubgoal` VALUES (54, '2-1', 15, 5);
-INSERT INTO `courseToSubgoal` VALUES (55, '2-1', 17, 5);
-INSERT INTO `courseToSubgoal` VALUES (56, '2-1', 18, 5);
-INSERT INTO `courseToSubgoal` VALUES (57, '2-1', 19, 5);
-INSERT INTO `courseToSubgoal` VALUES (58, '2-1', 22, 5);
-INSERT INTO `courseToSubgoal` VALUES (59, '2-2', 8, 15);
-INSERT INTO `courseToSubgoal` VALUES (60, '2-2', 9, 10);
-INSERT INTO `courseToSubgoal` VALUES (61, '2-2', 10, 10);
-INSERT INTO `courseToSubgoal` VALUES (62, '2-2', 11, 15);
-INSERT INTO `courseToSubgoal` VALUES (63, '2-2', 12, 15);
-INSERT INTO `courseToSubgoal` VALUES (64, '2-2', 15, 15);
-INSERT INTO `courseToSubgoal` VALUES (65, '2-2', 17, 10);
-INSERT INTO `courseToSubgoal` VALUES (66, '2-2', 19, 10);
-INSERT INTO `courseToSubgoal` VALUES (67, '2-3', 18, 15);
-INSERT INTO `courseToSubgoal` VALUES (68, '2-3', 20, 15);
-INSERT INTO `courseToSubgoal` VALUES (69, '2-3', 21, 15);
-INSERT INTO `courseToSubgoal` VALUES (70, '2-3', 22, 15);
-INSERT INTO `courseToSubgoal` VALUES (71, '2-3', 23, 10);
-INSERT INTO `courseToSubgoal` VALUES (72, '2-3', 24, 20);
-INSERT INTO `courseToSubgoal` VALUES (73, '2-3', 25, 10);
-INSERT INTO `courseToSubgoal` VALUES (74, '3-1', 15, 30);
-INSERT INTO `courseToSubgoal` VALUES (75, '3-1', 23, 20);
-INSERT INTO `courseToSubgoal` VALUES (76, '3-1', 24, 30);
-INSERT INTO `courseToSubgoal` VALUES (77, '3-1', 25, 20);
-INSERT INTO `courseToSubgoal` VALUES (78, '3-2', 15, 30);
-INSERT INTO `courseToSubgoal` VALUES (79, '3-2', 23, 10);
-INSERT INTO `courseToSubgoal` VALUES (80, '3-2', 24, 30);
-INSERT INTO `courseToSubgoal` VALUES (81, '3-2', 25, 20);
-INSERT INTO `courseToSubgoal` VALUES (82, '3-2', 26, 10);
-INSERT INTO `courseToSubgoal` VALUES (83, '3-3', 15, 30);
-INSERT INTO `courseToSubgoal` VALUES (84, '3-3', 23, 10);
-INSERT INTO `courseToSubgoal` VALUES (85, '3-3', 24, 30);
-INSERT INTO `courseToSubgoal` VALUES (86, '3-3', 25, 10);
-INSERT INTO `courseToSubgoal` VALUES (87, '3-3', 26, 20);
-INSERT INTO `courseToSubgoal` VALUES (88, '4-1', 18, 25);
-INSERT INTO `courseToSubgoal` VALUES (89, '4-1', 20, 25);
-INSERT INTO `courseToSubgoal` VALUES (90, '4-1', 21, 25);
-INSERT INTO `courseToSubgoal` VALUES (91, '4-1', 22, 25);
-INSERT INTO `courseToSubgoal` VALUES (92, '4-2', 15, 20);
-INSERT INTO `courseToSubgoal` VALUES (93, '4-2', 19, 20);
-INSERT INTO `courseToSubgoal` VALUES (94, '4-2', 23, 10);
-INSERT INTO `courseToSubgoal` VALUES (95, '4-2', 26, 10);
-INSERT INTO `courseToSubgoal` VALUES (96, '4-2', 27, 20);
-INSERT INTO `courseToSubgoal` VALUES (97, '4-2', 28, 20);
-INSERT INTO `courseToSubgoal` VALUES (98, '4-3', 15, 20);
-INSERT INTO `courseToSubgoal` VALUES (99, '4-3', 19, 15);
-INSERT INTO `courseToSubgoal` VALUES (100, '4-3', 23, 15);
-INSERT INTO `courseToSubgoal` VALUES (101, '4-3', 26, 20);
-INSERT INTO `courseToSubgoal` VALUES (102, '4-3', 27, 15);
-INSERT INTO `courseToSubgoal` VALUES (103, '4-3', 28, 15);
-INSERT INTO `courseToSubgoal` VALUES (104, '4-4', 15, 20);
-INSERT INTO `courseToSubgoal` VALUES (105, '4-4', 19, 10);
-INSERT INTO `courseToSubgoal` VALUES (106, '4-4', 23, 10);
-INSERT INTO `courseToSubgoal` VALUES (107, '4-4', 26, 20);
-INSERT INTO `courseToSubgoal` VALUES (108, '4-4', 27, 10);
-INSERT INTO `courseToSubgoal` VALUES (109, '4-4', 28, 30);
-INSERT INTO `courseToSubgoal` VALUES (110, '5-1', 10, 20);
-INSERT INTO `courseToSubgoal` VALUES (111, '5-1', 11, 15);
-INSERT INTO `courseToSubgoal` VALUES (112, '5-1', 13, 20);
-INSERT INTO `courseToSubgoal` VALUES (113, '5-1', 15, 15);
-INSERT INTO `courseToSubgoal` VALUES (114, '5-1', 16, 15);
-INSERT INTO `courseToSubgoal` VALUES (115, '5-1', 26, 15);
-INSERT INTO `courseToSubgoal` VALUES (116, '5-2', 10, 20);
-INSERT INTO `courseToSubgoal` VALUES (117, '5-2', 11, 15);
-INSERT INTO `courseToSubgoal` VALUES (118, '5-2', 13, 20);
-INSERT INTO `courseToSubgoal` VALUES (119, '5-2', 15, 15);
-INSERT INTO `courseToSubgoal` VALUES (120, '5-2', 16, 15);
-INSERT INTO `courseToSubgoal` VALUES (121, '5-2', 26, 15);
-INSERT INTO `courseToSubgoal` VALUES (122, '5-3', 12, 30);
-INSERT INTO `courseToSubgoal` VALUES (123, '5-3', 24, 50);
-INSERT INTO `courseToSubgoal` VALUES (124, '5-3', 26, 20);
-INSERT INTO `courseToSubgoal` VALUES (125, '6-1', 6, 50);
-INSERT INTO `courseToSubgoal` VALUES (126, '6-1', 16, 50);
-INSERT INTO `courseToSubgoal` VALUES (127, '6-2', 6, 50);
-INSERT INTO `courseToSubgoal` VALUES (128, '6-2', 16, 50);
-INSERT INTO `courseToSubgoal` VALUES (129, '7-1', 18, 20);
-INSERT INTO `courseToSubgoal` VALUES (130, '7-1', 19, 30);
-INSERT INTO `courseToSubgoal` VALUES (131, '7-1', 22, 20);
-INSERT INTO `courseToSubgoal` VALUES (132, '7-1', 27, 30);
-INSERT INTO `courseToSubgoal` VALUES (133, '7-2', 19, 50);
-INSERT INTO `courseToSubgoal` VALUES (134, '7-2', 27, 50);
-INSERT INTO `courseToSubgoal` VALUES (135, '8-1', 18, 50);
-INSERT INTO `courseToSubgoal` VALUES (136, '8-1', 22, 50);
-INSERT INTO `courseToSubgoal` VALUES (137, '8-2', 16, 60);
-INSERT INTO `courseToSubgoal` VALUES (138, '8-2', 22, 40);
-INSERT INTO `courseToSubgoal` VALUES (139, '8-3', 29, 100);
-INSERT INTO `courseToSubgoal` VALUES (140, '9-1', 18, 50);
-INSERT INTO `courseToSubgoal` VALUES (141, '9-1', 22, 50);
-INSERT INTO `courseToSubgoal` VALUES (142, '9-2', 18, 50);
-INSERT INTO `courseToSubgoal` VALUES (143, '9-2', 22, 50);
-INSERT INTO `courseToSubgoal` VALUES (144, '9-3', 18, 50);
-INSERT INTO `courseToSubgoal` VALUES (145, '9-3', 22, 50);
-INSERT INTO `courseToSubgoal` VALUES (146, '10-1', 18, 20);
-INSERT INTO `courseToSubgoal` VALUES (147, '10-1', 20, 20);
-INSERT INTO `courseToSubgoal` VALUES (148, '10-1', 21, 20);
-INSERT INTO `courseToSubgoal` VALUES (149, '10-1', 22, 20);
-INSERT INTO `courseToSubgoal` VALUES (150, '10-1', 29, 20);
-INSERT INTO `courseToSubgoal` VALUES (151, '10-2', 18, 25);
-INSERT INTO `courseToSubgoal` VALUES (152, '10-2', 20, 25);
-INSERT INTO `courseToSubgoal` VALUES (153, '10-2', 21, 25);
-INSERT INTO `courseToSubgoal` VALUES (154, '10-2', 22, 25);
-INSERT INTO `courseToSubgoal` VALUES (155, '10-3', 18, 50);
-INSERT INTO `courseToSubgoal` VALUES (156, '10-3', 22, 50);
-INSERT INTO `courseToSubgoal` VALUES (157, '11-1', 18, 50);
-INSERT INTO `courseToSubgoal` VALUES (158, '11-1', 22, 50);
-INSERT INTO `courseToSubgoal` VALUES (159, '11-2', 18, 50);
-INSERT INTO `courseToSubgoal` VALUES (160, '11-2', 22, 50);
-INSERT INTO `courseToSubgoal` VALUES (161, '11-3', 18, 50);
-INSERT INTO `courseToSubgoal` VALUES (162, '11-3', 22, 50);
-INSERT INTO `courseToSubgoal` VALUES (163, '12-1', 18, 40);
-INSERT INTO `courseToSubgoal` VALUES (164, '12-1', 22, 40);
-INSERT INTO `courseToSubgoal` VALUES (165, '12-1', 30, 20);
-COMMIT;
+INSERT INTO `coursetosubgoal` VALUES (1, '1-1', 1, 15);
+INSERT INTO `coursetosubgoal` VALUES (2, '1-1', 2, 5);
+INSERT INTO `coursetosubgoal` VALUES (3, '1-1', 3, 5);
+INSERT INTO `coursetosubgoal` VALUES (4, '1-1', 4, 10);
+INSERT INTO `coursetosubgoal` VALUES (5, '1-1', 5, 5);
+INSERT INTO `coursetosubgoal` VALUES (6, '1-1', 6, 4);
+INSERT INTO `coursetosubgoal` VALUES (7, '1-1', 7, 4);
+INSERT INTO `coursetosubgoal` VALUES (8, '1-1', 8, 6);
+INSERT INTO `coursetosubgoal` VALUES (9, '1-1', 9, 6);
+INSERT INTO `coursetosubgoal` VALUES (10, '1-1', 10, 6);
+INSERT INTO `coursetosubgoal` VALUES (11, '1-1', 11, 5);
+INSERT INTO `coursetosubgoal` VALUES (12, '1-1', 12, 5);
+INSERT INTO `coursetosubgoal` VALUES (13, '1-1', 13, 5);
+INSERT INTO `coursetosubgoal` VALUES (14, '1-1', 14, 5);
+INSERT INTO `coursetosubgoal` VALUES (15, '1-1', 15, 5);
+INSERT INTO `coursetosubgoal` VALUES (16, '1-1', 16, 4);
+INSERT INTO `coursetosubgoal` VALUES (18, '1-2', 6, 5);
+INSERT INTO `coursetosubgoal` VALUES (19, '1-2', 7, 5);
+INSERT INTO `coursetosubgoal` VALUES (20, '1-2', 8, 10);
+INSERT INTO `coursetosubgoal` VALUES (21, '1-2', 9, 10);
+INSERT INTO `coursetosubgoal` VALUES (22, '1-2', 10, 10);
+INSERT INTO `coursetosubgoal` VALUES (23, '1-2', 11, 10);
+INSERT INTO `coursetosubgoal` VALUES (24, '1-2', 12, 10);
+INSERT INTO `coursetosubgoal` VALUES (25, '1-2', 13, 10);
+INSERT INTO `coursetosubgoal` VALUES (26, '1-2', 14, 10);
+INSERT INTO `coursetosubgoal` VALUES (27, '1-2', 17, 10);
+INSERT INTO `coursetosubgoal` VALUES (28, '1-2', 18, 10);
+INSERT INTO `coursetosubgoal` VALUES (29, '1-3', 7, 10);
+INSERT INTO `coursetosubgoal` VALUES (30, '1-3', 8, 15);
+INSERT INTO `coursetosubgoal` VALUES (31, '1-3', 10, 10);
+INSERT INTO `coursetosubgoal` VALUES (32, '1-3', 11, 15);
+INSERT INTO `coursetosubgoal` VALUES (33, '1-3', 12, 15);
+INSERT INTO `coursetosubgoal` VALUES (34, '1-3', 13, 15);
+INSERT INTO `coursetosubgoal` VALUES (35, '1-3', 14, 10);
+INSERT INTO `coursetosubgoal` VALUES (36, '1-3', 17, 10);
+INSERT INTO `coursetosubgoal` VALUES (37, '1-4', 8, 20);
+INSERT INTO `coursetosubgoal` VALUES (38, '1-4', 11, 20);
+INSERT INTO `coursetosubgoal` VALUES (39, '1-4', 12, 20);
+INSERT INTO `coursetosubgoal` VALUES (40, '1-4', 14, 10);
+INSERT INTO `coursetosubgoal` VALUES (41, '1-4', 16, 10);
+INSERT INTO `coursetosubgoal` VALUES (42, '1-4', 17, 20);
+INSERT INTO `coursetosubgoal` VALUES (43, '2-1', 1, 15);
+INSERT INTO `coursetosubgoal` VALUES (44, '2-1', 2, 5);
+INSERT INTO `coursetosubgoal` VALUES (45, '2-1', 3, 5);
+INSERT INTO `coursetosubgoal` VALUES (46, '2-1', 4, 15);
+INSERT INTO `coursetosubgoal` VALUES (47, '2-1', 5, 5);
+INSERT INTO `coursetosubgoal` VALUES (48, '2-1', 7, 5);
+INSERT INTO `coursetosubgoal` VALUES (49, '2-1', 8, 5);
+INSERT INTO `coursetosubgoal` VALUES (50, '2-1', 9, 5);
+INSERT INTO `coursetosubgoal` VALUES (51, '2-1', 10, 5);
+INSERT INTO `coursetosubgoal` VALUES (52, '2-1', 11, 5);
+INSERT INTO `coursetosubgoal` VALUES (53, '2-1', 12, 5);
+INSERT INTO `coursetosubgoal` VALUES (54, '2-1', 15, 5);
+INSERT INTO `coursetosubgoal` VALUES (55, '2-1', 17, 5);
+INSERT INTO `coursetosubgoal` VALUES (56, '2-1', 18, 5);
+INSERT INTO `coursetosubgoal` VALUES (57, '2-1', 19, 5);
+INSERT INTO `coursetosubgoal` VALUES (58, '2-1', 22, 5);
+INSERT INTO `coursetosubgoal` VALUES (59, '2-2', 8, 15);
+INSERT INTO `coursetosubgoal` VALUES (60, '2-2', 9, 10);
+INSERT INTO `coursetosubgoal` VALUES (61, '2-2', 10, 10);
+INSERT INTO `coursetosubgoal` VALUES (62, '2-2', 11, 15);
+INSERT INTO `coursetosubgoal` VALUES (63, '2-2', 12, 15);
+INSERT INTO `coursetosubgoal` VALUES (64, '2-2', 15, 15);
+INSERT INTO `coursetosubgoal` VALUES (65, '2-2', 17, 10);
+INSERT INTO `coursetosubgoal` VALUES (66, '2-2', 19, 10);
+INSERT INTO `coursetosubgoal` VALUES (67, '2-3', 18, 15);
+INSERT INTO `coursetosubgoal` VALUES (68, '2-3', 20, 15);
+INSERT INTO `coursetosubgoal` VALUES (69, '2-3', 21, 15);
+INSERT INTO `coursetosubgoal` VALUES (70, '2-3', 22, 15);
+INSERT INTO `coursetosubgoal` VALUES (71, '2-3', 23, 10);
+INSERT INTO `coursetosubgoal` VALUES (72, '2-3', 24, 20);
+INSERT INTO `coursetosubgoal` VALUES (73, '2-3', 25, 10);
+INSERT INTO `coursetosubgoal` VALUES (74, '3-1', 15, 30);
+INSERT INTO `coursetosubgoal` VALUES (75, '3-1', 23, 20);
+INSERT INTO `coursetosubgoal` VALUES (76, '3-1', 24, 30);
+INSERT INTO `coursetosubgoal` VALUES (77, '3-1', 25, 20);
+INSERT INTO `coursetosubgoal` VALUES (78, '3-2', 15, 30);
+INSERT INTO `coursetosubgoal` VALUES (79, '3-2', 23, 10);
+INSERT INTO `coursetosubgoal` VALUES (80, '3-2', 24, 30);
+INSERT INTO `coursetosubgoal` VALUES (81, '3-2', 25, 20);
+INSERT INTO `coursetosubgoal` VALUES (82, '3-2', 26, 10);
+INSERT INTO `coursetosubgoal` VALUES (83, '3-3', 15, 30);
+INSERT INTO `coursetosubgoal` VALUES (84, '3-3', 23, 10);
+INSERT INTO `coursetosubgoal` VALUES (85, '3-3', 24, 30);
+INSERT INTO `coursetosubgoal` VALUES (86, '3-3', 25, 10);
+INSERT INTO `coursetosubgoal` VALUES (87, '3-3', 26, 20);
+INSERT INTO `coursetosubgoal` VALUES (88, '4-1', 18, 25);
+INSERT INTO `coursetosubgoal` VALUES (89, '4-1', 20, 25);
+INSERT INTO `coursetosubgoal` VALUES (90, '4-1', 21, 25);
+INSERT INTO `coursetosubgoal` VALUES (91, '4-1', 22, 25);
+INSERT INTO `coursetosubgoal` VALUES (92, '4-2', 15, 20);
+INSERT INTO `coursetosubgoal` VALUES (93, '4-2', 19, 20);
+INSERT INTO `coursetosubgoal` VALUES (94, '4-2', 23, 10);
+INSERT INTO `coursetosubgoal` VALUES (95, '4-2', 26, 10);
+INSERT INTO `coursetosubgoal` VALUES (96, '4-2', 27, 20);
+INSERT INTO `coursetosubgoal` VALUES (97, '4-2', 28, 20);
+INSERT INTO `coursetosubgoal` VALUES (98, '4-3', 15, 20);
+INSERT INTO `coursetosubgoal` VALUES (99, '4-3', 19, 15);
+INSERT INTO `coursetosubgoal` VALUES (100, '4-3', 23, 15);
+INSERT INTO `coursetosubgoal` VALUES (101, '4-3', 26, 20);
+INSERT INTO `coursetosubgoal` VALUES (102, '4-3', 27, 15);
+INSERT INTO `coursetosubgoal` VALUES (103, '4-3', 28, 15);
+INSERT INTO `coursetosubgoal` VALUES (104, '4-4', 15, 20);
+INSERT INTO `coursetosubgoal` VALUES (105, '4-4', 19, 10);
+INSERT INTO `coursetosubgoal` VALUES (106, '4-4', 23, 10);
+INSERT INTO `coursetosubgoal` VALUES (107, '4-4', 26, 20);
+INSERT INTO `coursetosubgoal` VALUES (108, '4-4', 27, 10);
+INSERT INTO `coursetosubgoal` VALUES (109, '4-4', 28, 30);
+INSERT INTO `coursetosubgoal` VALUES (110, '5-1', 10, 20);
+INSERT INTO `coursetosubgoal` VALUES (111, '5-1', 11, 15);
+INSERT INTO `coursetosubgoal` VALUES (112, '5-1', 13, 20);
+INSERT INTO `coursetosubgoal` VALUES (113, '5-1', 15, 15);
+INSERT INTO `coursetosubgoal` VALUES (114, '5-1', 16, 15);
+INSERT INTO `coursetosubgoal` VALUES (115, '5-1', 26, 15);
+INSERT INTO `coursetosubgoal` VALUES (116, '5-2', 10, 20);
+INSERT INTO `coursetosubgoal` VALUES (117, '5-2', 11, 15);
+INSERT INTO `coursetosubgoal` VALUES (118, '5-2', 13, 20);
+INSERT INTO `coursetosubgoal` VALUES (119, '5-2', 15, 15);
+INSERT INTO `coursetosubgoal` VALUES (120, '5-2', 16, 15);
+INSERT INTO `coursetosubgoal` VALUES (121, '5-2', 26, 15);
+INSERT INTO `coursetosubgoal` VALUES (122, '5-3', 12, 30);
+INSERT INTO `coursetosubgoal` VALUES (123, '5-3', 24, 50);
+INSERT INTO `coursetosubgoal` VALUES (124, '5-3', 26, 20);
+INSERT INTO `coursetosubgoal` VALUES (125, '6-1', 6, 50);
+INSERT INTO `coursetosubgoal` VALUES (126, '6-1', 16, 50);
+INSERT INTO `coursetosubgoal` VALUES (127, '6-2', 6, 50);
+INSERT INTO `coursetosubgoal` VALUES (128, '6-2', 16, 50);
+INSERT INTO `coursetosubgoal` VALUES (129, '7-1', 18, 20);
+INSERT INTO `coursetosubgoal` VALUES (130, '7-1', 19, 30);
+INSERT INTO `coursetosubgoal` VALUES (131, '7-1', 22, 20);
+INSERT INTO `coursetosubgoal` VALUES (132, '7-1', 27, 30);
+INSERT INTO `coursetosubgoal` VALUES (133, '7-2', 19, 50);
+INSERT INTO `coursetosubgoal` VALUES (134, '7-2', 27, 50);
+INSERT INTO `coursetosubgoal` VALUES (135, '8-1', 18, 50);
+INSERT INTO `coursetosubgoal` VALUES (136, '8-1', 22, 50);
+INSERT INTO `coursetosubgoal` VALUES (137, '8-2', 16, 60);
+INSERT INTO `coursetosubgoal` VALUES (138, '8-2', 22, 40);
+INSERT INTO `coursetosubgoal` VALUES (139, '8-3', 29, 100);
+INSERT INTO `coursetosubgoal` VALUES (140, '9-1', 18, 50);
+INSERT INTO `coursetosubgoal` VALUES (141, '9-1', 22, 50);
+INSERT INTO `coursetosubgoal` VALUES (142, '9-2', 18, 50);
+INSERT INTO `coursetosubgoal` VALUES (143, '9-2', 22, 50);
+INSERT INTO `coursetosubgoal` VALUES (144, '9-3', 18, 50);
+INSERT INTO `coursetosubgoal` VALUES (145, '9-3', 22, 50);
+INSERT INTO `coursetosubgoal` VALUES (146, '10-1', 18, 20);
+INSERT INTO `coursetosubgoal` VALUES (147, '10-1', 20, 20);
+INSERT INTO `coursetosubgoal` VALUES (148, '10-1', 21, 20);
+INSERT INTO `coursetosubgoal` VALUES (149, '10-1', 22, 20);
+INSERT INTO `coursetosubgoal` VALUES (150, '10-1', 29, 20);
+INSERT INTO `coursetosubgoal` VALUES (151, '10-2', 18, 25);
+INSERT INTO `coursetosubgoal` VALUES (152, '10-2', 20, 25);
+INSERT INTO `coursetosubgoal` VALUES (153, '10-2', 21, 25);
+INSERT INTO `coursetosubgoal` VALUES (154, '10-2', 22, 25);
+INSERT INTO `coursetosubgoal` VALUES (155, '10-3', 18, 50);
+INSERT INTO `coursetosubgoal` VALUES (156, '10-3', 22, 50);
+INSERT INTO `coursetosubgoal` VALUES (157, '11-1', 18, 50);
+INSERT INTO `coursetosubgoal` VALUES (158, '11-1', 22, 50);
+INSERT INTO `coursetosubgoal` VALUES (159, '11-2', 18, 50);
+INSERT INTO `coursetosubgoal` VALUES (160, '11-2', 22, 50);
+INSERT INTO `coursetosubgoal` VALUES (161, '11-3', 18, 50);
+INSERT INTO `coursetosubgoal` VALUES (162, '11-3', 22, 50);
+INSERT INTO `coursetosubgoal` VALUES (163, '12-1', 18, 40);
+INSERT INTO `coursetosubgoal` VALUES (164, '12-1', 22, 40);
+INSERT INTO `coursetosubgoal` VALUES (165, '12-1', 30, 20);
+INSERT INTO `coursetosubgoal` VALUES (201, '1-1', 17, 5);
 
 -- ----------------------------
--- Table structure for openCourse
+-- Table structure for opencourse
 -- ----------------------------
-DROP TABLE IF EXISTS `openCourse`;
-CREATE TABLE `openCourse` (
+DROP TABLE IF EXISTS `opencourse`;
+CREATE TABLE `opencourse`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主码 自增',
   `course_id` int(11) NOT NULL COMMENT '外码',
   `teacher_id` int(11) NOT NULL COMMENT '外码',
-  `time` datetime DEFAULT NULL COMMENT '时间',
-  PRIMARY KEY (`id`),
-  KEY `opencourse_ibfk_1` (`course_id`),
-  KEY `opencourse_ibfk_2` (`teacher_id`),
-  CONSTRAINT `opencourse_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`),
-  CONSTRAINT `opencourse_ibfk_2` FOREIGN KEY (`teacher_id`) REFERENCES `teacher` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `time` datetime(0) NULL DEFAULT NULL COMMENT '时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `opencourse_ibfk_1`(`course_id`) USING BTREE,
+  INDEX `opencourse_ibfk_2`(`teacher_id`) USING BTREE,
+  CONSTRAINT `opencourse_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `opencourse_ibfk_2` FOREIGN KEY (`teacher_id`) REFERENCES `teacher` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of openCourse
+-- Records of opencourse
 -- ----------------------------
-BEGIN;
-INSERT INTO `openCourse` VALUES (1, 1, 1, '2021-03-09 17:54:12');
-COMMIT;
+INSERT INTO `opencourse` VALUES (1, 1, 1, '2021-03-09 17:54:12');
 
 -- ----------------------------
--- Table structure for openCourseForm
+-- Table structure for opencourseform
 -- ----------------------------
-DROP TABLE IF EXISTS `openCourseForm`;
-CREATE TABLE `openCourseForm` (
+DROP TABLE IF EXISTS `opencourseform`;
+CREATE TABLE `opencourseform`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主码 自增',
   `openCourse_id` int(11) NOT NULL COMMENT '外码',
-  `target` varchar(255) NOT NULL COMMENT '指标名',
-  PRIMARY KEY (`id`),
-  KEY `opencourseform_ibfk_1` (`openCourse_id`),
-  KEY `target` (`target`),
-  CONSTRAINT `opencourseform_ibfk_1` FOREIGN KEY (`openCourse_id`) REFERENCES `opencourse` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `target` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '指标名',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `opencourseform_ibfk_1`(`openCourse_id`) USING BTREE,
+  INDEX `target`(`target`) USING BTREE,
+  CONSTRAINT `opencourseform_ibfk_1` FOREIGN KEY (`openCourse_id`) REFERENCES `opencourse` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of openCourseForm
+-- Records of opencourseform
 -- ----------------------------
-BEGIN;
-INSERT INTO `openCourseForm` VALUES (1, 1, 'final_exam');
-INSERT INTO `openCourseForm` VALUES (2, 1, 'mid_exam');
-COMMIT;
+INSERT INTO `opencourseform` VALUES (1, 1, 'final_exam');
+INSERT INTO `opencourseform` VALUES (2, 1, 'mid_exam');
 
 -- ----------------------------
--- Table structure for openCourseToSubgoal
+-- Table structure for opencoursetosubgoal
 -- ----------------------------
-DROP TABLE IF EXISTS `openCourseToSubgoal`;
-CREATE TABLE `openCourseToSubgoal` (
+DROP TABLE IF EXISTS `opencoursetosubgoal`;
+CREATE TABLE `opencoursetosubgoal`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主码 自增',
   `openCourseForm_id` int(11) NOT NULL COMMENT '外码',
   `courseToSubgoal_id` int(11) NOT NULL COMMENT '外码',
   `percent` int(11) NOT NULL COMMENT '比例',
-  PRIMARY KEY (`id`),
-  KEY `openCourseForm_id` (`openCourseForm_id`),
-  KEY `courseToSubgoal_id` (`courseToSubgoal_id`),
-  CONSTRAINT `opencoursetosubgoal_ibfk_1` FOREIGN KEY (`openCourseForm_id`) REFERENCES `opencourseform` (`id`),
-  CONSTRAINT `opencoursetosubgoal_ibfk_2` FOREIGN KEY (`courseToSubgoal_id`) REFERENCES `coursetosubgoal` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `openCourseForm_id`(`openCourseForm_id`) USING BTREE,
+  INDEX `courseToSubgoal_id`(`courseToSubgoal_id`) USING BTREE,
+  CONSTRAINT `opencoursetosubgoal_ibfk_1` FOREIGN KEY (`openCourseForm_id`) REFERENCES `opencourseform` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `opencoursetosubgoal_ibfk_2` FOREIGN KEY (`courseToSubgoal_id`) REFERENCES `coursetosubgoal` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of openCourseToSubgoal
+-- Records of opencoursetosubgoal
 -- ----------------------------
-BEGIN;
-INSERT INTO `openCourseToSubgoal` VALUES (1, 1, 1, 30);
-COMMIT;
+INSERT INTO `opencoursetosubgoal` VALUES (1, 1, 1, 30);
 
 -- ----------------------------
 -- Table structure for requirement
 -- ----------------------------
 DROP TABLE IF EXISTS `requirement`;
-CREATE TABLE `requirement` (
+CREATE TABLE `requirement`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增id',
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '标题',
   `title_EN` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '标题i18n',
   `statement` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '描述',
   `statement_EN` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '描述i18n',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of requirement
 -- ----------------------------
-BEGIN;
 INSERT INTO `requirement` VALUES (1, '工程知识', 'Engineering Knowledge', '能够将数学、自然科学、工程基础和专业知识用于解决复杂工程问题', 'Able to apply mathematics, science, engineering fundamentals and expertise to solve complex engineering problems');
 INSERT INTO `requirement` VALUES (2, '问题分析', 'Problem Analysis', '能够应用数学、自然科学和工程科学的基本原理，识别、表达、并通过文献研究分析复杂工程问题，以获得有效结论', 'Ability to apply fundamental principles of mathematics, natural science and engineering science to identify, express, and analyze complex engineering problems through literature research to reach valid conclusions');
 INSERT INTO `requirement` VALUES (3, '设计/开发解决方案', 'Design/Develop Solution', '能够设计针对复杂工程问题的解决方案，设计满足特定需求的系统、单元（部件）或工艺流程，并能够在设计环节中体现创新意', 'Can design solutions to complex engineering problems, design systems, units (components) or processes to meet specific needs, and demonstrate innovation in the design process');
@@ -348,94 +337,86 @@ INSERT INTO `requirement` VALUES (9, '个人和团队', 'Individual And Team', '
 INSERT INTO `requirement` VALUES (10, '沟通', 'Communication', '能够就复杂工程问题与业界同行及社会公众进行有效沟通和交流，包括撰写报告和设计文稿、陈述发言、清晰表达或回应指令。并具备一定的国际视野，能够在跨文化背景下进行沟通和交流', 'Able to effectively communicate and communicate with industry colleagues and the public on complex engineering issues, including writing reports and design documents, making presentations, and clearly expressing or responding to instructions. With a certain international perspective and the ability to communicate and communicate in a cross-cultural context');
 INSERT INTO `requirement` VALUES (11, '项目管理', 'Project Management', '理解并掌握工程管理原理与经济决策方法，并能在多学科环境中应用', 'Understand and grasp the principles of project management and economic decision-making methods and be able to apply them in a multidisciplinary environment');
 INSERT INTO `requirement` VALUES (12, '终身学习', 'Lifelong Learning', '具有自主学习和终身学习的意识，有不断学习和适应发展的能力', 'Have the consciousness of independent learning and lifelong learning, and I have the ability to continuously learn and adapt to development');
-COMMIT;
 
 -- ----------------------------
 -- Table structure for student
 -- ----------------------------
 DROP TABLE IF EXISTS `student`;
-CREATE TABLE `student` (
+CREATE TABLE `student`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主码 学号',
-  `name` varchar(255) NOT NULL COMMENT '姓名',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '姓名',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of student
 -- ----------------------------
-BEGIN;
 INSERT INTO `student` VALUES (1, 'test_stu_1');
 INSERT INTO `student` VALUES (2, 'test_stu_2');
-COMMIT;
 
 -- ----------------------------
--- Table structure for studyCourse
+-- Table structure for studycourse
 -- ----------------------------
-DROP TABLE IF EXISTS `studyCourse`;
-CREATE TABLE `studyCourse` (
+DROP TABLE IF EXISTS `studycourse`;
+CREATE TABLE `studycourse`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主码 自增',
   `openCourse_id` int(11) NOT NULL COMMENT '外码',
   `student_id` int(11) NOT NULL COMMENT '外码',
-  `time` datetime DEFAULT NULL COMMENT '时间',
-  PRIMARY KEY (`id`),
-  KEY `studycourse_ibfk_1` (`openCourse_id`),
-  KEY `studycourse_ibfk_2` (`student_id`),
-  CONSTRAINT `studycourse_ibfk_1` FOREIGN KEY (`openCourse_id`) REFERENCES `opencourse` (`id`),
-  CONSTRAINT `studycourse_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `time` datetime(0) NULL DEFAULT NULL COMMENT '时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `studycourse_ibfk_1`(`openCourse_id`) USING BTREE,
+  INDEX `studycourse_ibfk_2`(`student_id`) USING BTREE,
+  CONSTRAINT `studycourse_ibfk_1` FOREIGN KEY (`openCourse_id`) REFERENCES `opencourse` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `studycourse_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of studyCourse
+-- Records of studycourse
 -- ----------------------------
-BEGIN;
-INSERT INTO `studyCourse` VALUES (1, 1, 1, '2021-03-09 18:01:07');
-INSERT INTO `studyCourse` VALUES (2, 1, 2, '2021-03-09 18:01:16');
-COMMIT;
+INSERT INTO `studycourse` VALUES (1, 1, 1, '2021-03-09 18:01:07');
+INSERT INTO `studycourse` VALUES (2, 1, 2, '2021-03-09 18:01:16');
 
 -- ----------------------------
--- Table structure for studyCourseForm
+-- Table structure for studycourseform
 -- ----------------------------
-DROP TABLE IF EXISTS `studyCourseForm`;
-CREATE TABLE `studyCourseForm` (
+DROP TABLE IF EXISTS `studycourseform`;
+CREATE TABLE `studycourseform`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主码 自增',
   `studyCourse_id` int(11) NOT NULL COMMENT '外码',
-  `target` varchar(255) NOT NULL COMMENT '外码 指标名',
-  `grade` int(11) DEFAULT NULL COMMENT '分数',
-  PRIMARY KEY (`id`),
-  KEY `studyCourse_id` (`studyCourse_id`),
-  KEY `target` (`target`),
-  CONSTRAINT `studycourseform_ibfk_1` FOREIGN KEY (`studyCourse_id`) REFERENCES `studycourse` (`id`),
-  CONSTRAINT `studycourseform_ibfk_2` FOREIGN KEY (`target`) REFERENCES `opencourseform` (`target`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `target` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '外码 指标名',
+  `grade` int(11) NULL DEFAULT NULL COMMENT '分数',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `studyCourse_id`(`studyCourse_id`) USING BTREE,
+  INDEX `target`(`target`) USING BTREE,
+  CONSTRAINT `studycourseform_ibfk_1` FOREIGN KEY (`studyCourse_id`) REFERENCES `studycourse` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `studycourseform_ibfk_2` FOREIGN KEY (`target`) REFERENCES `opencourseform` (`target`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of studyCourseForm
+-- Records of studycourseform
 -- ----------------------------
-BEGIN;
-INSERT INTO `studyCourseForm` VALUES (1, 1, 'final_exam', 60);
-INSERT INTO `studyCourseForm` VALUES (2, 1, 'mid_exam', 90);
-INSERT INTO `studyCourseForm` VALUES (3, 2, 'final_exam', 75);
-INSERT INTO `studyCourseForm` VALUES (4, 2, 'mid_exam', 80);
-COMMIT;
+INSERT INTO `studycourseform` VALUES (1, 1, 'final_exam', 60);
+INSERT INTO `studycourseform` VALUES (2, 1, 'mid_exam', 90);
+INSERT INTO `studycourseform` VALUES (3, 2, 'final_exam', 75);
+INSERT INTO `studycourseform` VALUES (4, 2, 'mid_exam', 80);
 
 -- ----------------------------
 -- Table structure for subgoal
 -- ----------------------------
 DROP TABLE IF EXISTS `subgoal`;
-CREATE TABLE `subgoal` (
+CREATE TABLE `subgoal`  (
   `id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '主码 字串',
   `father_id` int(11) NOT NULL COMMENT '外码',
   `statement` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '描述',
   `statement_EN` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '描述-i18n',
   PRIMARY KEY (`id`) USING BTREE,
-  KEY `subgoal_ibfk_1` (`father_id`),
-  CONSTRAINT `subgoal_ibfk_1` FOREIGN KEY (`father_id`) REFERENCES `requirement` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  INDEX `subgoal_ibfk_1`(`father_id`) USING BTREE,
+  CONSTRAINT `subgoal_ibfk_1` FOREIGN KEY (`father_id`) REFERENCES `requirement` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of subgoal
 -- ----------------------------
-BEGIN;
 INSERT INTO `subgoal` VALUES ('1-1', 1, '掌握数学、自然科学、工程科学和计算机专业的基础知识、原理和方法', 'Master the basic knowledge, principles and methods of mathematics, natural science, engineering science and computer science');
 INSERT INTO `subgoal` VALUES ('1-2', 1, '能使用数学、自然科学、工程科学和计算机专业的语言工具表述计算机领域的复杂工程问题并求解', 'Can use the language tools of mathematics, natural science, engineering science and computer science to express and solve complex engineering problems in the computer field');
 INSERT INTO `subgoal` VALUES ('1-3', 1, '能利用相关知识和数学模型方法推演、分析计算机领域的复杂工程问题', 'Can use relevant knowledge and mathematical modeling methods to deduce and analyze complex engineering problems in the computer field');
@@ -470,35 +451,36 @@ INSERT INTO `subgoal` VALUES ('8-3', 8, '理解并遵守计算机领域工程职
 INSERT INTO `subgoal` VALUES ('9-1', 9, '能与其他学科的成员有效沟通，合作共享', 'Able to communicate effectively and collaboratively with members of other disciplines');
 INSERT INTO `subgoal` VALUES ('9-2', 9, '能够在计算机领域团队中独立或合作开展工作', 'Able to work independently or collaboratively in a computer field team');
 INSERT INTO `subgoal` VALUES ('9-3', 9, '能够组织、协调和指挥计算机领域团队开展工作', 'Able to organize, coordinate and direct the work of computer field teams');
-COMMIT;
 
 -- ----------------------------
 -- Table structure for teacher
 -- ----------------------------
 DROP TABLE IF EXISTS `teacher`;
-CREATE TABLE `teacher` (
+CREATE TABLE `teacher`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主码 自增',
-  `is_admin` tinyint(1) NOT NULL DEFAULT '0' COMMENT '管理员权限',
+  `is_admin` tinyint(1) NOT NULL DEFAULT 0 COMMENT '管理员权限',
   `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '用户名',
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '密码',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '姓名',
-  `name_EN` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '姓名-i18n',
-  `TEL` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '电话',
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '邮箱',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `name_EN` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '姓名-i18n',
+  `TEL` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '电话',
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '邮箱',
+  `id_teacher` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '工号',
+  `department` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '部门',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of teacher
 -- ----------------------------
-BEGIN;
-INSERT INTO `teacher` VALUES (1, 1, 'admin', 'changeme', '管理员', 'admin', '123', '123@456');
-COMMIT;
+INSERT INTO `teacher` VALUES (1, 1, 'admin', 'changeme', '管理员', 'admin', '123', '123@456', NULL, '');
+INSERT INTO `teacher` VALUES (5, 0, 'admin1', 'changeme', '', '', '', '', NULL, '');
+INSERT INTO `teacher` VALUES (6, 0, 'admin4', 'changeme', '', '', '', '', NULL, '');
 
 -- ----------------------------
 -- View structure for coursetosubgoalview
 -- ----------------------------
 DROP VIEW IF EXISTS `coursetosubgoalview`;
-CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `coursetosubgoalview` AS select `coursetosubgoal`.`id` AS `id`,`coursetosubgoal`.`subgoal_id` AS `subgoal_id`,`course`.`id` AS `course_id`,`course`.`name` AS `name`,`course`.`name_EN` AS `name_EN`,`coursetosubgoal`.`percent` AS `percent` from (`coursetosubgoal` join `course` on((`coursetosubgoal`.`course_id` = `course`.`id`))) order by `coursetosubgoal`.`subgoal_id` asc;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `coursetosubgoalview` AS select `coursetosubgoal`.`id` AS `id`,`coursetosubgoal`.`subgoal_id` AS `subgoal_id`,`course`.`id` AS `course_id`,`course`.`name` AS `name`,`course`.`name_EN` AS `name_EN`,`coursetosubgoal`.`percent` AS `percent` from (`coursetosubgoal` join `course` on((`coursetosubgoal`.`course_id` = `course`.`id`))) order by `coursetosubgoal`.`subgoal_id`;
 
 SET FOREIGN_KEY_CHECKS = 1;
