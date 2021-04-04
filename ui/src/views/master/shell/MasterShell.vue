@@ -32,7 +32,7 @@ html {
   &-header {
     height: 10vh !important;
     padding: 0 !important;
-    z-index: 9999;
+    z-index: 999;
   }
   &-aside {
     display: flex;
