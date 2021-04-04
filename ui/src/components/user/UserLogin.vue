@@ -2,7 +2,7 @@
   <div class="h-full">
     <div class="user-login-bg" />
     <div class="user-login-form">
-      <ValidationObserver v-slot="v" tag="div" class="validation-div">
+      <ValidationObserver v-slot="v" tag="article" class="validation-div">
         <el-form
           class="flex flex-col"
           inline
@@ -143,14 +143,20 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+.el-form-item__content {
+  width: auto !important;
+}
 .validation {
   &-text {
     font-size: 14px;
     color: red;
+    text-align: left;
   }
   &-div {
     position: absolute;
-    top: 20%;
+    height: 100%;
+    padding-top: 25%;
+    text-align: center;
   }
 }
 .user-login {
@@ -167,20 +173,15 @@ export default defineComponent({
     background-size: 100% 100%; // 拉伸
     filter: blur(4px);
   }
-
   &-form {
     position: absolute;
     left: 70%;
     right: 5%;
+    width: 25%;
     top: 20%;
     bottom: 5%;
+    height: 75%;
     overflow: hidden;
-    // width: 40%;
-    // min-width: 20%;
-    // max-width: 40%;
-    // min-height: 35%;
-    // max-height: 70%;
-    padding: 0 40px 20px 50px;
     background-color: white;
     box-shadow: darkgray 3px 3px 3px 3px;
     border-radius: 5%;
@@ -189,16 +190,12 @@ export default defineComponent({
     justify-content: flex-end;
     align-items: center;
   }
-
   &-text {
-    margin-left: 50%;
     min-width: 150px;
   }
-
   &-input {
     width: 200px;
   }
-
   &-button {
     position: relative;
     top: 5%;
