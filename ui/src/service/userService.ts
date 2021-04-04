@@ -1,10 +1,8 @@
 import axios from '@/plugins/axios';
 
 class UserService {
-  getUser(query: any) { // lang username password
-    return axios.get('./userLogin', {
-      params: query,
-    });
+  getUser(params: any) { // lang username password
+    return axios.post('./userLogin', params);
   }
 }
 

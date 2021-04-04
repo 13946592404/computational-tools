@@ -1,25 +1,17 @@
 import axios from 'axios';
 
 class CourseToSubgoalService {
-  /* TODO - put */
-  updateCourseToSubgoal(query: any) {
-    return axios.get('./updateCourseToSubgoal', {
-      params: query,
-    });
+  updateCourseToSubgoal(params: any) {
+    return axios.put('./updateCourseToSubgoal', params);
   }
 
-  /* TODO - put */
-  deleteCourseToSubgoal(query: any) {
-    return axios.get('./deleteCourseToSubgoal', {
-      params: query,
-    });
+  deleteCourseToSubgoal(params: any) {
+    const { subgoal_id, course_id } = params;
+    return axios.delete(`./deleteCourseToSubgoal?subgoal_id=${subgoal_id}&course_id=${course_id}`);
   }
 
-  /* TODO - put */
-  addCourseToSubgoal(query: any) {
-    return axios.get('./addCourseToSubgoal', {
-      params: query,
-    });
+  addCourseToSubgoal(params: any) {
+    return axios.put('./addCourseToSubgoal', params);
   }
 }
 

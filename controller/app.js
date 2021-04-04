@@ -1,6 +1,10 @@
-const express = require('express');
+const app = require('express')();
+
+const bodyParser = require('body-parser');
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
 const { query } = require('./src/plugins/mysql');
-const app = express();
 const port = 3000;
 
 app.listen(port, () => {
@@ -8,14 +12,14 @@ app.listen(port, () => {
 });
 
 app.all('*', (req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin','*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT');  
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');  
-  // res.setHeader("Content-Type", "application/json;charset=utf-8"); 
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With,Content-Type");
+  res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+  res.header("X-Powered-By", '3.2.1')
+  res.header("Content-Type", "application/json;charset=utf-8");
   next();
 });
 
-// TODO - router
 /* requirement */
 app.get('/requirement', (req, res) => {
   const isEN = req.query.lang === "en";
@@ -51,15 +55,15 @@ app.get('/course', (req, res) => { // for add selection
 });
 
 /* courseToSubgoal - CRUD */
-app.get('/updateCourseToSubgoal', (req, res) => {
-  const { percent, subgoal_id, course_id } = req.query;
+app.put('/updateCourseToSubgoal', (req, res) => {
+  const { percent, subgoal_id, course_id } = req.body;
   const statement = `UPDATE courseToSubgoal SET percent = ${percent} WHERE subgoal_id = "${subgoal_id}" AND course_id = ${course_id}`;
   query(statement).then((resolve, rejected) => {
     res.send(resolve);
   });
 });
 
-app.get('/deleteCourseToSubgoal', (req, res) => {
+app.delete('/deleteCourseToSubgoal', (req, res) => {
   const { subgoal_id, course_id } = req.query;
   const statement = `DELETE FROM courseToSubgoal WHERE subgoal_id = "${subgoal_id}" AND course_id = ${course_id}`;
   query(statement).then((resolve, rejected) => {
@@ -67,8 +71,8 @@ app.get('/deleteCourseToSubgoal', (req, res) => {
   });
 });
 
-app.get('/addCourseToSubgoal', (req, res) => {
-  const { percent, subgoal_id, course_id } = req.query;
+app.put('/addCourseToSubgoal', (req, res) => {
+  const { percent, subgoal_id, course_id } = req.body;
   const statement = `INSERT INTO courseToSubgoal VALUES (NULL ,"${subgoal_id}", ${course_id}, ${percent})`;
   query(statement).then((resolve, rejected) => {
     res.send(resolve);
@@ -76,9 +80,9 @@ app.get('/addCourseToSubgoal', (req, res) => {
 });
 
 /* user */
-app.get('/userLogin', (req, res) => {
-  const isEN = req.query.lang === "en";
-  const { username, password } = req.query;
+app.post('/userLogin', (req, res) => {
+  const { username, password, lang } = req.body;
+  const isEN = lang === "en";
   const statement = `SELECT id, password FROM teacher WHERE username="${username}"`;
   query(statement).then((resolve, rejected) => {
     if (resolve.length) {
