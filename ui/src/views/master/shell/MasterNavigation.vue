@@ -1,33 +1,28 @@
 <template>
-  <el-col
-    class="flex-1"
-    style="background:#545c64"
-    :span="12"
+  <el-menu
+    class="ct-sidebar"
+    background-color="#545c64"
+    text-color="#ffffff"
+    active-text-color="#ffd04b"
+    mode="horizontal"
+    router
   >
-    <el-menu
-      class="el-menu-vertical-demo ct-sidebar"
-      background-color="#545c64"
-      text-color="#ffffff"
-      active-text-color="#ffd04b"
-      router
+    <el-menu-item
+      v-for="(value, index) in masterRouters"
+      :key="index"
+      :index="value.path"
     >
-      <el-menu-item
-        v-for="(value, index) in masterRouters"
-        :key="index"
-        :index="value.path"
-      >
-        <i :class="value.meta.icon" />
-        <span slot="title">
-          {{ value.meta.name }}
-        </span>
-      </el-menu-item>
-    </el-menu>
-  </el-col>
+      <i :class="value.meta.icon" />
+      <span slot="title">
+        {{ value.meta.name }}
+      </span>
+    </el-menu-item>
+  </el-menu>
 </template>
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
-import { master } from '@/router/config';
+import { master } from '../../../router/config';
 
 export default defineComponent({
   setup() {
@@ -42,10 +37,7 @@ export default defineComponent({
 
 <style lang="scss">
 .el-menu {
-  border-right: none;
-
-  .el-menu-item {
-    padding-left: 20% !important;
+  &-item {
     font-size: 15px;
   }
 }

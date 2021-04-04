@@ -1,21 +1,14 @@
 <template>
   <el-container>
     <el-header>
-      <!-- header -->
+      <!-- header & navigation -->
+      <master-navigation />
       <!-- noop -->
     </el-header>
-    <el-container>
-      <el-aside>
-        <!-- navigation -->
-        <master-navigation />
-      </el-aside>
-      <el-container>
-        <el-main>
-          <!-- main -->
-          <router-view />
-        </el-main>
-      </el-container>
-    </el-container>
+    <el-main>
+      <!-- main -->
+      <router-view />
+    </el-main>
   </el-container>
 </template>
 
@@ -49,6 +42,6 @@ html{
 .el-main {
   overflow: auto;
   height: 90vh;
-  padding: 0;
+  // padding: 0;
 }
 </style>
