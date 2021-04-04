@@ -104,3 +104,23 @@ app.post('/userLogin', (req, res) => {
     }
   });
 });
+
+app.put('/userRegister', (req, res) => {
+  const { username, password, lang } = req.body;
+  const isEN = lang === "en";
+  const statement = `INSERT INTO teacher VALUES (null, 0, '${username}', '${password}', '', '', '', '')`;
+  const subStatement = `SELECT id, is_admin, ${isEN ? 'name_EN as name' : 'name'}, TEL, email FROM teacher WHERE username = '${username}'`;
+  query(subStatement).then((resolve, rejected) => {
+    if (resolve.length) {
+      res.send({
+        statusCode: 400,
+      });
+    } else {
+      query(statement).then((resolve, rejected) => {
+        query(subStatement).then((resolve, reject) => {
+          res.send(resolve[0]);
+        });
+      });
+    }
+  });
+});

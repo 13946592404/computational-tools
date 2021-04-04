@@ -57,7 +57,7 @@
               {{ $t('user.action.login') }}
             </el-button>
             <el-button
-              @click="onRegister"
+              @click="onLogin(true)"
               type="primary"
               :disabled="v.invalid"
             >
@@ -89,7 +89,7 @@ export default defineComponent({
       },
     });
 
-    const onLoginMessage = (message: any, type: any) => {
+    const onMessage = (message: any, type: any) => {
       Message({
         message,
         type,
@@ -98,36 +98,45 @@ export default defineComponent({
       });
     };
 
-    const onLoginHandle = (user: any) => {
+    const onHandle = (user: any, register = false) => {
       switch (user.statusCode) {
         case 404:
-          onLoginMessage($t('user.login.fail.user'), 'error');
+          onMessage($t('user.login.fail.user'), 'error');
           break;
         case 403:
-          onLoginMessage($t('user.login.fail.password'), 'warning');
+          onMessage($t('user.login.fail.password'), 'warning');
+          break;
+        case 400:
+          if (register) {
+            onMessage($t('user.register.fail.exist'), 'error');
+          }
           break;
         case undefined:
           if (user.id) {
-            onLoginMessage($t('user.login.success'), 'success');
+            if (register) {
+              onMessage($t('user.register.success'), 'success');
+            } else {
+              onMessage($t('user.login.success'), 'success');
+            }
             emit('user-login', user);
           } else {
-            onLoginMessage($t('user.login.fail.others'), 'error');
+            onMessage($t('user.login.fail.others'), 'error');
           }
           break;
         default: break;
       }
     };
 
-    const onLogin = async () => {
-      await UserController.loadUser(state.login);
+    const onLogin = async (register = false) => {
+      if (register) {
+        await UserController.registerUser(state.login);
+      } else {
+        await UserController.loadUser(state.login);
+      }
 
       const user = UserController.user; // eslint-disable-line
 
-      onLoginHandle(user);
-    };
-
-    const onRegister = async () => {
-      console.log(true);
+      onHandle(user, register);
     };
 
     return {
@@ -136,7 +145,6 @@ export default defineComponent({
 
       // methods
       onLogin,
-      onRegister,
     };
   },
 });

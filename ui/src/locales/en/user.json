@@ -25,11 +25,18 @@
   },
 
   "login": {
-    "success": "Login successful! Welcome to the system!",
+    "success": "Login successfully! Welcome to the system!",
     "fail": {
       "password": "Password error!",
       "user": "No such user!",
       "others": "Unknown error!"
+    }
+  },
+
+  "register": {
+    "success": "Register successfully!  Welcome to the system!",
+    "fail": {
+      "exist": "This username aleady existed in the system!"
     }
   }
 }

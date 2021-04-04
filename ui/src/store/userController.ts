@@ -34,6 +34,17 @@ export class UserModule extends createModule({ namespaced: MODULE_NAME }) {
     return user;
   }
 
+  @action async registerUser(login: any) {
+    const { username, password } = login;
+    const user = await UserService.registerUser({
+      lang: getLocale(),
+      username,
+      password,
+    }).then((res) => res.data);
+    this.setUser(user);
+    return user;
+  }
+
   @mutation logoutUser() {
     this.state.user = {};
   }
