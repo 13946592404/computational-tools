@@ -27,21 +27,28 @@ export default defineComponent({
 html{
   touch-action: none;
 }
-.el-container {
-  &.is-vertical {
-    height: 100vh;
+
+.el {
+  &-header {
+    height: 10vh !important;
+    padding: 0 !important;
+    z-index: 9999;
+  }
+  &-aside {
+    display: flex;
+    width: 15vw !important;
+  }
+  &-main {
+    overflow: auto;
+    height: 90vh;
+    // padding: 0;
+  }
+  &-menu {
+    &-item {
+      min-width: 15%;
+      text-align: center;
+    }
   }
 }
-.el-header {
-  height: 10vh !important;
-}
-.el-aside {
-  display: flex;
-  width: 15vw !important;
-}
-.el-main {
-  overflow: auto;
-  height: 90vh;
-  // padding: 0;
-}
+
 </style>
