@@ -24,7 +24,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-html{
+html {
   touch-action: none;
 }
 

@@ -128,7 +128,6 @@ export default defineComponent({
     };
 
     const onLogin = async (register = false) => {
-      console.log(register);
       if (register) {
         await UserController.registerUser(state.login);
       } else {

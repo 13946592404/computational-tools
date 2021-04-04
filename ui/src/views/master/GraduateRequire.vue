@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="padding: 0 20%">
     <div class="collapseGroups">
       <certification-requirement
         :radio-requirement="radioRequirement"

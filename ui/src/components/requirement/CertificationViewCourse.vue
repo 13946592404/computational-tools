@@ -173,7 +173,7 @@ export default defineComponent({
       },
       // css
       spanStyle: {
-        marginLeft: getLocale() === 'ch' ? '80px' : '380px',
+        marginLeft: getLocale() === 'ch' ? '80px' : '320px',
       },
     });
 
@@ -400,11 +400,19 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.el-form-item__content {
-  width: 800px;
+.demo-table-expand {
+  padding-left: 15%;
 }
-.el-form-item__label {
-  white-space: nowrap;
+.el-form {
+  &-item {
+    white-space: nowrap;
+    &__content {
+      width: 800px;
+    }
+    &__label {
+      white-space: nowrap;
+    }
+  }
 }
 .el-button {
   outline: 0 white !important;
