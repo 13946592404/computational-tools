@@ -1,4 +1,7 @@
 {
+  "user": "User",
   "requirement": "Requirements",
-  "user": "User"
+  "course": "Courses",
+  "student": "Students",
+  "setting": "Settings"
 }

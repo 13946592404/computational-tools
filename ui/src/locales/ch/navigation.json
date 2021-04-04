@@ -1,4 +1,7 @@
 {
+  "user": "用户",
   "requirement": "毕业要求",
-  "user": "用户"
+  "course": "课程管理",
+  "student": "学生管理",
+  "setting": "设置"
 }

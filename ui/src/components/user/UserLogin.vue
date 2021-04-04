@@ -76,7 +76,7 @@ import {
   reactive,
   toRefs,
 } from '@vue/composition-api';
-import { Message } from 'element-ui';
+import { LocalMessage } from '../../plugins/element-ui';
 import { $t } from '../../plugins/i18n';
 import UserController from '../../store/userController';
 
@@ -90,12 +90,10 @@ export default defineComponent({
     });
 
     const onMessage = (message: any, type: any) => {
-      Message({
+      LocalMessage(
         message,
         type,
-        showClose: true,
-        duration: 4000,
-      });
+      );
     };
 
     const onHandle = (user: any, register = false) => {

@@ -1,18 +1,16 @@
 import { RouteConfig } from 'vue-router';
 import { $t } from '@/plugins/i18n';
 import UserController from '@/store/userController';
-import { Message } from 'element-ui';
+import { LocalMessage } from '@/plugins/element-ui';
 
 const loginCheck = (to: any, from: any, next: any) => {
   if (UserController.user.id) {
     next();
   } else {
-    Message({
-      message: $t('user.permission.require').toString(),
-      type: 'warning',
-      showClose: true,
-      duration: 4000,
-    });
+    LocalMessage(
+      $t('user.permission.require'),
+      'warning',
+    );
     next({ name: 'user' });
   }
 };
@@ -41,7 +39,7 @@ export const master: RouteConfig = {
       name: 'user',
       meta: {
         name: $t('navigation.user'),
-        icon: 'el-icon-user-solid',
+        icon: 'el-icon-s-custom',
       },
       component: () => import('@/views/master/UserView.vue'),
     },
@@ -54,6 +52,35 @@ export const master: RouteConfig = {
       },
       component: () => import('@/views/master/GraduateRequire.vue'),
       beforeEnter: loginCheck,
+    },
+    {
+      path: 'course',
+      name: 'course',
+      meta: {
+        name: $t('navigation.course'),
+        icon: 'el-icon-school',
+      },
+      component: () => import('@/views/master/CourseManage.vue'),
+      beforeEnter: loginCheck,
+    },
+    {
+      path: 'student',
+      name: 'student',
+      meta: {
+        name: $t('navigation.student'),
+        icon: 'el-icon-collection',
+      },
+      component: () => import('@/views/master/StudentManage.vue'),
+      beforeEnter: loginCheck,
+    },
+    {
+      path: 'setting',
+      name: 'setting',
+      meta: {
+        name: $t('navigation.setting'),
+        icon: 'el-icon-s-tools',
+      },
+      component: () => import('@/views/master/UserSetting.vue'),
     },
   ],
 };

@@ -129,7 +129,8 @@ import {
   watch,
   ref,
 } from '@vue/composition-api';
-import { Notification, Message, MessageBox } from 'element-ui';
+import { Notification, MessageBox } from 'element-ui';
+import { LocalMessage } from '../../plugins/element-ui';
 import { $t, getLocale } from '../../plugins/i18n';
 import RequirementController from '../../store/requirementController';
 import courseToSubgoalService from '../../service/courseToSubgoalService';
@@ -206,6 +207,7 @@ export default defineComponent({
           message: msg,
           dangerouslyUseHTMLString: true,
           type: 'warning',
+          offset: 100,
           showClose: true,
           duration: 8000,
         });
@@ -257,20 +259,16 @@ export default defineComponent({
         subgoal_id,
       }).then(() => {
         subClassesUpdated();
-        Message({
-          message: `${$t('certification.subClasses.edit.success')}`,
-          type: 'success',
-          showClose: true,
-          duration: 4000,
-        });
+        LocalMessage(
+          $t('certification.subClasses.edit.success'),
+          'success',
+        );
       }).catch(() => {
         state.subClasses[index].percent = state.editValueMap.get(index); // reset
-        Message({
-          message: `${$t('certification.subClasses.edit.error')}`,
-          type: 'error',
-          showClose: true,
-          duration: 4000,
-        });
+        LocalMessage(
+          $t('certification.subClasses.edit.error'),
+          'error',
+        );
       });
     };
 
@@ -303,19 +301,15 @@ export default defineComponent({
         subgoal_id,
       }).then(() => {
         subClassesUpdated(true);
-        Message({
-          message: `${$t('certification.subClasses.delete.success')}`,
-          type: 'success',
-          showClose: true,
-          duration: 4000,
-        });
+        LocalMessage(
+          $t('certification.subClasses.delete.success'),
+          'success',
+        );
       }).catch(() => {
-        Message({
-          message: `${$t('certification.subClasses.delete.error')}`,
-          type: 'error',
-          showClose: true,
-          duration: 4000,
-        });
+        LocalMessage(
+          $t('certification.subClasses.delete.error'),
+          'error',
+        );
       });
     };
 
@@ -364,19 +358,15 @@ export default defineComponent({
         percent,
       }).then(() => {
         onAddUpdated();
-        Message({
-          message: `${$t('certification.subClasses.add.success')}`,
-          type: 'success',
-          showClose: true,
-          duration: 4000,
-        });
+        LocalMessage(
+          $t('certification.subClasses.add.success'),
+          'success',
+        );
       }).catch(() => {
-        Message({
-          message: `${$t('certification.subClasses.add.error')}`,
-          type: 'error',
-          showClose: true,
-          duration: 4000,
-        });
+        LocalMessage(
+          $t('certification.subClasses.add.error'),
+          'error',
+        );
       });
     };
 
