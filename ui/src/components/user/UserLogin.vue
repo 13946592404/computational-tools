@@ -50,7 +50,7 @@
             class="flex flex-row user-login-button"
           >
             <el-button
-              @click="onLogin"
+              @click="onLogin(false)"
               type="success"
               :disabled="v.invalid"
             >
@@ -128,6 +128,7 @@ export default defineComponent({
     };
 
     const onLogin = async (register = false) => {
+      console.log(register);
       if (register) {
         await UserController.registerUser(state.login);
       } else {
@@ -138,6 +139,10 @@ export default defineComponent({
 
       onHandle(user, register);
     };
+
+    if (UserController.user.id) {
+      emit('user-login', UserController.user);
+    }
 
     return {
       // data
