@@ -33,10 +33,18 @@
     }
   },
 
+  "logout": {
+    "success": "注销成功！"
+  },
+
   "register": {
     "success": "注册成功！欢迎进入系统",
     "fail": {
       "exist": "系统中已存在此用户名！"
     }
+  },
+
+  "permission": {
+    "require": "需要登陆才能访问！"
   }
 }

@@ -1,5 +1,21 @@
 import { RouteConfig } from 'vue-router';
 import { $t } from '@/plugins/i18n';
+import UserController from '@/store/userController';
+import { Message } from 'element-ui';
+
+const loginCheck = (to: any, from: any, next: any) => {
+  if (UserController.user.id) {
+    next();
+  } else {
+    Message({
+      message: $t('user.permission.require').toString(),
+      type: 'warning',
+      showClose: true,
+      duration: 4000,
+    });
+    next({ name: 'user' });
+  }
+};
 
 // home page: redirect
 export const home: RouteConfig = {
@@ -37,6 +53,7 @@ export const master: RouteConfig = {
         icon: 'el-icon-s-flag',
       },
       component: () => import('@/views/master/GraduateRequire.vue'),
+      beforeEnter: loginCheck,
     },
   ],
 };

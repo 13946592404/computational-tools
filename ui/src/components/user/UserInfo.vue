@@ -13,8 +13,12 @@
 
 <script lang="ts">
 import {
-  defineComponent, reactive, toRefs,
+  defineComponent,
+  reactive,
+  toRefs,
 } from '@vue/composition-api';
+import { Message } from 'element-ui';
+import { $t } from '../../plugins/i18n';
 import UserController from '../../store/userController';
 
 export default defineComponent({
@@ -33,6 +37,12 @@ export default defineComponent({
     const logoutHandle = () => {
       UserController.logoutUser(); // vuex
       emit('user-logout'); // state
+      Message({
+        message: $t('user.logout.success').toString(),
+        type: 'success',
+        showClose: true,
+        duration: 4000,
+      });
     };
 
     return {

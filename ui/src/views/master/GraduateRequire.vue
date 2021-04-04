@@ -47,6 +47,7 @@ import {
   reactive,
 } from '@vue/composition-api';
 import RequirementController from '../../store/requirementController';
+import UserController from '../../store/userController';
 // import CourseController from '@/store/courseController';
 import CertificationRequirement from '../../components/requirement/CertificationRequirement.vue';
 
@@ -63,9 +64,11 @@ export default defineComponent({
       value: true,
     });
 
+    const isAdmin = Boolean(UserController.user?.is_admin);
+
     const radioCoursePermission = reactive({
-      show: true,
-      value: true,
+      show: isAdmin,
+      value: isAdmin,
     });
 
     provide('radioSubgoal', radioSubgoal);

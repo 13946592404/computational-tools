@@ -33,10 +33,18 @@
     }
   },
 
+  "logout": {
+    "success": "Logout successfully!"
+  },
+
   "register": {
     "success": "Register successfully!  Welcome to the system!",
     "fail": {
       "exist": "This username aleady existed in the system!"
     }
+  },
+
+  "permission": {
+    "require": "Need login to visit!"
   }
 }
