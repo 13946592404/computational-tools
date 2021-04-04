@@ -2,7 +2,12 @@
   "label": {
     "login": "用户登录",
     "username": "账号",
-    "password": "密码"
+    "password": "密码",
+    "id_teacher": "编号",
+    "name": "姓名",
+    "tel": "电话",
+    "email": "邮箱",
+    "department": "部门"
   },
 
   "hint": {

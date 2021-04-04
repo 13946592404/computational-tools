@@ -2,7 +2,12 @@
   "label": {
     "login": "User Login",
     "username": "Username",
-    "password": "Password"
+    "password": "Password",
+    "id_teacher": "No.",
+    "name": "Name",
+    "tel": "TEL",
+    "email": "e-mail",
+    "department": "department"
   },
 
   "hint": {

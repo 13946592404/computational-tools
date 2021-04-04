@@ -1,13 +1,38 @@
 <template>
-  <div>
-    {{ user }}
-    <el-button
+  <div class="user-info-panel">
+    <el-form class="user-info-form">
+      <el-form-item
+        :label="$t('user.label.id_teacher')"
+      >
+        <span> {{ user.id_teacher }} </span>
+      </el-form-item>
+      <el-form-item
+        :label="$t('user.label.name')"
+      >
+        <span> {{ user.name }} </span>
+      </el-form-item>
+      <el-form-item
+        :label="$t('user.label.tel')"
+      >
+        <span> {{ user.tel }} </span>
+      </el-form-item>
+      <el-form-item
+        :label="$t('user.label.email')"
+      >
+        <span> {{ user.email }} </span>
+      </el-form-item>
+      <el-form-item
+        :label="$t('user.label.department')"
+      >
+        <span> {{ user.department }} </span>
+      </el-form-item>
+    </el-form>
+    <!-- <el-button
       @click="logoutHandle"
       type="info"
     >
       {{ $t('user.action.logout') }}
-    </el-button>
-    <el-calendar v-model="date" />
+    </el-button> -->
   </div>
 </template>
 
@@ -31,7 +56,7 @@ export default defineComponent({
 
   setup(props, { emit }) {
     const state = reactive({
-      date: new Date(),
+      edit: false,
     });
 
     const logoutHandle = () => {
@@ -50,3 +75,16 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss">
+.user-info {
+  &-panel {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  &-form {
+    white-space: nowrap;
+  }
+}
+</style>
