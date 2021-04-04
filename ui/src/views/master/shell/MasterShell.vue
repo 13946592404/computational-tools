@@ -47,7 +47,7 @@ html{
   width: 15vw !important;
 }
 .el-main {
-  overflow: scroll;
+  overflow: auto;
   height: 90vh;
   padding: 0;
 }

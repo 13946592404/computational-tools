@@ -2,21 +2,21 @@
   <div class="h-full">
     <div class="user-login-bg" />
     <div class="user-login-form">
-      <!-- text -->
-      <div>
-        <span class="text-2xl">
-          {{ $t('user.label.login') }}
-        </span>
-      </div>
-      <!-- input -->
       <el-form
-        class="mt-8 mb-4 flex flex-col"
-        :rules="rules"
+        class="flex flex-col"
         inline
       >
+        <!-- text -->
+        <el-form-item>
+          <span class="text-2xl">
+            {{ $t('user.label.login') }}
+          </span>
+        </el-form-item>
+
+        <!-- input -->
         <el-form-item
           :label="$t('user.label.username')"
-          prop="username"
+          required
         >
           <el-input
             class="user-login-input"
@@ -27,7 +27,7 @@
         </el-form-item>
         <el-form-item
           :label="$t('user.label.password')"
-          prop="password"
+          required
         >
           <el-input
             class="user-login-input"
@@ -37,22 +37,26 @@
             show-password
           />
         </el-form-item>
+
+        <!-- button -->
+        <el-form-item
+          class="flex flex-row ml-6 relative"
+          style="top: 5%"
+        >
+          <el-button
+            @click="onLogin"
+            type="success"
+          >
+            {{ $t('user.action.login') }}
+          </el-button>
+          <el-button
+            @click="onRegister"
+            type="primary"
+          >
+            {{ $t('user.action.register') }}
+          </el-button>
+        </el-form-item>
       </el-form>
-      <!-- button -->
-      <div class="flex flex-row ml-6">
-        <el-button
-          @click="onLogin"
-          type="success"
-        >
-          {{ $t('user.action.login') }}
-        </el-button>
-        <el-button
-          @click="onRegister"
-          type="primary"
-        >
-          {{ $t('user.action.register') }}
-        </el-button>
-      </div>
     </div>
   </div>
 </template>
@@ -73,34 +77,6 @@ export default defineComponent({
       login: {
         username: 'admin',
         password: 'changeme',
-      },
-      rules: {
-        username: [
-          {
-            required: true,
-            triggered: 'blur',
-            message: $t('user.hint.username.required'),
-          },
-          {
-            min: 3,
-            max: 16,
-            triggered: 'blur',
-            message: $t('user.hint.username.length'),
-          },
-        ],
-        password: [
-          {
-            required: true,
-            triggered: 'blur',
-            message: $t('user.hint.password.required'),
-          },
-          {
-            min: 3,
-            max: 16,
-            triggered: 'blur',
-            message: $t('user.hint.password.length'),
-          },
-        ],
       },
     });
 
@@ -175,8 +151,11 @@ export default defineComponent({
 
   &-form {
     position: absolute;
+    left: 70%;
     right: 5%;
     top: 20%;
+    bottom: 5%;
+    overflow: hidden;
     // width: 40%;
     // min-width: 20%;
     // max-width: 40%;
@@ -188,7 +167,7 @@ export default defineComponent({
     border-radius: 5%;
     display: flex;
     flex-flow: column wrap;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
   }
 
