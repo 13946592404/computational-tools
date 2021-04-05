@@ -1,7 +1,12 @@
 <template>
   <article>
-    <p class="my-course-label">
-      {{ $t('openCourse.table.label') }}
+    <div class="my-course-label">
+      <el-input
+        v-model="myCourses.search"
+        prefix-icon="el-icon-search"
+        :placeholder="$t('openCourse.add.search')"
+        class="mx-4 w-1/5 inline-block"
+      />
       <el-button
         class="ml-64 outline-none"
         type="success"
@@ -9,9 +14,9 @@
       >
         {{ $t('openCourse.table.open') }}
       </el-button>
-    </p>
+    </div>
     <el-table
-      :data="myCourses"
+      :data="myCoursesSearchResult"
       border
       height="385"
       class="my-course-table"
@@ -37,14 +42,14 @@
             class="text-blue-400"
           >
             <i class="el-icon-notebook-1" />
-            {{ scope.row.name}}
+            {{ scope.row.name }}
           </router-link>
         </template>
       </el-table-column>
       <!-- time -->
       <el-table-column
         :label="$t('openCourse.table.time')"
-        width="280"
+        width="230"
       >
         <template slot-scope="scope">
           <i class="el-icon-time" />
@@ -56,7 +61,7 @@
       <!-- action -->
       <el-table-column
         :label="$t('openCourse.table.action')"
-        width="100"
+        :width="isEN ? 120 : 100"
       >
         <template slot-scope="scope">
           <!-- inspect -->
@@ -92,8 +97,14 @@
       wrapperClosable
       close-on-press-escape
     >
+      <el-input
+        v-model="addCourses.search"
+        prefix-icon="el-icon-search"
+        :placeholder="$t('openCourse.add.search')"
+        class="mx-4 w-4/5"
+      />
       <el-table
-        :data="courses"
+        :data="addCoursesSearchResult"
         border
         height="385"
         class="pl-4"
@@ -120,10 +131,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from '@vue/composition-api';
+import {
+  defineComponent,
+  reactive,
+  toRefs,
+  computed,
+} from '@vue/composition-api';
 import dayjs from 'dayjs';
 import { LocalMessage, LocalMessageBox } from '../../plugins/element-ui';
-import { $t } from '../../plugins/i18n';
+import { $t, getLocale } from '../../plugins/i18n';
 import UserController from '../../store/userController';
 import CourseController from '../../store/courseController';
 import OpenCourseService from '../../service/openCourseService';
@@ -131,13 +147,36 @@ import OpenCourseService from '../../service/openCourseService';
 export default defineComponent({
   setup() {
     const state = reactive({
-      myCourses: [],
+      myCourses: {
+        list: [],
+        search: '',
+      },
+      addCourses: {
+        list: [],
+        search: '',
+      },
       drawer: false,
-      courses: [],
+      isEN: getLocale() === 'en',
+    });
+
+    const myCoursesSearchResult = computed(() => {
+      if (state.myCourses.search) {
+        // @ts-ignore
+        return state.myCourses.list.filter((val) => val.name.indexOf(state.myCourses.search) >= 0);
+      }
+      return state.myCourses.list;
+    });
+
+    const addCoursesSearchResult = computed(() => {
+      if (state.addCourses.search) {
+        // @ts-ignore
+        return state.addCourses.list.filter((val) => val.name.indexOf(state.addCourses.search) >= 0);
+      }
+      return state.addCourses.list;
     });
 
     const getMyCourses = async (force = false) => {
-      state.myCourses = await CourseController.loadMyCourses({
+      state.myCourses.list = await CourseController.loadMyCourses({
         teacher_id: UserController.user.id,
         force,
       });
@@ -163,7 +202,7 @@ export default defineComponent({
     };
 
     const onAddMyCourseButton = async () => {
-      state.courses = await CourseController.loadCourses();
+      state.addCourses.list = await CourseController.loadCourses();
       state.drawer = true;
     };
 
@@ -187,7 +226,12 @@ export default defineComponent({
 
     return {
       ...toRefs(state),
+      // computed
+      myCoursesSearchResult,
+      addCoursesSearchResult,
+      // filter
       timeFilter,
+      // methods
       onDeleteMyCourse,
       onAddMyCourseButton,
       onAddMyCourse,

@@ -11,7 +11,7 @@
  Target Server Version : 80018
  File Encoding         : 65001
 
- Date: 05/04/2021 21:54:14
+ Date: 05/04/2021 22:28:08
 */
 
 SET NAMES utf8mb4;
@@ -293,8 +293,8 @@ INSERT INTO `opencourse` VALUES (53, 25, 1, '2021-04-05 16:28:51');
 INSERT INTO `opencourse` VALUES (54, 26, 1, '2021-04-05 16:28:54');
 INSERT INTO `opencourse` VALUES (55, 27, 1, '2021-04-05 16:28:57');
 INSERT INTO `opencourse` VALUES (58, 29, 1, '2021-04-05 16:28:11');
-INSERT INTO `opencourse` VALUES (63, 1, 1, '2021-04-05 21:42:23');
-INSERT INTO `opencourse` VALUES (64, 3, 1, '2021-04-05 21:53:53');
+INSERT INTO `opencourse` VALUES (65, 5, 1, '2021-04-05 22:06:20');
+INSERT INTO `opencourse` VALUES (68, 2, 1, '2021-04-05 22:18:01');
 
 -- ----------------------------
 -- Table structure for opencourseform
@@ -514,6 +514,6 @@ CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `coursetosubgoalview` AS 
 -- View structure for opencourseview
 -- ----------------------------
 DROP VIEW IF EXISTS `opencourseview`;
-CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `opencourseview` AS select `course`.`id` AS `course_id`,`opencourse`.`id` AS `opencourse_id`,`opencourse`.`teacher_id` AS `teacher_id`,`course`.`name` AS `name`,`opencourse`.`time` AS `time` from (`opencourse` join `course` on((`opencourse`.`course_id` = `course`.`id`)));
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `opencourseview` AS select `course`.`id` AS `course_id`,`opencourse`.`id` AS `opencourse_id`,`opencourse`.`teacher_id` AS `teacher_id`,`course`.`name` AS `name`,`course`.`name_EN` AS `name_EN`,`opencourse`.`time` AS `time` from (`opencourse` join `course` on((`opencourse`.`course_id` = `course`.`id`)));
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import elementUI, { Message, MessageBox, Notification } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import { $t } from './i18n';
 
 Vue.use(elementUI);
 
@@ -21,8 +22,8 @@ export const LocalMessageBox = (
   message: any = '',
   confirmCallback: any = () => ({}),
   cancelCallback: any = () => ({}),
-  confirmButtonText: any = '',
-  cancelButtonText: any = '',
+  confirmButtonText: any = $t('action.yes'),
+  cancelButtonText: any = $t('action.no'),
 ) => MessageBox({
   title,
   message,

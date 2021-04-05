@@ -47,7 +47,7 @@ export class CourseModule extends createModule({ namespaced: MODULE_NAME }) {
   @action async loadMyCourses(opt: any) {
     const { teacher_id, force } = opt;
     if (force || !this.myCourses.length) {
-      await OpenCourseService.getCourse(teacher_id).then((res) => {
+      await OpenCourseService.getCourse(teacher_id, getLocale()).then((res) => {
         this.setMyCourses(res.data);
       });
     }

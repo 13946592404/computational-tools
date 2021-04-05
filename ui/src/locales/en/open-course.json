@@ -2,7 +2,7 @@
   "table": {
     "name": "Course Name",
     "time": "Time",
-    "label": "<My Opening Courses>",
+    "label": "Search My Opening Courses",
     "action": "Actions",
     "open": "Add New Course",
     "click": "Inspect",
@@ -20,6 +20,7 @@
   "add": {
     "title": "Add course",
     "message": "Are you sure to open this course? Course name: {course}",
-    "success": "Add course successfully"
+    "success": "Add course successfully",
+    "search": "Search course name"
   }
 }

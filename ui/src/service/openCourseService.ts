@@ -1,10 +1,11 @@
 import axios from '@/plugins/axios';
 
 class OpenCourse {
-  getCourse(teacher_id: number) {
+  getCourse(teacher_id: number, lang: string) {
     return axios.get('./openCourse', {
       params: {
         teacher_id,
+        lang,
       },
     });
   }

@@ -81,13 +81,14 @@ app.put('/addCourseToSubgoal', (req, res) => {
 
 /* user */
 app.post('/userLogin', (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, lang } = req.body;
+  const isEN = lang === 'en';
   const statement = `SELECT id, password FROM teacher WHERE username="${username}"`;
   query(statement).then((resolve, rejected) => {
     if (resolve.length) {
       const { id: user_id, password: user_password } = resolve[0];
       if (user_password === password) {
-        const subStatement = `SELECT * FROM teacher WHERE id = ${user_id}`
+        const subStatement = `SELECT id, is_admin, ${ isEN ? 'name_EN as name' : 'name' }, TEL, email, id_teacher, department FROM teacher WHERE id = ${user_id}`
         query(subStatement).then((resolve, rejected) => {
           res.send(resolve[0]);
         })
@@ -133,8 +134,9 @@ app.put('/userModifyInfo', (req, res) => {
 
 /* open course */
 app.get('/openCourse', (req, res) => {
-  const { teacher_id } = req.query;
-  const statement = `SELECT * FROM opencourseview WHERE teacher_id=${teacher_id}`;
+  const { teacher_id, lang } = req.query;
+  const isEN = lang === 'en';
+  const statement = `SELECT course_id, opencourse_id, time, ${ isEN ? 'name_EN as name' : 'name' } FROM opencourseview WHERE teacher_id=${teacher_id}`;
   query(statement).then((resolve, rejected) => {
     res.send(resolve);
   });
