@@ -17,7 +17,6 @@
 import { defineComponent, reactive, toRefs } from '@vue/composition-api';
 import UserLogin from '../../components/user/UserLogin.vue';
 import UserInfo from '../../components/user/UserInfo.vue';
-import UserController from '../../store/userController';
 
 export default defineComponent({
   components: {

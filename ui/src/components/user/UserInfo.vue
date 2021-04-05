@@ -1,6 +1,6 @@
 <template>
   <div class="user-info-panel">
-    <el-card class="user-info-card">
+    <el-card class="user-info-card animate__animated animate__zoomInDown">
       <!-- name -->
       <div slot="header" class="clearfix">
         <span style="margin-left: 40%">
@@ -100,6 +100,7 @@ export default defineComponent({
       LocalMessage(
         $t('user.logout.success'),
         'success',
+        1500,
       );
     };
 
@@ -111,6 +112,7 @@ export default defineComponent({
         LocalMessage(
           $t('user.modify.success'),
           'success',
+          1500,
         );
         emit('user-modify', state.userInfo); // v-model
       }

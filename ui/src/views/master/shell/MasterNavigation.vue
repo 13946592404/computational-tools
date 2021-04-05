@@ -6,6 +6,7 @@
     active-text-color="#ffd04b"
     mode="horizontal"
     router
+    default-active="1"
   >
     <el-menu-item
       v-for="(value, index) in masterRouters"

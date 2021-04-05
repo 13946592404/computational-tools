@@ -1,7 +1,6 @@
 <template>
-  <div class="h-full">
-    <div class="user-login-bg" />
-    <div class="user-login-form">
+  <div class="h-full user-login-bg">
+    <div class="user-login-form animate__animated animate__fadeIn">
       <ValidationObserver v-slot="v" tag="article" class="validation-div">
         <el-form
           class="flex flex-col"
@@ -93,6 +92,7 @@ export default defineComponent({
       LocalMessage(
         message,
         type,
+        1500,
       );
     };
 
@@ -165,7 +165,7 @@ export default defineComponent({
   &-div {
     position: absolute;
     height: 100%;
-    padding-top: 25%;
+    padding-top: 20%;
     text-align: center;
   }
 }
@@ -184,13 +184,12 @@ export default defineComponent({
     // filter: blur(5px);
   }
   &-form {
-    opacity: 0.85;
     position: absolute;
     left: 70%;
     right: 5%;
     width: 25%;
-    top: 20%;
-    bottom: 5%;
+    top: 15%;
+    bottom: 20%;
     height: 75%;
     overflow: hidden;
     background-color: white;

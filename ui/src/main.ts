@@ -7,6 +7,7 @@ import store from './store';
 import i18n from './plugins/i18n';
 
 import '@/assets/tailwind.css';
+import 'animate.css';
 // import 'default-passive-events';
 
 Vue.config.productionTip = false;

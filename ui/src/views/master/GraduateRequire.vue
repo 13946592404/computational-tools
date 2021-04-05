@@ -1,6 +1,6 @@
 <template>
   <div class="graduate-require">
-    <div class="collapseGroups">
+    <div class="collapseGroups animate__animated animate__fadeIn">
       <certification-requirement
         :radio-requirement="radioRequirement"
         v-if="globalVuexState"
@@ -96,7 +96,13 @@ export default defineComponent({
 
 <style lang="scss">
 .graduate-require {
-  padding: 0 18%;
+  height: auto;
+  width: 100%;
+  background-color: white;
+
+  .collapseGroups {
+    padding: 1% 18%;
+  }
 }
 .radioGroups {
   position: fixed;

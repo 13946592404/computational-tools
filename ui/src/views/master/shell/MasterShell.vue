@@ -7,7 +7,9 @@
     </el-header>
     <el-main>
       <!-- main -->
-      <router-view />
+      <div class="el-main-style">
+        <router-view />
+      </div>
     </el-main>
   </el-container>
 </template>
@@ -38,6 +40,13 @@ html {
     overflow: auto;
     height: 90vh;
     padding: 0 !important;
+    background-image: url('../../../assets/e.jpeg');
+
+    &-style {
+      height: 100%;
+      width: 100%;
+      opacity: 0.9;
+    }
   }
   &-menu {
     &-item {
