@@ -11,7 +11,7 @@
  Target Server Version : 80018
  File Encoding         : 65001
 
- Date: 05/04/2021 12:21:03
+ Date: 05/04/2021 16:54:43
 */
 
 SET NAMES utf8mb4;
@@ -267,6 +267,34 @@ CREATE TABLE `opencourse`  (
 -- Records of opencourse
 -- ----------------------------
 INSERT INTO `opencourse` VALUES (1, 1, 1, '2021-03-09 17:54:12');
+INSERT INTO `opencourse` VALUES (30, 2, 1, '2021-04-05 16:27:46');
+INSERT INTO `opencourse` VALUES (31, 3, 1, '2021-04-05 16:27:49');
+INSERT INTO `opencourse` VALUES (32, 4, 1, '2021-04-05 16:27:52');
+INSERT INTO `opencourse` VALUES (33, 5, 1, '2021-04-05 16:27:55');
+INSERT INTO `opencourse` VALUES (34, 6, 1, '2021-04-05 16:27:59');
+INSERT INTO `opencourse` VALUES (35, 7, 1, '2021-04-05 16:28:02');
+INSERT INTO `opencourse` VALUES (36, 8, 1, '2021-04-05 16:28:05');
+INSERT INTO `opencourse` VALUES (37, 9, 1, '2021-04-05 16:28:08');
+INSERT INTO `opencourse` VALUES (38, 10, 1, '2021-04-05 16:28:11');
+INSERT INTO `opencourse` VALUES (39, 11, 1, '2021-04-05 16:28:13');
+INSERT INTO `opencourse` VALUES (40, 12, 1, '2021-04-05 16:28:16');
+INSERT INTO `opencourse` VALUES (41, 13, 1, '2021-04-05 16:28:19');
+INSERT INTO `opencourse` VALUES (42, 14, 1, '2021-04-05 16:28:21');
+INSERT INTO `opencourse` VALUES (43, 15, 1, '2021-04-05 16:28:24');
+INSERT INTO `opencourse` VALUES (44, 16, 1, '2021-04-05 16:28:26');
+INSERT INTO `opencourse` VALUES (45, 17, 1, '2021-04-05 16:28:28');
+INSERT INTO `opencourse` VALUES (46, 18, 1, '2021-04-05 16:28:31');
+INSERT INTO `opencourse` VALUES (47, 19, 1, '2021-04-05 16:28:34');
+INSERT INTO `opencourse` VALUES (48, 20, 1, '2021-04-05 16:28:38');
+INSERT INTO `opencourse` VALUES (49, 21, 1, '2021-04-05 16:28:41');
+INSERT INTO `opencourse` VALUES (50, 22, 1, '2021-04-05 16:28:44');
+INSERT INTO `opencourse` VALUES (51, 23, 1, '2021-04-05 16:28:47');
+INSERT INTO `opencourse` VALUES (52, 24, 1, '2021-04-05 16:28:49');
+INSERT INTO `opencourse` VALUES (53, 25, 1, '2021-04-05 16:28:51');
+INSERT INTO `opencourse` VALUES (54, 26, 1, '2021-04-05 16:28:54');
+INSERT INTO `opencourse` VALUES (55, 27, 1, '2021-04-05 16:28:57');
+INSERT INTO `opencourse` VALUES (56, 28, 1, '2021-04-05 16:28:59');
+INSERT INTO `opencourse` VALUES (57, 29, 1, '2021-04-05 16:29:02');
 
 -- ----------------------------
 -- Table structure for opencourseform
@@ -474,12 +502,18 @@ CREATE TABLE `teacher`  (
 -- Records of teacher
 -- ----------------------------
 INSERT INTO `teacher` VALUES (1, 1, 'admin', 'changeme', '管理员', 'admin', '13946592404', '13946592404@163.com', '123456', '计算机学院');
-INSERT INTO `teacher` VALUES (2, 0, 'admin1', 'changeme', '', '', '', '', NULL, '');
+INSERT INTO `teacher` VALUES (2, 0, 'admin1', 'changeme', '', '', '', '', 'null', '');
 
 -- ----------------------------
 -- View structure for coursetosubgoalview
 -- ----------------------------
 DROP VIEW IF EXISTS `coursetosubgoalview`;
 CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `coursetosubgoalview` AS select `coursetosubgoal`.`id` AS `id`,`coursetosubgoal`.`subgoal_id` AS `subgoal_id`,`course`.`id` AS `course_id`,`course`.`name` AS `name`,`course`.`name_EN` AS `name_EN`,`coursetosubgoal`.`percent` AS `percent` from (`coursetosubgoal` join `course` on((`coursetosubgoal`.`course_id` = `course`.`id`))) order by `coursetosubgoal`.`subgoal_id`;
+
+-- ----------------------------
+-- View structure for opencourseview
+-- ----------------------------
+DROP VIEW IF EXISTS `opencourseview`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `opencourseview` AS select `course`.`id` AS `course_id`,`opencourse`.`id` AS `opencourse_id`,`opencourse`.`teacher_id` AS `teacher_id`,`course`.`name` AS `name`,`opencourse`.`time` AS `time` from (`opencourse` join `course` on((`opencourse`.`course_id` = `course`.`id`)));
 
 SET FOREIGN_KEY_CHECKS = 1;

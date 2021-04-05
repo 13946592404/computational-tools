@@ -2,6 +2,7 @@ import { useModule } from '@/store/helper';
 import { reactive } from '@vue/composition-api';
 import { createModule, mutation, action } from 'vuex-class-component';
 import CourseService from '@/service/courseService';
+import OpenCourseService from '@/service/openCourseService';
 import { getLocale } from '@/plugins/i18n';
 
 const MODULE_NAME = 'CourseModule';
@@ -9,6 +10,7 @@ const MODULE_NAME = 'CourseModule';
 export class CourseModule extends createModule({ namespaced: MODULE_NAME }) {
   state = reactive({
     courses: [],
+    myCourses: [],
   });
 
   get courses() {
@@ -31,6 +33,24 @@ export class CourseModule extends createModule({ namespaced: MODULE_NAME }) {
   // init
   @action async init(force = false) {
     this.loadCourses(force);
+  }
+
+  /* my course */
+  get myCourses() {
+    return this.state.myCourses;
+  }
+
+  @mutation setMyCourses(myCourses: any) {
+    this.state.myCourses = myCourses;
+  }
+
+  @action async loadMyCourses(teacher_id: number) {
+    if (!this.myCourses.length) {
+      await OpenCourseService.getCourse(teacher_id).then((res) => {
+        this.setMyCourses(res.data);
+      });
+    }
+    return this.myCourses;
   }
 }
 

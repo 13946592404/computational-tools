@@ -130,3 +130,15 @@ app.put('/userModifyInfo', (req, res) => {
     res.send(resolve);
   });
 });
+
+/* open course */
+app.get('/openCourse', (req, res) => {
+  const { teacher_id } = req.query;
+  const statement = `SELECT * FROM opencourseview WHERE teacher_id=${teacher_id}`;
+  query(statement).then((resolve, rejected) => {
+    res.send(resolve);
+  });
+});
+
+app.put('/openCourseAdd', (req, res) => {
+});
