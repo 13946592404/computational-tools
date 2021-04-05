@@ -11,7 +11,7 @@
  Target Server Version : 80018
  File Encoding         : 65001
 
- Date: 04/04/2021 23:29:42
+ Date: 05/04/2021 12:21:03
 */
 
 SET NAMES utf8mb4;
@@ -76,7 +76,7 @@ CREATE TABLE `coursetosubgoal`  (
   INDEX `course_id`(`course_id`) USING BTREE,
   CONSTRAINT `coursetosubgoal_ibfk_1` FOREIGN KEY (`subgoal_id`) REFERENCES `subgoal` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `coursetosubgoal_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 200 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 205 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of coursetosubgoal
@@ -468,14 +468,13 @@ CREATE TABLE `teacher`  (
   `id_teacher` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '工号',
   `department` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '部门',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of teacher
 -- ----------------------------
-INSERT INTO `teacher` VALUES (1, 1, 'admin', 'changeme', '管理员', 'admin', '123', '123@456', NULL, '');
-INSERT INTO `teacher` VALUES (5, 0, 'admin1', 'changeme', '', '', '', '', NULL, '');
-INSERT INTO `teacher` VALUES (6, 0, 'admin4', 'changeme', '', '', '', '', NULL, '');
+INSERT INTO `teacher` VALUES (1, 1, 'admin', 'changeme', '管理员', 'admin', '13946592404', '13946592404@163.com', '123456', '计算机学院');
+INSERT INTO `teacher` VALUES (2, 0, 'admin1', 'changeme', '', '', '', '', NULL, '');
 
 -- ----------------------------
 -- View structure for coursetosubgoalview

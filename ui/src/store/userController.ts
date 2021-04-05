@@ -42,6 +42,12 @@ export class UserModule extends createModule({ namespaced: MODULE_NAME }) {
     return user;
   }
 
+  @action async modifyUserInfo(user: any) {
+    const newUser = await UserService.modifyUserInfo(user).then((res) => res.data);
+    this.setUser(user);
+    return user;
+  }
+
   @mutation logoutUser() {
     this.state.user = {};
   }

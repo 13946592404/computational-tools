@@ -122,3 +122,11 @@ app.put('/userRegister', (req, res) => {
     }
   });
 });
+
+app.put('/userModifyInfo', (req, res) => {
+  const { id, id_teacher, name, TEL, email, department } = req.body;
+  const statement = `UPDATE teacher SET id_teacher = '${id_teacher}', name = '${name}', TEL = '${TEL}', email = '${email}', department = '${department}' WHERE id = ${id}`;
+  query(statement).then((resolve, rejected) => {
+    res.send(resolve);
+  });
+});

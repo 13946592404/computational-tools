@@ -6,8 +6,9 @@
     "id_teacher": "No.",
     "name": "Name",
     "tel": "TEL",
-    "email": "e-mail",
-    "department": "department"
+    "email": "E-mail",
+    "department": "Department",
+    "info": "Info"
   },
 
   "hint": {
@@ -26,7 +27,9 @@
   "action": {
     "login": "Login",
     "logout": "Logout",
-    "register": "Register"
+    "register": "Register",
+    "modifyInfo": "Modify Information",
+    "modifyCheck": "Check Your Modifaction"
   },
 
   "login": {
@@ -47,6 +50,10 @@
     "fail": {
       "exist": "This username aleady existed in the system!"
     }
+  },
+
+  "modify": {
+    "success": "Modify information successfully！"
   },
 
   "permission": {

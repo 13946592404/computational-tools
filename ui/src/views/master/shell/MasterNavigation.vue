@@ -38,5 +38,7 @@ export default defineComponent({
 <style lang="scss">
 .ct-sidebar {
   border-bottom: none !important;
+  display: flex !important;
+  justify-content: center;
 }
 </style>

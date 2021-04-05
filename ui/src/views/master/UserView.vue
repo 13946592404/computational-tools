@@ -3,11 +3,12 @@
     <user-info
       v-if="user.id"
       :user="user"
-      @user-logout="userLogout"
+      @user-logout="onUserLogout"
+      @user-modify="onUserLogin"
     />
     <user-login
       v-else
-      @user-login="userLogin"
+      @user-login="onUserLogin"
     />
   </div>
 </template>
@@ -16,6 +17,7 @@
 import { defineComponent, reactive, toRefs } from '@vue/composition-api';
 import UserLogin from '../../components/user/UserLogin.vue';
 import UserInfo from '../../components/user/UserInfo.vue';
+import UserController from '../../store/userController';
 
 export default defineComponent({
   components: {
@@ -28,19 +30,19 @@ export default defineComponent({
       user: {},
     });
 
-    const userLogin = (user: any) => {
+    const onUserLogin = (user: any) => {
       state.user = user;
     };
 
-    const userLogout = () => {
+    const onUserLogout = () => {
       state.user = {};
     };
 
     return {
       ...toRefs(state),
       // methods
-      userLogin,
-      userLogout,
+      onUserLogin,
+      onUserLogout,
     };
   },
 });

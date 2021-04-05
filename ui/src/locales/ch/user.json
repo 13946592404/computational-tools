@@ -7,7 +7,8 @@
     "name": "姓名",
     "tel": "电话",
     "email": "邮箱",
-    "department": "部门"
+    "department": "部门",
+    "info": "个人信息"
   },
 
   "hint": {
@@ -26,7 +27,9 @@
   "action": {
     "login": "登录",
     "logout": "注销",
-    "register": "注册"
+    "register": "注册",
+    "modifyInfo": "修改信息",
+    "modifyCheck": "确认修改"
   },
 
   "login": {
@@ -47,6 +50,10 @@
     "fail": {
       "exist": "系统中已存在此用户名！"
     }
+  },
+
+  "modify": {
+    "success": "修改信息成功！"
   },
 
   "permission": {

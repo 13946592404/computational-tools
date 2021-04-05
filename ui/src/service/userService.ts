@@ -8,6 +8,10 @@ class UserService {
   registerUser(params: any) {
     return axios.put('./userRegister', params);
   }
+
+  modifyUserInfo(user: any) {
+    return axios.put('./userModifyInfo', user);
+  }
 }
 
 export default new UserService();
