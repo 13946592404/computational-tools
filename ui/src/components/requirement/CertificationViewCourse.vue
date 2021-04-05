@@ -129,8 +129,7 @@ import {
   watch,
   ref,
 } from '@vue/composition-api';
-import { Notification, MessageBox } from 'element-ui';
-import { LocalMessage } from '../../plugins/element-ui';
+import { LocalMessage, LocalMessageBox, LocalNotification } from '../../plugins/element-ui';
 import { $t, getLocale } from '../../plugins/i18n';
 import RequirementController from '../../store/requirementController';
 import courseToSubgoalService from '../../service/courseToSubgoalService';
@@ -202,15 +201,11 @@ export default defineComponent({
         <h2>${$t('certification.subClasses.subGoal.target')}${props.subgoal}</h2>
         <h2>${$t('certification.subClasses.subGoal.value')}${subClassesTotal.value}%</h2>
         `;
-        Notification({
-          title: `${$t('certification.subClasses.subGoal.total')}`,
-          message: msg,
-          dangerouslyUseHTMLString: true,
-          type: 'warning',
-          offset: 100,
-          showClose: true,
-          duration: 8000,
-        });
+        LocalNotification(
+          $t('certification.subClasses.subGoal.total'),
+          msg,
+          'warning',
+        );
       }
     };
 
@@ -314,20 +309,11 @@ export default defineComponent({
     };
 
     const onDeleteMessageBox = (index: number) => {
-      MessageBox({
-        title: `${$t('certification.subClasses.delete.message')}`,
-        message: `${$t('certification.subClasses.delete.hint')}`,
-        // center: true,
-        showCancelButton: true,
-        showConfirmButton: true,
-        closeOnClickModal: true,
-        closeOnPressEscape: true,
-        callback: (action: string) => {
-          if (action === 'confirm') {
-            onDeleteSubmit(index);
-          }
-        },
-      });
+      LocalMessageBox(
+        $t('certification.subClasses.delete.message'),
+        $t('certification.subClasses.delete.hint'),
+        () => onDeleteSubmit(index),
+      );
     };
 
     /* add */

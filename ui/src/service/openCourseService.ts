@@ -8,6 +8,10 @@ class OpenCourse {
       },
     });
   }
+
+  deleteCourse(openCourse_id: number) {
+    return axios.delete(`./openCourseDelete?openCourse_id=${openCourse_id}`);
+  }
 }
 
 export default new OpenCourse();

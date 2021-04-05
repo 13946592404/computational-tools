@@ -10,6 +10,7 @@
   >
     <el-menu-item
       v-for="(value, index) in masterRouters"
+      v-show="value.meta.icon"
       :key="index"
       :index="value.path"
     >

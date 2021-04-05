@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full bg-white px-64 py-4 animate__animated animate__fadeIn">
+  <div class="h-full bg-white animate__animated animate__fadeIn">
     <my-course />
   </div>
 </template>

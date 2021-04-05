@@ -64,6 +64,13 @@ export const master: RouteConfig = {
       beforeEnter: loginCheck,
     },
     {
+      path: 'course-view',
+      name: 'course-view',
+      meta: {},
+      component: () => import('@/components/course/CourseView.vue'),
+      beforeEnter: loginCheck,
+    },
+    {
       path: 'student',
       name: 'student',
       meta: {

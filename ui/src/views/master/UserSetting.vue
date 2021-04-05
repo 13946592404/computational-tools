@@ -44,7 +44,7 @@ import {
   reactive,
   toRefs,
 } from '@vue/composition-api';
-import { MessageBox } from 'element-ui';
+import { LocalMessageBox } from '../../plugins/element-ui';
 import { $t } from '../../plugins/i18n';
 import UserController from '../../store/userController';
 
@@ -69,21 +69,11 @@ export default defineComponent({
     const onLangChange = (val: boolean) => {
       localStorage.setItem('lang', val ? 'en' : 'ch');
       // message box
-      MessageBox({
-        title: $t('setting.lang.title').toString(),
-        message: $t('setting.lang.message').toString(),
-        confirmButtonText: $t('setting.lang.yes').toString(),
-        cancelButtonText: $t('setting.lang.no').toString(),
-        showCancelButton: true,
-        showConfirmButton: true,
-        closeOnClickModal: true,
-        closeOnPressEscape: true,
-        callback: (action: string) => {
-          if (action === 'confirm') {
-            window.location.reload();
-          }
-        },
-      });
+      LocalMessageBox(
+        $t('setting.lang.title'),
+        $t('setting.lang.message'),
+        () => window.location.reload(),
+      );
     };
 
     const passwordSave = () => {
@@ -101,24 +91,15 @@ export default defineComponent({
     const onSavepasswordChange = (val: boolean) => {
       if (val) { // to yes
         // message box
-        MessageBox({
-          title: $t('setting.password.title').toString(),
-          message: $t('setting.password.message').toString(),
-          confirmButtonText: $t('setting.password.yes').toString(),
-          cancelButtonText: $t('setting.password.no').toString(),
-          showCancelButton: true,
-          showConfirmButton: true,
-          closeOnClickModal: true,
-          closeOnPressEscape: true,
-          callback: (action: string) => {
-            if (action === 'confirm') {
-              passwordSave();
-            } else {
-              state.savePassword = false;
-              passwordDelete();
-            }
+        LocalMessageBox(
+          $t('setting.password.title'),
+          $t('setting.password.message'),
+          () => passwordSave(),
+          () => {
+            state.savePassword = false;
+            passwordDelete();
           },
-        });
+        );
       } else { // to no
         passwordDelete();
       }

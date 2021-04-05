@@ -6,9 +6,7 @@
     "ch": "Chinese",
     "en": "English",
     "title": "Modify Language",
-    "message": "To change the language, you need to refresh the page. Do you want to do it now?",
-    "yes": "Refresh",
-    "no": "Nop"
+    "message": "To change the language, you need to refresh the page. Do you want to do it now?"
   },
 
   "password": {
@@ -16,8 +14,6 @@
     "nop": "No-save",
     "ok": "Save",
     "title": "Check to save password",
-    "message": "It's not safe to save your password locally, do you confirm?",
-    "yes": "Yes",
-    "no": "No"
+    "message": "It's not safe to save your password locally, do you confirm?"
   }
 }

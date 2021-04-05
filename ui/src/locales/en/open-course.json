@@ -1,0 +1,25 @@
+{
+  "table": {
+    "name": "Course Name",
+    "time": "Time",
+    "label": "<My Opening Courses>",
+    "action": "Actions",
+    "open": "Add New Course",
+    "click": "Inspect",
+    "delete": "Delete",
+    "add": "Add",
+    "addList": "Courses List"
+  },
+
+  "delete": {
+    "title": "Delete Course",
+    "message": "Are you sure to delete this course? This action cannot restore! Pleack check carefully! You will delete course: {course}",
+    "success": "Delete course successfully!"
+  },
+
+  "add": {
+    "title": "Add course",
+    "message": "Are you sure to open this course? Course name: {course}",
+    "success": "Add course successfully"
+  }
+}

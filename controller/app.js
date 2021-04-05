@@ -142,3 +142,11 @@ app.get('/openCourse', (req, res) => {
 
 app.put('/openCourseAdd', (req, res) => {
 });
+
+app.delete('/openCourseDelete', (req, res) => {
+  const { openCourse_id } = req.query;
+  const statement = `DELETE FROM opencourse WHERE id = '${openCourse_id}'`;
+  query(statement).then((resolve, rejected) => {
+    res.send(resolve);
+  });
+});
