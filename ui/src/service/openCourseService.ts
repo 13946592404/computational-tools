@@ -12,6 +12,10 @@ class OpenCourse {
   deleteCourse(openCourse_id: number) {
     return axios.delete(`./openCourseDelete?openCourse_id=${openCourse_id}`);
   }
+
+  addCourse(params: any) {
+    return axios.put('./openCourseAdd', params);
+  }
 }
 
 export default new OpenCourse();

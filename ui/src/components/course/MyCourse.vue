@@ -3,7 +3,7 @@
     <p class="my-course-label">
       {{ $t('openCourse.table.label') }}
       <el-button
-        class="ml-64"
+        class="ml-64 outline-none"
         type="success"
         @click="onAddMyCourseButton"
       >
@@ -121,6 +121,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from '@vue/composition-api';
+import dayjs from 'dayjs';
 import { LocalMessage, LocalMessageBox } from '../../plugins/element-ui';
 import { $t } from '../../plugins/i18n';
 import UserController from '../../store/userController';
@@ -144,7 +145,7 @@ export default defineComponent({
     // onCreated
     getMyCourses();
 
-    const timeFilter = (str: string) => str.replace('T', ' ').replace('.000Z', ' ');
+    const timeFilter = (str: string) => dayjs(str).format('YYYY-MM-DD dddd');
 
     const onDeleteMyCourse = async (row: any) => {
       LocalMessageBox(
@@ -169,15 +170,19 @@ export default defineComponent({
     const onAddMyCourse = async (row: any) => {
       LocalMessageBox(
         $t('openCourse.add.title'),
-        $t('openCourse.add.message'),
-        () => {
-          console.log('right!');
-        },
-        () => {
-          console.log('on cancel!');
+        $t('openCourse.add.message', { course: row.name }),
+        async () => {
+          await OpenCourseService.addCourse({
+            course_id: row.id,
+            teacher_id: UserController.user.id,
+          });
+          LocalMessage(
+            $t('openCourse.add.success'),
+            'success',
+          );
+          getMyCourses(true); // forcely
         },
       );
-      getMyCourses(true); // forcely
     };
 
     return {

@@ -140,12 +140,17 @@ app.get('/openCourse', (req, res) => {
   });
 });
 
-app.put('/openCourseAdd', (req, res) => {
-});
-
 app.delete('/openCourseDelete', (req, res) => {
   const { openCourse_id } = req.query;
   const statement = `DELETE FROM opencourse WHERE id = '${openCourse_id}'`;
+  query(statement).then((resolve, rejected) => {
+    res.send(resolve);
+  });
+});
+
+app.put('/openCourseAdd', (req, res) => {
+  const { course_id, teacher_id } = req.body;
+  const statement = `INSERT INTO opencourse values(null, ${course_id}, ${teacher_id}, NOW())`;
   query(statement).then((resolve, rejected) => {
     res.send(resolve);
   });
