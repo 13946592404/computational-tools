@@ -38,6 +38,7 @@
                 spellcheck="false"
                 v-model="login.password"
                 :placeholder="$t('user.hint.password.text')"
+                @keyup.enter="onLogin(false)"
                 show-password
               />
               <p class="validation-text">{{ errors[0] }}</p>
@@ -83,10 +84,19 @@ export default defineComponent({
   setup(props, { emit }) {
     const state = reactive({
       login: {
-        username: 'admin',
-        password: 'changeme',
+        username: localStorage.getItem('username') || '',
+        password: localStorage.getItem('password') || '',
       },
     });
+
+    const onLoginSuccess = (user: any) => {
+      emit('user-login', user);
+      if (localStorage.getItem('savePassword') === 'yes') {
+        const { username, password } = state.login;
+        localStorage.setItem('username', username);
+        localStorage.setItem('password', password);
+      }
+    };
 
     const onMessage = (message: any, type: any) => {
       LocalMessage(
@@ -116,7 +126,7 @@ export default defineComponent({
             } else {
               onMessage($t('user.login.success'), 'success');
             }
-            emit('user-login', user);
+            onLoginSuccess(user);
           } else {
             onMessage($t('user.login.fail.others'), 'error');
           }

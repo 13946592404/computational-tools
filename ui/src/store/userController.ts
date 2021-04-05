@@ -44,7 +44,7 @@ export class UserModule extends createModule({ namespaced: MODULE_NAME }) {
 
   @action async modifyUserInfo(user: any) {
     const newUser = await UserService.modifyUserInfo(user).then((res) => res.data);
-    this.setUser(user);
+    this.setUser(newUser);
     return user;
   }
 

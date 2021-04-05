@@ -1,0 +1,23 @@
+{
+  "label": "Local settings",
+
+  "lang": {
+    "label": "Language",
+    "ch": "Chinese",
+    "en": "English",
+    "title": "Modify Language",
+    "message": "To change the language, you need to refresh the page. Do you want to do it now?",
+    "yes": "Refresh",
+    "no": "Nop"
+  },
+
+  "password": {
+    "label": "Save password",
+    "nop": "No-save",
+    "ok": "Save",
+    "title": "Check to save password",
+    "message": "It's not safe to save your password locally, do you confirm?",
+    "yes": "Yes",
+    "no": "No"
+  }
+}

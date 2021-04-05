@@ -19,6 +19,7 @@
       <!-- item -->
       <el-form
         class="user-info-form"
+        label-width="100px"
         inline
       >
         <el-form-item
