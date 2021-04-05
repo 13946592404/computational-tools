@@ -74,7 +74,7 @@ export default defineComponent({
       handleCollapseByRadioSubgoal(radioSubgoal);
     };
 
-    getSubgoals();
+    setTimeout(() => getSubgoals(), 0); // debug: async
 
     watch(
       () => radioSubgoal,
