@@ -47,6 +47,12 @@
     "form": {
       "hint": "Input Subgoal Name",
       "exist": "This target is already existed!"
+    },
+
+    "require": {
+      "subgoal": "Requirement subgoal",
+      "ratio": "Ratio",
+      "course": "Proportional composition of curriculum sub-objectives"
     }
   }
 }

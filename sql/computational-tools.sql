@@ -11,7 +11,7 @@
  Target Server Version : 80018
  File Encoding         : 65001
 
- Date: 05/04/2021 22:28:08
+ Date: 17/05/2021 00:12:16
 */
 
 SET NAMES utf8mb4;
@@ -76,7 +76,7 @@ CREATE TABLE `coursetosubgoal`  (
   INDEX `course_id`(`course_id`) USING BTREE,
   CONSTRAINT `coursetosubgoal_ibfk_1` FOREIGN KEY (`subgoal_id`) REFERENCES `subgoal` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `coursetosubgoal_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 205 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 208 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of coursetosubgoal
@@ -261,7 +261,7 @@ CREATE TABLE `opencourse`  (
   INDEX `opencourse_ibfk_2`(`teacher_id`) USING BTREE,
   CONSTRAINT `opencourse_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `opencourse_ibfk_2` FOREIGN KEY (`teacher_id`) REFERENCES `teacher` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 69 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of opencourse
@@ -308,13 +308,20 @@ CREATE TABLE `opencourseform`  (
   INDEX `opencourseform_ibfk_1`(`openCourse_id`) USING BTREE,
   INDEX `target`(`target`) USING BTREE,
   CONSTRAINT `opencourseform_ibfk_1` FOREIGN KEY (`openCourse_id`) REFERENCES `opencourse` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of opencourseform
 -- ----------------------------
 INSERT INTO `opencourseform` VALUES (1, 1, 'final_exam');
 INSERT INTO `opencourseform` VALUES (2, 1, 'mid_exam');
+INSERT INTO `opencourseform` VALUES (3, 31, '月考');
+INSERT INTO `opencourseform` VALUES (4, 31, '小测');
+INSERT INTO `opencourseform` VALUES (5, 31, '考勤');
+INSERT INTO `opencourseform` VALUES (6, 31, '机考');
+INSERT INTO `opencourseform` VALUES (7, 31, '期中考试');
+INSERT INTO `opencourseform` VALUES (8, 31, '期末考试');
+INSERT INTO `opencourseform` VALUES (9, 31, '随机测验');
 
 -- ----------------------------
 -- Table structure for opencoursetosubgoal
@@ -330,12 +337,19 @@ CREATE TABLE `opencoursetosubgoal`  (
   INDEX `courseToSubgoal_id`(`courseToSubgoal_id`) USING BTREE,
   CONSTRAINT `opencoursetosubgoal_ibfk_1` FOREIGN KEY (`openCourseForm_id`) REFERENCES `opencourseform` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `opencoursetosubgoal_ibfk_2` FOREIGN KEY (`courseToSubgoal_id`) REFERENCES `coursetosubgoal` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of opencoursetosubgoal
 -- ----------------------------
 INSERT INTO `opencoursetosubgoal` VALUES (1, 1, 1, 30);
+INSERT INTO `opencoursetosubgoal` VALUES (2, 3, 3, 16);
+INSERT INTO `opencoursetosubgoal` VALUES (3, 4, 3, 32);
+INSERT INTO `opencoursetosubgoal` VALUES (4, 5, 3, 52);
+INSERT INTO `opencoursetosubgoal` VALUES (5, 6, 45, 25);
+INSERT INTO `opencoursetosubgoal` VALUES (6, 7, 45, 25);
+INSERT INTO `opencoursetosubgoal` VALUES (7, 8, 45, 25);
+INSERT INTO `opencoursetosubgoal` VALUES (8, 9, 45, 25);
 
 -- ----------------------------
 -- Table structure for requirement
@@ -509,6 +523,12 @@ INSERT INTO `teacher` VALUES (2, 0, 'admin1', 'changeme', '', '', '', '', 'null'
 -- ----------------------------
 DROP VIEW IF EXISTS `coursetosubgoalview`;
 CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `coursetosubgoalview` AS select `coursetosubgoal`.`id` AS `id`,`coursetosubgoal`.`subgoal_id` AS `subgoal_id`,`course`.`id` AS `course_id`,`course`.`name` AS `name`,`course`.`name_EN` AS `name_EN`,`coursetosubgoal`.`percent` AS `percent` from (`coursetosubgoal` join `course` on((`coursetosubgoal`.`course_id` = `course`.`id`))) order by `coursetosubgoal`.`subgoal_id`;
+
+-- ----------------------------
+-- View structure for opencoursetosubgoalview
+-- ----------------------------
+DROP VIEW IF EXISTS `opencoursetosubgoalview`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `opencoursetosubgoalview` AS select `opencoursetosubgoal`.`id` AS `id`,`coursetosubgoal`.`course_id` AS `course_id`,`opencourseform`.`openCourse_id` AS `opencourse_id`,`opencoursetosubgoal`.`openCourseForm_id` AS `openCourseForm_id`,`opencourseform`.`target` AS `target`,`coursetosubgoal`.`subgoal_id` AS `subgoal_id`,`opencoursetosubgoal`.`percent` AS `percent` from ((`opencoursetosubgoal` join `opencourseform` on((`opencoursetosubgoal`.`openCourseForm_id` = `opencourseform`.`id`))) join `coursetosubgoal` on((`opencoursetosubgoal`.`courseToSubgoal_id` = `coursetosubgoal`.`id`)));
 
 -- ----------------------------
 -- View structure for opencourseview

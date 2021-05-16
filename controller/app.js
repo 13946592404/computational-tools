@@ -190,3 +190,20 @@ app.put('/openCourseFormAdd', (req, res) => {
     res.send(resolve);
   });
 });
+
+/* open course to subgoal */
+app.get('/openCourseToSubgoal', (req, res) => {
+  const { course_id } = req.query;
+  const statement = `SELECT * FROM coursetosubgoalview WHERE course_id=${course_id}`;
+  query(statement).then((resolve, rejected) => {
+    res.send(resolve);
+  });
+});
+
+app.get('/openCourseToSubgoalSelect', (req, res) => {
+  const { opencourse_id, subgoal_id } = req.query;
+  const statement = `SELECT * FROM opencoursetosubgoalview WHERE opencourse_id=${opencourse_id} AND subgoal_id='${subgoal_id}'`;
+  query(statement).then((resolve, rejected) => {
+    res.send(resolve);
+  });
+});

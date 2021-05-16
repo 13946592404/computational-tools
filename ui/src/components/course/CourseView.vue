@@ -11,7 +11,7 @@
         :label="$t('openCourse.view.requirement')"
         class="animate__animated animate__fadeIn"
       >
-        2
+        <course-requirement :course="course" />
       </el-tab-pane>
       <el-tab-pane
         :label="$t('openCourse.view.student')"
@@ -55,10 +55,12 @@ import {
 import UserController from '../../store/userController';
 import timeFilter from '../../utils/TimeFilter';
 import CourseSubgoal from './CourseSubgoal.vue';
+import CourseRequirement from './CourseRequirement.vue';
 
 export default defineComponent({
   components: {
     CourseSubgoal,
+    CourseRequirement,
   },
   setup() {
     const state = reactive({
