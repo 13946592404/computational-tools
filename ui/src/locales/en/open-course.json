@@ -26,15 +26,22 @@
 
   "view": {
     "subgoal": "Course Subgoal",
-    "subgoalToRequirement": "For Requirement",
+    "requirement": "For Requirement",
     "student": "Student Manage",
     "grade": "Course Grade",
 
     "info": {
-      "name": "OpenCourse Name",
-      "time": "OpenCourse Time",
+      "name": "Name",
+      "time": "Time",
       "username": "Username",
       "department": "Department"
+    },
+
+    "message": {
+      "ok": "Succeed!",
+      "no": "Failed",
+      "warn": "Warning",
+      "delete": "This operation is not reversible! Please be careful!"
     }
   }
 }

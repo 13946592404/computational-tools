@@ -35,6 +35,13 @@
       "time": "时间",
       "username": "用户",
       "department": "学院"
+    },
+
+    "message": {
+      "ok": "成功！",
+      "no": "失败！",
+      "warn": "警告",
+      "delete": "此操作不可逆！请谨慎操作！"
     }
   }
 }

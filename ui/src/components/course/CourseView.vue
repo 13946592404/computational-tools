@@ -5,9 +5,7 @@
         :label="$t('openCourse.view.subgoal')"
         class="animate__animated animate__fadeIn"
       >
-        <course-subgoal
-          :opencourse_id="course.opencourse_id"
-        />
+        <course-subgoal :opencourse_id="course.opencourse_id" />
       </el-tab-pane>
       <el-tab-pane
         :label="$t('openCourse.view.requirement')"

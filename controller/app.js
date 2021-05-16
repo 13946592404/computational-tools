@@ -174,3 +174,11 @@ app.put('/openCourseFormEdit', (req, res) => {
     res.send(resolve);
   });
 });
+
+app.delete('/openCourseFormDelete', (req, res) => {
+  const { id } = req.query;
+  const statement = `DELETE FROM opencourseform WHERE id = '${id}'`;
+  query(statement).then((resolve, rejected) => {
+    res.send(resolve);
+  });
+});

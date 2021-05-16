@@ -29,13 +29,14 @@
               round
               @click="modifyRow(scope.row)"
             >
-              修改
+              {{ $t('action.modify') }}
             </el-button>
             <el-button
               type="danger"
               round
+              @click="deleteRow(scope.row)"
             >
-              删除
+              {{ $t('action.delete') }}
             </el-button>
           </template>
         </el-table-column>
@@ -52,7 +53,8 @@ import {
   toRefs,
 } from '@vue/composition-api';
 import OpenCourseFormService from '../../service/openCourseFormService';
-import { LocalMessage } from '../../plugins/element-ui';
+import { $t } from '../../plugins/i18n';
+import { LocalMessage, LocalMessageBox } from '../../plugins/element-ui';
 
 export default defineComponent({
   props: {
@@ -83,15 +85,34 @@ export default defineComponent({
         OpenCourseFormService.editOpenCourseForm({
           id,
           target,
-        }).then(() => {
-          LocalMessage('ok', 'success');
-        });
+        }).then(
+          () => { LocalMessage($t('openCourse.view.message.ok'), 'success'); },
+          () => { LocalMessage($t('openCourse.view.message.no'), 'error'); },
+        );
       }
+    };
+
+    const deleteRowAlready = (id: number) => {
+      const idx = state.form.findIndex((val: any) => val.id === id);
+      state.form.splice(idx, 1);
+      OpenCourseFormService.deleteOpenCourseForm(id).then(
+        () => { LocalMessage($t('openCourse.view.message.ok'), 'success'); },
+        () => { LocalMessage($t('openCourse.view.message.no'), 'error'); },
+      );
+    };
+
+    const deleteRow = (row: any) => {
+      LocalMessageBox(
+        $t('openCourse.view.message.warn'),
+        $t('openCourse.view.message.delete'),
+        () => deleteRowAlready(row.id),
+      );
     };
 
     return {
       ...toRefs(state),
       modifyRow,
+      deleteRow,
     };
   },
 });
