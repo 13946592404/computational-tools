@@ -79,7 +79,7 @@ export default defineComponent({
 <style lang="scss">
 .course-info {
   position: fixed;
-  right: 2%;
+  right: 6%;
   bottom: 7%;
   display: flex;
   flex-flow: column wrap;

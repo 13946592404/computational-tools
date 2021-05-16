@@ -4,6 +4,19 @@
       {{ $t('openCourse.view.subgoal') }}
     </h1>
     <el-divider />
+    <div class="el-courseform-add flex flex-row">
+      <el-input
+        v-model="newForm"
+        :placeholder="$t('openCourse.view.form.hint')"
+      />
+      <el-button
+        type="success"
+        round
+        @click="addForm"
+      >
+        {{ $t('action.add') }}
+      </el-button>
+    </div>
     <div>
       <el-table
         :data="form"
@@ -66,16 +79,21 @@ export default defineComponent({
   setup(props) {
     const state = reactive({
       form: [],
+      newForm: '',
     });
 
-    // @ts-ignore
-    OpenCourseFormService.getOpenCourseForm(props.opencourse_id).then((value: any) => {
-      state.form = value.data.map((val: any) => ({
-        id: val.id,
-        target: val.target,
-        is_edit: ref(false),
-      }));
-    });
+    const refreshForm = () => {
+      // @ts-ignore
+      OpenCourseFormService.getOpenCourseForm(props.opencourse_id).then((value: any) => {
+        state.form = value.data.map((val: any) => ({
+          id: val.id,
+          target: val.target,
+          is_edit: ref(false),
+        }));
+      });
+    };
+
+    refreshForm();
 
     const modifyRow = (row: any) => {
       const { value } = row.is_edit;
@@ -109,10 +127,40 @@ export default defineComponent({
       );
     };
 
+    const addForm = () => {
+      const { newForm: target } = state;
+      const findIdx = state.form.find((value: any) => value.target === target);
+      if (findIdx) {
+        LocalMessage(
+          $t('openCourse.view.form.exist'),
+          'error',
+        );
+      } else {
+        OpenCourseFormService.addOpenCourseForm({
+          opencourse_id: props.opencourse_id,
+          target,
+        }).then(() => {
+          // @ts-ignore
+          // state.form.push({ target, is_edit: ref(false) });
+          refreshForm();
+          LocalMessage(
+            $t('action.success'),
+            'success',
+          );
+        }, () => {
+          LocalMessage(
+            $t('action.fail'),
+            'error',
+          );
+        });
+      }
+    };
+
     return {
       ...toRefs(state),
       modifyRow,
       deleteRow,
+      addForm,
     };
   },
 });
@@ -127,5 +175,11 @@ export default defineComponent({
   button {
     outline: none;
   }
+}
+
+.el-courseform-add {
+  position: absolute;
+  right: 60px;
+  top: 100px;
 }
 </style>

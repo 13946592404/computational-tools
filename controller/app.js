@@ -182,3 +182,11 @@ app.delete('/openCourseFormDelete', (req, res) => {
     res.send(resolve);
   });
 });
+
+app.put('/openCourseFormAdd', (req, res) => {
+  const { opencourse_id, target } = req.body;
+  const statement = `INSERT INTO opencourseform values(null, ${opencourse_id}, '${target}')`;
+  query(statement).then((resolve, rejected) => {
+    res.send(resolve);
+  });
+});

@@ -16,6 +16,10 @@ class OpenCourseForm {
   deleteOpenCourseForm(id: number) {
     return axios.delete(`./openCourseFormDelete?id=${id}`);
   }
+
+  addOpenCourseForm(params: any) {
+    return axios.put('./openCourseFormAdd', params);
+  }
 }
 
 export default new OpenCourseForm();

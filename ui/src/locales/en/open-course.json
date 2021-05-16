@@ -42,6 +42,11 @@
       "no": "Failed",
       "warn": "Warning",
       "delete": "This operation is not reversible! Please be careful!"
+    },
+
+    "form": {
+      "hint": "Input Subgoal Name",
+      "exist": "This target is already existed!"
     }
   }
 }

@@ -2,5 +2,8 @@
   "yes": "Yes",
   "no": "No",
   "modify": "Modify",
-  "delete": "Delete"
+  "delete": "Delete",
+  "add": "Add",
+  "success": "Succeed",
+  "fail": "Failed"
 }
