@@ -179,7 +179,7 @@ export default defineComponent({
 
 .el-courseform-add {
   position: absolute;
-  right: 60px;
+  right: 30px;
   top: 100px;
 }
 </style>
