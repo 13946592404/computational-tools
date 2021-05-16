@@ -22,5 +22,17 @@
     "message": "您是否要添加该课程到您的开课列表？课程名：{course}",
     "success": "添加课程成功！",
     "search": "搜索课程名"
+  },
+
+  "view": {
+    "subgoal": "课程子目标",
+    "requirement": "支持毕业要求",
+    "grade": "课程成绩",
+    "student": "选课学生管理",
+
+    "info": {
+      "name": "开课名称",
+      "time": "开课时间"
+    }
   }
 }

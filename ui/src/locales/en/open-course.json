@@ -22,5 +22,17 @@
     "message": "Are you sure to open this course? Course name: {course}",
     "success": "Add course successfully",
     "search": "Search course name"
+  },
+
+  "view": {
+    "subgoal": "Course Subgoal",
+    "subgoalToRequirement": "For Requirement",
+    "grade": "Course Grade",
+    "student": "Student Manage",
+
+    "info": {
+      "name": "OpenCourse Name",
+      "time": "OpenCourse Time"
+    }
   }
 }

@@ -137,7 +137,7 @@ import {
   toRefs,
   computed,
 } from '@vue/composition-api';
-import dayjs from 'dayjs';
+import timeFilter from '../../utils/TimeFilter';
 import { LocalMessage, LocalMessageBox } from '../../plugins/element-ui';
 import { $t, getLocale } from '../../plugins/i18n';
 import UserController from '../../store/userController';
@@ -183,8 +183,6 @@ export default defineComponent({
     };
     // onCreated
     getMyCourses();
-
-    const timeFilter = (str: string) => dayjs(str).format('YYYY-MM-DD dddd');
 
     const onDeleteMyCourse = async (row: any) => {
       LocalMessageBox(
