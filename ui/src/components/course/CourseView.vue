@@ -5,34 +5,42 @@
         :label="$t('openCourse.view.subgoal')"
         class="animate__animated animate__fadeIn"
       >
-        配置管理
+        <course-subgoal
+          :opencourse_id="course.opencourse_id"
+        />
       </el-tab-pane>
       <el-tab-pane
         :label="$t('openCourse.view.requirement')"
         class="animate__animated animate__fadeIn"
       >
-        角色管理
-      </el-tab-pane>
-      <el-tab-pane
-        :label="$t('openCourse.view.grade')"
-        class="animate__animated animate__fadeIn"
-      >
-        定时任务补偿
+        2
       </el-tab-pane>
       <el-tab-pane
         :label="$t('openCourse.view.student')"
         class="animate__animated animate__fadeIn"
       >
-        定时任务补偿
+        3
+      </el-tab-pane>
+      <el-tab-pane
+        :label="$t('openCourse.view.grade')"
+        class="animate__animated animate__fadeIn"
+      >
+        4
       </el-tab-pane>
     </el-tabs>
     <div class="course-info">
-      <el-form ref="form" :model="form" label-width="80px">
+      <el-form label-width="60px">
         <el-form-item :label="$t('openCourse.view.info.name')">
           {{ course.name }}
         </el-form-item>
         <el-form-item :label="$t('openCourse.view.info.time')">
-          {{ timeFilter(course.time) }}
+          {{ timeFilter(course.time, false) }}
+        </el-form-item>
+        <el-form-item :label="$t('openCourse.view.info.username')">
+          {{ user.name }}
+        </el-form-item>
+        <el-form-item :label="$t('openCourse.view.info.department')">
+          {{ user.department }}
         </el-form-item>
       </el-form>
     </div>
@@ -46,12 +54,18 @@ import {
   reactive,
   toRefs,
 } from '@vue/composition-api';
+import UserController from '../../store/userController';
 import timeFilter from '../../utils/TimeFilter';
+import CourseSubgoal from './CourseSubgoal.vue';
 
 export default defineComponent({
+  components: {
+    CourseSubgoal,
+  },
   setup() {
     const state = reactive({
       course: {},
+      user: UserController.user,
     });
     // @ts-ignore
     state.course = getCurrentInstance().proxy.$route.params.course;

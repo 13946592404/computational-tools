@@ -27,12 +27,14 @@
   "view": {
     "subgoal": "课程子目标",
     "requirement": "支持毕业要求",
-    "grade": "课程成绩",
     "student": "选课学生管理",
+    "grade": "课程成绩",
 
     "info": {
-      "name": "开课名称",
-      "time": "开课时间"
+      "name": "课程",
+      "time": "时间",
+      "username": "用户",
+      "department": "学院"
     }
   }
 }

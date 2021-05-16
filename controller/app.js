@@ -54,7 +54,7 @@ app.get('/course', (req, res) => { // for add selection
   });
 });
 
-/* courseToSubgoal - CRUD */
+/* courseToSubgoal */
 app.put('/updateCourseToSubgoal', (req, res) => {
   const { percent, subgoal_id, course_id } = req.body;
   const statement = `UPDATE courseToSubgoal SET percent = ${percent} WHERE subgoal_id = "${subgoal_id}" AND course_id = ${course_id}`;
@@ -153,6 +153,23 @@ app.delete('/openCourseDelete', (req, res) => {
 app.put('/openCourseAdd', (req, res) => {
   const { course_id, teacher_id } = req.body;
   const statement = `INSERT INTO opencourse values(null, ${course_id}, ${teacher_id}, NOW())`;
+  query(statement).then((resolve, rejected) => {
+    res.send(resolve);
+  });
+});
+
+/* open course form */
+app.get('/openCourseForm', (req, res) => {
+  const { opencourse_id } = req.query;
+  const statement = `SELECT * FROM opencourseform WHERE opencourse_id=${opencourse_id}`;
+  query(statement).then((resolve, rejected) => {
+    res.send(resolve);
+  });
+});
+
+app.put('/openCourseFormEdit', (req, res) => {
+  const { id, target } = req.body;
+  const statement = `UPDATE opencourseform SET target = "${target}" WHERE id = ${id}`;
   query(statement).then((resolve, rejected) => {
     res.send(resolve);
   });

@@ -27,12 +27,14 @@
   "view": {
     "subgoal": "Course Subgoal",
     "subgoalToRequirement": "For Requirement",
-    "grade": "Course Grade",
     "student": "Student Manage",
+    "grade": "Course Grade",
 
     "info": {
       "name": "OpenCourse Name",
-      "time": "OpenCourse Time"
+      "time": "OpenCourse Time",
+      "username": "Username",
+      "department": "Department"
     }
   }
 }
