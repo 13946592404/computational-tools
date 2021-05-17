@@ -17,6 +17,15 @@ class OpenCourseToSubgoalService {
       },
     });
   }
+
+  deleteOpenCourseToSubgoal(id: number) {
+    return axios.delete(`./openCourseToSubgoalDelete?id=${id}`);
+  }
+
+  addOpenCourseToSubgoal(params: any) {
+    // opencourseform_id: number, coursetosubgoal_id: number, ratio: number
+    return axios.put('./openCourseToSubgoalAdd', params);
+  }
 }
 
 export default new OpenCourseToSubgoalService();

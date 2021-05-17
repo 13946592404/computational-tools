@@ -207,3 +207,19 @@ app.get('/openCourseToSubgoalSelect', (req, res) => {
     res.send(resolve);
   });
 });
+
+app.delete('/openCourseToSubgoalDelete', (req, res) => {
+  const { id } = req.query;
+  const statement = `DELETE FROM opencoursetosubgoal WHERE id = '${id}'`;
+  query(statement).then((resolve, rejected) => {
+    res.send(resolve);
+  });
+});
+
+app.put('/openCourseToSubgoalAdd', (req, res) => {
+  const { opencourseform_id, coursetosubgoal_id, ratio } = req.body;
+  const statement = `INSERT INTO opencoursetosubgoal VALUES (null, ${opencourseform_id}, ${coursetosubgoal_id}, ${ratio})`;
+  query(statement).then((resolve, rejected) => {
+    res.send(resolve);
+  });
+});
