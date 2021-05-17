@@ -223,3 +223,19 @@ app.put('/openCourseToSubgoalAdd', (req, res) => {
     res.send(resolve);
   });
 });
+
+/* student */
+app.get('/student', (req, res) => {
+  const statement = 'SELECT * FROM student';
+  query(statement).then((resolve, rejected) => {
+    res.send(resolve);
+  });
+});
+
+app.put('/studentAdd', (req, res) => {
+  const { name } = req.body;
+  const statement = `INSERT INTO student VALUES (null, '${name}')`;
+  query(statement).then((resolve, rejected) => {
+    res.send(resolve);
+  });
+});

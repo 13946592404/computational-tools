@@ -58,5 +58,14 @@
 
   "permission": {
     "require": "Need login to visit!"
+  },
+
+  "student": {
+    "no": "Number",
+    "name": "Name",
+    "action": "Action",
+    "requirement": "Lookup Requirement",
+    "new": "New Name",
+    "add": "Add Student"
   }
 }

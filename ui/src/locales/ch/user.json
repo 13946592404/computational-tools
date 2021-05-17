@@ -58,5 +58,14 @@
 
   "permission": {
     "require": "需要登陆才能访问！"
+  },
+
+  "student": {
+    "no": "编号",
+    "name": "姓名",
+    "action": "操作",
+    "requirement": "查看达成度",
+    "new": "新学生名字",
+    "add": "添加学生"
   }
 }
