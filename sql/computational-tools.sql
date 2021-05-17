@@ -11,7 +11,7 @@
  Target Server Version : 80018
  File Encoding         : 65001
 
- Date: 17/05/2021 20:50:46
+ Date: 17/05/2021 21:50:05
 */
 
 SET NAMES utf8mb4;
@@ -395,6 +395,16 @@ CREATE TABLE `student`  (
 -- ----------------------------
 INSERT INTO `student` VALUES (1, 'test_stu_1');
 INSERT INTO `student` VALUES (2, 'test_stu_2');
+INSERT INTO `student` VALUES (3, 'abc');
+INSERT INTO `student` VALUES (4, 'def');
+INSERT INTO `student` VALUES (5, 'ghi');
+INSERT INTO `student` VALUES (6, 'jkl');
+INSERT INTO `student` VALUES (7, 'mno');
+INSERT INTO `student` VALUES (8, 'pqr');
+INSERT INTO `student` VALUES (9, 'stu');
+INSERT INTO `student` VALUES (10, 'vwx');
+INSERT INTO `student` VALUES (11, 'yz');
+INSERT INTO `student` VALUES (12, 'hello');
 
 -- ----------------------------
 -- Table structure for studycourse
