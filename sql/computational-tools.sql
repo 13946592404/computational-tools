@@ -11,7 +11,7 @@
  Target Server Version : 80018
  File Encoding         : 65001
 
- Date: 17/05/2021 00:12:16
+ Date: 17/05/2021 20:50:46
 */
 
 SET NAMES utf8mb4;
@@ -343,9 +343,9 @@ CREATE TABLE `opencoursetosubgoal`  (
 -- Records of opencoursetosubgoal
 -- ----------------------------
 INSERT INTO `opencoursetosubgoal` VALUES (1, 1, 1, 30);
-INSERT INTO `opencoursetosubgoal` VALUES (2, 3, 3, 16);
-INSERT INTO `opencoursetosubgoal` VALUES (3, 4, 3, 32);
-INSERT INTO `opencoursetosubgoal` VALUES (4, 5, 3, 52);
+INSERT INTO `opencoursetosubgoal` VALUES (2, 3, 3, 15);
+INSERT INTO `opencoursetosubgoal` VALUES (3, 4, 3, 30);
+INSERT INTO `opencoursetosubgoal` VALUES (4, 5, 3, 55);
 INSERT INTO `opencoursetosubgoal` VALUES (5, 6, 45, 25);
 INSERT INTO `opencoursetosubgoal` VALUES (6, 7, 45, 25);
 INSERT INTO `opencoursetosubgoal` VALUES (7, 8, 45, 25);
@@ -528,7 +528,7 @@ CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `coursetosubgoalview` AS 
 -- View structure for opencoursetosubgoalview
 -- ----------------------------
 DROP VIEW IF EXISTS `opencoursetosubgoalview`;
-CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `opencoursetosubgoalview` AS select `opencoursetosubgoal`.`id` AS `id`,`coursetosubgoal`.`course_id` AS `course_id`,`opencourseform`.`openCourse_id` AS `opencourse_id`,`opencoursetosubgoal`.`openCourseForm_id` AS `openCourseForm_id`,`opencourseform`.`target` AS `target`,`coursetosubgoal`.`subgoal_id` AS `subgoal_id`,`opencoursetosubgoal`.`percent` AS `percent` from ((`opencoursetosubgoal` join `opencourseform` on((`opencoursetosubgoal`.`openCourseForm_id` = `opencourseform`.`id`))) join `coursetosubgoal` on((`opencoursetosubgoal`.`courseToSubgoal_id` = `coursetosubgoal`.`id`)));
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `opencoursetosubgoalview` AS select `opencoursetosubgoal`.`id` AS `id`,`coursetosubgoal`.`course_id` AS `course_id`,`opencourseform`.`openCourse_id` AS `opencourse_id`,`opencoursetosubgoal`.`openCourseForm_id` AS `openCourseForm_id`,`opencourseform`.`target` AS `target`,`coursetosubgoal`.`subgoal_id` AS `subgoal_id`,`opencoursetosubgoal`.`courseToSubgoal_id` AS `coursetosubgoal_id`,`opencoursetosubgoal`.`percent` AS `percent` from ((`opencoursetosubgoal` join `opencourseform` on((`opencoursetosubgoal`.`openCourseForm_id` = `opencourseform`.`id`))) join `coursetosubgoal` on((`opencoursetosubgoal`.`courseToSubgoal_id` = `coursetosubgoal`.`id`)));
 
 -- ----------------------------
 -- View structure for opencourseview
