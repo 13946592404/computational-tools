@@ -21,9 +21,12 @@
           width="180"
         >
           <template slot-scope="scope">
-            <a @click="getRequirement(scope.row.id)">
+            <el-link
+              type="primary"
+              @click="getRequirement(scope.row.id)"
+            >
               {{ $t('user.student.requirement') }}
-            </a>
+            </el-link>
           </template>
         </el-table-column>
       </el-table>
@@ -47,15 +50,18 @@
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from '@vue/composition-api';
+import { MessageBox } from 'element-ui';
 import { $t } from '../../plugins/i18n';
-import { LocalMessage, LocalMessageBox } from '../../plugins/element-ui';
+import { LocalMessage } from '../../plugins/element-ui';
 import StudentService from '../../service/studentService';
+import AllService from '../../service/allService';
 
 export default defineComponent({
   setup() {
     const state = reactive({
       student: [],
       newName: '',
+      ans: {},
     });
 
     const studentGet = () => {
@@ -79,10 +85,34 @@ export default defineComponent({
     };
 
     const getRequirement = (id: number) => {
-      LocalMessageBox(
-        $t('user.student.requirement'),
-        id,
-      );
+      AllService.getAll(id).then((res: any) => {
+        state.ans = res.data[0]; // eslint-disable-line
+        // console.log(ans);
+        let msg = '';
+        let times = 0;
+        let ans = true;
+        for (let i of Object.keys(state.ans)) { // eslint-disable-line
+          if (i.indexOf('-') >= 0) {
+            // @ts-ignore
+            if (state.ans[i] < 0.6) {
+              ans = false;
+            }
+            // @ts-ignore
+            msg += `<span style='margin-left: 45px'>${i}: ${state.ans[i]}</span>`;
+            times += 1;
+            if (times === 3) {
+              times = 0;
+              msg += '</br>';
+            }
+          }
+        }
+        msg += `</br></br><p>${$t(`certification.ans.${ans ? 'yes' : 'no'}`)}</p>`;
+        MessageBox({
+          title: $t('user.student.requirement').toString(),
+          message: msg,
+          dangerouslyUseHTMLString: true,
+        });
+      });
     };
 
     return {

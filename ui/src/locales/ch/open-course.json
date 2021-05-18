@@ -53,6 +53,12 @@
       "subgoal": "毕业子目标",
       "ratio": "比例",
       "course": "课程子目标比例构成"
+    },
+
+    "studentView": {
+      "no": "编号",
+      "name": "姓名",
+      "time": "时间"
     }
   }
 }

@@ -31,5 +31,10 @@
       "success": "Add course successfully!",
       "error": "Add course failed!"
     }
+  },
+
+  "ans": {
+    "yes": "Requirement：yes",
+    "no": "Requirement：no"
   }
 }

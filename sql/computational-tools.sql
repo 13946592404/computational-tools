@@ -11,11 +11,73 @@
  Target Server Version : 80018
  File Encoding         : 65001
 
- Date: 17/05/2021 21:50:05
+ Date: 18/05/2021 22:09:48
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for alldata
+-- ----------------------------
+DROP TABLE IF EXISTS `alldata`;
+CREATE TABLE `alldata`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `student_id` int(11) NULL DEFAULT NULL,
+  `1-1` decimal(6, 2) NULL DEFAULT 0.00,
+  `1-2` decimal(6, 2) NULL DEFAULT 0.00,
+  `1-3` decimal(6, 2) NULL DEFAULT 0.00,
+  `1-4` decimal(6, 2) NULL DEFAULT 0.00,
+  `2-1` decimal(6, 2) NULL DEFAULT 0.00,
+  `2-2` decimal(6, 2) NULL DEFAULT 0.00,
+  `2-3` decimal(6, 2) NULL DEFAULT 0.00,
+  `3-1` decimal(6, 2) NULL DEFAULT 0.00,
+  `3-2` decimal(6, 2) NULL DEFAULT 0.00,
+  `3-3` decimal(6, 2) NULL DEFAULT 0.00,
+  `4-1` decimal(6, 2) NULL DEFAULT 0.00,
+  `4-2` decimal(6, 2) NULL DEFAULT 0.00,
+  `4-3` decimal(6, 2) NULL DEFAULT 0.00,
+  `4-4` decimal(6, 2) NULL DEFAULT 0.00,
+  `5-1` decimal(6, 2) NULL DEFAULT 0.00,
+  `5-2` decimal(6, 2) NULL DEFAULT 0.00,
+  `5-3` decimal(6, 2) NULL DEFAULT 0.00,
+  `6-1` decimal(6, 2) NULL DEFAULT 0.00,
+  `6-2` decimal(6, 2) NULL DEFAULT 0.00,
+  `7-1` decimal(6, 2) NULL DEFAULT 0.00,
+  `7-2` decimal(6, 2) NULL DEFAULT 0.00,
+  `8-1` decimal(6, 2) NULL DEFAULT 0.00,
+  `8-2` decimal(6, 2) NULL DEFAULT 0.00,
+  `8-3` decimal(6, 2) NULL DEFAULT 0.00,
+  `9-1` decimal(6, 2) NULL DEFAULT 0.00,
+  `9-2` decimal(6, 2) NULL DEFAULT 0.00,
+  `9-3` decimal(6, 2) NULL DEFAULT 0.00,
+  `10-1` decimal(6, 2) NULL DEFAULT 0.00,
+  `10-2` decimal(6, 2) NULL DEFAULT 0.00,
+  `10-3` decimal(6, 2) NULL DEFAULT 0.00,
+  `11-1` decimal(6, 2) NULL DEFAULT 0.00,
+  `11-2` decimal(6, 2) NULL DEFAULT 0.00,
+  `11-3` decimal(6, 2) NULL DEFAULT 0.00,
+  `12-1` decimal(6, 2) NULL DEFAULT 0.00,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `student_id`(`student_id`) USING BTREE,
+  CONSTRAINT `alldata_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of alldata
+-- ----------------------------
+INSERT INTO `alldata` VALUES (1, 1, 0.64, 0.68, 0.70, 0.65, 0.61, 0.69, 0.75, 0.71, 0.73, 0.72, 0.62, 0.69, 0.69, 0.61, 0.67, 0.83, 0.73, 0.63, 0.69, 0.69, 0.79, 0.89, 0.68, 0.66, 0.72, 0.76, 0.65, 0.63, 0.62, 0.69, 0.73, 0.63, 0.69, 0.62);
+INSERT INTO `alldata` VALUES (2, 2, 0.64, 0.68, 0.70, 0.65, 0.61, 0.69, 0.75, 0.71, 0.73, 0.72, 0.62, 0.69, 0.69, 0.61, 0.67, 0.83, 0.73, 0.63, 0.69, 0.69, 0.79, 0.89, 0.68, 0.66, 0.72, 0.76, 0.65, 0.63, 0.62, 0.69, 0.73, 0.63, 0.69, 0.62);
+INSERT INTO `alldata` VALUES (3, 3, 0.64, 0.68, 0.70, 0.65, 0.61, 0.69, 0.75, 0.71, 0.73, 0.72, 0.62, 0.69, 0.69, 0.61, 0.67, 0.83, 0.73, 0.63, 0.69, 0.69, 0.79, 0.89, 0.68, 0.66, 0.72, 0.76, 0.65, 0.63, 0.62, 0.69, 0.73, 0.63, 0.69, 0.62);
+INSERT INTO `alldata` VALUES (4, 4, 0.64, 0.68, 0.70, 0.65, 0.61, 0.69, 0.75, 0.71, 0.73, 0.72, 0.62, 0.69, 0.69, 0.61, 0.67, 0.83, 0.73, 0.63, 0.69, 0.69, 0.79, 0.89, 0.68, 0.66, 0.72, 0.76, 0.65, 0.63, 0.62, 0.69, 0.73, 0.63, 0.69, 0.62);
+INSERT INTO `alldata` VALUES (5, 5, 0.64, 0.68, 0.70, 0.65, 0.61, 0.69, 0.75, 0.71, 0.73, 0.72, 0.62, 0.69, 0.69, 0.61, 0.67, 0.83, 0.73, 0.63, 0.69, 0.69, 0.79, 0.89, 0.68, 0.66, 0.72, 0.76, 0.65, 0.63, 0.62, 0.69, 0.73, 0.63, 0.69, 0.62);
+INSERT INTO `alldata` VALUES (6, 6, 0.64, 0.68, 0.70, 0.65, 0.61, 0.69, 0.75, 0.71, 0.73, 0.72, 0.62, 0.69, 0.69, 0.61, 0.67, 0.83, 0.73, 0.63, 0.69, 0.69, 0.79, 0.89, 0.68, 0.66, 0.72, 0.76, 0.65, 0.63, 0.62, 0.69, 0.73, 0.63, 0.69, 0.62);
+INSERT INTO `alldata` VALUES (7, 7, 0.64, 0.68, 0.70, 0.65, 0.61, 0.69, 0.75, 0.71, 0.73, 0.72, 0.62, 0.69, 0.69, 0.61, 0.67, 0.83, 0.73, 0.63, 0.69, 0.69, 0.79, 0.89, 0.68, 0.66, 0.72, 0.76, 0.65, 0.63, 0.62, 0.69, 0.73, 0.63, 0.69, 0.62);
+INSERT INTO `alldata` VALUES (8, 8, 0.64, 0.68, 0.70, 0.65, 0.61, 0.69, 0.75, 0.71, 0.73, 0.72, 0.62, 0.69, 0.69, 0.61, 0.67, 0.83, 0.73, 0.63, 0.69, 0.69, 0.79, 0.89, 0.68, 0.66, 0.72, 0.76, 0.65, 0.63, 0.62, 0.69, 0.73, 0.63, 0.69, 0.62);
+INSERT INTO `alldata` VALUES (9, 9, 0.64, 0.68, 0.70, 0.65, 0.61, 0.69, 0.75, 0.71, 0.73, 0.72, 0.62, 0.69, 0.69, 0.61, 0.67, 0.83, 0.73, 0.63, 0.69, 0.69, 0.79, 0.89, 0.68, 0.66, 0.72, 0.76, 0.65, 0.63, 0.62, 0.69, 0.73, 0.63, 0.69, 0.62);
+INSERT INTO `alldata` VALUES (10, 10, 0.64, 0.68, 0.70, 0.65, 0.61, 0.69, 0.75, 0.71, 0.73, 0.72, 0.62, 0.69, 0.69, 0.61, 0.67, 0.83, 0.73, 0.63, 0.69, 0.69, 0.79, 0.89, 0.68, 0.66, 0.72, 0.76, 0.65, 0.63, 0.62, 0.69, 0.73, 0.63, 0.69, 0.62);
+INSERT INTO `alldata` VALUES (11, 11, 0.64, 0.68, 0.70, 0.65, 0.61, 0.69, 0.75, 0.71, 0.73, 0.72, 0.62, 0.69, 0.69, 0.61, 0.67, 0.83, 0.73, 0.63, 0.69, 0.69, 0.79, 0.89, 0.68, 0.66, 0.72, 0.76, 0.65, 0.63, 0.62, 0.69, 0.73, 0.63, 0.69, 0.62);
+INSERT INTO `alldata` VALUES (12, 12, 0.64, 0.68, 0.70, 0.65, 0.61, 0.69, 0.75, 0.71, 0.73, 0.72, 0.62, 0.69, 0.69, 0.61, 0.67, 0.83, 0.73, 0.63, 0.69, 0.69, 0.79, 0.89, 0.68, 0.66, 0.72, 0.76, 0.65, 0.63, 0.62, 0.69, 0.73, 0.63, 0.69, 0.62);
 
 -- ----------------------------
 -- Table structure for course
@@ -76,7 +138,7 @@ CREATE TABLE `coursetosubgoal`  (
   INDEX `course_id`(`course_id`) USING BTREE,
   CONSTRAINT `coursetosubgoal_ibfk_1` FOREIGN KEY (`subgoal_id`) REFERENCES `subgoal` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `coursetosubgoal_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 208 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 209 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of coursetosubgoal
@@ -308,7 +370,7 @@ CREATE TABLE `opencourseform`  (
   INDEX `opencourseform_ibfk_1`(`openCourse_id`) USING BTREE,
   INDEX `target`(`target`) USING BTREE,
   CONSTRAINT `opencourseform_ibfk_1` FOREIGN KEY (`openCourse_id`) REFERENCES `opencourse` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of opencourseform
@@ -337,7 +399,7 @@ CREATE TABLE `opencoursetosubgoal`  (
   INDEX `courseToSubgoal_id`(`courseToSubgoal_id`) USING BTREE,
   CONSTRAINT `opencoursetosubgoal_ibfk_1` FOREIGN KEY (`openCourseForm_id`) REFERENCES `opencourseform` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `opencoursetosubgoal_ibfk_2` FOREIGN KEY (`courseToSubgoal_id`) REFERENCES `coursetosubgoal` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of opencoursetosubgoal
@@ -388,7 +450,7 @@ CREATE TABLE `student`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主码 学号',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '姓名',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of student
@@ -420,13 +482,18 @@ CREATE TABLE `studycourse`  (
   INDEX `studycourse_ibfk_2`(`student_id`) USING BTREE,
   CONSTRAINT `studycourse_ibfk_1` FOREIGN KEY (`openCourse_id`) REFERENCES `opencourse` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `studycourse_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of studycourse
 -- ----------------------------
 INSERT INTO `studycourse` VALUES (1, 1, 1, '2021-03-09 18:01:07');
 INSERT INTO `studycourse` VALUES (2, 1, 2, '2021-03-09 18:01:16');
+INSERT INTO `studycourse` VALUES (3, 31, 2, '2021-05-18 20:40:47');
+INSERT INTO `studycourse` VALUES (4, 31, 3, '2021-05-18 20:40:51');
+INSERT INTO `studycourse` VALUES (5, 31, 4, '2021-05-18 20:40:53');
+INSERT INTO `studycourse` VALUES (6, 31, 5, '2021-05-18 20:40:56');
+INSERT INTO `studycourse` VALUES (7, 31, 6, '2021-05-18 20:40:59');
 
 -- ----------------------------
 -- Table structure for studycourseform
@@ -545,5 +612,11 @@ CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `opencoursetosubgoalview`
 -- ----------------------------
 DROP VIEW IF EXISTS `opencourseview`;
 CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `opencourseview` AS select `course`.`id` AS `course_id`,`opencourse`.`id` AS `opencourse_id`,`opencourse`.`teacher_id` AS `teacher_id`,`course`.`name` AS `name`,`course`.`name_EN` AS `name_EN`,`opencourse`.`time` AS `time` from (`opencourse` join `course` on((`opencourse`.`course_id` = `course`.`id`)));
+
+-- ----------------------------
+-- View structure for studycourseview
+-- ----------------------------
+DROP VIEW IF EXISTS `studycourseview`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `studycourseview` AS select `studycourse`.`id` AS `id`,`studycourse`.`openCourse_id` AS `openCourse_id`,`studycourse`.`student_id` AS `student_id`,`student`.`name` AS `name`,`studycourse`.`time` AS `time` from (`studycourse` join `student` on((`studycourse`.`student_id` = `student`.`id`)));
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -53,6 +53,12 @@
       "subgoal": "Requirement subgoal",
       "ratio": "Ratio",
       "course": "Proportional composition of curriculum sub-objectives"
+    },
+
+    "studentView": {
+      "no": "Number",
+      "name": "Name",
+      "time": "Time"
     }
   }
 }

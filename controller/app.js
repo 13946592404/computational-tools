@@ -239,3 +239,29 @@ app.put('/studentAdd', (req, res) => {
     res.send(resolve);
   });
 });
+
+/* study course */
+app.get('/studyCourse', (req, res) => {
+  const { opencourse_id } = req.query;
+  const statement = `SELECT * FROM studycourseview WHERE opencourse_id = ${opencourse_id}`;
+  query(statement).then((resolve, rejected) => {
+    res.send(resolve);
+  });
+});
+
+app.put('/studyCourseAdd', (req, res) => {
+  const { student_id, opencourse_id } = req.body;
+  const statement = `INSERT INTO studycourse VALUES (null, ${opencourse_id}, ${student_id}, NOW())`;
+  query(statement).then((resolve, rejected) => {
+    res.send(resolve);
+  });
+});
+
+/* all */
+app.get('/all', (req, res) => {
+  const { id: student_id } = req.query;
+  const statement = `SELECT * FROM allData WHERE student_id = ${student_id}`;
+  query(statement).then((resolve, rejected) => {
+    res.send(resolve);
+  });
+});
