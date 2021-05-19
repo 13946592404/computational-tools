@@ -11,7 +11,7 @@
  Target Server Version : 80018
  File Encoding         : 65001
 
- Date: 18/05/2021 22:09:48
+ Date: 19/05/2021 22:56:36
 */
 
 SET NAMES utf8mb4;
@@ -384,6 +384,7 @@ INSERT INTO `opencourseform` VALUES (6, 31, '机考');
 INSERT INTO `opencourseform` VALUES (7, 31, '期中考试');
 INSERT INTO `opencourseform` VALUES (8, 31, '期末考试');
 INSERT INTO `opencourseform` VALUES (9, 31, '随机测验');
+INSERT INTO `opencourseform` VALUES (15, 32, '期中考试');
 
 -- ----------------------------
 -- Table structure for opencoursetosubgoal
@@ -482,7 +483,7 @@ CREATE TABLE `studycourse`  (
   INDEX `studycourse_ibfk_2`(`student_id`) USING BTREE,
   CONSTRAINT `studycourse_ibfk_1` FOREIGN KEY (`openCourse_id`) REFERENCES `opencourse` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `studycourse_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of studycourse
@@ -494,6 +495,8 @@ INSERT INTO `studycourse` VALUES (4, 31, 3, '2021-05-18 20:40:51');
 INSERT INTO `studycourse` VALUES (5, 31, 4, '2021-05-18 20:40:53');
 INSERT INTO `studycourse` VALUES (6, 31, 5, '2021-05-18 20:40:56');
 INSERT INTO `studycourse` VALUES (7, 31, 6, '2021-05-18 20:40:59');
+INSERT INTO `studycourse` VALUES (8, 31, 7, '2021-05-18 22:32:14');
+INSERT INTO `studycourse` VALUES (9, 32, 1, '2021-05-19 22:56:17');
 
 -- ----------------------------
 -- Table structure for studycourseform

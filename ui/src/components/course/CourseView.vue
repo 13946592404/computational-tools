@@ -23,7 +23,7 @@
         :label="$t('openCourse.view.grade')"
         class="animate__animated animate__fadeIn"
       >
-        4
+        <course-grade :opencourse_id="course.opencourse_id" />
       </el-tab-pane>
     </el-tabs>
     <div class="course-info">
@@ -57,12 +57,14 @@ import timeFilter from '../../utils/TimeFilter';
 import CourseSubgoal from './CourseSubgoal.vue';
 import CourseRequirement from './CourseRequirement.vue';
 import CourseStudent from './CourseStudent.vue';
+import CourseGrade from './CourseGrade.vue';
 
 export default defineComponent({
   components: {
     CourseSubgoal,
     CourseRequirement,
     CourseStudent,
+    CourseGrade,
   },
   setup() {
     const state = reactive({
