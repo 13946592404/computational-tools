@@ -68,6 +68,7 @@ export default defineComponent({
     refreshForm();
 
     const randomMap = () => {
+      // @ts-ignore
       state.grade = state.form.map(() => 60 + Number((40 * Math.random()).toFixed(0)));
     };
 
@@ -80,7 +81,10 @@ export default defineComponent({
     const getStudyCourse = () => {
       // @ts-ignore
       StudyCourseService.getStudyCourse(props.opencourse_id).then((res: any) => {
+        // @ts-ignore
         state.student = res.data;
+        // @ts-ignore
+        state.select = state.student[0].id;
       });
     };
 
